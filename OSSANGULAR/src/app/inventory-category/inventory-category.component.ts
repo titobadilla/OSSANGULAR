@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { InventoryCategoryService } from './inventory-category.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inventory-category',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InventoryCategoryComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router,private inventoryCategoryService:InventoryCategoryService) { }
 
   ngOnInit() {
   }

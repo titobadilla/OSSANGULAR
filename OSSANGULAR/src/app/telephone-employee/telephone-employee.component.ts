@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TelephoneEmployeeService } from './telephone-employee.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-telephone-employee',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TelephoneEmployeeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router,private telephoneEmployee:TelephoneEmployeeService) { }
 
   ngOnInit() {
   }

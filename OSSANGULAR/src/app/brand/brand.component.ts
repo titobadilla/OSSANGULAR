@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BrandService } from './brand.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-brand',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BrandComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router,private brandService:BrandService) { }
 
   ngOnInit() {
   }

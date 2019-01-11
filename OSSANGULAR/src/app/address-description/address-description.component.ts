@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AddressDescriptionService } from './address-description.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-address-description',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddressDescriptionComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router,private addressDescriptionService:AddressDescriptionService) { }
 
   ngOnInit() {
   }

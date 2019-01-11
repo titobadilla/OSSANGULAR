@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DeviceService } from './device.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-device',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeviceComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router,private deviceService:DeviceService) { }
 
   ngOnInit() {
   }

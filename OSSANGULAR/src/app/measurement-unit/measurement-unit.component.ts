@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MeasurementUnitService } from './measurement-unit.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-measurement-unit',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MeasurementUnitComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router,private measurementUnitService:MeasurementUnitService) { }
 
   ngOnInit() {
   }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ListWorkOrderService } from './list-work-order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-work-order',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListWorkOrderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router,private listWorkOrderService:ListWorkOrderService) { }
 
   ngOnInit() {
   }
