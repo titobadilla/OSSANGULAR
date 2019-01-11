@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
+import { Environment } from '../app.environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WorkOrderService {
 
-  constructor() { }
+  private requestMapping = 'workorder';
+  private url = Environment.apiUrl + this.requestMapping;
+
+  constructor(private http: HttpClient) { }
 }
