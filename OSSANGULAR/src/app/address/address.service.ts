@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Environment } from '../app.environment';
+import { environment } from 'src/environments/environment.prod';
+
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { Environment } from '../app.environment';
 export class AddressService {
 
   private requestMapping = 'address';
-  private url = Environment.apiUrl + this.requestMapping;
+  private url = environment.apiUrl + this.requestMapping;
 
   constructor(private http: HttpClient) { }
 }

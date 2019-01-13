@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Environment } from '../app.environment';
+import { environment } from 'src/environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class EmployeeRoleService {
 
   private requestMapping = 'employeerole';
-  private url = Environment.apiUrl + this.requestMapping;
+  private url = environment.apiUrl + this.requestMapping;
 
   constructor(private http: HttpClient) { }
 }
