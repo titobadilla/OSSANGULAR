@@ -48,6 +48,8 @@ import { TelephoneEmployeeService } from './telephone-employee/telephone-employe
 import { WorkOrderService } from './work-order/work-order.service';
 import { WorkOrderDetailService } from './work-order-detail/work-order-detail.service';
 import { WorkOrderTypeService } from './work-order-type/work-order-type.service';
+import { MenuAdminComponent } from './shared/menu-admin/menu-admin.component';
+import { MenuComponent } from './shared/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +74,9 @@ import { WorkOrderTypeService } from './work-order-type/work-order-type.service'
     ListMaterialWorkOrderComponent,
     ListToolWorkOrderComponent,
     TelephoneClientComponent,
-    TelephoneEmployeeComponent
+    TelephoneEmployeeComponent,
+    MenuAdminComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
