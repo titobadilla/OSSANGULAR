@@ -50,6 +50,18 @@ import { WorkOrderDetailService } from './work-order-detail/work-order-detail.se
 import { WorkOrderTypeService } from './work-order-type/work-order-type.service';
 import { MenuAdminComponent } from './shared/menu-admin/menu-admin.component';
 import { MenuComponent } from './shared/menu/menu.component';
+import { CalendarComponent } from './shared/calendar/calendar.component';
+
+
+import { ScheduleAllModule, RecurrenceEditorAllModule } from '@syncfusion/ej2-angular-schedule';
+import { NumericTextBoxAllModule } from '@syncfusion/ej2-angular-inputs';
+import { DatePickerAllModule, TimePickerAllModule, DateTimePickerAllModule } from '@syncfusion/ej2-angular-calendars';
+import { CheckBoxAllModule } from '@syncfusion/ej2-angular-buttons';
+import { ToolbarAllModule, ContextMenuAllModule } from '@syncfusion/ej2-angular-navigations';
+import { MaskedTextBoxModule } from '@syncfusion/ej2-angular-inputs';
+import { DropDownListAllModule, MultiSelectAllModule } from '@syncfusion/ej2-angular-dropdowns';
+import { SharedModule } from './shared/calendar/shared.module';
+
 
 @NgModule({
   declarations: [
@@ -76,13 +88,18 @@ import { MenuComponent } from './shared/menu/menu.component';
     TelephoneClientComponent,
     TelephoneEmployeeComponent,
     MenuAdminComponent,
-    MenuComponent
+    MenuComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    SharedModule,
+    ScheduleAllModule, RecurrenceEditorAllModule, NumericTextBoxAllModule,
+        DatePickerAllModule, TimePickerAllModule, DateTimePickerAllModule, CheckBoxAllModule, ToolbarAllModule, DropDownListAllModule, ContextMenuAllModule,
+        MaskedTextBoxModule, MultiSelectAllModule
   ],
   providers: [AddressService,AddressDescriptionService,BrandService,ClientService,DeviceService,
   DeviceStateService,EmployeeService,EmployeeRoleService,GroupClientService,InventoryCategoryService,
