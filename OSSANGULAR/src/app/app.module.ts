@@ -50,6 +50,7 @@ import { WorkOrderDetailService } from './work-order-detail/work-order-detail.se
 import { WorkOrderTypeService } from './work-order-type/work-order-type.service';
 import { MenuAdminComponent } from './shared/menu-admin/menu-admin.component';
 import { MenuComponent } from './shared/menu/menu.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { MenuComponent } from './shared/menu/menu.component';
     TelephoneClientComponent,
     TelephoneEmployeeComponent,
     MenuAdminComponent,
-    MenuComponent
+    MenuComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
