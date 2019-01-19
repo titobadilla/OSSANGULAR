@@ -46,7 +46,7 @@ const routes: Routes = [
   {path:"app-work-order",component:WorkOrderComponent},
   {path:"app-work-order-detail",component:WorkOrderDetailComponent},
   {path:"app-work-order-type",component:WorkOrderTypeComponent},
-  {path:"app-login",component:LoginComponent}
+  {path:"app-login",component:LoginComponent},
   {path:"calendar",component:CalendarComponent}
 ];
 

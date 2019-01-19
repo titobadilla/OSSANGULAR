@@ -50,9 +50,7 @@ import { WorkOrderDetailService } from './work-order-detail/work-order-detail.se
 import { WorkOrderTypeService } from './work-order-type/work-order-type.service';
 import { MenuAdminComponent } from './shared/menu-admin/menu-admin.component';
 import { MenuComponent } from './shared/menu/menu.component';
-<<<<<<< HEAD
 import { LoginComponent } from './login/login.component';
-=======
 import { CalendarComponent } from './shared/calendar/calendar.component';
 
 
@@ -65,7 +63,6 @@ import { MaskedTextBoxModule } from '@syncfusion/ej2-angular-inputs';
 import { DropDownListAllModule, MultiSelectAllModule } from '@syncfusion/ej2-angular-dropdowns';
 import { SharedModule } from './shared/calendar/shared.module';
 
->>>>>>> c1facf14f49c97b8154b24f232e9528a3002971f
 
 @NgModule({
   declarations: [
@@ -93,11 +90,8 @@ import { SharedModule } from './shared/calendar/shared.module';
     TelephoneEmployeeComponent,
     MenuAdminComponent,
     MenuComponent,
-<<<<<<< HEAD
-    LoginComponent
-=======
+    LoginComponent,
     CalendarComponent
->>>>>>> c1facf14f49c97b8154b24f232e9528a3002971f
   ],
   imports: [
     BrowserModule,
