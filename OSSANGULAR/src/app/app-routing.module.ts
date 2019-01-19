@@ -22,6 +22,7 @@ import { WorkOrderComponent } from './work-order/work-order.component';
 import { WorkOrderDetailComponent } from './work-order-detail/work-order-detail.component';
 import { WorkOrderTypeComponent } from './work-order-type/work-order-type.component';
 import { LoginComponent } from './login/login.component';
+import { CalendarComponent } from './shared/calendar/calendar.component';
 
 const routes: Routes = [
   {path:"app-address",component:AddressComponent},
@@ -46,6 +47,7 @@ const routes: Routes = [
   {path:"app-work-order-detail",component:WorkOrderDetailComponent},
   {path:"app-work-order-type",component:WorkOrderTypeComponent},
   {path:"app-login",component:LoginComponent}
+  {path:"calendar",component:CalendarComponent}
 ];
 
 @NgModule({

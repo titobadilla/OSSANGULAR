@@ -1,0 +1,11 @@
+<div class="control-section">
+  <ejs-schedule #scheduleObj width='100%' height='650px' [selectedDate]="selectedDate" (eventRendered)="onEventRendered($event)"
+      [eventSettings]="eventSettings">
+      <e-views>
+          <e-view displayName='1 Día' option='Day' [interval]="dayInterval"></e-view>
+          <e-view displayName='1 Semana' option='Week' [isSelected]="isSelected" [interval]="weekInterval"></e-view>
+          <e-view displayName='1 Mes' option='Month' [interval]="monthInterval"></e-view>
+      </e-views>
+  </ejs-schedule>
+</div>
+
