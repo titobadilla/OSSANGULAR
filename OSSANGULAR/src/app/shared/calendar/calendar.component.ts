@@ -5,6 +5,26 @@ import {
     EventSettingsModel, EventRenderedArgs, ScheduleComponent, MonthService, DayService, WeekService, ResizeService, DragAndDropService
 } from '@syncfusion/ej2-angular-schedule';
 import { fifaEventsData } from 'src/app/datasource';
+import {Router} from "@angular/router"
+
+
+
+import { loadCldr,L10n } from '@syncfusion/ej2-base';
+L10n.load({
+    'en-US': {
+        'schedule': {
+            'saveButton': 'Aceptar',
+            'cancelButton': 'Cancelar',
+            'deleteButton': 'Eliminar',
+            'newEvent': '¿Desea crear una orden de trabajo?',
+            'today':'Hoy',
+            'day':'Por día',
+            'week':'Por Semana',
+            'month':'Por mes',
+            'agenda':'Agenda'
+        },
+    }
+});
 
 @Component({
   selector: 'app-calendar',
@@ -12,6 +32,9 @@ import { fifaEventsData } from 'src/app/datasource';
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent {
+
+
+    
   public data: Object[] = <Object[]>extend([], fifaEventsData, null, true);
   public selectedDate: Date = new Date(2018, 5, 21);
   public eventSettings: EventSettingsModel = { dataSource: this.data ,enableTooltip:true};
@@ -19,8 +42,22 @@ export class CalendarComponent {
   public dayInterval: number = 1;
   public weekInterval: number = 1;
   public monthInterval: number = 1;
+  public flag:boolean=false;
   @ViewChild('scheduleObj')
   public scheduleObj: ScheduleComponent;
+  public showQuickInfo: boolean = false;
+
+
+
+  
+ 
+  public constructor(private router: Router ){
+
+}
+
+  onCellDoubleClick(): void {
+   // alert('Doble click');
+}
 
   onEventRendered(args: EventRenderedArgs): void {
     
@@ -33,5 +70,15 @@ export class CalendarComponent {
       } else {
           args.element.style.backgroundColor = categoryColor;
       }
+  }
+
+  onRedirect(): void{
+      if(this.flag){     
+        this.router.navigate(['/workorder'])
+    }else{
+        this.flag=!this.flag;
+    }
+   
+
   }
 }
