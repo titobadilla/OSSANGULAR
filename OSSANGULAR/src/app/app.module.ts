@@ -62,6 +62,15 @@ import { ToolbarAllModule, ContextMenuAllModule } from '@syncfusion/ej2-angular-
 import { MaskedTextBoxModule } from '@syncfusion/ej2-angular-inputs';
 import { DropDownListAllModule, MultiSelectAllModule } from '@syncfusion/ej2-angular-dropdowns';
 import { SharedModule } from './shared/calendar/shared.module';
+import { loadCldr,L10n } from '@syncfusion/ej2-base';
+
+declare var require: any;
+
+loadCldr(
+  require('node_modules/cldr-data/supplemental/numberingSystems.json'),
+  require('node_modules/cldr-data/main/es-CR/ca-gregorian.json'),
+  require('node_modules/cldr-data/main/es-CR/numbers.json'),
+  require('node_modules/cldr-data/main/es-CR/timeZoneNames.json'));
 
 
 @NgModule({

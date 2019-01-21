@@ -11,7 +11,7 @@ import {Router} from "@angular/router"
 
 import { loadCldr,L10n } from '@syncfusion/ej2-base';
 L10n.load({
-    'en-US': {
+    'es-CR': {
         'schedule': {
             'saveButton': 'Aceptar',
             'cancelButton': 'Cancelar',
@@ -22,6 +22,9 @@ L10n.load({
             'week':'Por Semana',
             'month':'Por mes',
             'agenda':'Agenda'
+        },
+        'calendar':{
+            'today':'Hoy'
         },
     }
 });
@@ -47,10 +50,6 @@ export class CalendarComponent {
   public scheduleObj: ScheduleComponent;
   public showQuickInfo: boolean = false;
 
-
-
-  
- 
   public constructor(private router: Router ){
 
 }
