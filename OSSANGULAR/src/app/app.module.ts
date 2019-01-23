@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -63,6 +63,10 @@ import { MaskedTextBoxModule } from '@syncfusion/ej2-angular-inputs';
 import { DropDownListAllModule, MultiSelectAllModule } from '@syncfusion/ej2-angular-dropdowns';
 import { SharedModule } from './shared/calendar/shared.module';
 import { loadCldr,L10n } from '@syncfusion/ej2-base';
+import { AuthService } from './login/auth.service';
+import { AuthGuard } from './login/guards/auth.guard';
+import { JwtHelper } from './login/helper/jwt-helper';
+import { TokenStorage } from './login/helper/token-storage';
 
 declare var require: any;
 
@@ -110,13 +114,13 @@ loadCldr(
     SharedModule,
     ScheduleAllModule, RecurrenceEditorAllModule, NumericTextBoxAllModule,
         DatePickerAllModule, TimePickerAllModule, DateTimePickerAllModule, CheckBoxAllModule, ToolbarAllModule, DropDownListAllModule, ContextMenuAllModule,
-        MaskedTextBoxModule, MultiSelectAllModule
+        MaskedTextBoxModule, MultiSelectAllModule,ReactiveFormsModule
   ],
   providers: [AddressService,AddressDescriptionService,BrandService,ClientService,DeviceService,
   DeviceStateService,EmployeeService,EmployeeRoleService,GroupClientService,InventoryCategoryService,
 ListDeviceWorkOrderService,ListMaterialWorkOrderService,ListToolWorkOrderService,ListWorkOrderService,
 MeasurementUnitService,ModelService,TelephoneClientService,TelephoneEmployeeService,WorkOrderService,
-WorkOrderDetailService,WorkOrderTypeService],
+WorkOrderDetailService,WorkOrderTypeService,AuthService,AuthGuard,JwtHelper,TokenStorage],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
