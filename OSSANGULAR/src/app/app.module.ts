@@ -63,14 +63,11 @@ import { MaskedTextBoxModule } from '@syncfusion/ej2-angular-inputs';
 import { DropDownListAllModule, MultiSelectAllModule } from '@syncfusion/ej2-angular-dropdowns';
 import { SharedModule } from './shared/calendar/shared.module';
 import { loadCldr,L10n } from '@syncfusion/ej2-base';
-<<<<<<< HEAD
 import { AuthService } from './login/auth.service';
 import { AuthGuard } from './login/guards/auth.guard';
 import { JwtHelper } from './login/helper/jwt-helper';
 import { TokenStorage } from './login/helper/token-storage';
-=======
 import { InsertWorkOrderComponent } from './work-order/insert-work-order/insert-work-order.component';
->>>>>>> 87f4b6ecde204cc6a9f88f5c5075467130e959f1
 
 declare var require: any;
 

@@ -4,20 +4,19 @@
     <div id="panel" class="panel panel-default">
       <div class="panel-body">
         <form role="form" class="form-horizontal">
-
           <div class="row-fluid">
             <div class="col-md-3"></div>
 
             <div class="col-md-5">
-            <div *ngIf="primario">
+              <div *ngIf="primario">
                 <app-insert-work-order></app-insert-work-order>
                 <br>
                 <button class="btn btn-primary enviar" (click)="save()">Guardar</button>
+              </div>
             </div>
-          </div>
-        
+
             <div *ngIf="secundario">
-                <div class="col-md-1"></div>
+              <div class="col-md-1"></div>
               <div class="col-md-4 col-sm-4 col-xs-12 padding border-right">
 
                 <div class="row">
@@ -62,98 +61,97 @@
                   <button class="btn btn-primary enviar" (click)="edit()">Editar</button>
                 </div>
               </div>
-            </div><!--Finsecundario-->
-            <div *ngIf="terciario">
+            </div>
+            <!--Finsecundario-->
 
-            <div class="col-md-5">
+            <div *ngIf="terciario">
+              <div class="col-md-8">
                 <h3>Inventario</h3>
-              <div class="row">
-                <div class="col-md-8">
-                  <label label-default="" for="">Listas de inventario</label>
-                  <div class="dropdown">
+                <div class="row">
+                  <div class="col-md-5">
+                    <label label-default="" for="">Listas de inventario</label>
+                    <div class="dropdown">
                       <select name="inventory" class="dropdown-select">
                         <option value="">Cerca electrica</option>
                         <option value="1">Mantenimiento en tuberia</option>
                         <option value="2">instalación nueva de camaras</option>
                       </select>
                     </div>
-                </div>
-       
-              </div>
-              <div class="row">
+                  </div>
 
-                <div class="col-md-3">
-                 <h4>Materiales</h4>
-                 <table class="table table-condensed table-hover table-responsive">
-                    <tr>
-                      <th>Nombre</th>
-                      <th>Descripción</th>
-                    </tr>
-                    <tr>
-                      <td>Martillo</td>
-                      <td>Punta de metal</td>
-                    </tr>
-                    <tr>
-                      <td>Cable</td>
-                      <td>Grueso</td>
-                    </tr>
-                    <tr>
-                      <td>Clavos</td>
-                      <td>Punta fina</td>
-                    </tr>
-                  </table>
                 </div>
-                <div class="col-md-3"></div>
-                <div class="col-md-3">
+                <div class="row">
+                  <div class="col-md-4">
+                    <h4>Herramientas</h4>
+                    <table class="table table-condensed table-hover table-responsive">
+                      <tr>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                      </tr>
+                      <tr>
+                        <td>Martillo</td>
+                        <td>Punta de metal</td>
+                      </tr>
+                      <tr>
+                        <td>Cable</td>
+                        <td>Grueso</td>
+                      </tr>
+                      <tr>
+                        <td>Clavos</td>
+                        <td>Punta fina</td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="col-md-4">
+                    <h4>Dispositivos</h4>
+                    <table class="table table-condensed table-hover table-responsive">
+                      <tr>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                      </tr>
+                      <tr>
+                        <td>Martillo</td>
+                        <td>Punta de metal</td>
+                      </tr>
+                      <tr>
+                        <td>Cable</td>
+                        <td>Grueso</td>
+                      </tr>
+                      <tr>
+                        <td>Clavos</td>
+                        <td>Punta fina</td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="col-md-4">
                     <h4>Materiales</h4>
                     <table class="table table-condensed table-hover table-responsive">
-                       <tr>
-                         <th>Nombre</th>
-                         <th>Descripción</th>
-                       </tr>
-                       <tr>
-                         <td>Martillo</td>
-                         <td>Punta de metal</td>
-                       </tr>
-                       <tr>
-                         <td>Cable</td>
-                         <td>Grueso</td>
-                       </tr>
-                       <tr>
-                         <td>Clavos</td>
-                         <td>Punta fina</td>
-                       </tr>
-                     </table>
+                      <tr>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                      </tr>
+                      <tr>
+                        <td>Martillo</td>
+                        <td>Punta de metal</td>
+                      </tr>
+                      <tr>
+                        <td>Cable</td>
+                        <td>Grueso</td>
+                      </tr>
+                      <tr>
+                        <td>Clavos</td>
+                        <td>Punta fina</td>
+                      </tr>
+                    </table>
+                  </div>
                 </div>
-                <div class="col-md-3"></div>
-                <div class="col-md-3">
-                    <h4>Materiales</h4>
-                    <table class="table table-condensed table-hover table-responsive">
-                       <tr>
-                         <th>Nombre</th>
-                         <th>Descripción</th>
-                       </tr>
-                       <tr>
-                         <td>Martillo</td>
-                         <td>Punta de metal</td>
-                       </tr>
-                       <tr>
-                         <td>Cable</td>
-                         <td>Grueso</td>
-                       </tr>
-                       <tr>
-                         <td>Clavos</td>
-                         <td>Punta fina</td>
-                       </tr>
-                     </table>
+
+                <div class="row-fluid">
+                    <div class="col-md-8"></div>
+                  <div class="col-md-2"><button class="btn btn-primary enviar">Agregar</button></div>
+                  <div class="col-md-2"><button class="btn btn-warning enviar">Crear lista</button></div>
                 </div>
               </div>
-             
-              <div class="row-fluid">
-                <button class="btn btn-primary enviar">Enviar</button>
-             
-              </div>
-            </div>
             </div>
           </div>
 
