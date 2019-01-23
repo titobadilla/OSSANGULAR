@@ -1,6 +1,6 @@
 import { Component, OnInit ,ViewChild} from '@angular/core';
 
-import { extend } from '@syncfusion/ej2-base';
+import { extend, Internationalization } from '@syncfusion/ej2-base';
 import {
     EventSettingsModel, EventRenderedArgs, ScheduleComponent, MonthService, DayService, WeekService, ResizeService, DragAndDropService
 } from '@syncfusion/ej2-angular-schedule';
@@ -10,6 +10,7 @@ import {Router} from "@angular/router"
 
 
 import { loadCldr,L10n } from '@syncfusion/ej2-base';
+import { TimePickerComponent } from '@syncfusion/ej2-angular-calendars';
 L10n.load({
     'es-CR': {
         'schedule': {
@@ -34,7 +35,7 @@ L10n.load({
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })
-export class CalendarComponent {
+export class CalendarComponent  implements OnInit{
 
 
     
@@ -48,14 +49,27 @@ export class CalendarComponent {
   public flag:boolean=false;
   @ViewChild('scheduleObj')
   public scheduleObj: ScheduleComponent;
+  @ViewChild('ejStartTimePicker')
+  public ejStartTimePicker: TimePickerComponent;
+  @ViewChild('ejEndTimePicker')
+  public ejEndTimePicker: TimePickerComponent;
   public showQuickInfo: boolean = false;
+  public instance: Internationalization = new Internationalization();
+  public startdate: Date = new Date(2000, 0, 1, 8);
+    public enddate: Date = new Date(2000, 0, 1, 21);
 
   public constructor(private router: Router ){
+    
+}
 
+ngOnInit(){
+    this.scheduleObj.startHour = this.instance.formatDate(this.startdate, { skeleton: 'Hm' });
+    this.scheduleObj.endHour = this.instance.formatDate(this.enddate, { skeleton: 'Hm' });  
 }
 
   onCellDoubleClick(): void {
    // alert('Doble click');
+  
 }
 
   onEventRendered(args: EventRenderedArgs): void {
