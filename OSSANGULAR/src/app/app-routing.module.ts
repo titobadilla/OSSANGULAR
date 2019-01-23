@@ -53,7 +53,7 @@ const routes: Routes = [
   {path:"login",component:LoginComponent},
   {path:"calendar",component:CalendarComponent, canActivate: [AuthGuard]},
   {path:"calendar",component:CalendarComponent},
-  {path:"app-insert-work-order",component:InsertWorkOrderComponent}
+  {path:"insert-work-order",component:InsertWorkOrderComponent}
 ];
 
 @NgModule({
