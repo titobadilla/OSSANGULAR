@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-insert-work-order',
+  selector: 'insert-work-order',
   templateUrl: './insert-work-order.component.html',
   styleUrls: ['./insert-work-order.component.css']
 })
