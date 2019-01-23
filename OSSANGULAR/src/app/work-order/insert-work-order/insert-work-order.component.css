@@ -9,26 +9,11 @@ body {
     padding: 20px;
   }
   
-
-  
-  .padding {
-    padding: 40px;
-  }
- 
-  
-  .border-right {
-    border-right: 1px solid #ccc;
+  h2 {
+    text-align: left;
+    margin: 20px 0 20px 0;
   }
   
-  .enviar {
-    float: right;
-    margin: 20px 5px 0 0;
-  }
-  
-  .enviar {
-    margin: 20px 0 0 0;
-  }
-
   .customcheck {
     display: block;
     position: relative;
@@ -95,9 +80,11 @@ body {
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 }
+
 .table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
+    width: 100%;
   }
   
   td, th {

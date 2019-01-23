@@ -63,6 +63,7 @@ import { MaskedTextBoxModule } from '@syncfusion/ej2-angular-inputs';
 import { DropDownListAllModule, MultiSelectAllModule } from '@syncfusion/ej2-angular-dropdowns';
 import { SharedModule } from './shared/calendar/shared.module';
 import { loadCldr,L10n } from '@syncfusion/ej2-base';
+import { InsertWorkOrderComponent } from './work-order/insert-work-order/insert-work-order.component';
 
 declare var require: any;
 
@@ -100,7 +101,8 @@ loadCldr(
     MenuAdminComponent,
     MenuComponent,
     LoginComponent,
-    CalendarComponent
+    CalendarComponent,
+    InsertWorkOrderComponent
   ],
   imports: [
     BrowserModule,

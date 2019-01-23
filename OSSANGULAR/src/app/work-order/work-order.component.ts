@@ -10,8 +10,14 @@ import { Router } from '@angular/router';
 export class WorkOrderComponent implements OnInit {
 
   constructor(private router: Router,private workOrderService:WorkOrderService) { }
-
+  primario:boolean=false;
+  secundario:boolean=true;
+  terciario:boolean=true;
   ngOnInit() {
   }
-
+  save(){
+      this.primario=false;
+      this.secundario=true;
+      this.terciario=true;
+  }
 }
