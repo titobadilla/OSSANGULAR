@@ -87,7 +87,7 @@ ngOnInit(){
 
   onRedirect(): void{
       if(this.flag){     
-        this.router.navigate(['/workorder'])
+        this.router.navigate(['/work-order'])
     }else{
         this.flag=!this.flag;
     }

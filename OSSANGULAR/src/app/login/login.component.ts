@@ -5,6 +5,7 @@ import { TokenStorage } from './helper/token-storage';
 import { FormControl, FormGroup, Validators, FormsModule, AbstractControl } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 import { Alert } from 'selenium-webdriver';
+import { EventEmitterLogoutService } from './event-emitter-logout.service';
 
 @Component({
   selector: 'app-login',
@@ -18,18 +19,22 @@ export class LoginComponent  implements OnInit{
   returnUrl: string;
   error = '';
   reactForm: FormGroup;
+  messageSesionClosedByUser:boolean=false;
+  messageSesionClosedBySystem:boolean=false;
 
 
-  constructor(private router: Router, private authService: AuthService, private token: TokenStorage) {
+  constructor(private router: Router, private authService: AuthService, private token: TokenStorage,private emitterService:EventEmitterLogoutService) {
     this.reactForm = new FormGroup({
       'username': new FormControl('', [FormValidators.required]),
       'password': new FormControl('', [FormValidators.required])
     });
+    emitterService.messageSesionClosedByUser$.subscribe(data=>{this.messageSesionClosedByUser=data});
+    emitterService.messageSesionClosedBySystem$.subscribe(data=>{this.messageSesionClosedBySystem=data});
   }
  
 
   ngOnInit(): void {
-    this.token.signOut();
+    this.signOut();
 
     let formId: HTMLElement = <HTMLElement>document.getElementById('formId');
     document.getElementById('formId').addEventListener(
@@ -54,7 +59,7 @@ export class LoginComponent  implements OnInit{
 
    
   signOut(){
-    this.token.signOut();
+    if(this.token.getToken()!=null) this.token.signOut();   
   }
 
   login(): void {
@@ -64,9 +69,9 @@ export class LoginComponent  implements OnInit{
         this.token.saveToken(data.token);
         this.router.navigate(['/']);
       },error=>{
-        alert('Ha ocurrido un error con su datos de autenticación: '+error.status);
-        this.reactForm.reset();
-        this.loading = false;        
+        alert('Ha ocurrido un error con su datos de autenticación: '+error.status);        
+        this.loading = false;   
+        this.reactForm.reset();     
       }
       
     );
