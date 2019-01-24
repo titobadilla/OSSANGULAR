@@ -1,8 +1,19 @@
 <body>
 
   <div *ngIf="primario">
-    <insert-work-order></insert-work-order>
-    <button class="btn btn-primary" (click)="save()" style="margin-left:60%;">Guardar</button>
+    <div class="container">
+      <div class="row-fluid">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div id="panel" class="panel panel-default">
+            <div class="panel-body">
+              <insert-work-order></insert-work-order>
+              <button class="btn btn-primary" (click)="save()" style="margin-left:60%;">Guardar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="container">
