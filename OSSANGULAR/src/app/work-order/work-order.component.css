@@ -1,12 +1,13 @@
 body {
     font-family: 'Exo', serif;
     font-size: 14px;
-    background: #eee;
+    background-color: #1692B8!important;
   }
   
   .container {
     margin: 20px auto;
     padding: 20px;
+    
   }
   
   .padding {
@@ -26,7 +27,6 @@ body {
   .enviar {
     margin: 20px 0 0 0;
   } 
-  
   .dropdown {
     display: inline-block;
     position: relative;
