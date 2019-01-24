@@ -2,11 +2,11 @@
 
     <div class="row">
         <div class="col-lg-4"></div>
-        <div class="col-lg-4">
+        <div class="col-lg-4 ">
 
                 <div class="content-wrapper" style="margin-bottom: 25px;">
                         <div class="formtitle">
-                            <span>Autenticación</span>
+                            <span>Ingreso al sistema OSS</span>
                         </div>
                 
                         <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
@@ -36,6 +36,12 @@
                                     </div>
                                 </div>
                             </div>
+                            <div *ngIf="messageSesionClosedByUser"class="notify bar-top do-show" data-notification-status="success">
+                                    Se ha cerrado sesión correctamente.
+                                </div>
+                                <div *ngIf="messageSesionClosedBySystem"class="notify bar-top do-show" data-notification-status="warning">
+                                        Se ha cerrado sesión por inactividad en la pagina.
+                                    </div>
                                                            
                             <div class="row">
                                 <div style=" text-align: center;width: 320px;margin:0px auto;height: 100px;padding-top: 10px;">
