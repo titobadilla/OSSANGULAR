@@ -29,6 +29,10 @@ export class WorkOrderService {
     }
   }
 
+  public getAllWorkOrders(): Observable<WorkOrder[]>{
+    this.getTokenHeader();
+      return this.http.get<WorkOrder[]>(this.URLAPI+'workorder/', { headers: this.reqHeader } );
+  }
 
   public insertWorkOrder(workOrder: WorkOrder):Observable<WorkOrder>{
     this.getTokenHeader();

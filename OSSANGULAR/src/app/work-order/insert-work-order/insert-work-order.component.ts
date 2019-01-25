@@ -36,11 +36,4 @@ export class InsertWorkOrderComponent implements OnInit {
     })
   }
 
-  check(){
-    console.log(this.workOrder.client);
-    console.log(this.workOrder.employees);
-    console.log(this.workOrder.description);
-    console.log(this.workOrder.workOrderType.name);
-  }
-
 }
