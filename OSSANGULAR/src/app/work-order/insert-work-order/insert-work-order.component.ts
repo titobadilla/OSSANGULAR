@@ -18,6 +18,7 @@ export class InsertWorkOrderComponent implements OnInit {
   workOrder:WorkOrder = new WorkOrder();
   clients:Client[];
   employees:Employee[];
+
   constructor(private serviceWorkOrderTypes:WorkOrderTypeService, private serviceClient:ClientService,private serviceEmployee:EmployeeService) { }
 
   ngOnInit() {

@@ -8,24 +8,17 @@
     </div>
 
     <div class="form-group" style="width: 80%; margin-left: 15%">
-        <label class="icon-user"> Cliente</label>
-        <input type="text" class="form-control">
-        <br>
-        <label class="container" *ngFor="let clients of clients">
-            <input type="radio" name="cliente" ng-model="workOrder.client">{{clients.name}}
-            <span class="checkmark"></span>
-        </label>
+        <label>Elija un cliente</label>
+        <ng-select [items]="clients" bindLabel="name" bindValue="id" placeholder="Seleccione un cliente" [(ngModel)]="workOrder.client.id"
+            name="clients">
+        </ng-select>
     </div>
 
     <div class="form-group" style="width: 80%; margin-left: 15%">
-        <label class="icon-user">Empleados</label>
-        <input type="text" class="form-control">
-        <br>
-        <label class="container" *ngFor="let employees of employees">
-            <input type="checkbox" name="employees" ng-model="workOrder.employees">{{employees.name}}
-            {{employees.lastName}}
-            <span class="checkmark"></span>
-        </label>
+        <label>Seleccione los empleados asociados</label>
+        <ng-select [items]="employees" bindLabel='name' bindValue="id" [multiple]="true" placeholder="Seleccione los técnicos"
+            [(ngModel)]="selectedEmployees" name="employees">
+        </ng-select>
     </div>
 
     <div class="form-group" style="width: 80%; margin-left: 15%">
@@ -35,6 +28,6 @@
             name="WorkOrderType" [(ngModel)]="workOrder.workOrderType.name"></ng-select>
     </div>
 
-    <button type="submit" class="btn btn-primary" (click)="check()" style="margin-left:60%;">Guardar</button>
-    
+    <button type="submit" class="btn btn-primary" (click)="check()" style="margin-left:70%;">Guardar</button>
+
 </div>

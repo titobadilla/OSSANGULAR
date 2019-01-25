@@ -54,6 +54,7 @@ export class ClientService {
     return this.http.get<Client>(this.URLAPI+'client/'+clientId, { headers: this.reqHeader });
   }
 
+
   
 
 }
