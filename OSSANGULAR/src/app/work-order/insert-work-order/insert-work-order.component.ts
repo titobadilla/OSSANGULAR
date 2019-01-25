@@ -28,7 +28,6 @@ export class InsertWorkOrderComponent implements OnInit {
 
     this.serviceClient.getAllClients().subscribe(data =>{
       this.clients = data;
-      console.log(this.clients[0].name);
     });
 
     this.serviceEmployee.getAllEmployees().subscribe(data=>{
@@ -36,6 +35,11 @@ export class InsertWorkOrderComponent implements OnInit {
     })
   }
 
-  
+  check(){
+    console.log(this.workOrder.client);
+    console.log(this.workOrder.employees);
+    console.log(this.workOrder.description);
+    console.log(this.workOrder.workOrderType.name);
+  }
 
 }
