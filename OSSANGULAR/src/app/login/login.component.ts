@@ -4,7 +4,6 @@ import { AuthService } from './auth.service';
 import { TokenStorage } from './helper/token-storage';
 import { FormControl, FormGroup, Validators, FormsModule, AbstractControl } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
-import { Alert } from 'selenium-webdriver';
 import { EventEmitterLogoutService } from './event-emitter-logout.service';
 
 @Component({
@@ -59,7 +58,12 @@ export class LoginComponent  implements OnInit{
 
    
   signOut(){
-    if(this.token.getToken()!=null) this.token.signOut();   
+    if(this.authService.isAuthenticated() && !this.authService.isTokenExpired()){
+       this.token.signOut();
+      }
+    else{
+      this.token.signOutSystem();
+    }   
   }
 
   login(): void {
