@@ -10,28 +10,29 @@
         <label class="icon-user"> Cliente</label>
         <input type="text" class="form-control">
         <br>
-        <label class="container" *ngFor="let clients of clients" >
-            <input type="radio" name="radio" >{{clients.name}}
+        <label class="container" *ngFor="let clients of clients">
+            <input type="radio" name="radio">{{clients.name}}
             <span class="checkmark"></span>
         </label>
-       
+
 
     </div>
     <div class="form-group" style="width: 80%; margin-left: 15%">
         <label class="icon-user">Empleados</label>
         <input type="text" class="form-control">
         <br>
-        <label class="container" *ngFor="let employees of employees" >{{employees.name}} {{employees.lastName}}
-            <input type="checkbox" >
+        <label class="container" *ngFor="let employees of employees">{{employees.name}} {{employees.lastName}}
+            <input type="checkbox">
             <span class="checkmark"></span>
         </label>
-        
+
     </div>
     <div class="form-group" style="width: 80%; margin-left: 15%">
         <label class="icon-user">Tipo de orden de trabajo</label>
         <br>
-        <ng-select [items]="workOrdersType" bindLabel="name" bindValue="id" placeholder="Seleccione un tipo de orden de trabajo"name="WorkOrderType"  [(ngModel)]="workOrder.workOrderType.id"></ng-select>
-        
-    </div>
+        <ng-select [items]="workOrdersType" bindLabel="name" bindValue="id" placeholder="Seleccione un tipo de orden de trabajo"
+            name="WorkOrderType" [(ngModel)]="workOrder.workOrderType.id"></ng-select>
 
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="save()" style="margin-left:60%;">Guardar</button>
 </div>
