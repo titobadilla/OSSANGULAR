@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -116,7 +116,7 @@ loadCldr(
     SharedModule,
     ScheduleAllModule, RecurrenceEditorAllModule, NumericTextBoxAllModule,
         DatePickerAllModule, TimePickerAllModule, DateTimePickerAllModule, CheckBoxAllModule, ToolbarAllModule, DropDownListAllModule, ContextMenuAllModule,
-        MaskedTextBoxModule, MultiSelectAllModule,ReactiveFormsModule
+        MaskedTextBoxModule, MultiSelectAllModule,ReactiveFormsModule,NgSelectModule
   ],
   providers: [AddressService,AddressDescriptionService,BrandService,ClientService,DeviceService,
   DeviceStateService,EmployeeService,EmployeeRoleService,GroupClientService,InventoryCategoryService,

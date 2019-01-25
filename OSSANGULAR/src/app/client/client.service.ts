@@ -31,7 +31,7 @@ export class ClientService {
 
   public getAllClients(): Observable<Client[]> {
     this.getTokenHeader();
-    return this.http.get<Client[]>(this.URLAPI+'client', { headers: this.reqHeader });
+    return this.http.get<Client[]>(this.URLAPI+'client/', { headers: this.reqHeader });
   }
 
   public insertClient(client: Client):Observable<Client> {

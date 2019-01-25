@@ -19,5 +19,6 @@ export class WorkOrderComponent implements OnInit {
       this.primario=false;
       this.secundario=true;
       this.terciario=true;
+     
   }
 }
