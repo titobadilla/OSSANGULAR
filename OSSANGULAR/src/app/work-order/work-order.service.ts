@@ -36,6 +36,6 @@ export class WorkOrderService {
 
   public insertWorkOrder(workOrder: WorkOrder):Observable<WorkOrder>{
     this.getTokenHeader();
-      return this.http.post<WorkOrder>(this.URLAPI+'workorder/addWorkOrder', workOrder, { headers: this.reqHeader } );
+      return this.http.post<WorkOrder>(this.URLAPI+'workorder/', workOrder, { headers: this.reqHeader } );
   }
 }

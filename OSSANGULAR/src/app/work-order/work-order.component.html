@@ -1,157 +1,151 @@
 <body>
 
-  <div *ngIf="primary">
-    <div class="container">
-      <div class="row-fluid">
-        <div class="col-md-3"></div>
-        <div class="col-md-6 col-sm-6 col-xs-12">
-          <div id="panel" class="panel panel-default">
-            <div class="panel-body">
-              <insert-work-order></insert-work-order>
-              <button type="submit" class="btn btn-primary" (click)="save()" style="margin-left:70%;">Inventario</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="container">
     <div id="panel" class="panel panel-default">
       <div class="panel-body">
-        <form role="form" class="form-horizontal">
-          <div class="row-fluid">
-            <div *ngIf="secondary">
-             
-              <div class="col-md-3 padding border-right">
-                <div class="row">
-                  <h4>Descripción</h4>
-                  <h4>{{workOrder.description}}</h4>
-                </div>
+
+
+        <div class="row-fluid">
+          <div class="col-md-3 border-right">
+
+            <h1>Orden de trabajo</h1>
+            <div class="form-group">
+
+              <div class="form-group" style="width: 80%; margin-left: 15%">
+                <label for="username" class="icon-user"> Descripción</label>
                 <br>
-                <div class="row">
-                  <h4>Empleados</h4>
-                  <table class="table table-bordered table-hover table-responsive" >
-                    <tr>
-                      <th>Nombre</th>
-                      <th>Apellido</th>
-                    </tr>
-                    <tr *ngFor="let workorder of workOrder.employees">
-                      <td>{{workorder.name}}</td>
-                      <td>{{workorder.lastName}}</td>
-                    </tr>
-                    
-                  </table>
-                </div>
-
-                    <h4>Tipo de orden de trabajo:</h4>
-                    <h4 style="margin-left:30%;">{{workOrder.workOrderType.name}}</h4> 
-                
-                <div class="row-fluid">
-                  <button class="btn btn-primary enviar" (click)="edit()">Editar</button>
-                </div>
+                <input type="text" class="form-control" [(ngModel)]="workOrder.description">
               </div>
-              <!--end of first column-->
-              <div class="col-md-8" style="margin-left:2%;">
-                <h3>Inventario</h3>
-                <div class="row">
-                  <div class="col-md-5">
-                    <h4>Listas de inventario</h4>
-                    <ng-select [items]="lists" bindLabel="name" bindValue="id" placeholder="Seleccione una lista de inventario"
-                      [(ngModel)]="list" name="list">
-                    </ng-select>
 
-                  </div>
+              <div class="form-group" style="width: 80%; margin-left: 15%">
+                <label>Elija un cliente</label>
+                <ng-select [items]="clients" bindLabel="name" bindValue="id" placeholder="Seleccione un cliente"
+                  [(ngModel)]="workOrder.client.id" name="clients">
+                </ng-select>
+              </div>
 
-                </div>
-                <div class="row">
-                  <div class="col-md-4">
-                    <h4>Herramientas</h4>
-                    <table class="table table table-bordered table-hover table-responsive">
-                      <tr>
-                        <th>Nombre</th>
-                        <th>Descripción</th>
-                        <th>Cantidad</th>
-                      </tr>
-                      <tr>
-                        <td>Martillo</td>
-                        <td>Punta de metal</td>
-                        <td>50</td>
-                      </tr>
-                      <tr>
-                        <td>Cable</td>
-                        <td>Grueso</td>
-                        <td>50</td>
-                      </tr>
-                      <tr>
-                        <td>Clavos</td>
-                        <td>Punta fina</td>
-                        <td>50</td>
-                      </tr>
-                    </table>
-                  </div>
-                  <div class="col-md-4">
-                    <h4>Dispositivos</h4>
-                    <table class="table table table-bordered table-hover table-responsive">
-                        <tr>
-                          <th>Nombre</th>
-                          <th>Descripción</th>
-                          <th>Cantidad</th>
-                        </tr>
-                        <tr>
-                          <td>Martillo</td>
-                          <td>Punta de metal</td>
-                          <td>50</td>
-                        </tr>
-                        <tr>
-                          <td>Cable</td>
-                          <td>Grueso</td>
-                          <td>50</td>
-                        </tr>
-                        <tr>
-                          <td>Clavos</td>
-                          <td>Punta fina</td>
-                          <td>50</td>
-                        </tr>
-                      </table>
-                  </div>
-                  <div class="col-md-4">
-                    <h4>Materiales</h4>
-                    <table class="table table table-bordered table-hover table-responsive">
-                        <tr>
-                          <th>Nombre</th>
-                          <th>Descripción</th>
-                          <th>Cantidad</th>
-                        </tr>
-                        <tr>
-                          <td>Martillo</td>
-                          <td>Punta de metal</td>
-                          <td>50</td>
-                        </tr>
-                        <tr>
-                          <td>Cable</td>
-                          <td>Grueso</td>
-                          <td>50</td>
-                        </tr>
-                        <tr>
-                          <td>Clavos</td>
-                          <td>Punta fina</td>
-                          <td>50</td>
-                        </tr>
-                      </table>
-                  </div>
-                </div>
+              <div class="form-group" style="width: 80%; margin-left: 15%">
+                <label>Seleccione los empleados asociados</label>
+                <ng-select [items]="employees" bindLabel='name' bindValue="id" [multiple]="true" placeholder="Seleccione los técnicos"
+                  [(ngModel)]="selectedEmployees" name="employees">
+                </ng-select>
+              </div>
 
-                <div class="row-fluid">
-                  <div class="col-md-8"></div>
-                  <div class="col-md-2"><button class="btn btn-primary enviar">Agregar</button></div>
-                  <div class="col-md-2"><button class="btn btn-warning enviar">Crear lista</button></div>
-                </div>
+              <div class="form-group" style="width: 80%; margin-left: 15%">
+                <label class="icon-user">Tipo de orden de trabajo</label>
+                <br>
+                <ng-select [items]="workOrdersType" bindLabel="name" bindValue="id" placeholder="Seleccione un tipo de orden de trabajo"
+                  name="WorkOrderType" [(ngModel)]="workOrder.workOrderType.id"></ng-select>
               </div>
             </div>
           </div>
+          <!--end of first column-->
 
-        </form>
+          <div class="col-md-8" style="margin-left:2%;">
+            <h1>Inventario</h1>
+            <div class="row">
+
+              <div class="col-md-5">
+                <h4>Listas de inventario</h4>
+                <ng-select [items]="lists" bindLabel="name" bindValue="id" placeholder="Seleccione una lista de inventario"
+                  [(ngModel)]="workOrder.listWorkOrder.id" name="listWorkOrder">
+                </ng-select>
+              </div>
+            </div>
+
+            <div class="row">
+
+              <div class="col-md-4">
+                <h4>Herramientas</h4>
+                <table class="table table table-bordered table-hover table-responsive">
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Cantidad</th>
+                  </tr>
+                  <tr>
+                    <td>Martillo</td>
+                    <td>Punta de metal</td>
+                    <td>50</td>
+                  </tr>
+                  <tr>
+                    <td>Cable</td>
+                    <td>Grueso</td>
+                    <td>50</td>
+                  </tr>
+                  <tr>
+                    <td>Clavos</td>
+                    <td>Punta fina</td>
+                    <td>50</td>
+                  </tr>
+                </table>
+              </div>
+
+              <div class="col-md-4">
+                <h4>Dispositivos</h4>
+                <table class="table table table-bordered table-hover table-responsive">
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Cantidad</th>
+                  </tr>
+                  <tr>
+                    <td>Martillo</td>
+                    <td>Punta de metal</td>
+                    <td>50</td>
+                  </tr>
+                  <tr>
+                    <td>Cable</td>
+                    <td>Grueso</td>
+                    <td>50</td>
+                  </tr>
+                  <tr>
+                    <td>Clavos</td>
+                    <td>Punta fina</td>
+                    <td>50</td>
+                  </tr>
+                </table>
+              </div>
+
+              <div class="col-md-4">
+                <h4>Materiales</h4>
+                <table class="table table table-bordered table-hover table-responsive">
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Cantidad</th>
+                  </tr>
+                  <tr>
+                    <td>Martillo</td>
+                    <td>Punta de metal</td>
+                    <td>50</td>
+                  </tr>
+                  <tr>
+                    <td>Cable</td>
+                    <td>Grueso</td>
+                    <td>50</td>
+                  </tr>
+                  <tr>
+                    <td>Clavos</td>
+                    <td>Punta fina</td>
+                    <td>50</td>
+                  </tr>
+                </table>
+              </div>
+
+            </div>
+            <!--end of row-->
+
+            <div class="row-fluid">
+              <div class="col-md-8"></div>
+              <div class="col-md-2"><button type="submit" class="btn btn-primary enviar" (click)="createWorkOrder()">Guardar</button></div>
+              <div class="col-md-2"><button class="btn btn-warning enviar">Crear lista</button></div>
+            </div>
+          </div>
+
+        </div>
+
+
       </div>
     </div>
   </div><!-- End of .container -->
