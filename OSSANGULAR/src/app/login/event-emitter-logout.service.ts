@@ -10,14 +10,22 @@ export class EventEmitterLogoutService {
 
   private _message2 = new Subject<boolean>();
   messageSesionClosedBySystem$ = this._message2.asObservable();
+
+  private _sessionClosedByExpiration = new Subject<boolean>();
+  _sessionClosedByExpiration$ = this._message1.asObservable();
   
   constructor() { }
 
   public setSessionClosedByUser(flat:boolean){
     this._message1.next(flat);
+    
   }
 
   public setSessionClosedBySystem(flat:boolean){
     this._message2.next(flat);
+  }
+
+  public setSessionClosedByExpiration(flat:boolean){
+    this._sessionClosedByExpiration.next(flat);
   }
 }

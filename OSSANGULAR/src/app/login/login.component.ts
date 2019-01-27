@@ -23,6 +23,7 @@ export class LoginComponent  implements OnInit{
 
 
   constructor(private router: Router, private authService: AuthService, private token: TokenStorage,private emitterService:EventEmitterLogoutService) {
+    //this.signOut();
     this.reactForm = new FormGroup({
       'username': new FormControl('', [FormValidators.required]),
       'password': new FormControl('', [FormValidators.required])
@@ -61,7 +62,7 @@ export class LoginComponent  implements OnInit{
     if(this.authService.isAuthenticated() && !this.authService.isTokenExpired()){
        this.token.signOut();
       }
-    else{
+    else if(this.authService.isAuthenticated() && this.authService.isTokenExpired()){
       this.token.signOutSystem();
     }   
   }

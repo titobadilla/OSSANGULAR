@@ -52,7 +52,6 @@ const routes: Routes = [
   {path:"work-order-type",component:WorkOrderTypeComponent, canActivate: [AuthGuard]},
   {path:"login",component:LoginComponent},
   {path:"calendar",component:CalendarComponent, canActivate: [AuthGuard]},
-  {path:"calendar",component:CalendarComponent},
   {path:"insert-work-order",component:InsertWorkOrderComponent}/*,
   { path: '**', component: PageNotFoundComponent }*/
 ];
