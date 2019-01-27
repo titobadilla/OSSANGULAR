@@ -4,6 +4,12 @@ import { Router } from '@angular/router';
 import { ListWorkOrderService } from '../list-work-order/list-work-order.service';
 import { ListWorkOrder } from 'src/model/listworkorder.model';
 import { WorkOrder } from 'src/model/workorder.model';
+import { WorkOrderTypeService } from '../work-order-type/work-order-type.service';
+import { ClientService } from '../client/client.service';
+import { EmployeeService } from '../employee/employee.service';
+import { Client } from 'src/model/client.model';
+import { Employee } from 'src/model/employee.model';
+import { WorkOrderType } from 'src/model/workordertype.model';
 
 @Component({
   selector: 'app-work-order',
@@ -12,23 +18,43 @@ import { WorkOrder } from 'src/model/workorder.model';
 })
 export class WorkOrderComponent implements OnInit {
 
-  constructor(private router: Router,private workOrderService:WorkOrderService,private listservice:ListWorkOrderService) { }
-  primary:boolean=true;
-  secondary:boolean=false;
+  constructor(private router: Router,private workOrderService:WorkOrderService,private listservice:ListWorkOrderService,private serviceWorkOrderTypes:WorkOrderTypeService, private serviceClient:ClientService,private serviceEmployee:EmployeeService, private serviceWorkOrder:WorkOrderService) { }
+
   lists:ListWorkOrder[];
   workOrder:WorkOrder = new WorkOrder();
+  workOrdersType: WorkOrderType[];
+  clients:Client[];
+  employees:Employee[];
+  selectedEmployees: String[];
  
   ngOnInit() {
     this.listservice.getAllLists().subscribe(data => {
       this.lists = data;
     });
-    this.workOrderService.getAllWorkOrders().subscribe(data =>{
-      this.workOrder = data[0];
+
+    this.serviceWorkOrderTypes.getAllWorkOrdersType().subscribe(data => {
+      this.workOrdersType = data;
+    });
+
+    this.serviceClient.getAllClients().subscribe(data =>{
+      this.clients = data;
+    });
+
+    this.serviceEmployee.getAllEmployees().subscribe(data=>{
+      this.employees = data;
     })
   }
-  save(){
-      this.primary=false;
-      this.secondary=true;
-     
-  }
+
+  public createWorkOrder() {
+    let i = 0;
+    for (i = 0; i < this.selectedEmployees.length; i++) {
+      let employee: Employee = new Employee();
+      employee.id = this.selectedEmployees[i];
+      this.workOrder.employees.push(employee);
+    }
+    this.serviceWorkOrder.insertWorkOrder(this.workOrder).subscribe();
+    this.workOrder = new WorkOrder();
+    this.selectedEmployees = [];
+}
+
 }

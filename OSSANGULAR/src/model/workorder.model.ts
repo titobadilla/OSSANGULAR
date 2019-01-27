@@ -11,6 +11,6 @@ export class WorkOrder{
     client:Client=new Client();
     employees:Employee[]=new Array();
     listWorkOrder:ListWorkOrder=new ListWorkOrder();
-    workOrderDetail:WorkOrderDetail=new WorkOrderDetail();
+    workOrderDetail:WorkOrderDetail;
     workOrderType:WorkOrderType=new WorkOrderType();
 }
