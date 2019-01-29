@@ -38,4 +38,10 @@ export class WorkOrderService {
     this.getTokenHeader();
       return this.http.post<WorkOrder>(this.URLAPI+'workorder/', workOrder, { headers: this.reqHeader } );
   }
+
+  public getByIdWorkOrder(id: number):Observable<WorkOrder>{
+    this.getTokenHeader();
+      return this.http.get<WorkOrder>(this.URLAPI+'workorder/'+id, { headers: this.reqHeader } );
+  }
+
 }

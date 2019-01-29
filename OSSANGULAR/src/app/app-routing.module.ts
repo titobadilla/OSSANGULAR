@@ -25,6 +25,7 @@ import { LoginComponent } from './login/login.component';
 import { CalendarComponent } from './shared/calendar/calendar.component';
 import { AuthGuard } from './login/guards/auth.guard';
 import { AppComponent } from './app.component';
+import { UpdateWorkOrderComponent } from './work-order/update-work-order/update-work-order.component';
 
 const routes: Routes = [
   {path:"",component:AppComponent, canActivate: [AuthGuard]},
@@ -51,7 +52,8 @@ const routes: Routes = [
   {path:"work-order-type",component:WorkOrderTypeComponent, canActivate: [AuthGuard]},
   {path:"login",component:LoginComponent},
   {path:"calendar",component:CalendarComponent, canActivate: [AuthGuard]},
-  {path:"calendar",component:CalendarComponent}/*,
+  {path:"calendar",component:CalendarComponent},
+  {path:"update-work-order",component:UpdateWorkOrderComponent}/*,
   { path: '**', component: PageNotFoundComponent }*/
 ];
 

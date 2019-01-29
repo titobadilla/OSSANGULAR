@@ -13,10 +13,10 @@ body {
     position:relative;
     color:#696969;
 }
-  .container {
-    margin: 20px auto;
+  .panel {
+    margin: 20px 40px auto;
     padding: 20px;
-    
+
   }
   
   .border-right {
