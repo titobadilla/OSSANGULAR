@@ -44,4 +44,9 @@ export class WorkOrderService {
       return this.http.get<WorkOrder>(this.URLAPI+'workorder/'+id, { headers: this.reqHeader } );
   }
 
+  public updateWorkOrder(workOrder:WorkOrder):Observable<WorkOrder>{
+    this.getTokenHeader();
+    return this.http.put<WorkOrder>(this.URLAPI+'workorder/' + workOrder.id, workOrder, { headers: this.reqHeader } );
+  }
+
 }
