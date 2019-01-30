@@ -1,52 +1,15 @@
 <div class="control-section">
   <ejs-schedule #scheduleObj width='100%' locale='es-CR' height='650px' [selectedDate]="selectedDate" (eventRendered)="onEventRendered($event)"
-      [eventSettings]="eventSettings"  [showQuickInfo]="showQuickInfo" (actionComplete)="onRedirect()" (cellDoubleClick)="onCellDoubleClick()">
+      [eventSettings]="eventSettings"  [showQuickInfo]="showQuickInfo" (actionComplete)="onRedirect($event)" (cellDoubleClick)="onCellDoubleClick()">
       <e-views>
           <e-view  option='Day' [interval]="dayInterval"></e-view>
           <e-view  option='Week' [isSelected]="isSelected" [interval]="weekInterval"></e-view>
           <e-view  option='Month' [interval]="monthInterval"></e-view>
           <e-view  option="Agenda"></e-view>
       </e-views>
-      <ng-template #editorTemplate>
-
         
-          <!--
-        <table class="custom-event-editor" width="100%" cellpadding="5">
-            <tbody>
-                <tr>
-                    <td class="e-textlabel">Resumen</td>
-                    <td colspan="4">
-                        <input id="Subject" class="e-field e-input" type="text" value="" name="Subject" style="width: 100%" />
-                    </td>
-                </tr>
-                <tr>
-                    <td class="e-textlabel">Estado</td>
-                    <td colspan="4">
-                        <input type="text" id="EventType" name="EventType" class="e-field" style="width: 100%" />
-                    </td>
-                </tr>
-                <tr>
-                    <td class="e-textlabel">From</td>
-                    <td colspan="4">
-                        <input id="StartTime" class="e-field" type="text" name="StartTime" />
-                    </td>
-                </tr>
-                <tr>
-                    <td class="e-textlabel">To</td>
-                    <td colspan="4">
-                        <input id="EndTime" class="e-field" type="text" name="EndTime" />
-                    </td>
-                </tr>
-                <tr>
-                    <td class="e-textlabel">Reason</td>
-                    <td colspan="4">
-                        <textarea id="Description" class="e-field e-input" name="Description" rows="3" cols="50" style="width: 100%; height: 60px !important; resize: vertical"></textarea>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        -->
-    </ng-template>
+      <ng-template #editorTemplate>
+      </ng-template>      
 
     
   </ejs-schedule>

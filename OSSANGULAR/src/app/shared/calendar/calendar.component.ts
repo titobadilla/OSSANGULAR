@@ -22,7 +22,8 @@ L10n.load({
             'day':'Por día',
             'week':'Por Semana',
             'month':'Por mes',
-            'agenda':'Agenda'
+            'agenda':'Agenda',
+            'more':'más'
         },
         'calendar':{
             'today':'Hoy'
@@ -57,19 +58,24 @@ export class CalendarComponent  implements OnInit{
   public instance: Internationalization = new Internationalization();
   public startdate: Date = new Date(2000, 0, 1, 8);
     public enddate: Date = new Date(2000, 0, 1, 21);
+    public readonly: boolean = false;
 
   public constructor(private router: Router ){
     
 }
 
 ngOnInit(){
-    this.scheduleObj.startHour = this.instance.formatDate(this.startdate, { skeleton: 'Hm' });
-    this.scheduleObj.endHour = this.instance.formatDate(this.enddate, { skeleton: 'Hm' });  
+    //this.scheduleObj.startHour = this.instance.formatDate(this.startdate, { skeleton: 'Hm' });
+    //this.scheduleObj.endHour = this.instance.formatDate(this.enddate, { skeleton: 'Hm' });  
 }
 
   onCellDoubleClick(): void {
-   // alert('Doble click');
+    //alert('Doble click');
   
+}
+
+onPopupOpen(){
+    alert('Popup');
 }
 
   onEventRendered(args: EventRenderedArgs): void {
@@ -85,9 +91,11 @@ ngOnInit(){
       }
   }
 
-  onRedirect(): void{
+  onRedirect(args: EventRenderedArgs): void{
       if(this.flag){     
-        this.router.navigate(['/work-order'])
+          if(args.data!=undefined){
+         this.router.navigate(['/work-order'])
+        }
     }else{
         this.flag=!this.flag;
     }

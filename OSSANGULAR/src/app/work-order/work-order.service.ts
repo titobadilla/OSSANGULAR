@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { TokenStorage } from '../login/helper/token-storage';
+import { HttpClient } from '@angular/common/http';
+
 import { WorkOrder } from 'src/model/workorder.model';
 import { Observable } from 'rxjs';
 
@@ -10,32 +10,15 @@ import { Observable } from 'rxjs';
 })
 export class WorkOrderService {
 
-  reqHeader:any;
-  tokenCrypt:any
   URLAPI=environment.apiUrl;
 
-  constructor(private http: HttpClient,private token:TokenStorage) { }
-
-  private getTokenHeader(){
-    this.tokenCrypt=this.token.getToken();
-    if(this.tokenCrypt!=null){
-      this.reqHeader = new HttpHeaders({ 
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + this.tokenCrypt
-     });
-    }
-    else{
-      this.reqHeader=null;      
-    }
-  }
+  constructor(private http: HttpClient) { }
 
   public getAllWorkOrders(): Observable<WorkOrder[]>{
-    this.getTokenHeader();
-      return this.http.get<WorkOrder[]>(this.URLAPI+'workorder/', { headers: this.reqHeader } );
+      return this.http.get<WorkOrder[]>(this.URLAPI+'workorder/');
   }
 
   public insertWorkOrder(workOrder: WorkOrder):Observable<WorkOrder>{
-    this.getTokenHeader();
-      return this.http.post<WorkOrder>(this.URLAPI+'workorder/', workOrder, { headers: this.reqHeader } );
+      return this.http.post<WorkOrder>(this.URLAPI+'workorder/', workOrder);
   }
 }

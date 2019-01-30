@@ -67,7 +67,7 @@ export class JwtHelper {
     public decodeToken(token?: string): Iuser {
   
       if (token == null) {
-        token = localStorage.getItem('userToken');
+        token = sessionStorage.getItem('userToken');
       }
   
       /**
@@ -95,7 +95,7 @@ export class JwtHelper {
     public getTokenExpirationDate(token?: string): Date {
   
       if (token == null) {
-        token = localStorage.getItem('userToken');
+        token = sessionStorage.getItem('userToken');
       }
   
       let decoded: any;
@@ -113,7 +113,7 @@ export class JwtHelper {
   
     public isTokenExpired(token?: string, offsetSeconds?: number): boolean {
       if (token == null) {
-        token = localStorage.getItem('userToken');
+        token = sessionStorage.getItem('userToken');
       }
   
       let date = this.getTokenExpirationDate(token);

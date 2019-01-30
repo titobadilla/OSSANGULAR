@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -67,6 +67,7 @@ import { AuthService } from './login/auth.service';
 import { AuthGuard } from './login/guards/auth.guard';
 import { JwtHelper } from './login/helper/jwt-helper';
 import { TokenStorage } from './login/helper/token-storage';
+import { Interceptor } from './login/interceptor/app.interceptor';
 
 
 declare var require: any;
@@ -121,7 +122,11 @@ loadCldr(
   DeviceStateService,EmployeeService,EmployeeRoleService,GroupClientService,InventoryCategoryService,
 ListDeviceWorkOrderService,ListMaterialWorkOrderService,ListToolWorkOrderService,ListWorkOrderService,
 MeasurementUnitService,ModelService,TelephoneClientService,TelephoneEmployeeService,WorkOrderService,
-WorkOrderDetailService,WorkOrderTypeService,AuthService,AuthGuard,JwtHelper,TokenStorage],
+WorkOrderDetailService,WorkOrderTypeService,AuthService,AuthGuard,JwtHelper,TokenStorage,{
+  provide: HTTP_INTERCEPTORS,
+  useClass: Interceptor,
+  multi: true
+}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
