@@ -46,8 +46,7 @@
 
           <div class="form-group" style="width: 80%; margin-left: 15%">
             <label>Elija un estado</label>
-            <ng-select [items]="colors" bindLabel="state" bindValue="id" placeholder="Seleccione un color"
-             [(ngModel)]="workOrder.color.id"
+            <ng-select [items]="colors" bindLabel="state" bindValue="id" placeholder="Seleccione un color" [(ngModel)]="workOrder.color.id"
               name="colors">
 
               <ng-template ng-label-tmp let-item="item">

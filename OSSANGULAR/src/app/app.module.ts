@@ -67,7 +67,12 @@ import { AuthService } from './login/auth.service';
 import { AuthGuard } from './login/guards/auth.guard';
 import { JwtHelper } from './login/helper/jwt-helper';
 import { TokenStorage } from './login/helper/token-storage';
+<<<<<<< HEAD
 import { Interceptor } from './login/interceptor/app.interceptor';
+=======
+import { ColorComponent } from './color/color.component';
+import { UpdateWorkOrderComponent } from './work-order/update-work-order/update-work-order.component';
+>>>>>>> 65014f2be0b207d8fe386887d9ef4923f0fe2249
 
 
 declare var require: any;
@@ -106,7 +111,9 @@ loadCldr(
     MenuAdminComponent,
     MenuComponent,
     LoginComponent,
-    CalendarComponent
+    CalendarComponent,
+    ColorComponent,
+    UpdateWorkOrderComponent
   ],
   imports: [
     BrowserModule,
