@@ -11,6 +11,7 @@ import { WorkOrderTypeService } from 'src/app/work-order-type/work-order-type.se
 import { ClientService } from 'src/app/client/client.service';
 import { ColorService } from 'src/app/color/color.service';
 import { EmployeeService } from 'src/app/employee/employee.service';
+import { Time } from '@angular/common';
 
 @Component({
   selector: 'app-update-work-order',
@@ -19,12 +20,12 @@ import { EmployeeService } from 'src/app/employee/employee.service';
 })
 export class UpdateWorkOrderComponent implements OnInit {
 
-  constructor(private serviceWorkOrder:WorkOrderService,
+  constructor(private serviceWorkOrder: WorkOrderService,
     private listservice: ListWorkOrderService, private serviceWorkOrderTypes: WorkOrderTypeService,
     private serviceClient: ClientService, private serviceEmployee: EmployeeService,
     private serviceColors: ColorService) { }
 
-  workOrder:WorkOrder = new WorkOrder();
+  workOrder: WorkOrder = new WorkOrder();
   lists: ListWorkOrder[];
   workOrdersType: WorkOrderType[];
   clients: Client[];
@@ -33,10 +34,12 @@ export class UpdateWorkOrderComponent implements OnInit {
   startHour: String;
   endHour: String;
   colors: Color[];
+  flagView: boolean = false;
 
   ngOnInit() {
-    this.serviceWorkOrder.getByIdWorkOrder(3).subscribe(data =>{
-        this.workOrder = data;
+    this.serviceWorkOrder.getByIdWorkOrder(3).subscribe(data => {
+      this.workOrder = data;
+      this.splitDatesHours(data);
     });
     this.listservice.getAllLists().subscribe(data => {
       this.lists = data;
@@ -59,25 +62,46 @@ export class UpdateWorkOrderComponent implements OnInit {
     })
   }
 
-  public editWorkOrder(){
-    this.workOrder.employees=new Array();
-    let i=0;
-    for(i=0;i<this.selectedEmployees.length;i++){
-      let employee:Employee = new Employee();
-      employee.id=this.selectedEmployees[i];
-      this.workOrder.employees.push(employee);
+  public editWorkOrder() {
+
+    this.workOrder.startDate = "" + this.workOrder.startDate + "T" + this.startHour + "-0600"
+    this.workOrder.endDate = "" + this.workOrder.endDate + "T" + this.endHour + "-0600"
+
+    if (this.flagView) {
+      this.workOrder.employees = new Array();
+      let i = 0;
+      for (i = 0; i < this.selectedEmployees.length; i++) {
+        let employee: Employee = new Employee();
+        employee.id = this.selectedEmployees[i];
+        this.workOrder.employees.push(employee);
+      }
     }
-   this.serviceWorkOrder.updateWorkOrder(this.workOrder).subscribe();
+
+    this.serviceWorkOrder.updateWorkOrder(this.workOrder).subscribe();
   }
 
-  
-  private loadDropDownMultiple(){
-    let i=0;
-   this.selectedEmployees=[];
-    for(i=0;i<this.workOrder.employees.length;i++){
+
+  private loadDropDownMultiple() {
+    let i = 0;
+    this.selectedEmployees = [];
+    for (i = 0; i < this.workOrder.employees.length; i++) {
       this.selectedEmployees.push(this.workOrder.employees[i].id);
     }
-  
   }
+  private viewEmployees() {
+    this.loadDropDownMultiple();
+    this.flagView = true;
+  }
+
+  private splitDatesHours(data: WorkOrder) {
+    let start = data.startDate.split(" ");
+    let end = data.endDate.split(" ");
+    this.workOrder.startDate = start[0];
+    this.workOrder.endDate = end[0];
+    this.startHour = start[1]
+    this.endHour = end[1];
+  }
+
+
 
 }
