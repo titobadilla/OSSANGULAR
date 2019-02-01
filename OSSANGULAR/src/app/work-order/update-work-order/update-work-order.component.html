@@ -56,14 +56,14 @@
             </ng-select>
           </div>
 
-
-          <!--[style.backgroundColor]="item.bgcolor"   <hr />-->
-
-
           <div class="form-group" style="width: 80%; margin-left: 15%">
+            <label *ngIf='!flagView'>Empleados asociados</label>
+            <button *ngIf='!flagView' class="btn btn-default" (click)="viewEmployees()">Mostrar empleados asociados</button>
+          </div>
+          <div *ngIf='flagView' class="form-group" style="width: 80%; margin-left: 15%">
             <label>Seleccione los empleados asociados</label>
-            <ng-select [items]="employees" bindLabel='name' bindValue="id" [multiple]="true" placeholder="Seleccione los empleados"
-              [(ngModel)]="selectedEmployees" name="employees">
+            <ng-select [items]="employees" bindLabel='name' bindValue="id" [multiple]="true" placeholder="Seleccione los técnicos"
+              [(ngModel)]="selectedEmployees">
             </ng-select>
           </div>
 
@@ -174,7 +174,7 @@
 
         <div class="row-fluid">
           <div class="col-md-8"></div>
-          <div class="col-md-2"><button type="submit" class="btn btn-primary enviar" (click)="createWorkOrder()">Guardar</button></div>
+          <div class="col-md-2"><button type="submit" class="btn btn-primary enviar" (click)="editWorkOrder()">Guardar</button></div>
           <div class="col-md-2"><button class="btn btn-warning enviar">Crear lista</button></div>
         </div>
       </div>

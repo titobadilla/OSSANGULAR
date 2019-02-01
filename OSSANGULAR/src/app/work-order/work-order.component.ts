@@ -63,15 +63,15 @@ export class WorkOrderComponent implements OnInit {
     this.workOrder.startDate = "" + this.workOrder.startDate + "T" + this.startHour + "-0600"
     this.workOrder.endDate = "" + this.workOrder.endDate + "T" + this.endHour + "-0600"
 
-     let i = 0;
-     for (i = 0; i < this.selectedEmployees.length; i++) {
-       let employee: Employee = new Employee();
-       employee.id = this.selectedEmployees[i];
-        this.workOrder.employees.push(employee);
-     }
-      this.serviceWorkOrder.insertWorkOrder(this.workOrder).subscribe();
-      this.workOrder = new WorkOrder();
-       this.selectedEmployees = [];
+    let i = 0;
+    for (i = 0; i < this.selectedEmployees.length; i++) {
+      let employee: Employee = new Employee();
+      employee.id = this.selectedEmployees[i];
+      this.workOrder.employees.push(employee);
+    }
+    this.serviceWorkOrder.insertWorkOrder(this.workOrder).subscribe();
+    this.workOrder = new WorkOrder();
+    this.selectedEmployees = [];
   }
 
 }
