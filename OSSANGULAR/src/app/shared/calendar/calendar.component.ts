@@ -11,6 +11,12 @@ import {Router} from "@angular/router"
 
 import { loadCldr,L10n } from '@syncfusion/ej2-base';
 import { TimePickerComponent } from '@syncfusion/ej2-angular-calendars';
+import { WorkOrderService } from 'src/app/work-order/work-order.service';
+import { DataManager, WebApiAdaptor } from '@syncfusion/ej2-data';
+import { WorkOrder } from 'src/model/workorder.model';
+import { Color } from 'src/model/color.model';
+import { Client } from 'src/model/client.model';
+import { Observable } from 'rxjs';
 L10n.load({
     'es-CR': {
         'schedule': {
@@ -39,10 +45,9 @@ L10n.load({
 export class CalendarComponent  implements OnInit{
 
 
-    
-  public data: Object[] = <Object[]>extend([], fifaEventsData, null, true);
-  public selectedDate: Date = new Date(2018, 5, 21);
-  public eventSettings: EventSettingsModel = { dataSource: this.data ,enableTooltip:true};
+  public data:WorkOrder[];
+  public selectedDate: Date = new Date();
+  public eventSettings: EventSettingsModel ;
   public isSelected: Boolean = true;
   public dayInterval: number = 1;
   public weekInterval: number = 1;
@@ -50,37 +55,65 @@ export class CalendarComponent  implements OnInit{
   public flag:boolean=false;
   @ViewChild('scheduleObj')
   public scheduleObj: ScheduleComponent;
-  @ViewChild('ejStartTimePicker')
-  public ejStartTimePicker: TimePickerComponent;
-  @ViewChild('ejEndTimePicker')
-  public ejEndTimePicker: TimePickerComponent;
-  public showQuickInfo: boolean = false;
+  public showQuickInfo: boolean = true;
   public instance: Internationalization = new Internationalization();
   public startdate: Date = new Date(2000, 0, 1, 8);
-    public enddate: Date = new Date(2000, 0, 1, 21);
-    public readonly: boolean = false;
+  public enddate: Date = new Date(2000, 0, 1, 21);
+  public readonly: boolean = false;
+  public flagDoubleClick:boolean=false;
 
-  public constructor(private router: Router ){
+    public constructor(private router: Router,private workOrderService:WorkOrderService ){
     
 }
 
 ngOnInit(){
-    //this.scheduleObj.startHour = this.instance.formatDate(this.startdate, { skeleton: 'Hm' });
-    //this.scheduleObj.endHour = this.instance.formatDate(this.enddate, { skeleton: 'Hm' });  
+    this.getAllWorkOrders();
+    this.scheduleObj.startHour = this.instance.formatDate(this.startdate, { skeleton: 'Hm' });
+    this.scheduleObj.endHour = this.instance.formatDate(this.enddate, { skeleton: 'Hm' });  
 }
 
-  onCellDoubleClick(): void {
-    //alert('Doble click');
-  
+onCellClick(arg: EventRenderedArgs){
+    return arg.cancel=true;
 }
 
-onPopupOpen(){
-    alert('Popup');
-}
+
+
+    getAllWorkOrders(){
+        this.workOrderService.getAllWorkOrders().subscribe(data=>{
+            this.data=data;
+            this.loadDataCalendar();
+        });
+
+    }
+
+    loadDataCalendar(){
+
+        this.eventSettings={ dataSource: this.data ,enableTooltip:true, fields: {
+            subject: { title: 'Nombre del cliente', name: 'nameClientOptional', default: 'Nombre' },
+            location: { title: 'Ubicación del trabajo', name: 'locationClientOptional', default: 'Descripción' },
+            description: { title: 'Descripción del trabajo', name: 'description' },
+            startTime: { title: 'De', name: 'startDate' },
+            endTime: { title: 'Hasta', name: 'endDate' }
+        }};
+    }
+   
+    onCellDoubleClick(): void {
+        this.flagDoubleClick=true; 
+    }
+
+
+    onPopupOpen(arg: EventRenderedArgs){
+        if((arg.type==='Editor' && !this.flagDoubleClick) || arg.type==='DeleteAlert'){
+            return arg.cancel=true;
+        }else{
+            this.flagDoubleClick=false;
+        }
+    }
 
   onEventRendered(args: EventRenderedArgs): void {
-    
-      let categoryColor: string = args.data.CategoryColor as string;
+   
+      let color: Color = args.data.color as Color;
+      let categoryColor:string=color.color;
       if (!args.element || !categoryColor) {
           return;
       }
@@ -98,8 +131,7 @@ onPopupOpen(){
         }
     }else{
         this.flag=!this.flag;
-    }
-   
-
+    }   
   }
+
 }

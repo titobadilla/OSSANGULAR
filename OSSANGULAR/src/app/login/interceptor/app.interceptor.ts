@@ -3,7 +3,7 @@ import {HttpInterceptor, HttpRequest, HttpHandler, HttpSentEvent, HttpHeaderResp
   HttpResponse, HttpUserEvent, HttpErrorResponse, HttpEvent} from '@angular/common/http';
 
 import { Router } from '@angular/router';
-import { tap} from 'rxjs/operators';
+import {finalize, tap} from 'rxjs/operators';
 import { TokenStorage } from '../helper/token-storage';
 import { Observable } from 'rxjs';
 
@@ -16,6 +16,8 @@ export class Interceptor implements HttpInterceptor {
   constructor(private token: TokenStorage, private router: Router) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler):Observable<HttpEvent<any>> {
+    const startTime = Date.now();
+    let status: string;
 
     let authReq = request;
     let tokenV=this.token.getToken();
@@ -26,19 +28,29 @@ return next.handle(authReq)
 .pipe(
     tap(event => {
       if (event instanceof HttpResponse) {
- 
+        status = 'succeeded'
         // http response status code
        // console.log(event.status);
       }
     }, error => {
            // http response status code
            if (error.status === 401) {
-            this.router.navigate(['login']);
-            //this.token.signOutSystem();
+            status = 'failed'
+            this.router.navigate(['login']);            
           }
         
+    }),
+    finalize(() => {
+      const elapsedTime = Date.now() - startTime;
+      const message = request.method + " " + request.urlWithParams +" "+ status 
+      + " in " + elapsedTime + "ms";      
+      this.logDetails(message);
     }))
 
+  }
+
+  private logDetails(msg: string) {
+    console.log(msg);
   }
 
 }

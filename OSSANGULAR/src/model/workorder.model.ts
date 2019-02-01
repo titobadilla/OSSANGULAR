@@ -9,7 +9,7 @@ export class WorkOrder{
 
     id:number;
     description:String;
-    client:Client=new Client();
+    client:Client=new Client();      
     startDate:String;
     endDate:String;
     employees:Employee[]=new Array();
@@ -17,4 +17,5 @@ export class WorkOrder{
     workOrderDetail:WorkOrderDetail;
     workOrderType:WorkOrderType=new WorkOrderType();
     color:Color = new Color();
+
 }

@@ -1,6 +1,6 @@
 export class Color{
 
     id:number;
-    color:String;
+    color:string;
     state:String;
 }

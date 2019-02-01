@@ -11,4 +11,6 @@ export class Client{
   telephones: TelephoneClient[] = new Array();
   addressDescription:AddressDescription= new AddressDescription();
   group:GroupClient=new GroupClient();
+
+  
 }
