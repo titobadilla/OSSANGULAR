@@ -25,7 +25,8 @@ L10n.load({
             'week':'Por Semana',
             'month':'Por mes',
             'agenda':'Agenda',
-            'more':'más'
+            'more':'más',
+            'noEvents':'No hay órdenes de trabajo en la fecha seleccionada.'
         },
         'calendar':{
             'today':'Hoy'
