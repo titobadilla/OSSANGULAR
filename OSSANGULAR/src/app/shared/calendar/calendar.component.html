@@ -1,6 +1,6 @@
 <div class="control-section">
-  <ejs-schedule #scheduleObj width='100%' locale='es-CR' height='650px' [selectedDate]="selectedDate" (eventRendered)="onEventRendered($event)"
-      [eventSettings]="eventSettings" [readonly]='readonly' (popupOpen)="onPopupOpen($event)" (cellClick)="onCellClick($event)"  [showQuickInfo]="showQuickInfo" (actionComplete)="onRedirect($event)" (cellDoubleClick)="onCellDoubleClick()">
+  <ejs-schedule #scheduleObj width='100%' locale='es-CR' height='650px'  [(currentView)]="scheduleView" [selectedDate]="selectedDate" (eventRendered)="onEventRendered($event)"
+      [eventSettings]="eventSettings" (keydown)='onKeyDown($event)' (actionBegin)="onActionBegin($event)" (navigating)="onNavigating($event)" [readonly]='readonly' (popupOpen)="onPopupOpen($event)" (cellClick)="onCellClick($event)"  [showQuickInfo]="showQuickInfo" (actionComplete)="onRedirect($event)" (cellDoubleClick)="onCellDoubleClick()">
       <e-views>
           <e-view  option='Day' [interval]="dayInterval"></e-view>
           <e-view  option='Week' [isSelected]="isSelected" [interval]="weekInterval"></e-view>
