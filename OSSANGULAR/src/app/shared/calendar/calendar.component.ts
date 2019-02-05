@@ -2,22 +2,17 @@ import { Component, OnInit ,ViewChild} from '@angular/core';
 
 import { extend, Internationalization } from '@syncfusion/ej2-base';
 import {
-    EventSettingsModel, EventRenderedArgs, ScheduleComponent, MonthService, DayService, WeekService, ResizeService, DragAndDropService, ActionEventArgs, KeyEventArgs, View
+    EventSettingsModel, EventRenderedArgs, ScheduleComponent, ActionEventArgs, View
 } from '@syncfusion/ej2-angular-schedule';
-import { fifaEventsData } from 'src/app/datasource';
 import {Router} from "@angular/router"
 
 
 
-import { loadCldr,L10n } from '@syncfusion/ej2-base';
-import { TimePickerComponent } from '@syncfusion/ej2-angular-calendars';
+import { L10n } from '@syncfusion/ej2-base';
 import { WorkOrderService } from 'src/app/work-order/work-order.service';
-import { DataManager, WebApiAdaptor } from '@syncfusion/ej2-data';
 import { WorkOrder } from 'src/model/workorder.model';
 import { Color } from 'src/model/color.model';
-import { Client } from 'src/model/client.model';
-import { Observable } from 'rxjs';
-import { ArgumentType } from '@angular/compiler/src/core';
+
 L10n.load({
     'es-CR': {
         'schedule': {
@@ -60,16 +55,13 @@ export class CalendarComponent  implements OnInit{
   public instance: Internationalization = new Internationalization();
   public startdate: Date = new Date(2000, 0, 1, 8);
   public enddate: Date = new Date(2000, 0, 1, 21);
-  public readonly: boolean = false;
   public flagDoubleClick:boolean=false;
   public flagKeyDown:boolean=false;
-  public scheduleView: View = 'Week';
 
     public constructor(private router: Router,private workOrderService:WorkOrderService ){
      
-        this.addEventsNews();
-    
-}
+        this.addEventsNews();    
+    }
 
 addEventsNews(){
     document.body.addEventListener('keydown', (e: KeyboardEvent) => {
@@ -78,7 +70,7 @@ addEventsNews(){
 
 
 ngOnInit(){
-    this.getAllWorkOrders();
+    this. loadDataInit();
     this.scheduleObj.startHour = this.instance.formatDate(this.startdate, { skeleton: 'Hm' });
     this.scheduleObj.endHour = this.instance.formatDate(this.enddate, { skeleton: 'Hm' });  
 }
@@ -88,12 +80,15 @@ onCellClick(arg: EventRenderedArgs){
     return arg.cancel=true;
 }
 
+    loadDataInit(){
+        var curr = new Date(this.scheduleObj.selectedDate); // get current date 
+            var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week 
+            var last = first + 6; // last day is the first day + 6 
+            
+            var firstday = new Date(curr.setDate(first)).toISOString().substring(0,10); 
+            var lastday = new Date(curr.setDate(last)).toISOString().substring(0,10); 
 
-    getAllWorkOrders(){
-        this.workOrderService.getAllWorkOrders().subscribe(data=>{
-            this.data=data;
-            this.loadDataCalendar();
-        });
+            this.loadWeekData(firstday,lastday);
 
     }
 
@@ -129,7 +124,7 @@ onCellClick(arg: EventRenderedArgs){
     }
 
   onEventRendered(args: EventRenderedArgs): void {
-   
+
       let color: Color = args.data.color as Color;
       let categoryColor:string=color.color;
       if (!args.element || !categoryColor) {
@@ -159,59 +154,71 @@ onCellClick(arg: EventRenderedArgs){
 
   changeDate(args: ActionEventArgs){
 
-    /*var startDay = 0; //0=sunday, 1=monday etc.
-      var d = this.scheduleObj.selectedDate.getDay(); //get the current day
-      var weekStart = new Date(this.scheduleObj.selectedDate.valueOf() - (d<=0 ? 7-startDay:d-startDay)*86400000); //rewind to start day
-      var weekEnd = new Date(weekStart.valueOf() + 6*86400000); //add 6 days to get last day
-
-      console.log('Inicia: '+weekStart.toISOString());
-      console.log('Finaliza: '+weekEnd);
-*/
-    
         if(this.scheduleObj.currentView.toString()==='Day'){
-            alert('day');
             //llamar loadDayData()
-            
-        }else if(this.scheduleObj.currentView.toString()==='Week'){
-            alert('week');
-            //llamar loadWeekData()
-        }else if(this.scheduleObj.currentView.toString()==='Month'){
-            alert('month');
-            //llamar loadMonthData()
-        }else if(this.scheduleObj.currentView.toString()==='Agenda'){
-            alert('agenda');
-            //llamar loadAgendaData()
             let dateStart=new Date(this.scheduleObj.selectedDate);
             let dateStartString=dateStart.toJSON().substring(0,10);
-            console.log('Agenda Inicia: '+dateStartString);
+            this.loadDayData(dateStartString);
+            
+        }else if(this.scheduleObj.currentView.toString()==='Week'){
+            //llamar loadWeekData()
+
+            var curr = new Date(this.scheduleObj.selectedDate); // get current date 
+            var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week 
+            var last = first + 6; // last day is the first day + 6 
+            
+            var firstday = new Date(curr.setDate(first)).toISOString().substring(0,10); 
+            var lastday = new Date(curr.setDate(last)).toISOString().substring(0,10); 
+
+            this.loadWeekData(firstday,lastday);
+
+        }else if(this.scheduleObj.currentView.toString()==='Month'){
+            //llamar loadMonthData()
+            var date=this.scheduleObj.selectedDate.toISOString();
+            this.loadMonthData(date.substring(0,7));
+
+        }else if(this.scheduleObj.currentView.toString()==='Agenda'){
+            //llamar loadAgendaData()
+            
+            let dateStart=new Date(this.scheduleObj.selectedDate);
+            let dateStartString=dateStart.toJSON().substring(0,10);
             let dateEnd=new Date(dateStart);
             dateEnd.setDate((dateEnd.getDate()+6));
             let dateEndString=dateEnd.toJSON().substring(0,10);
-            console.log('Agenda Finaliza: '+(dateEndString));
+            this.loadAgendaData(dateStartString,dateEndString);
+
         }
 
-   // this.data=null;
-    this.loadDataCalendar();
 
   }
 
-  loadWeekData(){
+  loadWeekData(weekStart:String,weekEnd:String){
+    this.workOrderService.getWorkOrderByWeekWithStartDateAndEndDate(weekStart,weekEnd).subscribe(data=>{
+        this.data=data;
+        this.loadDataCalendar();
+    });
+  }
+
+  loadMonthData(date:String){
+    this.workOrderService.getWorkOrderByMonth(date).subscribe(data=>{
+        this.data=data;
+        this.loadDataCalendar();
+    });
 
   }
 
-  loadMonthData(){
-
+  loadDayData(date:String){ 
+      this.workOrderService.getWorkOrderByStartDate(date).subscribe(data=>{
+          this.data=data;
+          this.loadDataCalendar();
+      });
   }
 
-  loadDayData(){
-
+  loadAgendaData(dateStartString:String,dateEndString:String){
+    this.loadWeekData(dateStartString,dateEndString);
   }
 
-  loadAgendaData(){
-
-  }
-
-  onRedirect(args: ActionEventArgs): void{
+  onComplete(args: ActionEventArgs): void{
 
       //si se cambió de fecha(mandar a recargar datos)
       if(args.requestType==='viewNavigate' || args.requestType==='dateNavigate'){

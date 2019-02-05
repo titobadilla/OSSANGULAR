@@ -26,6 +26,19 @@ export class WorkOrderService {
       return this.http.get<WorkOrder>(this.URLAPI+'workorder/'+id);
   }
 
+  public getWorkOrderByStartDate(date: String):Observable<WorkOrder[]>{
+    return this.http.get<WorkOrder[]>(this.URLAPI+'workorder/findworkorderbystartdate/'+date);
+}
+
+public getWorkOrderByWeekWithStartDateAndEndDate(dateStart: String,dateEnd:String):Observable<WorkOrder[]>{
+  return this.http.get<WorkOrder[]>(this.URLAPI+'workorder/findworkorderbyweekwithstartdateandenddate/'+dateStart+'/'+dateEnd);
+}
+
+public getWorkOrderByMonth(date: String):Observable<WorkOrder[]>{
+  return this.http.get<WorkOrder[]>(this.URLAPI+'workorder/findworkorderbymonthandyear/'+date);
+}
+
+
   public updateWorkOrder(workOrder:WorkOrder):Observable<WorkOrder>{
     return this.http.put<WorkOrder>(this.URLAPI+'workorder/' + workOrder.id, workOrder);
   }
