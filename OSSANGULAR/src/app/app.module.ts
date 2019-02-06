@@ -71,6 +71,7 @@ import { TokenStorage } from './login/helper/token-storage';
 import { Interceptor } from './login/interceptor/app.interceptor';
 import { ColorComponent } from './color/color.component';
 import { UpdateWorkOrderComponent } from './work-order/update-work-order/update-work-order.component';
+import { InsertEmployeeComponent } from './employee/insert-employee/insert-employee.component';
 
 
 
@@ -112,7 +113,8 @@ loadCldr(
     LoginComponent,
     CalendarComponent,
     ColorComponent,
-    UpdateWorkOrderComponent
+    UpdateWorkOrderComponent,
+    InsertEmployeeComponent
   ],
   imports: [
     BrowserModule,

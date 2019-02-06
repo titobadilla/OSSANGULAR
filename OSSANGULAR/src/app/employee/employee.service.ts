@@ -17,4 +17,19 @@ export class EmployeeService {
   public getAllEmployees(): Observable<Employee[]> {
     return this.http.get<Employee[]>(this.URLAPI+'employee/');
   }
+
+  
+  public insertEmployee(employee: Employee):Observable<Employee>{
+      return this.http.post<Employee>(this.URLAPI+'employee/', employee);
+  }
+
+  public getByIdEmployee(id: String):Observable<Employee>{
+      return this.http.get<Employee>(this.URLAPI+'employee/'+id);
+  }
+
+  
+  public updateEmployee(employee:Employee):Observable<Employee>{
+    return this.http.put<Employee>(this.URLAPI+'employee/' + employee.id, employee);
+  }
+
 }
