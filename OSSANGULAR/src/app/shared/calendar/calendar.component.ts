@@ -21,9 +21,9 @@ L10n.load({
             'deleteButton': 'Eliminar',
             'newEvent': '¿Desea crear una orden de trabajo?',
             'today':'Hoy',
-            'day':'Por día',
+            'day':'Por Día',
             'week':'Por Semana',
-            'month':'Por mes',
+            'month':'Por Mes',
             'agenda':'Agenda',
             'more':'más',
             'noEvents':'No hay órdenes de trabajo en la fecha seleccionada.'

@@ -55,6 +55,7 @@ import { CalendarComponent } from './shared/calendar/calendar.component';
 
 
 import { ScheduleAllModule, RecurrenceEditorAllModule } from '@syncfusion/ej2-angular-schedule';
+import { ComboBoxModule } from '@syncfusion/ej2-angular-dropdowns';
 import { NumericTextBoxAllModule } from '@syncfusion/ej2-angular-inputs';
 import { DatePickerAllModule, TimePickerAllModule, DateTimePickerAllModule } from '@syncfusion/ej2-angular-calendars';
 import { CheckBoxAllModule } from '@syncfusion/ej2-angular-buttons';
@@ -121,7 +122,7 @@ loadCldr(
     SharedModule,
     ScheduleAllModule, RecurrenceEditorAllModule, NumericTextBoxAllModule,
         DatePickerAllModule, TimePickerAllModule, DateTimePickerAllModule, CheckBoxAllModule, ToolbarAllModule, DropDownListAllModule, ContextMenuAllModule,
-        MaskedTextBoxModule, MultiSelectAllModule,ReactiveFormsModule,NgSelectModule
+        MaskedTextBoxModule, MultiSelectAllModule,ReactiveFormsModule,NgSelectModule,ComboBoxModule
   ],
   providers: [AddressService,AddressDescriptionService,BrandService,ClientService,DeviceService,
   DeviceStateService,EmployeeService,EmployeeRoleService,GroupClientService,InventoryCategoryService,
