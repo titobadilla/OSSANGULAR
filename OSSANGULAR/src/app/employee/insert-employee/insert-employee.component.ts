@@ -75,6 +75,14 @@ employee:Employee=new Employee();
   get password() { return this.reactForm.get('password'); }
 
   saveEmployee(){
+    this.employee.id=this.id.value;
+    this.employee.lastName=this.lastName.value;
+    this.employee.name=this.name.value;
+    this.employee.password=this.password.value;
+    this.employee.position=this.position.value;
+    //telephones
+    
+
     alert('save');
   }
 
