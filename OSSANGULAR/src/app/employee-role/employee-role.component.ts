@@ -3,6 +3,7 @@ import { EmployeeRoleService } from './employee-role.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators, FormsModule, AbstractControl } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
+import { EmployeeRole } from 'src/model/employeerole.model';
 
 @Component({
   selector: 'app-employee-role',
@@ -12,13 +13,14 @@ import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 export class EmployeeRoleComponent implements OnInit {
 
   reactForm: FormGroup;
+  role: EmployeeRole = new EmployeeRole();
 
-  constructor(private router: Router,private employeeRoleService:EmployeeRoleService) {
+  constructor(private router: Router, private employeeRoleService: EmployeeRoleService) {
     this.reactForm = new FormGroup({
       'name': new FormControl('', [FormValidators.required]),
       'type': new FormControl('', [FormValidators.required]),
     });
-   }
+  }
 
   ngOnInit() {
     let formId: HTMLElement = <HTMLElement>document.getElementById('formId');
@@ -27,7 +29,6 @@ export class EmployeeRoleComponent implements OnInit {
       (e: Event) => {
         e.preventDefault();
         if (this.reactForm.valid) {
-          alert('Customer details added!');
           this.reactForm.reset();
         } else {
           // validating whole form
@@ -41,5 +42,11 @@ export class EmployeeRoleComponent implements OnInit {
 
   get name() { return this.reactForm.get('name'); }
   get type() { return this.reactForm.get('type'); }
+
+  private createEmployeeRole() {
+    this.employeeRoleService.insertEmployeeRole(this.role)
+      .subscribe(data => {
+      });
+  }
 
 }
