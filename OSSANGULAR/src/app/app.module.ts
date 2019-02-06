@@ -122,6 +122,7 @@ loadCldr(
     HttpClientModule,
     FormsModule,
     SharedModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     ScheduleAllModule, RecurrenceEditorAllModule, NumericTextBoxAllModule,
         DatePickerAllModule, TimePickerAllModule, DateTimePickerAllModule, CheckBoxAllModule, ToolbarAllModule, DropDownListAllModule, ContextMenuAllModule,
         MaskedTextBoxModule, MultiSelectAllModule,ReactiveFormsModule,NgSelectModule,ComboBoxModule

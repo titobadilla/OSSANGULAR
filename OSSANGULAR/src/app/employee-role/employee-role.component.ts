@@ -16,10 +16,21 @@ export class EmployeeRoleComponent implements OnInit {
   role: EmployeeRole = new EmployeeRole();
 
   constructor(private router: Router, private employeeRoleService: EmployeeRoleService) {
+   this.createReactiveForm();
+   this.associateValues();
+  }
+
+  associateValues(){
+    this.role.name=this.name.value;
+    this.role.type=this.type.value;
+  }
+
+  createReactiveForm(){
     this.reactForm = new FormGroup({
       'name': new FormControl('', [FormValidators.required]),
       'type': new FormControl('', [FormValidators.required]),
     });
+
   }
 
   ngOnInit() {
