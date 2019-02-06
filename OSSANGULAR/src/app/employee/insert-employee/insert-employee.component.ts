@@ -3,6 +3,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 import { EmployeeService } from '../employee.service';
 import { Router } from '@angular/router';
+import { Employee } from 'src/model/employee.model';
+import { EmployeeRoleService } from 'src/app/employee-role/employee-role.service';
 
 @Component({
   selector: 'app-insert-employee',
@@ -20,8 +22,9 @@ export class InsertEmployeeComponent implements OnInit {
 public autoreactiveplaceholder: String = 'Seleccione un rol';
 
 reactForm: FormGroup;
+employee:Employee=new Employee();
 
-  constructor(private router: Router,private employeeService:EmployeeService) { 
+  constructor(private router: Router,private employeeService:EmployeeService,private employeeRoleService:EmployeeRoleService) { 
   this.createReactiveForm();
   }
 
@@ -41,6 +44,26 @@ reactForm: FormGroup;
 
 
   ngOnInit() {
+    this.initEventSubmit();
+  }
+
+  initEventSubmit(){
+    let formId: HTMLElement = <HTMLElement>document.getElementById('formId');
+    document.getElementById('formId').addEventListener(
+      'submit',
+      (e: Event) => {
+        e.preventDefault();
+        if (this.reactForm.valid) {
+          this.saveEmployee();
+        } else {
+          // validating whole form
+          Object.keys(this.reactForm.controls).forEach(field => {
+            const control = this.reactForm.get(field);
+            control.markAsTouched({ onlySelf: true });
+          });
+        }
+      });
+
   }
 
   get id() { return this.reactForm.get('id'); }
@@ -50,5 +73,9 @@ reactForm: FormGroup;
   get role() { return this.reactForm.get('role'); }
   get username() { return this.reactForm.get('username'); }
   get password() { return this.reactForm.get('password'); }
+
+  saveEmployee(){
+    alert('save');
+  }
 
 }

@@ -35,7 +35,12 @@ export class LoginComponent  implements OnInit{
 
   ngOnInit(): void {
     this.signOut();
+    this.initEventSubmit();
 
+    
+  }
+
+  initEventSubmit(){
     let formId: HTMLElement = <HTMLElement>document.getElementById('formId');
     document.getElementById('formId').addEventListener(
       'submit',
@@ -51,6 +56,7 @@ export class LoginComponent  implements OnInit{
           });
         }
       });
+
   }
 
   get username() { return this.reactForm.get('username'); }
