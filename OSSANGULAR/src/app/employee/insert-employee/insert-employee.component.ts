@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 import { EmployeeService } from '../employee.service';
 import { Router } from '@angular/router';
 import { Employee } from 'src/model/employee.model';
 import { EmployeeRoleService } from 'src/app/employee-role/employee-role.service';
+import { ComboBoxComponent } from '@syncfusion/ej2-angular-dropdowns';
 
 @Component({
   selector: 'app-insert-employee',
@@ -13,13 +14,15 @@ import { EmployeeRoleService } from 'src/app/employee-role/employee-role.service
 })
 export class InsertEmployeeComponent implements OnInit {
 
-  public autoreactiveskillset: string[] = [
-    'ASP.NET', 'ActionScript', 'Basic',
-    'C++' , 'C#' , 'dBase' , 'Delphi' ,
-    'ESPOL' , 'F#' , 'FoxPro' , 'Java',
-    'J#' , 'Lisp' , 'Logo' , 'PHP'
+  public data: { [key: string]: Object; }[] = [
+    { Name: 'Administrador', Id: 1 },
+    { Name: 'Tecnico', Id: 2 },
+    { Name: 'Tercero', Id: 3 }
 ];
-public autoreactiveplaceholder: String = 'Seleccione un rol';
+
+public fields: Object = { text: 'Name', value: 'Id' };
+public watermark: string = 'Seleccione un rol';
+
 
 reactForm: FormGroup;
 employee:Employee=new Employee();
@@ -35,13 +38,16 @@ employee:Employee=new Employee();
     this.employee.name=this.name.value;
     this.employee.password=this.password.value;
     this.employee.position=this.position.value;
+    this.employee.role.id=this.role.value;
 
   }
 
+ 
+
 
   imprimir(){
-    this.employee.id='20';
-    //alert(this.employee.id);
+    alert(this.role.valid);
+    alert(this.employee.role.id);
   }
 
 
@@ -90,12 +96,8 @@ employee:Employee=new Employee();
   get username() { return this.reactForm.get('username'); }
   get password() { return this.reactForm.get('password'); }
 
-  saveEmployee(){
-    
+  saveEmployee(){    
  
-    
-
-    alert('save');
   }
 
 }
