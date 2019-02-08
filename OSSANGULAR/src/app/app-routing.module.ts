@@ -27,6 +27,12 @@ import { AuthGuard } from './login/guards/auth.guard';
 import { AppComponent } from './app.component';
 import { UpdateWorkOrderComponent } from './work-order/update-work-order/update-work-order.component';
 import { InsertEmployeeComponent } from './employee/insert-employee/insert-employee.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+
+import {MatNativeDateModule} from '@angular/material';
+import {HttpClientModule} from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 const routes: Routes = [
   {path:"",component:AppComponent, canActivate: [AuthGuard]},
@@ -61,7 +67,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes),BrowserAnimationsModule,MatButtonModule, MatCheckboxModule,
+  
+    HttpClientModule,
+    MatNativeDateModule,
+    ReactiveFormsModule,
+  ],
+  providers: [],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
