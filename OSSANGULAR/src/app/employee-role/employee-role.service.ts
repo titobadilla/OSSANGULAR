@@ -20,4 +20,17 @@ export class EmployeeRoleService {
   public getAllRoles(): Observable<EmployeeRole[]> {
     return this.http.get<EmployeeRole[]>(this.URLAPI + 'employeerole/');
   }
+
+  public getByIdEmployeeRole(roleID:number):Observable<EmployeeRole>{
+    return this.http.get<EmployeeRole>(this.URLAPI+'employeerole/'+roleID);
+  }
+
+  public updateEmployeeRole(role:EmployeeRole):Observable<EmployeeRole>{
+    return this.http.put<EmployeeRole>(this.URLAPI+'employeerole/',role);
+  }
+
+  
+  public deleteEmployeeRole(roleid:number):Observable<EmployeeRole>{
+    return this.http.delete<EmployeeRole>(this.URLAPI+'employeerole/'+roleid);
+  }
 }

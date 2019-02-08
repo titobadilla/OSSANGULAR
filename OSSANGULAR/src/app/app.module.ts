@@ -118,6 +118,7 @@ import {
   MatTooltipModule,
   MatTreeModule,
 } from '@angular/material';
+import { UpdateEmployeeRoleComponent } from './employee-role/update-employee-role/update-employee-role.component';
 
 declare var require: any;
 
@@ -159,7 +160,8 @@ loadCldr(
     ColorComponent,
     UpdateWorkOrderComponent,
     InsertEmployeeComponent,
-    InsertEmployeeRoleComponent
+    InsertEmployeeRoleComponent,
+    UpdateEmployeeRoleComponent
   ],
   imports: [
     A11yModule,

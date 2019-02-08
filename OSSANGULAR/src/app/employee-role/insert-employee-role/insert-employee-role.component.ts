@@ -20,19 +20,6 @@ export class InsertEmployeeRoleComponent implements OnInit {
    this.associateValues();
   }
 
-  associateValues(){
-    this.role.name=this.name.value;
-    this.role.type=this.type.value;
-  }
-
-  createReactiveForm(){
-    this.reactForm = new FormGroup({
-      'name': new FormControl('', [FormValidators.required]),
-      'type': new FormControl('', [FormValidators.required]),
-    });
-
-  }
-
   ngOnInit() {
     let formId: HTMLElement = <HTMLElement>document.getElementById('formId');
     document.getElementById('formId').addEventListener(
@@ -50,6 +37,21 @@ export class InsertEmployeeRoleComponent implements OnInit {
         }
       });
   }
+
+  associateValues(){
+    this.role.name=this.name.value;
+    this.role.type=this.type.value;
+  }
+
+  createReactiveForm(){
+    this.reactForm = new FormGroup({
+      'name': new FormControl('', [FormValidators.required]),
+      'type': new FormControl('', [FormValidators.required]),
+    });
+
+  }
+
+ 
 
   get name() { return this.reactForm.get('name'); }
   get type() { return this.reactForm.get('type'); }

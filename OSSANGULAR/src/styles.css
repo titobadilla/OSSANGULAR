@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { height: 100%; width: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background: url(http://www.laeradigital.net/es/wp-content/uploads/2017/10/fondo-abstracto-degradado.jpg) no-repeat}
+

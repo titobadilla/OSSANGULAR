@@ -1,0 +1,73 @@
+
+
+.formtitle {
+    font-family:'Questrial', Verdana, sans-serif;
+    text-align:center;
+    font-size:28px;
+    padding:0;
+    position:relative;
+    color:#fff;
+    }
+
+    .e-error,
+    .e-float-text {
+        font-weight: 500;
+        font-size:14px;
+    }
+
+    .e-custom-label {
+        font-weight: 500;
+        margin-left: 20px;
+    }
+
+    form {
+        padding-top: 20px;
+        margin-bottom: 45px;
+        border: 1px solid #ccc;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.36);
+        border-radius: 5px;
+        background:#fff;
+        }
+
+    .highcontrast form,
+    .highcontrast .header {
+        color: #fff;
+        background: #000000;
+    }
+
+    .header {
+        color: rgba(0, 0, 0, 0.7);
+    }
+
+    table,
+    td,
+    th {
+        padding: 5px;
+    }
+
+    .form-horizontal .form-group {
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-top: 6%;
+    }
+
+    .row {
+        padding-bottom: 30px;
+        padding-top: 25px;
+    }
+      .line {
+        display: inline-block;
+        width: 13%;
+        height: 2px;
+        background-color: #fff;
+      }
+      .dot {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background-color: #fff;
+        border-radius: 50%;
+        margin: 0 10px;
+        align-items: center;
+      }
+
