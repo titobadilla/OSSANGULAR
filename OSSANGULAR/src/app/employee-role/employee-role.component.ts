@@ -15,10 +15,6 @@ export class EmployeeRoleComponent implements OnInit {
   roles: EmployeeRole[] = new Array();
 
   ngOnInit(): void {
-   
-    $(document).ready(function () {
-      $('#example').DataTable();
-    });
 
     this.serviceRole.getAllRoles().subscribe(data => {
       this.roles= data;

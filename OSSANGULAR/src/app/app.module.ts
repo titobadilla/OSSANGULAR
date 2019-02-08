@@ -73,7 +73,7 @@ import { ColorComponent } from './color/color.component';
 import { UpdateWorkOrderComponent } from './work-order/update-work-order/update-work-order.component';
 import { InsertEmployeeComponent } from './employee/insert-employee/insert-employee.component';
 import { InsertEmployeeRoleComponent } from './employee-role/insert-employee-role/insert-employee-role.component';
-import { DataTablesModule } from 'angular-datatables';
+
 declare var require: any;
 
 loadCldr(
@@ -118,7 +118,6 @@ loadCldr(
   ],
   imports: [
     BrowserModule,
-    DataTablesModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,

@@ -1,17 +1,15 @@
-
-<table id="example" class="display" cellspacing="0" width="80%">
-    <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Tipo de rol</th> 
-        </tr>
-    </thead>
-  
-    <tbody>
-          
-        <tr *ngFor="let role of roles">
-            <td>{{role.name}}</td>
-            <td>{{role.type}}</td>
-        </tr>
-    </tbody>
-  </table>
+<div class="col-lg-4 control-section"></div>
+<div class="col-lg-4 control-section">
+    <div class="container">
+        <table class="table table-condensed table-hover" cellspacing="0" width="80%">
+            <tr>
+                <th>Nombre</th>
+                <th>Tipo de rol</th>
+            </tr>
+            <tr *ngFor="let role of roles">
+                <td>{{role.name}}</td>
+                <td>{{role.type}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
