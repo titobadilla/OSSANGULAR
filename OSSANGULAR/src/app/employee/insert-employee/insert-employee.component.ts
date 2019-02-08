@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Employee } from 'src/model/employee.model';
 import { EmployeeRoleService } from 'src/app/employee-role/employee-role.service';
 import { ComboBoxComponent } from '@syncfusion/ej2-angular-dropdowns';
+import { TelephoneEmployee } from 'src/model/telephoneemployee.model';
 
 @Component({
   selector: 'app-insert-employee',
@@ -21,13 +22,15 @@ export class InsertEmployeeComponent implements OnInit {
 ];
 
 public fields: Object = { text: 'Name', value: 'Id' };
-public watermark: string = 'Seleccione un rol';
+public watermark: string = 'Seleccione un rol*';
+
 
 
 reactForm: FormGroup;
-employee:Employee=new Employee();
+employee:Employee;
 
-  constructor(private router: Router,private employeeService:EmployeeService,private employeeRoleService:EmployeeRoleService) { 
+  constructor(private router: Router,private employeeService:EmployeeService,private employeeRoleService:EmployeeRoleService) {
+     this.employee=new Employee();
   this.createReactiveForm();
   this.associateValues();
   }
@@ -39,31 +42,51 @@ employee:Employee=new Employee();
     this.employee.password=this.password.value;
     this.employee.position=this.position.value;
     this.employee.role.id=this.role.value;
-
+    this.employee.username=this.username.value;
   }
 
- 
-
-
-  imprimir(){
-    alert(this.role.valid);
-    alert(this.employee.role.id);
-  }
-
-
-  createReactiveForm(){
+   createReactiveForm(){
     this.reactForm = new FormGroup({
       'id': new FormControl('', [FormValidators.required]),
       'name': new FormControl('', [FormValidators.required]),
       'lastName': new FormControl('', [FormValidators.required]),
       'position': new FormControl('', [FormValidators.required]),
-      'role': new FormControl('', [FormValidators.required]),
+      'role': new FormControl('', [this.roleRequired]),
       'username': new FormControl('', [FormValidators.required]),
-      'password': new FormControl('', [FormValidators.required])
+      'password': new FormControl('', [FormValidators.required]),
+      'mobile': new FormControl('', [FormValidators.required,this.phoneLength]),
+      'home': new FormControl('', [this.phoneLength])
 
     });
   }
+  
+  phoneLength(control: FormControl) {
+   
+    let value = control.value; 
+    if(value!=null){
+    if (value.length<8 && value.length>=1|| value.length>8) {  
+        return {
+          phoneError: {
+            parsed: value
+          }
+        }
+   
+    }}
+    return null;
+  }
 
+  roleRequired(control: FormControl) {
+  
+    let value = control.value;
+    if((value===null || value==="" || value===undefined)){
+        return {
+          errorD: {
+            parsed: value
+          }
+        }    
+  }
+    return null;
+  }
 
   ngOnInit() {
     this.initEventSubmit();
@@ -95,9 +118,29 @@ employee:Employee=new Employee();
   get role() { return this.reactForm.get('role'); }
   get username() { return this.reactForm.get('username'); }
   get password() { return this.reactForm.get('password'); }
+  get mobile() { return this.reactForm.get('mobile'); }
+  get home() { return this.reactForm.get('home'); }
 
-  saveEmployee(){    
- 
+  saveEmployee(){
+    var telephone=new TelephoneEmployee();
+    telephone.type="Celular";
+    telephone.number=this.mobile.value;
+    this.employee.telephones.push(telephone);
+    
+    if(this.home.value.length===8){
+      var telephoneHome=new TelephoneEmployee();      
+      telephoneHome.type="Casa";
+      telephoneHome.number=this.home.value;
+     this.employee.telephones.push(telephoneHome);
+
+    }
+
+    
+    this.employeeService.insertEmployee(this.employee).subscribe(data=>{
+      this.reactForm.reset;
+    });
+
+    
   }
 
 }
