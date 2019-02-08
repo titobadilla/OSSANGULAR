@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { EmployeeRoleService } from './employee-role.service';
+import { EmployeeRole } from 'src/model/employeerole.model';
 
 
 @Component({
@@ -8,11 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeeRoleComponent implements OnInit {
  
- 
+  constructor(private serviceRole: EmployeeRoleService){}
+
+  roles: EmployeeRole[] = new Array();
+
   ngOnInit(): void {
    
     $(document).ready(function () {
       $('#example').DataTable();
+    });
+
+    this.serviceRole.getAllRoles().subscribe(data => {
+      this.roles= data;
+      console.log(this.roles[1].name)
     });
   }
 
