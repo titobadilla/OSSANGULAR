@@ -9,11 +9,15 @@ import { Observable } from 'rxjs';
 })
 export class EmployeeRoleService {
 
-  URLAPI=environment.apiUrl;
+  URLAPI = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
-  public insertEmployeeRole(role:EmployeeRole):Observable<EmployeeRole>{
-    return this.http.post<EmployeeRole>(this.URLAPI+'employeerole/', role);
-}
+  public insertEmployeeRole(role: EmployeeRole): Observable<EmployeeRole> {
+    return this.http.post<EmployeeRole>(this.URLAPI + 'employeerole/', role);
+  }
+
+  public getAllRoles(): Observable<EmployeeRole[]> {
+    return this.http.get<EmployeeRole[]>(this.URLAPI + 'employeerole/');
+  }
 }

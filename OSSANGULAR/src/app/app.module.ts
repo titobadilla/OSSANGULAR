@@ -63,7 +63,7 @@ import { ToolbarAllModule, ContextMenuAllModule } from '@syncfusion/ej2-angular-
 import { MaskedTextBoxModule } from '@syncfusion/ej2-angular-inputs';
 import { DropDownListAllModule, MultiSelectAllModule } from '@syncfusion/ej2-angular-dropdowns';
 import { SharedModule } from './shared/calendar/shared.module';
-import { loadCldr,L10n } from '@syncfusion/ej2-base';
+import { loadCldr, L10n } from '@syncfusion/ej2-base';
 import { AuthService } from './login/auth.service';
 import { AuthGuard } from './login/guards/auth.guard';
 import { JwtHelper } from './login/helper/jwt-helper';
@@ -72,9 +72,8 @@ import { Interceptor } from './login/interceptor/app.interceptor';
 import { ColorComponent } from './color/color.component';
 import { UpdateWorkOrderComponent } from './work-order/update-work-order/update-work-order.component';
 import { InsertEmployeeComponent } from './employee/insert-employee/insert-employee.component';
-
-
-
+import { InsertEmployeeRoleComponent } from './employee-role/insert-employee-role/insert-employee-role.component';
+import { DataTablesModule } from 'angular-datatables';
 declare var require: any;
 
 loadCldr(
@@ -114,28 +113,30 @@ loadCldr(
     CalendarComponent,
     ColorComponent,
     UpdateWorkOrderComponent,
-    InsertEmployeeComponent
+    InsertEmployeeComponent,
+    InsertEmployeeRoleComponent
   ],
   imports: [
     BrowserModule,
+    DataTablesModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
     SharedModule,
-    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
+    ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     ScheduleAllModule, RecurrenceEditorAllModule, NumericTextBoxAllModule,
-        DatePickerAllModule, TimePickerAllModule, DateTimePickerAllModule, CheckBoxAllModule, ToolbarAllModule, DropDownListAllModule, ContextMenuAllModule,
-        MaskedTextBoxModule, MultiSelectAllModule,ReactiveFormsModule,NgSelectModule,ComboBoxModule
+    DatePickerAllModule, TimePickerAllModule, DateTimePickerAllModule, CheckBoxAllModule, ToolbarAllModule, DropDownListAllModule, ContextMenuAllModule,
+    MaskedTextBoxModule, MultiSelectAllModule, ReactiveFormsModule, NgSelectModule, ComboBoxModule
   ],
-  providers: [AddressService,AddressDescriptionService,BrandService,ClientService,DeviceService,
-  DeviceStateService,EmployeeService,EmployeeRoleService,GroupClientService,InventoryCategoryService,
-ListDeviceWorkOrderService,ListMaterialWorkOrderService,ListToolWorkOrderService,ListWorkOrderService,
-MeasurementUnitService,ModelService,TelephoneClientService,TelephoneEmployeeService,WorkOrderService,
-WorkOrderDetailService,WorkOrderTypeService,AuthService,AuthGuard,JwtHelper,TokenStorage,{
-  provide: HTTP_INTERCEPTORS,
-  useClass: Interceptor,
-  multi: true
-}],
+  providers: [AddressService, AddressDescriptionService, BrandService, ClientService, DeviceService,
+    DeviceStateService, EmployeeService, EmployeeRoleService, GroupClientService, InventoryCategoryService,
+    ListDeviceWorkOrderService, ListMaterialWorkOrderService, ListToolWorkOrderService, ListWorkOrderService,
+    MeasurementUnitService, ModelService, TelephoneClientService, TelephoneEmployeeService, WorkOrderService,
+    WorkOrderDetailService, WorkOrderTypeService, AuthService, AuthGuard, JwtHelper, TokenStorage, {
+      provide: HTTP_INTERCEPTORS,
+      useClass: Interceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
