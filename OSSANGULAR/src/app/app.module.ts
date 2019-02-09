@@ -81,6 +81,9 @@ import { InsertEmployeeComponent } from './employee/insert-employee/insert-emplo
 import { InsertEmployeeRoleComponent } from './employee-role/insert-employee-role/insert-employee-role.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
+import { CheckBoxModule, ButtonModule } from '@syncfusion/ej2-angular-buttons';
+import { NumericTextBoxModule } from '@syncfusion/ej2-angular-inputs';
+
 import {
   MatAutocompleteModule,
   MatBadgeModule,
@@ -119,6 +122,8 @@ import {
   MatTreeModule,
 } from '@angular/material';
 import { UpdateEmployeeRoleComponent } from './employee-role/update-employee-role/update-employee-role.component';
+import { InsertGroupClientComponent } from './group-client/insert-group-client/insert-group-client.component';
+import { UpdateGroupClientComponent } from './group-client/update-group-client/update-group-client.component';
 
 declare var require: any;
 
@@ -161,7 +166,9 @@ loadCldr(
     UpdateWorkOrderComponent,
     InsertEmployeeComponent,
     InsertEmployeeRoleComponent,
-    UpdateEmployeeRoleComponent
+    UpdateEmployeeRoleComponent,
+    InsertGroupClientComponent,
+    UpdateGroupClientComponent
   ],
   imports: [
     A11yModule,
@@ -205,6 +212,8 @@ loadCldr(
     MatTooltipModule,
     MatTreeModule,
     ScrollingModule,
+
+    MultiSelectAllModule,CheckBoxModule,NumericTextBoxModule,
 
     BrowserModule,
     AppRoutingModule,

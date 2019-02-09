@@ -1,3 +1,73 @@
-<p>
-  group-client works!
-</p>
+<div class="formtitle">
+  <div style="">
+    <span class="line"></span>
+    <span class="dot"></span>
+    <span class="title">
+      Buscar Jerarquia
+    </span>
+    <span class="dot"></span>
+    <span class="line"></span>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-4"></div>
+  <div class="col-lg-2 control-section">
+    <div class="content-wrapper">
+      <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
+
+        <div class="form-group">
+          <ejs-dropdownlist formControlName="client" name="client" [(ngModel)]="headClient" [dataSource]='clients'
+            [fields]='fields' [placeholder]='watermark' floatLabelType='Auto'>
+
+          </ejs-dropdownlist>
+          <div *ngIf="clients.errors">
+            <div *ngIf="clients.errors.errorD && clients.touched" class="e-error">
+              Debe seleccionar un rol.
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-lg-1">
+    <div style="display: inline-block;">
+      <button id="validateSubmit" class="samplebtn e-control e-btn e-info" type="submit" style="height:40px;width: 150px;"
+        data-ripple="true" (click)='search()'>Buscar</button>
+      <button class="samplebtn e-control e-btn e-basic" (click)='insert()' style="height:40px;width: 150px;">Ingresar</button>
+    </div>
+  </div>
+  <div class="col-lg-1">
+    <button class="samplebtn e-control e-btn e-warning" (click)='edit()' style="height:40px;width: 150px;">Editar</button>
+    <button class="samplebtn e-control e-btn e-danger" (click)='delete()' style="height:40px;width: 150px;">Delete</button>
+  </div>
+</div>
+
+<div *ngIf="clientsSection">
+  <div class="container">
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" style=" width: 100%; ">
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Nombre</th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <!-- Type Column -->
+        <ng-container matColumnDef="contactName">
+          <th mat-header-cell *matHeaderCellDef>Nombre de contacto</th>
+          <td mat-cell *matCellDef="let element"> {{element.contactName}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+
+  <div *ngIf="insertComponent">
+    <insert-group-client></insert-group-client>
+  </div>
