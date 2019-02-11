@@ -52,6 +52,10 @@ import { MenuAdminComponent } from './shared/menu-admin/menu-admin.component';
 import { MenuComponent } from './shared/menu/menu.component';
 import { LoginComponent } from './login/login.component';
 import { CalendarComponent } from './shared/calendar/calendar.component';
+import { UpdateEmployeeRoleComponent } from './employee-role/update-employee-role/update-employee-role.component';
+import { InsertGroupClientComponent } from './group-client/insert-group-client/insert-group-client.component';
+import { UpdateGroupClientComponent } from './group-client/update-group-client/update-group-client.component';
+import { UpdateEmployeeComponent } from './employee/update-employee/update-employee.component';
 
 import {A11yModule} from '@angular/cdk/a11y';
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -121,9 +125,7 @@ import {
   MatTooltipModule,
   MatTreeModule,
 } from '@angular/material';
-import { UpdateEmployeeRoleComponent } from './employee-role/update-employee-role/update-employee-role.component';
-import { InsertGroupClientComponent } from './group-client/insert-group-client/insert-group-client.component';
-import { UpdateGroupClientComponent } from './group-client/update-group-client/update-group-client.component';
+
 
 declare var require: any;
 
@@ -168,7 +170,8 @@ loadCldr(
     InsertEmployeeRoleComponent,
     UpdateEmployeeRoleComponent,
     InsertGroupClientComponent,
-    UpdateGroupClientComponent
+    UpdateGroupClientComponent,
+    UpdateEmployeeComponent
   ],
   imports: [
     A11yModule,

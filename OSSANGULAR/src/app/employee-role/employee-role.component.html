@@ -29,12 +29,9 @@
             <button mat-button class="btn btn-danger" (click)='delete(element)'>Eliminar</button>
           </td>
         </ng-container>
-
-
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-
       <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </div>
 

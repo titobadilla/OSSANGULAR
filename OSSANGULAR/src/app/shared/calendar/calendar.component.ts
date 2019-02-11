@@ -1,4 +1,4 @@
-import { Component, OnInit ,ViewChild} from '@angular/core';
+import { Component, OnInit ,ViewChild, AfterViewInit} from '@angular/core';
 
 import { extend, Internationalization } from '@syncfusion/ej2-base';
 import {
@@ -39,9 +39,11 @@ L10n.load({
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })
-export class CalendarComponent  implements OnInit{
-
-
+export class CalendarComponent  implements OnInit,AfterViewInit{
+    ngAfterViewInit(): void {
+      
+    }
+   
   public data:WorkOrder[];
   public selectedDate: Date = new Date();
   public eventSettings: EventSettingsModel ;
@@ -61,7 +63,8 @@ export class CalendarComponent  implements OnInit{
 
     public constructor(private router: Router,private workOrderService:WorkOrderService ){
      
-        this.addEventsNews();    
+        this.addEventsNews();  
+        
     }
 
 addEventsNews(){
@@ -71,6 +74,7 @@ addEventsNews(){
 
 
 ngOnInit(){
+  
     this. loadDataInit();
     this.scheduleObj.startHour = this.instance.formatDate(this.startdate, { skeleton: 'Hm' });
     this.scheduleObj.endHour = this.instance.formatDate(this.enddate, { skeleton: 'Hm' });  
@@ -112,6 +116,8 @@ onCellClick(arg: EventRenderedArgs){
 
     onPopupOpen(arg: EventRenderedArgs){
 
+      
+
       if((arg.type==='Editor' && !this.flagDoubleClick) || arg.type==='DeleteAlert' || this.flagKeyDown ){
          this.flagKeyDown=false;
             return arg.cancel=true;
@@ -128,10 +134,11 @@ onCellClick(arg: EventRenderedArgs){
 
       let color: Color = args.data.color as Color;
       let categoryColor:string=color.color;
+
       if (!args.element || !categoryColor) {
           return;
       }
-      if (this.scheduleObj.currentView === 'Agenda') {
+      if (this.scheduleObj.currentView === 'Agenda') {          
           (args.element.firstChild as HTMLElement).style.borderLeftColor = categoryColor;
       } else {
           args.element.style.backgroundColor = categoryColor;
@@ -163,7 +170,7 @@ onCellClick(arg: EventRenderedArgs){
             
         }else if(this.scheduleObj.currentView.toString()==='Week'){
             //llamar loadWeekData()
-
+            
             var curr = new Date(this.scheduleObj.selectedDate); // get current date 
             var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week 
             var last = first + 6; // last day is the first day + 6 
@@ -194,6 +201,7 @@ onCellClick(arg: EventRenderedArgs){
   }
 
   loadWeekData(weekStart:String,weekEnd:String){
+
     this.workOrderService.getWorkOrderByWeekWithStartDateAndEndDate(weekStart,weekEnd).subscribe(data=>{
         this.data=data;
         this.loadDataCalendar();
