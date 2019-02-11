@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-update-group-client',
+  selector: 'update-group-client',
   templateUrl: './update-group-client.component.html',
   styleUrls: ['./update-group-client.component.css']
 })
