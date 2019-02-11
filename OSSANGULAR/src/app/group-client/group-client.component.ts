@@ -17,7 +17,8 @@ export class GroupClientComponent implements OnInit {
   reactForm: FormGroup;
   headClient: String;
   clientsSection = false;
-  insertComponent = false;
+  updateSection = false;
+  formSection = true;
   clientsOfHeadClient: Client[] = new Array();
   displayedColumns: string[] = ['name', 'contactName'];
   dataSource = new MatTableDataSource<Client>([]);
@@ -90,7 +91,11 @@ export class GroupClientComponent implements OnInit {
     })
   }
 
-  insert() {
-    this.insertComponent = true;
+  edit() {
+    this.formSection = false;
+    this.clientsSection=false;
+  this.updateSection = true;
+  
+  alert('hola')
   }
 }

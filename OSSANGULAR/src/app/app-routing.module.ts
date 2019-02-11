@@ -36,6 +36,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { InsertEmployeeRoleComponent } from './employee-role/insert-employee-role/insert-employee-role.component';
 import { UpdateEmployeeRoleComponent } from './employee-role/update-employee-role/update-employee-role.component';
 import { InsertGroupClientComponent } from './group-client/insert-group-client/insert-group-client.component';
+import { UpdateGroupClientComponent } from './group-client/update-group-client/update-group-client.component';
 
 const routes: Routes = [
   {path:"",component:AppComponent, canActivate: [AuthGuard]},
@@ -68,7 +69,8 @@ const routes: Routes = [
   {path:"insert-employee-role",component:InsertEmployeeRoleComponent},
   {path:'update-employee-role',component:UpdateEmployeeRoleComponent},
   {path:'insert-group-client',component:InsertGroupClientComponent},
-  {path:'insert-group-client',component:InsertGroupClientComponent}
+  {path:'insert-group-client',component:InsertGroupClientComponent},
+  {path:'update-group-client',component:UpdateGroupClientComponent}
   /*,
   { path: '**', component: PageNotFoundComponent }*/
 ];
