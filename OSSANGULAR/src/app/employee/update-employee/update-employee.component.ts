@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Employee } from 'src/model/employee.model';
 import { EmployeeRoleService } from 'src/app/employee-role/employee-role.service';
 import { TelephoneEmployee } from 'src/model/telephoneemployee.model';
+import { EmployeeRole } from 'src/model/employeerole.model';
 
 @Component({
   selector: 'update-employee',
@@ -15,15 +16,11 @@ import { TelephoneEmployee } from 'src/model/telephoneemployee.model';
 export class UpdateEmployeeComponent implements OnInit {
 
   @Input() employeeId: String;
+  
+  public data: EmployeeRole[]=new Array();
 
-  public data: { [key: string]: Object; }[] = [
-    { Name: 'Administrador', Id: 1 },
-    { Name: 'Tecnico', Id: 2 },
-    { Name: 'Tercero', Id: 3 }
-];
-
-public fields: Object = { text: 'Name', value: 'Id' };
-public watermark: string = 'Seleccione un rol*';
+  public fields: Object = { text: 'name', value: 'id' };
+  public watermark: string = 'Seleccione un rol*';
 
 reactForm: FormGroup;
 employee:Employee;
@@ -34,6 +31,12 @@ employee:Employee;
   this.associateValues();
   }
 
+  getEmployeeRoles(){
+    this.employeeRoleService.getAllRoles().subscribe(data=>{
+      this.data=data
+    });
+  }
+
   loadEmployee(){
     this.employeeService.getByIdEmployee(this.employeeId).subscribe(
       data => {
@@ -41,6 +44,8 @@ employee:Employee;
       }
     );
   }
+
+  
 
   associateValues(){
     this.employee.id=this.id.value;
@@ -95,7 +100,10 @@ employee:Employee;
     return null;
   }
 
+
+
   ngOnInit() {
+    this.getEmployeeRoles();
     this.loadEmployee();
     this.initEventSubmit();
   }

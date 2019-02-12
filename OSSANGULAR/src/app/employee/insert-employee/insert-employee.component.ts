@@ -7,6 +7,7 @@ import { Employee } from 'src/model/employee.model';
 import { EmployeeRoleService } from 'src/app/employee-role/employee-role.service';
 import { ComboBoxComponent } from '@syncfusion/ej2-angular-dropdowns';
 import { TelephoneEmployee } from 'src/model/telephoneemployee.model';
+import { EmployeeRole } from 'src/model/employeerole.model';
 
 @Component({
   selector: 'app-insert-employee',
@@ -15,13 +16,9 @@ import { TelephoneEmployee } from 'src/model/telephoneemployee.model';
 })
 export class InsertEmployeeComponent implements OnInit {
 
-  public data: { [key: string]: Object; }[] = [
-    { Name: 'Administrador', Id: 1 },
-    { Name: 'Tecnico', Id: 2 },
-    { Name: 'Tercero', Id: 3 }
-];
+  public data: EmployeeRole[]=new Array();
 
-public fields: Object = { text: 'Name', value: 'Id' };
+public fields: Object = { text: 'name', value: 'id' };
 public watermark: string = 'Seleccione un rol*';
 
 
@@ -33,6 +30,12 @@ employee:Employee;
      this.employee=new Employee();
   this.createReactiveForm();
   this.associateValues();
+  }
+
+  getEmployeeRoles(){
+    this.employeeRoleService.getAllRoles().subscribe(data=>{
+      this.data=data
+    });
   }
 
   associateValues(){
@@ -89,6 +92,8 @@ employee:Employee;
   }
 
   ngOnInit() {
+    
+  this.getEmployeeRoles();
     this.initEventSubmit();
   }
 
