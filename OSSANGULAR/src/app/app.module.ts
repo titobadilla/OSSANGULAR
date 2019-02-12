@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClientJsonpModule, } from '@angular/common/http';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -57,13 +57,6 @@ import { InsertGroupClientComponent } from './group-client/insert-group-client/i
 import { UpdateGroupClientComponent } from './group-client/update-group-client/update-group-client.component';
 import { UpdateEmployeeComponent } from './employee/update-employee/update-employee.component';
 
-import {A11yModule} from '@angular/cdk/a11y';
-import {DragDropModule} from '@angular/cdk/drag-drop';
-import {ScrollingModule} from '@angular/cdk/scrolling';
-import {CdkStepperModule} from '@angular/cdk/stepper';
-import {CdkTableModule} from '@angular/cdk/table';
-import {CdkTreeModule} from '@angular/cdk/tree';
-
 import { ScheduleAllModule, RecurrenceEditorAllModule } from '@syncfusion/ej2-angular-schedule';
 import { ComboBoxModule } from '@syncfusion/ej2-angular-dropdowns';
 import { NumericTextBoxAllModule } from '@syncfusion/ej2-angular-inputs';
@@ -83,49 +76,14 @@ import { ColorComponent } from './color/color.component';
 import { UpdateWorkOrderComponent } from './work-order/update-work-order/update-work-order.component';
 import { InsertEmployeeComponent } from './employee/insert-employee/insert-employee.component';
 import { InsertEmployeeRoleComponent } from './employee-role/insert-employee-role/insert-employee-role.component';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { CheckBoxModule, ButtonModule } from '@syncfusion/ej2-angular-buttons';
+import { CheckBoxModule } from '@syncfusion/ej2-angular-buttons';
 import { NumericTextBoxModule } from '@syncfusion/ej2-angular-inputs';
 
-import {
-  MatAutocompleteModule,
-  MatBadgeModule,
-  MatBottomSheetModule,
-  MatButtonModule,
-  MatButtonToggleModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatChipsModule,
-  MatDatepickerModule,
-  MatDialogModule,
-  MatDividerModule,
-  MatExpansionModule,
-  MatGridListModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatMenuModule,
-  MatNativeDateModule,
-  MatPaginatorModule,
-  MatProgressBarModule,
-  MatProgressSpinnerModule,
-  MatRadioModule,
-  MatRippleModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatSliderModule,
-  MatSlideToggleModule,
-  MatSnackBarModule,
-  MatSortModule,
-  MatStepperModule,
-  MatTableModule,
-  MatTabsModule,
-  MatToolbarModule,
-  MatTooltipModule,
-  MatTreeModule,
-} from '@angular/material';
-
+import { CommonModule } from '@angular/common';
+import { ToolbarModule } from '@syncfusion/ej2-angular-navigations';
+import { GridAllModule } from '@syncfusion/ej2-angular-grids';
+import { DialogModule } from '@syncfusion/ej2-angular-popups';
 
 declare var require: any;
 
@@ -174,65 +132,50 @@ loadCldr(
     UpdateEmployeeComponent
   ],
   imports: [
-    A11yModule,
-    CdkStepperModule,
-    CdkTableModule,
-    CdkTreeModule,
-    DragDropModule,
-    MatAutocompleteModule,
-    MatBadgeModule,
-    MatBottomSheetModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatChipsModule,
-    MatStepperModule,
-    MatDatepickerModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatExpansionModule,
-    MatGridListModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatNativeDateModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatRadioModule,
-    MatRippleModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatSliderModule,
-    MatSlideToggleModule,
-    MatSnackBarModule,
-    MatSortModule,
-    MatTableModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    MatTreeModule,
-    ScrollingModule,
 
-    MultiSelectAllModule,CheckBoxModule,NumericTextBoxModule,
+    //dropdowns
+    MultiSelectAllModule, CheckBoxModule, NumericTextBoxModule,
 
+    //basic
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
     SharedModule,
+    //form ejs
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     ScheduleAllModule, RecurrenceEditorAllModule, NumericTextBoxAllModule,
-    DatePickerAllModule, TimePickerAllModule, DateTimePickerAllModule, CheckBoxAllModule, ToolbarAllModule, DropDownListAllModule, ContextMenuAllModule,
-    MaskedTextBoxModule, MultiSelectAllModule, ReactiveFormsModule, NgSelectModule, ComboBoxModule, NoopAnimationsModule
+    DatePickerAllModule, TimePickerAllModule, DateTimePickerAllModule, CheckBoxAllModule, ToolbarAllModule,
+    DropDownListAllModule, ContextMenuAllModule, MaskedTextBoxModule, MultiSelectAllModule, ReactiveFormsModule, 
+    NgSelectModule, ComboBoxModule,
+
+    //table 
+    CommonModule, ToolbarModule, GridAllModule, DialogModule,HttpClientJsonpModule
+    
   ],
-  providers: [AddressService, AddressDescriptionService, BrandService, ClientService, DeviceService,
-    DeviceStateService, EmployeeService, EmployeeRoleService, GroupClientService, InventoryCategoryService,
-    ListDeviceWorkOrderService, ListMaterialWorkOrderService, ListToolWorkOrderService, ListWorkOrderService,
-    MeasurementUnitService, ModelService, TelephoneClientService, TelephoneEmployeeService, WorkOrderService,
-    WorkOrderDetailService, WorkOrderTypeService, AuthService, AuthGuard, JwtHelper, TokenStorage, {
+  providers: [
+    AddressService,
+    AddressDescriptionService,
+    BrandService,
+    ClientService,
+    DeviceService,
+    DeviceStateService,
+    EmployeeService,
+    EmployeeRoleService,
+    GroupClientService,
+    InventoryCategoryService,
+    ListDeviceWorkOrderService,
+    ListMaterialWorkOrderService,
+    ListToolWorkOrderService,
+    ListWorkOrderService,
+    MeasurementUnitService,
+    ModelService,
+    TelephoneClientService,
+    TelephoneEmployeeService,
+    WorkOrderService,
+    WorkOrderDetailService,
+    WorkOrderTypeService,
+    AuthService, AuthGuard, JwtHelper, TokenStorage, {
       provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
       multi: true

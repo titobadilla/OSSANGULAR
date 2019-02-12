@@ -27,12 +27,8 @@ import { AuthGuard } from './login/guards/auth.guard';
 import { AppComponent } from './app.component';
 import { UpdateWorkOrderComponent } from './work-order/update-work-order/update-work-order.component';
 import { InsertEmployeeComponent } from './employee/insert-employee/insert-employee.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCheckboxModule} from '@angular/material';
-
-import {MatNativeDateModule} from '@angular/material';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule} from '@angular/forms';
 import { InsertEmployeeRoleComponent } from './employee-role/insert-employee-role/insert-employee-role.component';
 import { UpdateEmployeeRoleComponent } from './employee-role/update-employee-role/update-employee-role.component';
 import { InsertGroupClientComponent } from './group-client/insert-group-client/insert-group-client.component';
@@ -70,16 +66,15 @@ const routes: Routes = [
   {path:'update-employee-role',component:UpdateEmployeeRoleComponent},
   {path:'insert-group-client',component:InsertGroupClientComponent},
   {path:'insert-group-client',component:InsertGroupClientComponent},
-  {path:'update-group-client',component:UpdateGroupClientComponent}
+  {path:'update-group-client',component:UpdateGroupClientComponent},
+  {path:'work-order-detail',component:WorkOrderDetailComponent}
   /*,
   { path: '**', component: PageNotFoundComponent }*/
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes),BrowserAnimationsModule,MatButtonModule, MatCheckboxModule,
-  
+  imports: [RouterModule.forRoot(routes),  
     HttpClientModule,
-    MatNativeDateModule,
     ReactiveFormsModule,
   ],
   providers: [],

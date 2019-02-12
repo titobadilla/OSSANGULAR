@@ -1,3 +1,111 @@
-<p>
-  work-order-detail works!
-</p>
+<div class="col-lg-4 control-section"></div>
+<div class="col-lg-4 control-section">
+  <div class="content-wrapper" style="margin-bottom: 25px; height: 600px;">
+    <div class="formtitle">
+      <div style="">
+        <span class="line"></span>
+        <span class="dot"></span>
+        <span class="title">
+          Rol de Empleado
+        </span>
+        <span class="dot"></span>
+        <span class="line"></span>
+      </div>
+
+    </div>
+
+    <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
+
+      <div class="form-group">
+        <div class="e-float-input">
+          <input id="date" type="date" formControlName="name" [(ngModel)]="detail.date">
+          <span class="e-float-line"></span>
+          <label for="date" class="e-float-text" style="font-size:15px;">Fecha</label>
+        </div>
+        <div *ngIf="date.errors">
+          <div *ngIf="date.errors.required && date.touched" class="e-error">
+            Debe rellenar este campo.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-top:10%;">
+        <div class="e-float-input">
+          <input id="checkIn" type="time" formControlName="checkIn" [(ngModel)]="detail.checkIn">
+          <span class="e-float-line"></span>
+          <label for="checkIn" class="e-float-text" style="font-size:15px;">Hora de llegada</label>
+        </div>
+        <div *ngIf="checkIn.errors">
+          <div *ngIf="checkIn.errors.required && checkIn.touched" class="e-error">
+            Debe rellenar este campo.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-top:10%;">
+        <div class="e-float-input">
+          <input id="checkOut" type="time" formControlName="checkOut" [(ngModel)]="detail.checkOut">
+          <span class="e-float-line"></span>
+          <label for="checkOut" class="e-float-text" style="font-size:15px;">Hora de Salida</label>
+        </div>
+        <div *ngIf="checkOut.errors">
+          <div *ngIf="checkOut.errors.required && checkOut.touched" class="e-error">
+            Debe rellenar este campo.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-top:10%;">
+        <div class="e-float-input">
+          <input id="description" type="text" formControlName="description" [(ngModel)]="detail.description">
+          <span class="e-float-line"></span>
+          <label for="description" class="e-float-text" style="font-size:15px;">Detalle</label>
+        </div>
+        <div *ngIf="description.errors">
+          <div *ngIf="description.errors.required && description.touched" class="e-error">
+            Debe rellenar este campo.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-top:10%;">
+        <div class="e-float-input">
+          <input id="invoiceId" type="number" formControlName="invoiceId" [(ngModel)]="detail.invoiceId">
+          <span class="e-float-line"></span>
+          <label for="invoiceId" class="e-float-text" style="font-size:15px;">Número de factura</label>
+        </div>
+        <div *ngIf="invoiceId.errors">
+          <div *ngIf="invoiceId.errors.required && invoiceId.touched" class="e-error">
+            Debe rellenar este campo.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-top:10%;">
+        <div class="e-float-input">
+          <input id="managerName" type="text" formControlName="managerName" [(ngModel)]="detail.managerName">
+          <span class="e-float-line"></span>
+          <label for="managerName" class="e-float-text" style="font-size:15px;">Persona que recibe</label>
+        </div>
+        <div *ngIf="managerName.errors">
+          <div *ngIf="managerName.errors.required && managerName.touched" class="e-error">
+            Debe rellenar este campo.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div style="width: 325px;margin:0px auto;height: 100px;margin-top:10%;">
+          <div style="display: inline-block;">
+            <button id="validateSubmit" class="samplebtn e-control e-btn e-info" type="submit" style="height:40px;width: 150px;"
+              data-ripple="true" (click)="createWorkOrderDetail()">Agregar</button>
+          </div>
+          <div style="float: right;">
+            <button id="resetbtn" class="samplebtn e-control e-btn" type="reset" style="height:40px;width: 165px;"
+              data-ripple="true">Limpiar Formulario</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

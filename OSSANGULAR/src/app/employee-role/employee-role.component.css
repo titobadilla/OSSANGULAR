@@ -1,9 +1,7 @@
-<<<<<<< HEAD
 table {
   width: 100%;
 }
 
-=======
 .formtitle {
   font-family:'Questrial', Verdana, sans-serif;
   text-align:center;
@@ -13,12 +11,11 @@ table {
   position:relative;
   color:#fff;
   }
->>>>>>> 44670a1fc8555d90a8abe453fb610b9f92a31be8
 .modal {
     text-align: left;
   }
   .modal-content {
-    background-color: #f5f1df;
+ 
     border: none;
     border-radius: 2px;
     box-shadow: 0 16px 28px 0 rgba(0,0,0,0.58),0 25px 55px 0 rgba(0,0,0,0.21);

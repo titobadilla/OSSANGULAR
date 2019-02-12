@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { EmployeeService } from './employee.service';
-import { Router } from '@angular/router';
+
 import { Employee } from 'src/model/employee.model';
-import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
 
 
@@ -21,11 +20,6 @@ export class EmployeeComponent implements OnInit {
   employeesSection: boolean = false;
   modalDelete = false;
   employeeDelete:Employee;
-
-  displayedColumns: string[] = ['id', 'name','lastName','position','roleName','telephoneMovil','telephoneHome','username', 'edit', 'delete'];
-  dataSource = new MatTableDataSource<Employee>([]);
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('updateEmployee') childOne: UpdateEmployeeComponent;
 
   constructor(private employeeService: EmployeeService) {
@@ -38,8 +32,7 @@ export class EmployeeComponent implements OnInit {
 
   getAllEmployees(){
     this.employeeService.getAllEmployees().subscribe((data: Employee[]) => {
-      this.dataSource = new MatTableDataSource<Employee>(data);
-      this.dataSource.paginator = this.paginator;
+
     });
   }
 

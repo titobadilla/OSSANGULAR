@@ -3,7 +3,6 @@ import { GroupClientService } from './group-client.service';
 import { Router } from '@angular/router';
 import { Client } from 'src/model/client.model';
 import { FormGroup, FormControl } from '@angular/forms';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-group-client',
@@ -20,10 +19,7 @@ export class GroupClientComponent implements OnInit {
   updateSection = false;
   formSection = true;
   clientsOfHeadClient: Client[] = new Array();
-  displayedColumns: string[] = ['name', 'contactName'];
-  dataSource = new MatTableDataSource<Client>([]);
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private router: Router, private groupClientService: GroupClientService) {
     this.createReactiveForm();
@@ -86,16 +82,14 @@ export class GroupClientComponent implements OnInit {
   search() {
     this.clientsSection = true;
     this.groupClientService.getClientsOfHeadClient(this.headClient).subscribe(data => {
-      this.dataSource = new MatTableDataSource<Client>(data);
-      this.dataSource.paginator = this.paginator;
+
     })
   }
 
   edit() {
     this.formSection = false;
-    this.clientsSection=false;
-  this.updateSection = true;
-  
-  alert('hola')
+    this.clientsSection = false;
+    this.updateSection = true;
+
   }
 }

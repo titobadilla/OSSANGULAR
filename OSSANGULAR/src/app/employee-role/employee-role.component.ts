@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { EmployeeRoleService } from './employee-role.service';
 import { EmployeeRole } from 'src/model/employeerole.model';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { UpdateEmployeeRoleComponent } from './update-employee-role/update-employee-role.component';
 
 
@@ -12,15 +11,11 @@ import { UpdateEmployeeRoleComponent } from './update-employee-role/update-emplo
 })
 export class EmployeeRoleComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'type', 'edit', 'delete'];
-  dataSource = new MatTableDataSource<EmployeeRole>([]);
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  public data: EmployeeRole[] = new Array();
+    public pageSettings: Object = { pageCount: 2 };
   @ViewChild('updateEmployeeRole') childOne: UpdateEmployeeRoleComponent;
 
-  constructor(private serviceRole: EmployeeRoleService) {
-
-  }
+  constructor(private serviceRole: EmployeeRoleService) {}
 
   roles: EmployeeRole[] = new Array();
   roleid: number;
@@ -35,8 +30,7 @@ export class EmployeeRoleComponent implements OnInit {
 
   getAllRoles(){
     this.serviceRole.getAllRoles().subscribe((data: EmployeeRole[]) => {
-      this.dataSource = new MatTableDataSource<EmployeeRole>(data);
-      this.dataSource.paginator = this.paginator;
+        this.data = data;
     });
   }
 

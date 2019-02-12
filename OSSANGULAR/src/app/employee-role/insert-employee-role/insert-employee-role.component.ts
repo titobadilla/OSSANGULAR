@@ -4,8 +4,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 import { EmployeeRole } from 'src/model/employeerole.model';
 import { EmployeeRoleService } from '../employee-role.service';
-import { Query, DataManager, WebApiAdaptor } from '@syncfusion/ej2-data';
-import { MultiSelectComponent, DropDownListComponent } from '@syncfusion/ej2-angular-dropdowns';
 
 @Component({
   selector: 'app-insert-employee-role',

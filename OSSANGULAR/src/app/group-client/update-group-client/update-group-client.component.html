@@ -1,3 +1,47 @@
-<div class="container" style="background-color:#fff; margin-top: 50%;">
-  <h1>Hola</h1>
+<div class="col-lg-4"></div>
+<div class="col-lg-4 control-section">
+    <div class="content-wrapper" style="margin-bottom: 25px;">
+        <div class="formtitle">
+            <div style="">
+                <span class="line"></span>
+                <span class="dot"></span>
+                <span class="title">
+                    Jerarquia de clientes
+                </span>
+                <span class="dot"></span>
+                <span class="line"></span>
+            </div>
+
+        </div>
+        <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
+            <div class="form-group">
+                <ejs-dropdownlist formControlName="client" name="client" [dataSource]='clients' [fields]='fields'
+                    [placeholder]='watermark' floatLabelType='Auto'>
+                </ejs-dropdownlist>
+                <div *ngIf="clients.errors">
+                    <div *ngIf="clients.errors.errorD && clients.touched" class="e-error">
+                        Debe seleccionar un rol.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <ejs-multiselect formControlName="clients" id='multiselect-checkbox' #checkbox [dataSource]='clients'
+                    [placeholder]='watermark' [fields]='fields' [mode]='mode' [popupHeight]='popHeight'
+                    showDropDownIcon='true' [filterBarPlaceholder]='filterPlaceholder' [(ngModel)]="selectedEmployees"></ejs-multiselect>
+            </div>
+            <div class="row">
+                <div style="width: 325px;margin:0px auto;height: 100px;padding-top: 25px;">
+                    <div style="display: inline-block;">
+                        <button id="validateSubmit" class="samplebtn e-control e-btn e-info" type="submit" style="height:40px;width: 150px;"
+                            data-ripple="true" (click)="createEmployeeRole()">Agregar</button>
+                    </div>
+                    <div style="float: right;">
+                        <button id="resetbtn" class="samplebtn e-control e-btn" type="reset" style="height:40px;width: 165px;"
+                            data-ripple="true">Limpiar Formulario</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
