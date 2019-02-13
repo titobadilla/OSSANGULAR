@@ -6,33 +6,9 @@ import {
 } from '@syncfusion/ej2-angular-schedule';
 import {Router} from "@angular/router"
 
-
-
-import { L10n } from '@syncfusion/ej2-base';
 import { WorkOrderService } from 'src/app/work-order/work-order.service';
 import { WorkOrder } from 'src/model/workorder.model';
 import { Color } from 'src/model/color.model';
-
-L10n.load({
-    'es-CR': {
-        'schedule': {
-            'saveButton': 'Aceptar',
-            'cancelButton': 'Cancelar',
-            'deleteButton': 'Eliminar',
-            'newEvent': '¿Desea crear una orden de trabajo?',
-            'today':'Hoy',
-            'day':'Por Día',
-            'week':'Por Semana',
-            'month':'Por Mes',
-            'agenda':'Agenda',
-            'more':'más',
-            'noEvents':'No hay órdenes de trabajo en la fecha seleccionada.'
-        },
-        'calendar':{
-            'today':'Hoy'
-        },
-    }
-});
 
 @Component({
   selector: 'app-calendar',

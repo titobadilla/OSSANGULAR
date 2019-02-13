@@ -1,7 +1,7 @@
 <div *ngIf="primario">
   <div class="container" style="margin: 70px auto;">
     <div class="formtitle">
-      <div style="">
+      <div >
         <span class="line"></span>
         <span class="dot"></span>
         <span class="title">
@@ -12,14 +12,14 @@
       </div>
     </div>
 
-    <div class="control-section">
-      <ejs-grid [dataSource]='data' allowPaging='true' allowTextWrap='true' [pageSettings]='pageSettings' width='800'>
+    <!--<div class="control-section">    </div>-->
+      <ejs-grid #grid [dataSource]='data' allowPaging='true' allowTextWrap='true' [pageSettings]='pageSettings' width=800>
         <e-columns>
           <e-column field='name' headerText='Nombre del rol' width='50' textAlign='center'></e-column>
           <e-column field='type' headerText="Tipo de rol" width='50' textAlign='center'></e-column>
         </e-columns>
       </ejs-grid>
-    </div>
+
 
   </div>
 

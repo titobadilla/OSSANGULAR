@@ -1,7 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { EmployeeRoleService } from './employee-role.service';
 import { EmployeeRole } from 'src/model/employeerole.model';
 import { UpdateEmployeeRoleComponent } from './update-employee-role/update-employee-role.component';
+import { L10n, loadCldr, setCulture, setCurrencyCode } from '@syncfusion/ej2-base';
+import { GridComponent } from '@syncfusion/ej2-angular-grids';
+
 
 
 @Component({
@@ -9,15 +12,21 @@ import { UpdateEmployeeRoleComponent } from './update-employee-role/update-emplo
   templateUrl: './employee-role.component.html',
   styleUrls: ['./employee-role.component.css']
 })
-export class EmployeeRoleComponent implements OnInit {
+export class EmployeeRoleComponent implements OnInit,AfterViewInit {
+ 
+  ngAfterViewInit(): void {
+    this.grid.pageSettings.pageSize=5;
+  }
 
-  public data: EmployeeRole[] = new Array();
-    public pageSettings: Object = { pageCount: 2 };
+  public data: EmployeeRole[];
+    public pageSettings: Object;
   @ViewChild('updateEmployeeRole') childOne: UpdateEmployeeRoleComponent;
+  @ViewChild('grid') public grid: GridComponent;
 
-  constructor(private serviceRole: EmployeeRoleService) {}
+  constructor(private serviceRole: EmployeeRoleService) {   
+  }
 
-  roles: EmployeeRole[] = new Array();
+  roles: EmployeeRole[];
   roleid: number;
   primario: boolean = true;
   secundario: boolean = false;
@@ -25,8 +34,11 @@ export class EmployeeRoleComponent implements OnInit {
   rolDelete:EmployeeRole;
 
   ngOnInit(): void {
-   this.getAllRoles();
+    this.getAllRoles();    
+    this.pageSettings = {pageCount: 3 };    
+    setCulture('es-CR'); 
   }
+  
 
   getAllRoles(){
     this.serviceRole.getAllRoles().subscribe((data: EmployeeRole[]) => {
@@ -51,8 +63,7 @@ export class EmployeeRoleComponent implements OnInit {
   }
 
   aceptDelete(){
-    this.serviceRole.deleteEmployeeRole(this.rolDelete.id).subscribe(data=>{
-    
+    this.serviceRole.deleteEmployeeRole(this.rolDelete.id).subscribe(data=>{    
         this.getAllRoles();
      });
      this.modalDelete = false;

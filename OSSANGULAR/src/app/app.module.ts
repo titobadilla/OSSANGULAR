@@ -85,6 +85,7 @@ import { ToolbarModule } from '@syncfusion/ej2-angular-navigations';
 import { GridAllModule } from '@syncfusion/ej2-angular-grids';
 import { DialogModule } from '@syncfusion/ej2-angular-popups';
 
+
 declare var require: any;
 
 loadCldr(
@@ -92,6 +93,8 @@ loadCldr(
   require('node_modules/cldr-data/main/es-CR/ca-gregorian.json'),
   require('node_modules/cldr-data/main/es-CR/numbers.json'),
   require('node_modules/cldr-data/main/es-CR/timeZoneNames.json'));
+
+  
 
 
 @NgModule({
@@ -146,11 +149,11 @@ loadCldr(
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     ScheduleAllModule, RecurrenceEditorAllModule, NumericTextBoxAllModule,
     DatePickerAllModule, TimePickerAllModule, DateTimePickerAllModule, CheckBoxAllModule, ToolbarAllModule,
-    DropDownListAllModule, ContextMenuAllModule, MaskedTextBoxModule, MultiSelectAllModule, ReactiveFormsModule, 
+    DropDownListAllModule, ContextMenuAllModule, MaskedTextBoxModule, MultiSelectAllModule, 
     NgSelectModule, ComboBoxModule,
 
     //table 
-    CommonModule, ToolbarModule, GridAllModule, DialogModule,HttpClientJsonpModule
+   CommonModule, ToolbarModule, GridAllModule, DialogModule
     
   ],
   providers: [
