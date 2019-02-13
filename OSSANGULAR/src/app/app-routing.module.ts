@@ -7,7 +7,7 @@ import { BrandComponent } from './brand/brand.component';
 import { ClientComponent } from './client/client.component';
 import { DeviceStateComponent } from './device-state/device-state.component';
 import { EmployeeComponent } from './employee/employee.component';
-import { EmployeeRoleComponent } from './employee-role/employee-role.component';
+import { EmployeeRoleComponent } from "./employee-role/employee-role.component";
 import { GroupClientComponent } from './group-client/group-client.component';
 import { InventoryCategoryComponent } from './inventory-category/inventory-category.component';
 import { ListDeviceWorkOrderComponent } from './list-device-work-order/list-device-work-order.component';

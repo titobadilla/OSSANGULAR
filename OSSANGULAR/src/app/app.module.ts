@@ -19,7 +19,7 @@ import { WorkOrderTypeComponent } from './work-order-type/work-order-type.compon
 import { WorkOrderDetailComponent } from './work-order-detail/work-order-detail.component';
 import { AddressComponent } from './address/address.component';
 import { AddressDescriptionComponent } from './address-description/address-description.component';
-import { EmployeeRoleComponent } from './employee-role/employee-role.component';
+import { EmployeeRoleComponent } from "./employee-role/employee-role.component";
 import { GroupClientComponent } from './group-client/group-client.component';
 import { ListDeviceWorkOrderComponent } from './list-device-work-order/list-device-work-order.component';
 import { ListWorkOrderComponent } from './list-work-order/list-work-order.component';

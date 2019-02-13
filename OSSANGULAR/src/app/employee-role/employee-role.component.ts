@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, OnChanges } from '@angular/core';
 import { EmployeeRoleService } from './employee-role.service';
 import { EmployeeRole } from 'src/model/employeerole.model';
 import { UpdateEmployeeRoleComponent } from './update-employee-role/update-employee-role.component';
