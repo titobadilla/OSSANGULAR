@@ -1,94 +1,68 @@
 <div *ngIf="principalSection">
-        <div class="container" style="margin: 70px auto;">
-      
-        <!--  <div class="mat-elevation-z8">
-            
-          <div class="mat-elevation-z8">
-            <table mat-table [dataSource]="dataSource" style=" width: 100%; ">
 
-              <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef> Identificación</th>
-                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-              </ng-container>
-      
-
-              <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef> Nombre </th>
-                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-              </ng-container>
-
-              <ng-container matColumnDef="lastName">
-                    <th mat-header-cell *matHeaderCellDef> Apellidos </th>
-                    <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
-              </ng-container>
-
-              <ng-container matColumnDef="position">
-                    <th mat-header-cell *matHeaderCellDef> Posición </th>
-                    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-              </ng-container>
-
-              <ng-container matColumnDef="roleName">
-                    <th mat-header-cell *matHeaderCellDef> Rol </th>
-                    <td mat-cell *matCellDef="let element"> {{element.role.name}} </td>
-              </ng-container>
-
-              <ng-container matColumnDef="username">
-                    <th mat-header-cell *matHeaderCellDef> Usuario </th>
-                    <td mat-cell *matCellDef="let element"> {{element.username}} </td>
-              </ng-container>
-
-              <ng-container matColumnDef="telephoneMovil">
-                    <th mat-header-cell *matHeaderCellDef> Celular </th>
-                    
-                        <td mat-cell *matCellDef="let element">
-                            <div *ngIf="element.telephones[0]!=undefined">
-                                    {{element.telephones[0].number}}
-                            </div>
-                            <div *ngIf="element.telephones[0]===undefined">
-                                   Desconocido
-                            </div>
-                            
-                        </td>               
-                  
-              </ng-container>
-
-              <ng-container matColumnDef="telephoneHome">
-                    <th mat-header-cell *matHeaderCellDef> Casa </th>
-                    <td mat-cell *matCellDef="let element"> 
-                            <div *ngIf="element.telephones[1]!=undefined">
-                                    {{element.telephones[1].number}} 
-                            </div>
-                            <div *ngIf="element.telephones[1]===undefined">
-                                    Desconocido
-                             </div>
-                        
-                    </td>
-                
-                  
-              </ng-container>
+  <div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-1 col-xs-1"></div>
+    <div class="col-lg-6 col-md-6 col-sm-10 col-xs-10">
+        <div class="" >
+            <div class="formtitle">
               
-            
-              <ng-container matColumnDef="edit">
-                <th mat-header-cell *matHeaderCellDef>Editar</th>
-                <td mat-cell *matCellDef="let element">
-                  <button mat-button class="btn btn-warning" (click)='edit(element)'>Editar</button>
-                </td>
-              </ng-container>
-      
-              <ng-container matColumnDef="delete">
-                <th mat-header-cell *matHeaderCellDef>Eliminar</th>
-                <td mat-cell *matCellDef="let element">
-                  <button mat-button class="btn btn-danger" (click)='delete(element)'>Eliminar</button>
-                </td>
-              </ng-container>
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            </div>        
+            <div class="control-section">
+                <ejs-toolbar class='e-gridlist' (clicked)="onClicked($event.originalEvent)">
+                    <e-items>
+                        <e-item text='Número de cédula'></e-item>
+                        <e-item text='Nombre'></e-item>
+                        <e-item text='Apellidos'></e-item>
+                        <e-item text='Posición'></e-item>
+                        <e-item text='Usuario'></e-item>
+                        <e-item text='Teléfono 1'></e-item>
+                        <e-item text='Teléfono 2'></e-item>
+                    </e-items>
+                </ejs-toolbar>
+                <br/>
+              <ejs-grid #grid [dataSource]='employees' allowPaging='true'  [allowSorting]='true'  (dataBound)="dataBound()" allowTextWrap='true' [pageSettings]='pageSettings'  >
+               
+                  <ng-template #toolbarTemplate>
+                      <ejs-toolbar>
+                        <div class="e-dlg-header"> Lista de empleados</div>
+                          
+                      </ejs-toolbar>
+                  </ng-template>
+                <e-columns>
+                  <e-column field='id' headerText='Número de cédula' width='100' textAlign='center'></e-column>
+                  <e-column field='name' headerText="Nombre" width='100' textAlign='center'></e-column>
+                  <e-column field='lastName' headerText="Apellidos" width='150' textAlign='center'></e-column>
+                  <e-column field='position' headerText="Posición" width='100' textAlign='center'></e-column>
+                  <e-column field='username' headerText="Usuario" width='100' textAlign='center'></e-column>
+                  <e-column headerText="Teléfono 1" width='100' textAlign='center'>
+                      <ng-template #template let-data>
+                          <div *ngIf="data.telephones[0]!=null && data.telephones[0]!=undefined">
+                                   {{data.telephones[0].number}}                     
+                         </div>
+                         <div *ngIf="data.telephones[0]===null || data.telephones[0]===undefined">
+                            ---                     
+                         </div>
+                         </ng-template>                    
+                  </e-column>
+                  <e-column headerText="Teléfono 2" width='100' textAlign='center'>
+                      <ng-template #template let-data>
+                          <div *ngIf="data.telephones[1]!=null && data.telephones[1]!=undefined">
+                                   {{data.telephones[1].number}}                     
+                         </div>
+                         <div *ngIf="data.telephones[1]===null || data.telephones[1]===undefined">
+                            ---                     
+                         </div>
+                         </ng-template>
+                  </e-column>
+                </e-columns>
+              </ejs-grid>
+            </div>
+        
           </div>
-      
-        </div>-->
-      </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-1 col-xs-1"></div>
+  </div>
+    
       
       <div *ngIf="employeesSection">
         <update-employee [employeeId]="employeeId"></update-employee>

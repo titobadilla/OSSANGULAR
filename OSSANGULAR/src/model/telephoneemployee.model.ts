@@ -6,4 +6,5 @@ export class TelephoneEmployee{
     type:String;
     number:String;
     employee:Employee=new Employee();
+  
 }
