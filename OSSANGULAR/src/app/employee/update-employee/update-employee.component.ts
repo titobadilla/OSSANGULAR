@@ -26,6 +26,7 @@ reactForm: FormGroup;
 employee:Employee;
 
   constructor(private router: Router,private employeeService:EmployeeService,private employeeRoleService:EmployeeRoleService) {
+
      this.employee=new Employee();
   this.createReactiveForm();
   this.associateValues();
@@ -55,6 +56,8 @@ employee:Employee;
     this.employee.position=this.position.value;
     this.employee.role.id=this.role.value;
     this.employee.username=this.username.value;
+    this.employee.telephones[0]=this.mobile.value;
+    this.employee.telephones[1]=this.home.value;
   }
 
    createReactiveForm(){

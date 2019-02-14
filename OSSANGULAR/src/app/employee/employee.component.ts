@@ -31,8 +31,6 @@ export class EmployeeComponent implements OnInit,AfterViewInit {
   employeesSection: boolean = false;
   modalDelete = false;
   employeeDelete:Employee;
-  @ViewChild('updateEmployee') childOne: UpdateEmployeeComponent;
-
   public dataBound(): void {
     this.flag = true;
 }
@@ -103,4 +101,5 @@ export class EmployeeComponent implements OnInit,AfterViewInit {
           this.grid.hideColumns(element.innerHTML);
       }
   }
+
 }

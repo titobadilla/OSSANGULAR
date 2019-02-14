@@ -65,7 +65,6 @@ const routes: Routes = [
   {path:"insert-employee-role",component:InsertEmployeeRoleComponent},
   {path:'update-employee-role',component:UpdateEmployeeRoleComponent},
   {path:'insert-group-client',component:InsertGroupClientComponent},
-  {path:'insert-group-client',component:InsertGroupClientComponent},
   {path:'update-group-client',component:UpdateGroupClientComponent},
   {path:'work-order-detail',component:WorkOrderDetailComponent}
   /*,

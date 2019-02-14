@@ -3,7 +3,7 @@
     <div class="col-lg-8 control-section">
         <div class="content-wrapper" style="margin-bottom: 25px;">
             <div class="formtitle">
-                <span>Agregar un Empleado</span>
+                <span>Editar un Empleado</span>
             </div>
             <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
               <div class="row">
@@ -104,7 +104,7 @@
     
                     <div class="form-group">
                         <div class="e-float-input">
-                            <input id="mobile" type="text" formControlName="mobile">
+                            <input id="mobile" type="text"  [(ngModel)]="employee.telephones[0].number" formControlName="mobile">
                             <span class="e-float-line"></span>
                             <label for="mobile" class="e-float-text">Teléfono Celular*</label>
                         </div>
@@ -120,9 +120,9 @@
     
                     <div class="form-group">
                         <div class="e-float-input">
-                            <input id="home" type="text" formControlName="home">
+                            <input id="home" type="text" formControlName="home" [(ngModel)]="employee.telephones[1].number">
                             <span class="e-float-line"></span>
-                            <label for="home" class="e-float-text">Teléfono Casa</label>
+                            <label for="home" class="e-float-text">Otro teléfono</label>
                         </div>
                         <div *ngIf="home.errors">
                             <div *ngIf="home.errors.phoneError && home.touched" class="e-error">
