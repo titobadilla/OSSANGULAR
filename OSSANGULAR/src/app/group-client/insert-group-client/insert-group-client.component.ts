@@ -15,7 +15,8 @@ import { GroupClient } from 'src/model/groupclient.model';
 export class InsertGroupClientComponent implements OnInit {
 
   public fields: Object = { text: 'name', value: 'id' };
-  public watermark: string = 'Seleccione un cliente*';
+  public watermark: string = 'Seleccione el cabecilla*';
+  public watermarkMultiple: string = 'Seleccione los clientes*';
   reactForm: FormGroup;
   clients: Client[] = new Array();
   headClient: String;

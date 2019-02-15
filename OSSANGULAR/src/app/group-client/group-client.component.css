@@ -1,76 +1,71 @@
-.formtitle {
+  .modal-content {
+      border: none;
+      border-radius: 2px;
+      box-shadow: 0 16px 28px 0 rgba(0,0,0,0.58),0 25px 55px 0 rgba(0,0,0,0.21);
+      padding-top: 2px;
+      padding-right: 26px;
+      padding-left: 26px;
+      padding-bottom: 5px;
+      font-size: 15px;
+      font-family:'Questrial', Verdana, sans-serif;
+    }
+  
+    .modal-footer {
+      border-top:0;
+      padding-bottom:10px;
+    }
+    .btn-default,.btn-primary {
+        border: none;
+        border-radius: 2px;
+        color: #424242;
+        background-color: #FFF;
+        text-align: center;
+        height: 36px;
+    }
+    .btn-default:hover{
+      background-color: #FFF;
+      box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
+    }
+    .btn-primary {
+      color: #FFF;
+      background-color: #2980B9;
+    }
+    .btn-primary:hover{
+      background-color: #2980B9;
+      box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
+    }
+  
+    .formtitle  {
     font-family:'Questrial', Verdana, sans-serif;
     text-align:center;
     font-size:32px;
     padding:0;
-    margin:70px 0 20px 0;
+    margin:40px 0 20px 0;
     position:relative;
     color:#fff;
-    }
+    margin-left: 45%;
 
+    }
     .e-error,
     .e-float-text {
         font-weight: 500;
-        font-size:18px;
+        font-size:14px;
     }
 
-    .contain{
+    form {  
+        margin-bottom: 60px;
         border: 1px solid #ccc;
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.36);
         border-radius: 5px;
-        background-color: #fff;
-    }
-    form {
-
-        
-        width: 75%;
-        
+        background:#fff;
         }
 
-    .highcontrast form,
-    .highcontrast .header {
-        color: #fff;
-        background: #000000;
-    }
-
-    .header {
-        color: rgba(0, 0, 0, 0.7);
-    }
-
-    table,
-    td,
-    th {
-        padding: 5px;
-    }
-
     .form-horizontal .form-group {
-        margin-left: 15px;
-        margin-right: 0px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }  
+
+    .container{
+      width: 120%;
+      margin-left: 10%;
     }
-
-    .row {
-        padding-bottom: 10px;
-        padding-top: 10px;
-    }
-      .line {
-        display: inline-block;
-        width: 7%;
-        height: 2px;
-        background-color: #fff;
-      }
-      .dot {
-        display: inline-block;
-        width: 10px;
-        height: 10px;
-        background-color: #fff;
-        border-radius: 50%;
-        margin: 0 10px;
-        align-items: center;
-      }
-
-      .container{
-          margin-left: 33%;
-          width: 39%;
-          margin-top:8%;
-      }
-

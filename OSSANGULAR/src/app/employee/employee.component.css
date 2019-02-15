@@ -1,65 +1,29 @@
-table {
-  width: 100%;
+.control-section{
+  margin-top: 15%;
 }
-
-.formtitle {
-  font-family:'Questrial', Verdana, sans-serif;
-  text-align:center;
-  font-size:32px;
-  padding:0;
-  margin:70px 0 20px 0;
-  position:relative;
-  color:#fff;
-  }
-.modal {
-    text-align: left;
-  }
-  .modal-content {
- 
+.modal-content {
     border: none;
     border-radius: 2px;
     box-shadow: 0 16px 28px 0 rgba(0,0,0,0.58),0 25px 55px 0 rgba(0,0,0,0.21);
-  }
-  .modal-header{
-    border-bottom: 0;
-    padding-top: 15px;
+    padding-top: 2px;
     padding-right: 26px;
     padding-left: 26px;
-    padding-bottom: 0px;
-  }
-  .modal-title {
-    border-bottom: 0;
-    padding-top: 5px;
-    padding-right: 26px;
-    padding-left: 26px;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
     font-size: 15px;
     font-family:'Questrial', Verdana, sans-serif;
   }
 
   .modal-footer {
     border-top:0;
-    padding-top: 0px;
-    padding-right:26px;
-    padding-bottom:26px;
-    padding-left:26px;
+    padding-bottom:10px;
   }
   .btn-default,.btn-primary {
       border: none;
       border-radius: 2px;
-      display: inline-block;
       color: #424242;
       background-color: #FFF;
       text-align: center;
       height: 36px;
-      line-height: 36px;
-      outline: 0;
-      padding: 0 2rem; 
-      vertical-align: middle;
-      -webkit-tap-highlight-color: transparent;
-      box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
-      letter-spacing: .5px;
-      transition: .2s ease-out;
   }
   .btn-default:hover{
     background-color: #FFF;
@@ -73,32 +37,16 @@ table {
     background-color: #2980B9;
     box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
   }
-  footer {
+
+  .e-dlg-header  {
+    font-family:'Questrial', Verdana, sans-serif;
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 2%;  
     text-align: center;
-    margin: 15px;
-  }
-  footer h4{
-    font-size: 2.92rem;
-    font-weight:100;
-      margin: 1.46rem 0 1.168rem; 
   }
   
-  .line {
-    display: inline-block;
-    width: 6%;
-    height: 2px;
-    background-color: #fff;
-  }
-  .dot {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    background-color: #fff;
-    border-radius: 50%;
-    margin: 0 10px;
-    align-items: center;
-  }
-
   .e-gridlist .e-tbar-btn.e-btn,
 .e-gridlist .e-btn  {
     box-shadow: none;
@@ -114,20 +62,4 @@ table {
     font-family: Roboto;
     opacity: 0.87;
     padding: 1em;
-}
-
-.e-dlg-header  {
-  display: block;
-  font-size: 18px;
-  font-weight: bold;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  vertical-align: top;
-  white-space: nowrap;
-  margin-top: 2%;  
-  text-align: center;
 }
