@@ -5,12 +5,13 @@
             <div class="formtitle">
                 <span>Editar un Empleado</span>
             </div>
-            <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
+            <form id="formId" [formGroup]="reactForm" #formDir="ngForm"  class="form-horizontal">
               <div class="row">
                 <div class="col-lg-6">
+                    
                     <div class="form-group">
                         <div class="e-float-input">
-                            <input id="id" type="text" formControlName="id" [(ngModel)]="employee.id">
+                            <input id="id" type="text" formControlName="id" [(ngModel)]='employee.id'>
                             <span class="e-float-line"></span>
                             <label for="id" class="e-float-text">Identificación*</label>
                         </div>
@@ -24,7 +25,7 @@
         
                     <div class="form-group">
                         <div class="e-float-input">
-                            <input id="name" type="text" formControlName="name" [(ngModel)]="employee.name">
+                            <input id="name" type="text" formControlName="name" [(ngModel)]='employee.name'>
                             <span class="e-float-line"></span>
                             <label for="name" class="e-float-text">Nombre*</label>
                         </div>
@@ -37,7 +38,7 @@
         
                     <div class="form-group">
                         <div class="e-float-input">
-                            <input id="lastName" type="text" formControlName="lastName" [(ngModel)]="employee.lastName">
+                            <input id="lastName" type="text" formControlName="lastName" [(ngModel)]='employee.lastName'>
                             <span class="e-float-line"></span>
                             <label for="lastName" class="e-float-text">Apellidos*</label>
                         </div>
@@ -50,7 +51,7 @@
         
                     <div class="form-group">
                         <div class="e-float-input">
-                            <input id="position" type="text" formControlName="position" [(ngModel)]="employee.position">
+                            <input id="position" type="text" formControlName="position" [(ngModel)]='employee.position'>
                             <span class="e-float-line"></span>
                             <label for="position" class="e-float-text">Posición*</label>
                         </div>
@@ -61,7 +62,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <ejs-dropdownlist formControlName="role" name="role" [(ngModel)]="employee.role.id"  [dataSource]='data' [fields]='fields'
+                        <ejs-dropdownlist formControlName="role" name="role" [(ngModel)]='employee.role.name' [dataSource]='data' [fields]='fields'
                         [placeholder]='watermark' floatLabelType='Auto'>
                        
                     </ejs-dropdownlist>
@@ -78,7 +79,7 @@
                         
                     <div class="form-group">
                         <div class="e-float-input">
-                            <input id="username" type="text" formControlName="username" [(ngModel)]="employee.username">
+                            <input id="username" type="text" formControlName="username" [(ngModel)]='employee.username'>
                             <span class="e-float-line"></span>
                             <label for="username" class="e-float-text">Usuario*</label>
                         </div>
@@ -91,7 +92,7 @@
         
                     <div class="form-group">
                         <div class="e-float-input">
-                            <input id="password" type="password" [(ngModel)]="employee.password" formControlName="password">
+                            <input id="password" type="password" formControlName="password" [(ngModel)]='employee.password'>
                             <span class="e-float-line"></span>
                             <label for="password" class="e-float-text">Contraseña*</label>
                         </div>
@@ -101,38 +102,55 @@
                             </div>
                         </div>
                     </div>
+                    <div *ngIf='!viewTelephones'>
+                            <div class="form-group" style="display: inline-block;">
+                                    <button class="samplebtn e-control e-btn e-warning"  (click)="viewTelephonesHtml()" style="height:40px;width: 150px;" data-ripple="true">Mostrar Teléfonos</button>
+                                </div>
     
-                    <div class="form-group">
-                        <div class="e-float-input">
-                            <input id="mobile" type="text"  [(ngModel)]="employee.telephones[0].number" formControlName="mobile">
-                            <span class="e-float-line"></span>
-                            <label for="mobile" class="e-float-text">Teléfono Celular*</label>
-                        </div>
-                        <div *ngIf="mobile.errors">
-                            <div *ngIf="mobile.errors.phoneError && mobile.touched" class="e-error">
-                                El número a digitar debe tener unicamente 8 dígitos.
-                            </div>
-                            <div *ngIf="mobile.errors.required && mobile.touched" class="e-error">
-                                Debe rellenar este campo.
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="form-group">
-                        <div class="e-float-input">
-                            <input id="home" type="text" formControlName="home" [(ngModel)]="employee.telephones[1].number">
-                            <span class="e-float-line"></span>
-                            <label for="home" class="e-float-text">Otro teléfono</label>
-                        </div>
-                        <div *ngIf="home.errors">
-                            <div *ngIf="home.errors.phoneError && home.touched" class="e-error">
-                                El número a digitar debe tener unicamente 8 dígitos.
-                            </div>
-                            <div *ngIf="home.errors.required && home.touched" class="e-error">
-                                Debe rellenar este campo.
-                            </div>
-                        </div>
-                    </div>
+                    </div>                    
+                    <div *ngIf='viewTelephones'>
+                            <div class="form-group">
+                                    <div class="e-float-input">
+                                        <input id="mobile" type="text" formControlName="mobile" [(ngModel)]='employee.telephones[0].number'>
+                                        <span class="e-float-line"></span>
+                                        <label for="mobile" class="e-float-text">Teléfono Celular*</label>
+                                    </div>
+                                    <div *ngIf="mobile.errors">
+                                        <div *ngIf="mobile.errors.phoneError && mobile.touched" class="e-error">
+                                            El número a digitar debe tener unicamente 8 dígitos.
+                                        </div>
+                                        <div *ngIf="mobile.errors.required && mobile.touched" class="e-error">
+                                            Debe rellenar este campo.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                        <div class="e-float-input">
+                                            <div *ngIf='employee.telephones[1]!=undefined'>
+                                                    <input id="home" type="text" formControlName="home" [(ngModel)]='employee.telephones[1].number' >
+                                                    <span class="e-float-line"></span>
+                                                    <label for="home" class="e-float-text">Otro teléfono</label>
+                                                </div>
+                                            <div *ngIf='employee.telephones[1]===undefined'>
+                                                    <input id="home" type="text" formControlName="home" >
+                                                    <span class="e-float-line"></span>
+                                            <label for="home" class="e-float-text">Otro teléfono</label>
+                                            </div>
+                                            
+                                        </div>
+                                        <div *ngIf="home.errors">
+                                            <div *ngIf="home.errors.phoneError && home.touched" class="e-error">
+                                                El número a digitar debe tener unicamente 8 dígitos.
+                                            </div>
+                                            <div *ngIf="home.errors.required && home.touched" class="e-error">
+                                                Debe rellenar este campo.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                    </div>            
+       
     
                     <div>
                         
@@ -154,6 +172,7 @@
             </form>
         </div>
     </div>
+    
     
     
     <div id="description">
