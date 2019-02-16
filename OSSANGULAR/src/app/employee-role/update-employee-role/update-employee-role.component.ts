@@ -32,12 +32,13 @@ export class UpdateEmployeeRoleComponent implements OnInit {
   }
 
   ngOnInit() {
+    alert('hello')
     this.serviceRole.getByIdEmployeeRole(this.roleid).subscribe(
       data => {
         this.role = data;
       }
     );
-
+   
     let formId: HTMLElement = <HTMLElement>document.getElementById('formId');
     document.getElementById('formId').addEventListener(
       'submit',

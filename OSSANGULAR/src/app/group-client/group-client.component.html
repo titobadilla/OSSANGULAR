@@ -1,23 +1,15 @@
-<div class="formtitle">
-  <div>
-    <span class="line"></span>
-    <span class="dot"></span>
-    <span class="title">
-      Buscar Jerarquia
-    </span>
-    <span class="dot"></span>
-    <span class="line"></span>
-  </div>
-</div>
-
-<div *ngIf="formSection">
-  <div class="col-lg-4"></div>
+<div class="row">
+  <div class="col-lg-3"></div>
   <div class="col-lg-4 control-section">
     <div class="content-wrapper">
-      <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
-        <div class="contain">
+      <div class="formtitle">
+        <span class="title">Buscar Jerarquia</span>
+      </div>
+      <div class="container">
+        <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
+
           <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-7 col-md-10 col-sm-8 col-xs-8">
               <div class="form-group">
                 <ejs-dropdownlist formControlName="client" name="client" [(ngModel)]="headClient" [dataSource]='clients'
                   [fields]='fields' [placeholder]='watermark' floatLabelType='Auto'>
@@ -29,26 +21,58 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-5">
-              <button id="validateSubmit" class="samplebtn e-control e-btn e-info" type="submit" style="height:30px;width: 40px; margin-top: 25px;"
-                data-ripple="true" (click)='search()'><span class="glyphicon glyphicon-search"></span></button>
+            <div class="col-lg-4 col-md-8 col-sm-8 col-xs-8">
+              <button id="validateSubmit" class="samplebtn e-control e-btn e-info" type="submit"
+                style="height:30px;width: 40px; margin-top: 25px;" data-ripple="true" (click)='search()'><span
+                  class="glyphicon glyphicon-search"></span></button>
 
-              <button class="samplebtn e-control e-btn e-warning" (click)='edit()' style="height:30px;width: 40px;margin-left: 55px;margin-top: 25px;"><span
+              <button class="samplebtn e-control e-btn e-warning" (click)='edit()'
+                style="height:30px;width: 40px;margin-left: 40px;margin-top: 25px;"><span
                   class="glyphicon glyphicon-pencil"></span></button>
 
-              <button class="samplebtn e-control e-btn e-danger" (click)='delete()' style="height:30px;width: 40px;margin-left: 5px;margin-top: 25px;"><span
+              <button class="samplebtn e-control e-btn e-danger" (click)='delete()'
+                style="height:30px;width: 40px;margin-left: 5px;margin-top: 25px;"><span
                   class="glyphicon glyphicon-trash"></span></button>
             </div>
           </div>
-        </div>
-      </form>
+
+        </form>
+      </div>
     </div>
   </div>
 </div>
 
-<div *ngIf="clientsSection">
-  <div class="container">
-    <!--table-->
+<div class="row">
+  <div class="col-lg-3"></div>
+  <div class="col-lg-6 control-section">
+    <div *ngIf="clientsSection" class="table">
+
+
+
+      <ejs-grid #grid [dataSource]='data' allowPaging='true' [allowSorting]='true' (dataBound)="dataBound()"
+        allowTextWrap='true' [pageSettings]='pageSettings'>
+        <ng-template #toolbarTemplate>
+          <ejs-toolbar>
+            <div class="e-dlg-header">Lista de roles de empleados</div>
+          </ejs-toolbar>
+        </ng-template>
+        <e-columns>
+          <e-column field='name' headerText='Nombre del rol' width='50' textAlign='center'></e-column>
+          <e-column field='type' headerText="Tipo de rol" width='50' textAlign='center'></e-column>
+          <e-column field='edit' headerText="Editar" width='50' textAlign='center'>
+            <ng-template #template let-data>
+              <button mat-button class="btn btn-warning glyphicon glyphicon-pencil" (click)='edit(data)'></button>
+            </ng-template>
+          </e-column>
+          <e-column field='delete' headerText="Eliminar" width='50' textAlign='center'>
+            <ng-template #template let-data>
+              <button mat-button class="btn btn-danger glyphicon glyphicon-trash" (click)='delete(data)'></button>
+            </ng-template>
+          </e-column>
+        </e-columns>
+      </ejs-grid>
+    </div>
+
   </div>
 </div>
 

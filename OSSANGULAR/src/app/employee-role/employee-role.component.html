@@ -1,37 +1,43 @@
 <div *ngIf="primario">
-  <div class="container" style="margin: 70px auto;">
-    <div class="formtitle">
-      <div style="">
-        <span class="line"></span>
-        <span class="dot"></span>
-        <span class="title">
-          Rol de Empleado
-        </span>
-        <span class="dot"></span>
-        <span class="line"></span>
+
+    <div class="col-lg-3 col-md-3 col-sm-1 col-xs-1"></div>
+    <div class="col-lg-6 col-md-6 col-sm-10 col-xs-10">
+      <div class="control-section">
+
+        <ejs-grid #grid [dataSource]='data' allowPaging='true' [allowSorting]='true'
+          allowTextWrap='true' [pageSettings]='pageSettings'>
+          <ng-template #toolbarTemplate>
+            <ejs-toolbar>
+              <div class="e-dlg-header">Lista de roles de empleados</div>
+            </ejs-toolbar>
+          </ng-template>
+          <e-columns>
+            <e-column field='name' headerText='Nombre del rol' width='50' textAlign='center'></e-column>
+            <e-column field='type' headerText="Tipo de rol" width='50' textAlign='center'></e-column>
+            <e-column field='edit' headerText="Editar" width='50' textAlign='center'>
+              <ng-template #template let-data>
+                <button mat-button class="btn btn-warning glyphicon glyphicon-pencil" (click)='edit(data)'></button>
+              </ng-template>
+            </e-column>
+            <e-column field='delete' headerText="Eliminar" width='50' textAlign='center'>
+              <ng-template #template let-data>
+                <button mat-button class="btn btn-danger glyphicon glyphicon-trash" (click)='delete(data)'></button>
+              </ng-template>
+            </e-column>
+          </e-columns>
+        </ejs-grid>
       </div>
     </div>
-
-    <div class="control-section">
-      <ejs-grid [dataSource]='data' allowPaging='true' allowTextWrap='true' [pageSettings]='pageSettings' width='800'>
-        <e-columns>
-          <e-column field='name' headerText='Nombre del rol' width='50' textAlign='center'></e-column>
-          <e-column field='type' headerText="Tipo de rol" width='50' textAlign='center'></e-column>
-        </e-columns>
-      </ejs-grid>
-    </div>
-
-  </div>
-
+    
   <div *ngIf="secundario">
     <update-employee-role [roleid]="roleid"></update-employee-role>
   </div>
 
-  <div *ngIf="modalDelete" class="modal fade in" role="dialog" id="gridTools" tabindex="-1" aria-labelledby="gridModalLabel"
-    style="display:block;padding-right: 15px;margin-top: 225px;">
+  <div *ngIf="modalDelete" class="modal fade in" role="dialog" id="gridTools" tabindex="-1"
+    aria-labelledby="gridModalLabel" style="display:block;padding-right: 15px;margin-top: 225px;">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-body">
           <button type="button" class="close" (click)="hideModal()" aria-label="Close">
             <span style="color: black;" aria-hidden="true">×</span>
           </button>
