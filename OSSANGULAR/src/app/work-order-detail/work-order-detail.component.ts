@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 import { WorkOrderDetail } from 'src/model/workorderdetail.model';
+import { WorkOrderService } from '../work-order/work-order.service';
+import { WorkOrder } from 'src/model/workorder.model';
 
 @Component({
   selector: 'work-order-detail',
@@ -12,7 +14,10 @@ import { WorkOrderDetail } from 'src/model/workorderdetail.model';
 })
 export class WorkOrderDetailComponent implements OnInit {
 
-  constructor(private router: Router,private workOrderDetail:WorkOrderDetailService) {
+  workOrder:WorkOrder = new WorkOrder();
+  checked: boolean = true;
+
+  constructor(private router: Router,private workOrderDetail:WorkOrderDetailService, private workOrderService:WorkOrderService) {
     this.createReactiveForm();
     this.associateValues();
    }
@@ -36,25 +41,42 @@ export class WorkOrderDetailComponent implements OnInit {
           });
         }
       });
-  }
 
+      this.workOrderService.getByIdWorkOrder(3).subscribe(data=>{
+        this.workOrder=data;
+      });
+      }
+  
   associateValues() {
-    //this.detail.
+  // this.detail.date = this.date.value;
+  // this.detail.checkIn = this.checkIn.value;
+  // this.detail.checkOut = this.checkOut.value;
+  // this.detail.description = this.description.value;
+  // this.detail.invoiceId = this.invoiceId.value;
+  // this.detail.managerName = this.managerName.value;
   
   }
 
   createReactiveForm() {
     this.reactForm = new FormGroup({
-      'name': new FormControl('', [FormValidators.required]),
-      'type': new FormControl('', [FormValidators.required]),
+      'date': new FormControl('', [FormValidators.required]),
+      'checkIn': new FormControl('', [FormValidators.date]),
+      'checkOut':new FormControl('', [FormValidators.date]),
+      'description': new FormControl('', [FormValidators.required]),
+      'invoiceId': new FormControl('', [FormValidators.number]),
+      'managerName': new FormControl('', [FormValidators.required]),
     });
 
   }
 
-  get name() { return this.reactForm.get('name'); }
-  get type() { return this.reactForm.get('type'); }
+  get date() { return this.reactForm.get('date'); }
+  get checkIn() { return this.reactForm.get('checkIn'); }
+  get checkOut() { return this.reactForm.get('checkOu'); }
+  get description() { return this.reactForm.get('description'); }
+  get invoiceId() { return this.reactForm.get('invoiceId'); }
+  get managerName() { return this.reactForm.get('managerName'); }
 
-  private createEmployeeRole() {
+  private createWorkOrderDetail() {
   
   }
 }
