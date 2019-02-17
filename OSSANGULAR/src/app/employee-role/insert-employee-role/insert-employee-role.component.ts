@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 import { EmployeeRole } from 'src/model/employeerole.model';
@@ -15,7 +14,7 @@ export class InsertEmployeeRoleComponent implements OnInit {
   reactForm: FormGroup;
   role: EmployeeRole = new EmployeeRole();
 
-  constructor(private router: Router, private employeeRoleService: EmployeeRoleService) {
+  constructor(private employeeRoleService: EmployeeRoleService) {
     this.createReactiveForm();
     this.associateValues();
   }

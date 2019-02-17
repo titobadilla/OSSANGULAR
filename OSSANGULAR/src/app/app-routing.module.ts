@@ -33,6 +33,8 @@ import { InsertEmployeeRoleComponent } from './employee-role/insert-employee-rol
 import { UpdateEmployeeRoleComponent } from './employee-role/update-employee-role/update-employee-role.component';
 import { InsertGroupClientComponent } from './group-client/insert-group-client/insert-group-client.component';
 import { UpdateGroupClientComponent } from './group-client/update-group-client/update-group-client.component';
+import { InsertWorkOrderDetailComponent } from './work-order-detail/insert-work-order-detail/insert-work-order-detail.component';
+import { UpdateWorkOrderDetailComponent } from './work-order-detail/update-work-order-detail/update-work-order-detail.component';
 
 const routes: Routes = [
   {path:"",component:AppComponent, canActivate: [AuthGuard]},
@@ -66,7 +68,9 @@ const routes: Routes = [
   {path:'update-employee-role',component:UpdateEmployeeRoleComponent},
   {path:'insert-group-client',component:InsertGroupClientComponent},
   {path:'update-group-client',component:UpdateGroupClientComponent},
-  {path:'work-order-detail',component:WorkOrderDetailComponent}
+  {path:'work-order-detail',component:WorkOrderDetailComponent},
+  {path:'insert-work-order-detail',component:InsertWorkOrderDetailComponent},
+  {path:'update-work-order-detail',component:UpdateWorkOrderDetailComponent}
   /*,
   { path: '**', component: PageNotFoundComponent }*/
 ];

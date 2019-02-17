@@ -84,6 +84,8 @@ import { CommonModule } from '@angular/common';
 import { ToolbarModule } from '@syncfusion/ej2-angular-navigations';
 import { GridAllModule } from '@syncfusion/ej2-angular-grids';
 import { DialogModule } from '@syncfusion/ej2-angular-popups';
+import { UpdateWorkOrderDetailComponent } from './work-order-detail/update-work-order-detail/update-work-order-detail.component';
+import { InsertWorkOrderDetailComponent } from './work-order-detail/insert-work-order-detail/insert-work-order-detail.component';
 
 
 declare var require: any;
@@ -132,7 +134,9 @@ loadCldr(
     UpdateEmployeeRoleComponent,
     InsertGroupClientComponent,
     UpdateGroupClientComponent,
-    UpdateEmployeeComponent
+    UpdateEmployeeComponent,
+    UpdateWorkOrderDetailComponent,
+    InsertWorkOrderDetailComponent
   ],
   imports: [
 

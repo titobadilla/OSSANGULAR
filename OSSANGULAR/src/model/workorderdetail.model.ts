@@ -3,7 +3,7 @@ import { WorkOrder } from './workorder.model';
 export class WorkOrderDetail{
 
     id:number;
-    date:Date;
+    date:String;
     checkIn:String;
     checkOut:String;
     description:String;

@@ -16,39 +16,41 @@ import { EmployeeRole } from 'src/model/employeerole.model';
 })
 export class InsertEmployeeComponent implements OnInit {
 
-  public data: EmployeeRole[]=new Array();
+  public data: EmployeeRole[] = new Array();
 
-public fields: Object = { text: 'name', value: 'id' };
-public watermark: string = 'Seleccione un rol*';
+  public fields: Object = { text: 'name', value: 'id' };
+  public watermark: string = 'Seleccione un rol*';
+  reactForm: FormGroup;
+  employee: Employee;
 
-
-
-reactForm: FormGroup;
-employee:Employee;
-
-  constructor(private router: Router,private employeeService:EmployeeService,private employeeRoleService:EmployeeRoleService) {
-     this.employee=new Employee();
-  this.createReactiveForm();
-  this.associateValues();
+  constructor(private router: Router, private employeeService: EmployeeService, private employeeRoleService: EmployeeRoleService) {
+    this.employee = new Employee();
+    this.createReactiveForm();
+    this.associateValues();
   }
 
-  getEmployeeRoles(){
-    this.employeeRoleService.getAllRoles().subscribe(data=>{
-      this.data=data
+  ngOnInit() {
+    this.getEmployeeRoles();
+    this.initEventSubmit();
+  }
+
+  getEmployeeRoles() {
+    this.employeeRoleService.getAllRoles().subscribe(data => {
+      this.data = data
     });
   }
 
-  associateValues(){
-    this.employee.id=this.id.value;
-    this.employee.lastName=this.lastName.value;
-    this.employee.name=this.name.value;
-    this.employee.password=this.password.value;
-    this.employee.position=this.position.value;
-    this.employee.role.id=this.role.value;
-    this.employee.username=this.username.value;
+  associateValues() {
+    this.employee.id = this.id.value;
+    this.employee.lastName = this.lastName.value;
+    this.employee.name = this.name.value;
+    this.employee.password = this.password.value;
+    this.employee.position = this.position.value;
+    this.employee.role.id = this.role.value;
+    this.employee.username = this.username.value;
   }
 
-   createReactiveForm(){
+  createReactiveForm() {
     this.reactForm = new FormGroup({
       'id': new FormControl('', [FormValidators.required]),
       'name': new FormControl('', [FormValidators.required]),
@@ -57,47 +59,39 @@ employee:Employee;
       'role': new FormControl('', [this.roleRequired]),
       'username': new FormControl('', [FormValidators.required]),
       'password': new FormControl('', [FormValidators.required]),
-      'mobile': new FormControl('', [FormValidators.required,this.phoneLength]),
+      'mobile': new FormControl('', [FormValidators.required, this.phoneLength]),
       'home': new FormControl('', [this.phoneLength])
-
     });
   }
-  
+
   phoneLength(control: FormControl) {
-   
-    let value = control.value; 
-    if(value!=null){
-    if (value.length<8 && value.length>=1|| value.length>8) {  
+    let value = control.value;
+    if (value != null) {
+      if (value.length < 8 && value.length >= 1 || value.length > 8) {
         return {
           phoneError: {
             parsed: value
           }
         }
-   
-    }}
+      }
+    }
     return null;
   }
 
   roleRequired(control: FormControl) {
-  
+
     let value = control.value;
-    if((value===null || value==="" || value===undefined)){
-        return {
-          errorD: {
-            parsed: value
-          }
-        }    
-  }
+    if ((value === null || value === "" || value === undefined)) {
+      return {
+        errorD: {
+          parsed: value
+        }
+      }
+    }
     return null;
   }
 
-  ngOnInit() {
-    
-  this.getEmployeeRoles();
-    this.initEventSubmit();
-  }
-
-  initEventSubmit(){
+  initEventSubmit() {
     let formId: HTMLElement = <HTMLElement>document.getElementById('formId');
     document.getElementById('formId').addEventListener(
       'submit',
@@ -126,26 +120,24 @@ employee:Employee;
   get mobile() { return this.reactForm.get('mobile'); }
   get home() { return this.reactForm.get('home'); }
 
-  saveEmployee(){
-    var telephone=new TelephoneEmployee();
-    telephone.type="Celular";
-    telephone.number=this.mobile.value;
+  saveEmployee() {
+    var telephone = new TelephoneEmployee();
+    telephone.type = "Celular";
+    telephone.number = this.mobile.value;
     this.employee.telephones.push(telephone);
-    
-    if(this.home.value.length===8){
-      var telephoneHome=new TelephoneEmployee();      
-      telephoneHome.type="Casa";
-      telephoneHome.number=this.home.value;
-     this.employee.telephones.push(telephoneHome);
 
+    if (this.home.value.length === 8) {
+      var telephoneHome = new TelephoneEmployee();
+      telephoneHome.type = "Casa";
+      telephoneHome.number = this.home.value;
+      this.employee.telephones.push(telephoneHome);
     }
 
-    
-    this.employeeService.insertEmployee(this.employee).subscribe(data=>{
+    this.employeeService.insertEmployee(this.employee).subscribe(data => {
       this.reactForm.reset;
     });
 
-    
+
   }
 
 }
