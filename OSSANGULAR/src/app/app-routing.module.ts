@@ -35,6 +35,9 @@ import { InsertGroupClientComponent } from './group-client/insert-group-client/i
 import { UpdateGroupClientComponent } from './group-client/update-group-client/update-group-client.component';
 import { InsertWorkOrderDetailComponent } from './work-order-detail/insert-work-order-detail/insert-work-order-detail.component';
 import { UpdateWorkOrderDetailComponent } from './work-order-detail/update-work-order-detail/update-work-order-detail.component';
+import { UpdateInventoryCategoryComponent } from './inventory-category/update-inventory-category/update-inventory-category.component';
+import { InventoryCategory } from 'src/model/inventorycategory.model';
+import { InsertInventoryCategoryComponent } from './inventory-category/insert-inventory-category/insert-inventory-category.component';
 
 const routes: Routes = [
   {path:"",component:AppComponent, canActivate: [AuthGuard]},
@@ -70,7 +73,10 @@ const routes: Routes = [
   {path:'update-group-client',component:UpdateGroupClientComponent},
   {path:'work-order-detail',component:WorkOrderDetailComponent},
   {path:'insert-work-order-detail',component:InsertWorkOrderDetailComponent},
-  {path:'update-work-order-detail',component:UpdateWorkOrderDetailComponent}
+  {path:'update-work-order-detail',component:UpdateWorkOrderDetailComponent},
+  {path:'insert-inventory-category',component:InsertInventoryCategoryComponent},
+  {path:'update-inventory-category',component:UpdateInventoryCategoryComponent},
+  {path:'inventory-category',component:InventoryCategory}
   /*,
   { path: '**', component: PageNotFoundComponent }*/
 ];

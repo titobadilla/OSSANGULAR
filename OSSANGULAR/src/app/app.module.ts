@@ -86,6 +86,8 @@ import { GridAllModule } from '@syncfusion/ej2-angular-grids';
 import { DialogModule } from '@syncfusion/ej2-angular-popups';
 import { UpdateWorkOrderDetailComponent } from './work-order-detail/update-work-order-detail/update-work-order-detail.component';
 import { InsertWorkOrderDetailComponent } from './work-order-detail/insert-work-order-detail/insert-work-order-detail.component';
+import { InsertInventoryCategoryComponent } from './inventory-category/insert-inventory-category/insert-inventory-category.component';
+import { UpdateInventoryCategoryComponent } from './inventory-category/update-inventory-category/update-inventory-category.component';
 
 
 declare var require: any;
@@ -136,7 +138,9 @@ loadCldr(
     UpdateGroupClientComponent,
     UpdateEmployeeComponent,
     UpdateWorkOrderDetailComponent,
-    InsertWorkOrderDetailComponent
+    InsertWorkOrderDetailComponent,
+    InsertInventoryCategoryComponent,
+    UpdateInventoryCategoryComponent
   ],
   imports: [
 

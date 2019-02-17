@@ -1,0 +1,32 @@
+.formtitle {
+    font-family:'Questrial', Verdana, sans-serif;
+    text-align:center;
+    font-size:32px;
+    padding:0;
+    margin:40px 0 20px 0;
+    position:relative;
+    color:#fff;
+    }
+
+    .e-error,
+    .e-float-text {
+        font-weight: 500;
+        font-size:14px;
+    }
+
+    form {
+        padding-top: 20px;
+        margin-bottom: 45px;
+        border: 1px solid #ccc;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.36);
+        border-radius: 5px;
+        background:#fff;
+        width: 70%;
+        margin-left: 10%;
+        }
+
+    .form-horizontal .form-group {
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-top: 5%;
+    }   
