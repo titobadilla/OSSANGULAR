@@ -1,30 +1,34 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { GroupClientService } from './group-client.service';
 import { Router } from '@angular/router';
 import { Client } from 'src/model/client.model';
 import { FormGroup, FormControl } from '@angular/forms';
+import { setCulture } from '@syncfusion/ej2-base';
 
 @Component({
   selector: 'app-group-client',
   templateUrl: './group-client.component.html',
   styleUrls: ['./group-client.component.css']
 })
-export class GroupClientComponent implements OnInit {
+export class GroupClientComponent implements OnInit,AfterViewInit {
+  
+  ngAfterViewInit(): void {
+    this.initEventSubmit();
+  }
 
   public fields: Object = { text: 'name', value: 'id' };
   public watermark: string = 'Seleccione un cliente*';
   reactForm: FormGroup;
   headClient: String;
-  clientsSection = false;
-  updateSection = false;
-  insertSection=false;
-  formSection = true;
+  clientsSection:boolean = false;
+  updateSection:boolean = false;
+  insertSection:boolean=false;
+  formSection:boolean = true;
   clientsOfHeadClient: Client[] = new Array();
   principal =true;
 
 
-  constructor(private router: Router, private groupClientService: GroupClientService) {
-    
+  constructor(private router: Router, private groupClientService: GroupClientService) {    
     this.createReactiveForm();
     this.associateValues();
   }
@@ -32,11 +36,11 @@ export class GroupClientComponent implements OnInit {
   clients: Client[] = new Array();
 
   ngOnInit() {
-    this.formSection=true;
-    this.initEventSubmit();
-    this.groupClientService.getAllHeadClients().subscribe(data => {
+   this.formSection=true;   
+   setCulture('es-CR');   
+   /* this.groupClientService.getAllHeadClients().subscribe(data => {
       this.clients = data;
-    });
+    });*/
   }
 
   associateValues() {
@@ -63,7 +67,7 @@ export class GroupClientComponent implements OnInit {
   }
 
   initEventSubmit() {
-    let formId: HTMLElement = <HTMLElement>document.getElementById('formId');
+    let formId: HTMLElement = <HTMLElement>document.getElementById('formId'); 
     document.getElementById('formId').addEventListener(
       'submit',
       (e: Event) => {
