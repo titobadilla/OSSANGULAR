@@ -29,7 +29,7 @@ export class EmployeeService {
 
   
   public updateEmployee(employee:Employee):Observable<Employee>{
-    return this.http.put<Employee>(this.URLAPI+'employee/' + employee.id, employee);
+    return this.http.put<Employee>(this.URLAPI+'employee/', employee);
   }
 
   public deleteEmployee(id:String):Observable<Employee>{

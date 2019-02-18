@@ -8,7 +8,12 @@ import { EmployeeRoleService } from 'src/app/employee-role/employee-role.service
 import { TelephoneEmployee } from 'src/model/telephoneemployee.model';
 import { EmployeeRole } from 'src/model/employeerole.model';
 import { FormBuilder } from '@angular/forms'
-import { fbind } from 'q';
+import { DropDownListComponent, FilteringEventArgs } from '@syncfusion/ej2-angular-dropdowns';
+import { element } from '@angular/core/src/render3';
+import { EmitType } from '@syncfusion/ej2-base';
+import { Query } from '@syncfusion/ej2-data';
+import { OpenCloseMenuEventArgs } from '@syncfusion/ej2-navigations';
+import { EmployeeComponent } from '../employee.component';
 
 @Component({
   selector: 'update-employee',
@@ -18,18 +23,29 @@ import { fbind } from 'q';
 export class UpdateEmployeeComponent implements OnInit {
 
   @Input() employeeId: String;
+
+  @ViewChild('ddlRole')
+  public ddlRole:DropDownListComponent;
   
   public data: EmployeeRole[]=new Array();
-
-  public fields: Object = { text: 'name', value: 'id' };
+  public data2:{ [key: string]: Object; }[];
+  public value: number;
+  
+  public fields: Object = { text: 'name', value: 'id'};
+  public filterPlaceholder: string = 'Buscar';
+  public height: string = '220px';
   public watermark: string = 'Seleccione un rol*';
   viewTelephones:boolean=false;
+  
 
 reactForm: FormGroup;
 employee:Employee=new Employee();
 
+
+
   constructor(private router: Router,private employeeService:EmployeeService,private employeeRoleService:EmployeeRoleService,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,private parent: EmployeeComponent) {
+    
 
   this.createReactiveForm();
   
@@ -39,6 +55,8 @@ employee:Employee=new Employee();
   getEmployeeRoles(){
     this.employeeRoleService.getAllRoles().subscribe(data=>{
       this.data=data
+      this.loadEmployee();
+
     });
   }
 
@@ -46,8 +64,8 @@ employee:Employee=new Employee();
     this.employeeService.getByIdEmployee(this.employeeId).subscribe(
       data => {
         this.employee = data;
-        this.loadEmployeeInReactiveFormWithValidation();
-      }
+        this.loadEmployeeInReactiveFormWithValidation();        
+              }
     );
   }
 
@@ -61,7 +79,6 @@ employee:Employee=new Employee();
       'position': new FormControl(),
       'role': new FormControl(),
       'username': new FormControl(),
-      'password': new FormControl(),
       'mobile': new FormControl(),
       'home': new FormControl()
 
@@ -70,7 +87,8 @@ employee:Employee=new Employee();
 
   loadEmployeeInReactiveFormWithValidation(){
     this.id.setValue(this.employee.id);
-    this.id.setValidators(FormValidators.required)
+    this.id.setValidators(FormValidators.required);
+    this.id.disable();
 
     this.name.setValue(this.employee.name);
     this.name.setValidators(FormValidators.required);
@@ -83,12 +101,10 @@ employee:Employee=new Employee();
 
     this.role.setValue(this.employee.role.name);
     this.role.setValidators(this.roleRequired);
+    this.value=this.employee.role.id;
 
     this.username.setValue(this.employee.username);
     this.username.setValidators(FormValidators.required);
-
-    this.password.setValue(this.employee.password);
-    this.password.setValidators(FormValidators.required);
 
     this.mobile.setValue(this.employee.telephones[0]!=undefined?this.employee.telephones[0].number:"");
     this.mobile.setValidators([FormValidators.required,this.phoneLength]);
@@ -96,10 +112,27 @@ employee:Employee=new Employee();
     this.home.setValue(this.employee.telephones[1]!=undefined?this.employee.telephones[1].number:"");
     this.home.setValidators([this.phoneLength]);
   }
+  onChangeDdl(value:any){
+    if(value.itemData!=undefined){     
+    this.employee.role= this.findRoleById(value.itemData.id);
+     }
+
+  }
 
   
-  phoneLength(control: FormControl) {
-   
+  findRoleById(id:number):any{
+    let elementReturn;   
+    this.data.forEach(element=>{
+      if(element.id==id){
+        elementReturn=element;
+      }
+    });
+    return elementReturn;
+    
+  }
+
+
+  phoneLength(control: FormControl) {   
     let value = control.value; 
     if(value!=null){
     if (value.length<8 && value.length>=1|| value.length>8) {  
@@ -129,8 +162,8 @@ employee:Employee=new Employee();
 
 
   ngOnInit() {
-    this.getEmployeeRoles();
-    this.loadEmployee();
+   //console.log( this.ddlRole.element);
+    this.getEmployeeRoles();    
     this.initEventSubmit();
   }
 
@@ -159,36 +192,41 @@ employee:Employee=new Employee();
   get position() { return this.reactForm.get('position'); }
   get role() { return this.reactForm.get('role'); }
   get username() { return this.reactForm.get('username'); }
-  get password() { return this.reactForm.get('password'); }
   get mobile() { return this.reactForm.get('mobile'); }
   get home() { return this.reactForm.get('home'); }
 
+  get formValid() { return this.reactForm.valid }
 
-   public editEmployeeRole() {
+  public onFiltering: EmitType<FilteringEventArgs> = (e: FilteringEventArgs) => {
+    let query: Query = new Query();
+    //frame the query based on search string with filter type.
+    query = (e.text !== '') ? query.where('name', 'startswith', e.text, true) : query;
+    //pass the filter data source, filter query to updateData method.
+    e.updateData(Object.assign(this.data), query);
+}
 
-    /*if(this.employee.telephones[1]===undefined && this.home.value!=""){
 
+   public editEmployeeRole() {   
 
+    if(this.employee.telephones[1]===undefined && this.home.value!=""){      
+        var telephoneHome=new TelephoneEmployee();      
+        telephoneHome.type="Casa";
+        telephoneHome.number=this.home.value;
+       this.employee.telephones.push(telephoneHome);  
+    }else if(this.home.value===""){
+      this.employee.telephones[1].number='';
+    } 
+    
+    this.employeeService.updateEmployee(this.employee).subscribe(data=>{
+      this.returnView();
+    });
 
-    }*/
-     
-     /*if(!(this.mobile.value===this.employee.telephones[0].number)){
-        this.employee.telephones[0].number=this.mobile.value;
-     }*/
+  }
 
-     
-
-   /* if(this.home.value!=undefined || this.home.value!=null || this.home.value!=""){
-        
-     }else{
-
-     } */
-
-     
-  
-   
-    //this.employeeService.updateEmployee(this.employee).subscribe();
-
+  returnView(){
+    this.parent.getAllEmployees();
+    this.parent.employeesSection=false;
+    this.parent.principalSection=true;
   }
 
   viewTelephonesHtml(){

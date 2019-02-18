@@ -6,21 +6,12 @@
             </div>
             <form id="formId" [formGroup]="reactForm" #formDir="ngForm"  class="form-horizontal">
               <div class="row">
-                <div class="col-lg-6">
-                    
+                <div class="col-lg-6">                    
                     <div class="form-group">
-                        <div class="e-float-input">
-                            <input id="id" type="text" formControlName="id" [(ngModel)]='employee.id'>
-                            <span class="e-float-line"></span>
-                            <label for="id" class="e-float-text">Identificación*</label>
-                        </div>
-                        <div *ngIf="id.errors">
-                            <div *ngIf="id.errors.required && id.touched" class="e-error">
-                                Debe rellenar este campo.
-                            </div>
-                        </div>
-                    </div>
-        
+                        <label class="input-disabled" for="id">Identificación*</label>
+                        <br>
+                        <input id="id" class="form-control" type="text" formControlName="id">                               
+                    </div>  
         
                     <div class="form-group">
                         <div class="e-float-input">
@@ -60,11 +51,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <ejs-dropdownlist formControlName="role" name="role" [(ngModel)]='employee.role.name' [dataSource]='data' [fields]='fields'
-                        [placeholder]='watermark' floatLabelType='Auto'>
+                    <div class="form-group ">      
+                                 
                        
-                    </ejs-dropdownlist>
+                                    <ejs-dropdownlist #ddlRole  (change)='onChangeDdl($event)' [value]='value' formControlName="role" name="role" [dataSource]='data' [fields]='fields'
+                                    [placeholder]='watermark' floatLabelType='Auto'>                       
+                                    </ejs-dropdownlist>
+
                         <div *ngIf="role.errors">
                             <div *ngIf="role.errors.errorD && role.touched" class="e-error">
                                 Debe seleccionar un rol.
@@ -89,18 +82,6 @@
                         </div>
                     </div>
         
-                    <div class="form-group">
-                        <div class="e-float-input">
-                            <input id="password" type="password" formControlName="password" [(ngModel)]='employee.password'>
-                            <span class="e-float-line"></span>
-                            <label for="password" class="e-float-text">Contraseña*</label>
-                        </div>
-                        <div *ngIf="password.errors">
-                            <div *ngIf="password.errors.required && password.touched" class="e-error">
-                                Debe rellenar este campo.
-                            </div>
-                        </div>
-                    </div>
                     <div *ngIf='!viewTelephones'>
                             <div class="form-group" style="display: inline-block;">
                                     <button class="samplebtn e-control e-btn e-warning"  (click)="viewTelephonesHtml()" style="height:40px;width: 150px;" data-ripple="true">Editar Teléfonos</button>
@@ -161,11 +142,11 @@
                     <div style="width: 320px;margin:0px auto;height: 100px;padding-top: 25px;">
                         <div style="display: inline-block;">
                             <button id="validateSubmit" class="samplebtn e-control e-btn e-info" type="submit"
-                                style="height:40px;width: 150px;" data-ripple="true">Agregar</button>
+                                style="height:40px;width: 150px;" data-ripple="true" >Editar</button>
                         </div>
                         <div style="float: right;">
-                            <button id="resetbtn" class="samplebtn e-control e-btn" type="reset"
-                                style="height:40px;width: 165px;" data-ripple="true">Limpiar formulario</button>
+                            <button class="samplebtn e-control e-btn" type="button" (click)='returnView()'
+                                style="height:40px;width: 165px;" d>Cancelar</button>
                         </div>
                     </div>
                 </div>
