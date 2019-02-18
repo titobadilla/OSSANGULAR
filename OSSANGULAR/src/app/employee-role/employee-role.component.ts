@@ -12,60 +12,66 @@ import { GridComponent } from '@syncfusion/ej2-angular-grids';
   templateUrl: './employee-role.component.html',
   styleUrls: ['./employee-role.component.css']
 })
-export class EmployeeRoleComponent implements OnInit,AfterViewInit {
- 
+export class EmployeeRoleComponent implements OnInit, AfterViewInit {
+
   ngAfterViewInit(): void {
-    this.grid.pageSettings.pageSize=5;
+    this.grid.pageSettings.pageSize = 5;
   }
 
   public data: EmployeeRole[];
-    public pageSettings: Object;
+  public pageSettings: Object;
   @ViewChild('updateEmployeeRole') childOne: UpdateEmployeeRoleComponent;
   @ViewChild('grid') public grid: GridComponent;
 
-  constructor(private serviceRole: EmployeeRoleService) {   
+  constructor(private serviceRole: EmployeeRoleService) {
   }
 
   roles: EmployeeRole[];
   roleid: number;
-  primario: boolean = true;
-  secundario: boolean = false;
+  principal: boolean = true;
+  editSection: boolean = false;
   modalDelete = false;
-  rolDelete:EmployeeRole;
+  insertSection = false;
+  rolDelete: EmployeeRole;
 
   ngOnInit(): void {
-    this.getAllRoles();    
-    this.pageSettings = {pageCount: 3 };    
-    setCulture('es-CR'); 
+    this.getAllRoles();
+    this.pageSettings = { pageCount: 3 };
+    setCulture('es-CR');
   }
-  
 
-  getAllRoles(){
+
+  getAllRoles() {
     this.serviceRole.getAllRoles().subscribe((data: EmployeeRole[]) => {
-        this.data = data;
+      this.data = data;
     });
   }
 
   edit(element: EmployeeRole) {
     this.roleid = element.id;
-    this.primario = false;
-    this.secundario = true;
+    this.principal = false;
+    this.editSection = true;
   }
 
-  delete(rol:EmployeeRole) {
-    this.rolDelete=rol;
+  delete(rol: EmployeeRole) {
+    this.rolDelete = rol;
     this.modalDelete = true;
   }
 
   hideModal() {
-    this.rolDelete=new EmployeeRole();
+    this.rolDelete = new EmployeeRole();
     this.modalDelete = false;
   }
 
-  aceptDelete(){
-    this.serviceRole.deleteEmployeeRole(this.rolDelete.id).subscribe(data=>{    
-        this.getAllRoles();
-     });
-     this.modalDelete = false;
-     }
+  aceptDelete() {
+    this.serviceRole.deleteEmployeeRole(this.rolDelete.id).subscribe(data => {
+      this.getAllRoles();
+    });
+    this.modalDelete = false;
+  }
+
+  insert() {
+    this.principal = false;
+    this.insertSection = true;
+  }
 }

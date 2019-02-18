@@ -1,56 +1,62 @@
-<div *ngIf="primario">
+<div *ngIf="principal">
+  <div class="col-lg-3 col-md-3 col-sm-1 col-xs-1"></div>
+  <div class="col-lg-6 col-md-6 col-sm-10 col-xs-10">
+    <div class="control-section">
 
-    <div class="col-lg-3 col-md-3 col-sm-1 col-xs-1"></div>
-    <div class="col-lg-6 col-md-6 col-sm-10 col-xs-10">
-      <div class="control-section">
+      <button class="but_insert" (click)="insert()">Agregar nuevo</button>
 
-        <ejs-grid #grid [dataSource]='data' allowPaging='true' [allowSorting]='true'
-          allowTextWrap='true' [pageSettings]='pageSettings'>
-          <ng-template #toolbarTemplate>
-            <ejs-toolbar>
-              <div class="e-dlg-header">Lista de roles de empleados</div>
-            </ejs-toolbar>
-          </ng-template>
-          <e-columns>
-            <e-column field='name' headerText='Nombre del rol' width='50' textAlign='center'></e-column>
-            <e-column field='type' headerText="Tipo de rol" width='50' textAlign='center'></e-column>
-            <e-column field='edit' headerText="Editar" width='50' textAlign='center'>
-              <ng-template #template let-data>
-                <button mat-button class="btn btn-warning glyphicon glyphicon-pencil" (click)='edit(data)'></button>
-              </ng-template>
-            </e-column>
-            <e-column field='delete' headerText="Eliminar" width='50' textAlign='center'>
-              <ng-template #template let-data>
-                <button mat-button class="btn btn-danger glyphicon glyphicon-trash" (click)='delete(data)'></button>
-              </ng-template>
-            </e-column>
-          </e-columns>
-        </ejs-grid>
-      </div>
-    </div>
-    
-  <div *ngIf="secundario">
-    <update-employee-role [roleid]="roleid"></update-employee-role>
-  </div>
-
-  <div *ngIf="modalDelete" class="modal fade in" role="dialog" id="gridTools" tabindex="-1"
-    aria-labelledby="gridModalLabel" style="display:block;padding-right: 15px;margin-top: 225px;">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-body">
-          <button type="button" class="close" (click)="hideModal()" aria-label="Close">
-            <span style="color: black;" aria-hidden="true">×</span>
-          </button>
-
-          <div class="modal-body" id="gridModalLabel">
-            ¿Está seguro que desea eliminar el rol de empleado {{rolDelete.name}}?
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" (click)="hideModal()">Cancelar</button>
-          <button type="button" class="btn btn-primary" (click)="aceptDelete()">Aceptar</button>
-        </div>
-      </div>
+      <ejs-grid #grid [dataSource]='data' allowPaging='true' [allowSorting]='true' allowTextWrap='true'
+        [pageSettings]='pageSettings'>
+        <ng-template #toolbarTemplate>
+          <ejs-toolbar>
+            <div class="e-dlg-header">Lista de roles de empleados</div>
+          </ejs-toolbar>
+        </ng-template>
+        <e-columns>
+          <e-column field='name' headerText='Nombre del rol' width='50' textAlign='center'></e-column>
+          <e-column field='type' headerText="Tipo de rol" width='50' textAlign='center'></e-column>
+          <e-column field='edit' headerText="Editar" width='50' textAlign='center'>
+            <ng-template #template let-data>
+              <button mat-button class="btn btn-warning glyphicon glyphicon-pencil" (click)='edit(data)'></button>
+            </ng-template>
+          </e-column>
+          <e-column field='delete' headerText="Eliminar" width='50' textAlign='center'>
+            <ng-template #template let-data>
+              <button mat-button class="btn btn-danger glyphicon glyphicon-trash" (click)='delete(data)'></button>
+            </ng-template>
+          </e-column>
+        </e-columns>
+      </ejs-grid>
     </div>
   </div>
+</div>
+
+<div *ngIf="editSection">
+  <update-employee-role [roleid]="roleid"></update-employee-role>
+</div>
+
+<div *ngIf="insertSection">
+  <insert-employee-role></insert-employee-role>
+</div>
+
+<div *ngIf="modalDelete" class="modal fade in" role="dialog" id="gridTools" tabindex="-1"
+  aria-labelledby="gridModalLabel" style="display:block;padding-right: 15px;margin-top: 225px;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" (click)="hideModal()" aria-label="Close">
+          <span style="color: black;" aria-hidden="true">×</span>
+        </button>
+
+        <div class="modal-body" id="gridModalLabel">
+          ¿Está seguro que desea eliminar el rol de empleado {{rolDelete.name}}?
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="hideModal()">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="aceptDelete()">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>

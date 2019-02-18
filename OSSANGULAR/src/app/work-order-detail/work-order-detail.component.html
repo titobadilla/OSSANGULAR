@@ -1,111 +1,131 @@
-<div class="col-lg-4 control-section"></div>
-<div class="col-lg-4 control-section">
-  <div class="content-wrapper" style="margin-bottom: 25px; height: 600px;">
-    <div class="formtitle">
-      <div style="">
-        <span class="line"></span>
-        <span class="dot"></span>
-        <span class="title">
-          Rol de Empleado
-        </span>
-        <span class="dot"></span>
-        <span class="line"></span>
-      </div>
+<div *ngIf="principal">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6 control-section">
+        <div class="content-wrapper" style="margin-bottom: 25px;">
 
+            <div class="row">
+                <div class="col-lg-2"></div>
+                <div id="panel" class="panel panel-default" style="margin-top:5%;">
+                    <div class="panel-body">
+
+                        <div class="col-lg-6 border-right">
+
+                            <div class="formtitle">
+                                <span>Orden de trabajo</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label style="font-size:15px;">Nombre del cliente</label>
+                                <br>
+                                <input type="text" class="form-control" [disabled]="true"
+                                    [(ngModel)]="workOrder.client.name">
+                            </div>
+
+                            <div class="form-group">
+                                <label style="font-size:15px;">Descripción</label>
+                                <br>
+                                <input type="text" class="form-control" [disabled]="true"
+                                    [(ngModel)]="workOrder.description">
+                            </div>
+
+                            <div class="form-group">
+                                <label style="font-size:15px;">Estado de orden</label>
+                                <br>
+                                <input type="text" class="form-control" [disabled]="true"
+                                    [(ngModel)]="workOrder.color.state">
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="formtitle">
+                                <span>Detalle de Orden</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label style="font-size:15px;">Fecha</label>
+                                <br>
+                                <input type="date" class="form-control" [disabled]="true" [(ngModel)]="detail.date">
+                            </div>
+
+                            <div class="form-group">
+                                <label style="font-size:15px;">Hora de llegada</label>
+                                <br>
+                                <input type="time" class="form-control" [disabled]="true" [(ngModel)]="detail.checkIn">
+                            </div>
+
+                            <div class="form-group">
+                                <label style="font-size:15px;">Hora de salida</label>
+                                <br>
+                                <input type="time" class="form-control" [disabled]="true" [(ngModel)]="detail.checkOut">
+                            </div>
+
+                            <div class="form-group">
+                                <label style="font-size:15px;">Detalle</label>
+                                <br>
+                                <textarea class="textarea form-control" type="text" [disabled]="true"
+                                    [(ngModel)]="detail.description"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label style="font-size:15px;">Número de factura</label>
+                                <br>
+                                <input type="text" class="form-control" [disabled]="true"
+                                    [(ngModel)]="detail.invoiceId">
+                            </div>
+
+                            <div class="form-group">
+                                <label style="font-size:15px;">Persona que recibió</label>
+                                <br>
+                                <input type="text" class="form-control" [disabled]="true"
+                                    [(ngModel)]="detail.managerName">
+                            </div>
+
+
+                            <div style="width: 225px;margin:0px auto;height: 100px;">
+                                <div style="display: inline-block;">
+                                    <button id="validateSubmit" class="samplebtn e-control e-btn e-warning"
+                                        type="submit" style="height:40px;width: 100px;" data-ripple="true"
+                                        (click)="edit()">Editar</button>
+                                </div>
+                                <div style="float: right;">
+                                    <button id="validateSubmit" class="samplebtn e-control e-btn e-danger" type="submit"
+                                        style="height:40px;width: 100px;" data-ripple="true"
+                                        (click)="delete()">Eliminar</button>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
-
-      <div class="form-group">
-        <div class="e-float-input">
-          <input id="date" type="date" formControlName="name" [(ngModel)]="detail.date">
-          <span class="e-float-line"></span>
-          <label for="date" class="e-float-text" style="font-size:15px;">Fecha</label>
-        </div>
-        <div *ngIf="date.errors">
-          <div *ngIf="date.errors.required && date.touched" class="e-error">
-            Debe rellenar este campo.
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group" style="margin-top:10%;">
-        <div class="e-float-input">
-          <input id="checkIn" type="time" formControlName="checkIn" [(ngModel)]="detail.checkIn">
-          <span class="e-float-line"></span>
-          <label for="checkIn" class="e-float-text" style="font-size:15px;">Hora de llegada</label>
-        </div>
-        <div *ngIf="checkIn.errors">
-          <div *ngIf="checkIn.errors.required && checkIn.touched" class="e-error">
-            Debe rellenar este campo.
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group" style="margin-top:10%;">
-        <div class="e-float-input">
-          <input id="checkOut" type="time" formControlName="checkOut" [(ngModel)]="detail.checkOut">
-          <span class="e-float-line"></span>
-          <label for="checkOut" class="e-float-text" style="font-size:15px;">Hora de Salida</label>
-        </div>
-        <div *ngIf="checkOut.errors">
-          <div *ngIf="checkOut.errors.required && checkOut.touched" class="e-error">
-            Debe rellenar este campo.
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group" style="margin-top:10%;">
-        <div class="e-float-input">
-          <input id="description" type="text" formControlName="description" [(ngModel)]="detail.description">
-          <span class="e-float-line"></span>
-          <label for="description" class="e-float-text" style="font-size:15px;">Detalle</label>
-        </div>
-        <div *ngIf="description.errors">
-          <div *ngIf="description.errors.required && description.touched" class="e-error">
-            Debe rellenar este campo.
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group" style="margin-top:10%;">
-        <div class="e-float-input">
-          <input id="invoiceId" type="number" formControlName="invoiceId" [(ngModel)]="detail.invoiceId">
-          <span class="e-float-line"></span>
-          <label for="invoiceId" class="e-float-text" style="font-size:15px;">Número de factura</label>
-        </div>
-        <div *ngIf="invoiceId.errors">
-          <div *ngIf="invoiceId.errors.required && invoiceId.touched" class="e-error">
-            Debe rellenar este campo.
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group" style="margin-top:10%;">
-        <div class="e-float-input">
-          <input id="managerName" type="text" formControlName="managerName" [(ngModel)]="detail.managerName">
-          <span class="e-float-line"></span>
-          <label for="managerName" class="e-float-text" style="font-size:15px;">Persona que recibe</label>
-        </div>
-        <div *ngIf="managerName.errors">
-          <div *ngIf="managerName.errors.required && managerName.touched" class="e-error">
-            Debe rellenar este campo.
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div style="width: 325px;margin:0px auto;height: 100px;margin-top:10%;">
-          <div style="display: inline-block;">
-            <button id="validateSubmit" class="samplebtn e-control e-btn e-info" type="submit" style="height:40px;width: 150px;"
-              data-ripple="true" (click)="createWorkOrderDetail()">Agregar</button>
-          </div>
-          <div style="float: right;">
-            <button id="resetbtn" class="samplebtn e-control e-btn" type="reset" style="height:40px;width: 165px;"
-              data-ripple="true">Limpiar Formulario</button>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
 </div>
+
+<div *ngIf="update">
+
+</div>
+
+<div *ngIf="modalDelete" class="modal fade in" role="dialog" id="gridTools" tabindex="-1"
+    aria-labelledby="gridModalLabel" style="display:block;padding-right: 15px;margin-top: 225px;">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close" (click)="hideModal()" aria-label="Close">
+            <span style="color: black;" aria-hidden="true">×</span>
+          </button>
+
+          <div class="modal-body" id="gridModalLabel">
+            ¿Está seguro que desea eliminar el detalle de orden de la fecha {{detail.date}}?
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" (click)="hideModal()">Cancelar</button>
+          <button type="button" class="btn btn-primary" (click)="aceptDelete()">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>

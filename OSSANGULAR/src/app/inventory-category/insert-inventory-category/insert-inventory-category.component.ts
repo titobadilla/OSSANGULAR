@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
-import { EmployeeRole } from 'src/model/employeerole.model';
-import { EmployeeRoleService } from '../employee-role.service';
+import { InventoryCategory } from 'src/model/inventorycategory.model';
+import { InventoryCategoryService } from '../inventory-category.service';
 
 @Component({
-  selector: 'insert-employee-role',
-  templateUrl: './insert-employee-role.component.html',
-  styleUrls: ['./insert-employee-role.component.css']
+  selector: 'app-insert-inventory-category',
+  templateUrl: './insert-inventory-category.component.html',
+  styleUrls: ['./insert-inventory-category.component.css']
 })
-export class InsertEmployeeRoleComponent implements OnInit {
+export class InsertInventoryCategoryComponent implements OnInit {
 
   reactForm: FormGroup;
-  role: EmployeeRole = new EmployeeRole();
+  category: InventoryCategory = new InventoryCategory();
 
-  constructor(private employeeRoleService: EmployeeRoleService) {
+  constructor(private categoryService: InventoryCategoryService) {
     this.createReactiveForm();
     this.associateValues();
   }
@@ -38,24 +38,20 @@ export class InsertEmployeeRoleComponent implements OnInit {
   }
 
   associateValues() {
-    this.role.name = this.name.value;
-    this.role.type = this.type.value;
+    this.category.name = this.name.value;
   }
 
   createReactiveForm() {
     this.reactForm = new FormGroup({
       'name': new FormControl('', [FormValidators.required]),
-      'type': new FormControl('', [FormValidators.required]),
     });
 
   }
 
   get name() { return this.reactForm.get('name'); }
-  get type() { return this.reactForm.get('type'); }
 
-  private createEmployeeRole() {
-    this.employeeRoleService.insertEmployeeRole(this.role)
-      .subscribe(data => {
-      });
+  private createInventoryCategory() {
+    this.categoryService.insertInventoryCategory(this.category).subscribe();
   }
+
 }
