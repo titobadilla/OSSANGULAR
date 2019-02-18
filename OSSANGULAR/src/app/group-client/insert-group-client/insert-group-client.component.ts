@@ -21,7 +21,7 @@ export class InsertGroupClientComponent implements OnInit {
   clients: Client[] = new Array();
   headClient: String;
   group:GroupClient = new GroupClient();
-  selectedClients:String[];
+  selectedClients:Client[]=new Array();
   @ViewChild('checkbox') public mulObj: MultiSelectComponent;
   @ViewChild('selectall') public checkboxObj: CheckBoxComponent;
   public mode: string;
@@ -31,6 +31,35 @@ export class InsertGroupClientComponent implements OnInit {
     this.createReactiveForm();
     this.associateValues();
   }
+
+  select(value:any){
+    let action=value.name;
+    let client=value.itemData as Client;
+    let aux;
+
+    if(action==='select'){
+      this.selectedClients.push(client);      
+    }else if(action='removing'){
+      this.selectedClients.forEach((element,index)=>{        
+        if(element.id===client.id){
+          aux=this.arrayRemove(this.selectedClients,index);
+        }
+      });
+      this.selectedClients=aux;
+    }
+
+    console.log(this.selectedClients);
+
+
+  }
+
+  arrayRemove(arr, value) {
+
+    return arr.filter(function(ele,index){
+        return index != value;
+    });
+ 
+ }
 
   ngOnInit() {
     this.initEventSubmit();
@@ -90,7 +119,7 @@ export class InsertGroupClientComponent implements OnInit {
   public popHeight: string = '350px';
 
   public insertGroupClient() {
-    let i = 0;
+    /*let i = 0;
     for (i = 0; i < this.selectedClients.length; i++) {
       let client:Client = new Client();
       client.id = this.selectedClients[i];
@@ -100,7 +129,7 @@ export class InsertGroupClientComponent implements OnInit {
     console.log('head: '+this.group.idHeadClient)
   //  this.groupClientService.insertGroupClient(this.group);
     this.group = new GroupClient();
-    this.selectedClients = [];
+    this.selectedClients = [];*/
 }
 
 }

@@ -18,7 +18,7 @@
 
             <div class="form-group">
                 <ejs-multiselect formControlName="clients" id='multiselect-checkbox' #checkbox [dataSource]='clients'
-                    [placeholder]='watermark' [fields]='fields' [mode]='mode' [popupHeight]='popHeight'
+                    [placeholder]='watermark'  [fields]='fields' (removing)='select($event)' (select)='select($event)' [mode]='mode' [popupHeight]='popHeight'
                     showDropDownIcon='true' [filterBarPlaceholder]='filterPlaceholder' [(ngModel)]="selectedEmployees">
                 </ejs-multiselect>
             </div>
