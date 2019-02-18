@@ -43,8 +43,7 @@ export class EmployeeComponent implements OnInit,AfterViewInit {
   ngOnInit(): void {
    this.getAllEmployees();
    this.pageSettings = {pageCount: 3 };    
-    setCulture('es-CR');
-   
+    setCulture('es-CR');   
   }
 
   getAllEmployees(){
