@@ -5,7 +5,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 
 @Component({
-  selector: 'app-update-work-order-detail',
+  selector: 'update-work-order-detail',
   templateUrl: './update-work-order-detail.component.html',
   styleUrls: ['./update-work-order-detail.component.css']
 })
@@ -22,7 +22,7 @@ export class UpdateWorkOrderDetailComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.detailService.getByIdWorkOrderDetail(4).subscribe(data => {
+    this.detailService.getByIdWorkOrderDetail(this.detailid).subscribe(data => {
       this.detail = data;
       this.splitDatesHours(this.detail);
     });

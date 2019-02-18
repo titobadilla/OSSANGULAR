@@ -7,7 +7,7 @@ import { WorkOrderDetailService } from '../work-order-detail.service';
 import { WorkOrderService } from 'src/app/work-order/work-order.service';
 
 @Component({
-  selector: 'app-insert-work-order-detail',
+  selector: 'insert-work-order-detail',
   templateUrl: './insert-work-order-detail.component.html',
   styleUrls: ['./insert-work-order-detail.component.css']
 })
