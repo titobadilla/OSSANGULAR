@@ -17,11 +17,14 @@ export class GroupClientComponent implements OnInit {
   headClient: String;
   clientsSection = false;
   updateSection = false;
+  insertSection=false;
   formSection = true;
   clientsOfHeadClient: Client[] = new Array();
+  principal =true;
 
 
   constructor(private router: Router, private groupClientService: GroupClientService) {
+    
     this.createReactiveForm();
     this.associateValues();
   }
@@ -29,6 +32,7 @@ export class GroupClientComponent implements OnInit {
   clients: Client[] = new Array();
 
   ngOnInit() {
+    this.formSection=true;
     this.initEventSubmit();
     this.groupClientService.getAllHeadClients().subscribe(data => {
       this.clients = data;
@@ -90,6 +94,11 @@ export class GroupClientComponent implements OnInit {
     this.formSection = false;
     this.clientsSection = false;
     this.updateSection = true;
+  }
 
+  insert(){
+    this.formSection=false;
+    this.clientsSection=false;
+    this.insertSection=true;
   }
 }

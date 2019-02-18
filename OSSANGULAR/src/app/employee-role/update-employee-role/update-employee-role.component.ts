@@ -28,11 +28,9 @@ export class UpdateEmployeeRoleComponent implements OnInit {
       'name': new FormControl('', [FormValidators.required]),
       'type': new FormControl('', [FormValidators.required]),
     });
-
   }
 
   ngOnInit() {
-    alert('hello')
     this.serviceRole.getByIdEmployeeRole(this.roleid).subscribe(
       data => {
         this.role = data;

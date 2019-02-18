@@ -5,7 +5,7 @@ import { EmployeeRole } from 'src/model/employeerole.model';
 import { EmployeeRoleService } from '../employee-role.service';
 
 @Component({
-  selector: 'app-insert-employee-role',
+  selector: 'insert-employee-role',
   templateUrl: './insert-employee-role.component.html',
   styleUrls: ['./insert-employee-role.component.css']
 })

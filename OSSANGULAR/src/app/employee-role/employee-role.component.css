@@ -1,5 +1,5 @@
 .control-section{
-  margin-top: 15%;
+  margin-top: 10%;
 }
 .modal-content {
     border: none;
@@ -46,3 +46,18 @@
     margin-top: 2%;  
     text-align: center;
   }
+
+.but_insert {
+    margin-left: 70%;
+    margin-bottom: 2%;
+    background-color: rgb(110, 191, 211);
+    border: none;
+    border: 1px solid #000;
+    border-radius: 4px;
+    width: 200px;
+    padding: 16px 0;
+    font-size: 20px;
+}
+.but_insert:hover {
+   box-shadow: 1px 1px 5px black;
+}
