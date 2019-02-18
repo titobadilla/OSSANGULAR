@@ -105,27 +105,27 @@
 </div>
 
 <div *ngIf="update">
-
+    <update-work-order-detail [detailid]="detailid"></update-work-order-detail>
 </div>
 
 <div *ngIf="modalDelete" class="modal fade in" role="dialog" id="gridTools" tabindex="-1"
     aria-labelledby="gridModalLabel" style="display:block;padding-right: 15px;margin-top: 225px;">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-body">
-          <button type="button" class="close" (click)="hideModal()" aria-label="Close">
-            <span style="color: black;" aria-hidden="true">×</span>
-          </button>
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" (click)="hideModal()" aria-label="Close">
+                    <span style="color: black;" aria-hidden="true">×</span>
+                </button>
 
-          <div class="modal-body" id="gridModalLabel">
-            ¿Está seguro que desea eliminar el detalle de orden de la fecha {{detail.date}}?
-          </div>
-        </div>
+                <div class="modal-body" id="gridModalLabel">
+                    ¿Está seguro que desea eliminar el detalle de orden de la fecha {{detail.date}}?
+                </div>
+            </div>
 
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" (click)="hideModal()">Cancelar</button>
-          <button type="button" class="btn btn-primary" (click)="aceptDelete()">Aceptar</button>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="hideModal()">Cancelar</button>
+                <button type="button" class="btn btn-primary" (click)="aceptDelete()">Aceptar</button>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>

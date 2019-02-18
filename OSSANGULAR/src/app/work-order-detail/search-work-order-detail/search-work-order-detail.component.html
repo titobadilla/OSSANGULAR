@@ -11,12 +11,13 @@
                             <div class="row">
                                 <div class="col-sm-3">
                                     <button id="validateSubmit" class="samplebtn e-control e-btn e-info" type="submit"
-                                        style="height:30px;width: 40px; margin-top: 5px;" data-ripple="true"
-                                        (click)='list()'><span class="glyphicon glyphicon-search"></span></button>
+                                        style="margin-left:20px;height:30px;width: 40px; margin-top: 5px;"
+                                        data-ripple="true" (click)='list()'><span
+                                            class="glyphicon glyphicon-search"></span></button>
                                 </div>
                                 <div class="col-sm-3">
                                     <button class="samplebtn e-control e-btn e-basic" (click)='insert()'
-                                        style="height:30px;width: 40px;margin-left: 15px;margin-top: 5px;"><span
+                                        style="height:30px;width: 40px;margin-left: 35px;margin-top: 5px;"><span
                                             class="glyphicon glyphicon-plus"></span></button>
                                 </div>
                             </div>
@@ -26,55 +27,85 @@
             </div>
         </div>
     </div>
-</div>
 
-<div *ngIf="tableSection">
+
+
     <div class="col-lg-3 col-md-3 col-sm-1 col-xs-1"></div>
     <div class="col-lg-6 col-md-6 col-sm-10 col-xs-10">
-        <div class="control-section">
-            <ejs-toolbar class='e-gridlist' (clicked)="onClicked($event.originalEvent)">
-                <e-items>
-                    <e-item text='Fecha'></e-item>
-                    <e-item text='Hora de entrada'></e-item>
-                    <e-item text='Hora de salida'></e-item>
-                    <e-item text='Descripción'></e-item>
-                    <e-item text='Número de factura'></e-item>
-                    <e-item text='Persona que recibe'></e-item>
-                </e-items>
-            </ejs-toolbar>
-            <br />
-            <ejs-grid #grid [dataSource]='data' allowPaging='true' [allowSorting]='true' (dataBound)="dataBound()"
-                allowTextWrap='true' [pageSettings]='pageSettings'>
 
-                <ng-template #toolbarTemplate>
-                    <ejs-toolbar>
-                        <div class="e-dlg-header">Lista de detalles</div>
+        <ejs-toolbar class='e-gridlist' (clicked)="onClicked($event.originalEvent)">
+            <e-items>
+                <e-item text='Fecha'></e-item>
+                <e-item text='Hora de entrada'></e-item>
+                <e-item text='Hora de salida'></e-item>
+                <e-item text='Descripción'></e-item>
+                <e-item text='Número de factura'></e-item>
+                <e-item text='Persona que recibe'></e-item>
+            </e-items>
+        </ejs-toolbar>
+        <br />
+        <ejs-grid #grid [dataSource]='data' allowPaging='true' [allowSorting]='true' (dataBound)="dataBound()"
+            allowTextWrap='true' [pageSettings]='pageSettings'>
 
-                    </ejs-toolbar>
-                </ng-template>
+            <ng-template #toolbarTemplate>
+                <ejs-toolbar>
+                    <div class="e-dlg-header">Lista de detalles de órdenes</div>
 
-                <e-columns>
-                    <e-column field='date' headerText='Fecha' width='100' textAlign='center'></e-column>
-                    <e-column field='checkIn' headerText="Hora de entrada" width='100' textAlign='center'></e-column>
-                    <e-column field='checkOut' headerText="Hora de salida" width='150' textAlign='center'></e-column>
-                    <e-column field='description' headerText="Descripción" width='105' textAlign='center'></e-column>
-                    <e-column field='invoiceId' headerText="Número de factura" width='100' textAlign='center'>
-                    </e-column>
-                    <e-column field='managerName' headerText="Persona que recibe" width='105' textAlign='center'>
-                    </e-column>
-                    <e-column headerText="Editar" width='85' textAlign='center'>
-                        <ng-template #template let-data>
-                            <button mat-button class="btn btn-warning glyphicon glyphicon-pencil"
-                                (click)='edit(data)'></button>
-                        </ng-template>
-                    </e-column>
-                    <e-column headerText="Eliminar" width='115' textAlign='center'>
-                        <ng-template #template let-data>
-                            <button mat-button class="btn btn-danger glyphicon glyphicon-trash"
-                                (click)='delete(data)'></button>
-                        </ng-template>
-                    </e-column>
-                </e-columns>
-            </ejs-grid>
+                </ejs-toolbar>
+            </ng-template>
+
+            <e-columns>
+                <e-column field='date' headerText='Fecha' width='100' textAlign='center'></e-column>
+                <e-column field='checkIn' headerText="Hora de entrada" width='150' textAlign='center'></e-column>
+                <e-column field='checkOut' headerText="Hora de salida" width='150' textAlign='center'></e-column>
+                <e-column field='description' headerText="Descripción" width='150' textAlign='center'></e-column>
+                <e-column field='invoiceId' headerText="Número de factura" width='150' textAlign='center'>
+                </e-column>
+                <e-column field='managerName' headerText="Persona que recibe" width='150' textAlign='center'>
+                </e-column>
+                <e-column headerText="Editar" width='85' textAlign='center'>
+                    <ng-template #template let-data>
+                        <button mat-button class="btn btn-warning glyphicon glyphicon-pencil"
+                            (click)='edit(data)'></button>
+                    </ng-template>
+                </e-column>
+                <e-column headerText="Eliminar" width='115' textAlign='center'>
+                    <ng-template #template let-data>
+                        <button mat-button class="btn btn-danger glyphicon glyphicon-trash"
+                            (click)='delete(data)'></button>
+                    </ng-template>
+                </e-column>
+            </e-columns>
+        </ejs-grid>
+    </div>
+</div>
+
+<div *ngIf="insertSection">
+    <insert-work-order-detail></insert-work-order-detail>
+</div>
+
+<div *ngIf="editSection">
+    <update-work-order-detail [detailid]="detailid"></update-work-order-detail>
+</div>
+
+<div *ngIf="modalDelete" class="modal fade in" role="dialog" id="gridTools" tabindex="-1"
+    aria-labelledby="gridModalLabel" style="display:block;padding-right: 15px;margin-top: 225px;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" (click)="hideModal()" aria-label="Close">
+                    <span style="color: black;" aria-hidden="true">×</span>
+                </button>
+
+                <div class="modal-body" id="gridModalLabel">
+                    ¿Está seguro que desea eliminar el detalle de la fecha {{detailDelete.date}}?
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="hideModal()">Cancelar</button>
+                <button type="button" class="btn btn-primary" (click)="aceptDelete()">Aceptar</button>
+            </div>
         </div>
     </div>
+</div>
