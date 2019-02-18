@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewInit, OnChanges } from '@angular
 import { EmployeeRoleService } from './employee-role.service';
 import { EmployeeRole } from 'src/model/employeerole.model';
 import { UpdateEmployeeRoleComponent } from './update-employee-role/update-employee-role.component';
-import { L10n, loadCldr, setCulture, setCurrencyCode } from '@syncfusion/ej2-base';
+import {setCulture } from '@syncfusion/ej2-base';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
 
 

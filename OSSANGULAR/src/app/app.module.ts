@@ -88,7 +88,10 @@ import { UpdateWorkOrderDetailComponent } from './work-order-detail/update-work-
 import { InsertWorkOrderDetailComponent } from './work-order-detail/insert-work-order-detail/insert-work-order-detail.component';
 import { InsertInventoryCategoryComponent } from './inventory-category/insert-inventory-category/insert-inventory-category.component';
 import { UpdateInventoryCategoryComponent } from './inventory-category/update-inventory-category/update-inventory-category.component';
+import { SearchWorkOrderDetailComponent } from './work-order-detail/search-work-order-detail/search-work-order-detail.component';
 
+
+import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
 
 declare var require: any;
 
@@ -99,8 +102,6 @@ loadCldr(
   require('node_modules/cldr-data/main/es-CR/timeZoneNames.json'));
 
   
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -140,7 +141,8 @@ loadCldr(
     UpdateWorkOrderDetailComponent,
     InsertWorkOrderDetailComponent,
     InsertInventoryCategoryComponent,
-    UpdateInventoryCategoryComponent
+    UpdateInventoryCategoryComponent,
+    SearchWorkOrderDetailComponent
   ],
   imports: [
 
@@ -161,7 +163,10 @@ loadCldr(
     NgSelectModule, ComboBoxModule,
 
     //table 
-   CommonModule, ToolbarModule, GridAllModule, DialogModule
+   CommonModule, ToolbarModule, GridAllModule, DialogModule,
+
+   //date range
+   DateRangePickerModule
     
   ],
   providers: [

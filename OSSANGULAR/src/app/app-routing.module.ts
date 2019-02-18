@@ -38,6 +38,7 @@ import { UpdateWorkOrderDetailComponent } from './work-order-detail/update-work-
 import { UpdateInventoryCategoryComponent } from './inventory-category/update-inventory-category/update-inventory-category.component';
 import { InventoryCategory } from 'src/model/inventorycategory.model';
 import { InsertInventoryCategoryComponent } from './inventory-category/insert-inventory-category/insert-inventory-category.component';
+import { SearchWorkOrderDetailComponent } from './work-order-detail/search-work-order-detail/search-work-order-detail.component';
 
 const routes: Routes = [
   {path:"",component:AppComponent, canActivate: [AuthGuard]},
@@ -76,7 +77,8 @@ const routes: Routes = [
   {path:'update-work-order-detail',component:UpdateWorkOrderDetailComponent},
   {path:'insert-inventory-category',component:InsertInventoryCategoryComponent},
   {path:'update-inventory-category',component:UpdateInventoryCategoryComponent},
-  {path:'inventory-category',component:InventoryCategory}
+  {path:'inventory-category',component:InventoryCategory},
+  {path:'search-work-order-detail',component:SearchWorkOrderDetailComponent}
   /*,
   { path: '**', component: PageNotFoundComponent }*/
 ];

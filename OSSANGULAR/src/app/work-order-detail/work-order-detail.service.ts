@@ -32,4 +32,8 @@ export class WorkOrderDetailService {
   public deleteWorkOrderDetail(detailID: number): Observable<WorkOrderDetail> {
     return this.http.delete<WorkOrderDetail>(this.URLAPI + 'workorderdetail/' + detailID);
   }
+
+  public getByDatesWorkOrderDetail(f1:Date, f2:Date): Observable<WorkOrderDetail[]> {
+    return this.http.get<WorkOrderDetail[]>(this.URLAPI + 'workorderdetail/search/'+f1+"/"+f2);
+  }
 }
