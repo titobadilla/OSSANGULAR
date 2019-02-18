@@ -3,6 +3,7 @@ import { GroupClientService } from './group-client.service';
 import { Router } from '@angular/router';
 import { Client } from 'src/model/client.model';
 import { FormGroup, FormControl } from '@angular/forms';
+import { setCulture } from '@syncfusion/ej2-base';
 
 @Component({
   selector: 'app-group-client',
@@ -27,8 +28,7 @@ export class GroupClientComponent implements OnInit,AfterViewInit {
   principal =true;
 
 
-  constructor(private router: Router, private groupClientService: GroupClientService) {
-    
+  constructor(private router: Router, private groupClientService: GroupClientService) {    
     this.createReactiveForm();
     this.associateValues();
   }
@@ -37,6 +37,7 @@ export class GroupClientComponent implements OnInit,AfterViewInit {
 
   ngOnInit() {
    this.formSection=true;   
+   setCulture('es-CR');   
    /* this.groupClientService.getAllHeadClients().subscribe(data => {
       this.clients = data;
     });*/
@@ -66,8 +67,7 @@ export class GroupClientComponent implements OnInit,AfterViewInit {
   }
 
   initEventSubmit() {
-    let formId: HTMLElement = <HTMLElement>document.getElementById('formId');
- 
+    let formId: HTMLElement = <HTMLElement>document.getElementById('formId'); 
     document.getElementById('formId').addEventListener(
       'submit',
       (e: Event) => {
