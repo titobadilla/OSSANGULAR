@@ -2,5 +2,5 @@
 @import "~@ng-select/ng-select/themes/default.theme.css";
 
 html, body { height: 100%; width: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background: url(https://elucubracion.com/wp-content/uploads/2014/05/fondo-abstracto-1.png) no-repeat}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color:#c4c2c0;}
 

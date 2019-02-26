@@ -5,7 +5,7 @@ import { InventoryCategory } from 'src/model/inventorycategory.model';
 import { InventoryCategoryService } from '../inventory-category.service';
 
 @Component({
-  selector: 'app-update-inventory-category',
+  selector: 'update-inventory-category',
   templateUrl: './update-inventory-category.component.html',
   styleUrls: ['./update-inventory-category.component.css']
 })
@@ -38,7 +38,7 @@ export class UpdateInventoryCategoryComponent implements OnInit {
         }
       });
 
-      this.categoryService.getByIdInventoryCategory(1).subscribe(data=>{
+      this.categoryService.getByIdInventoryCategory(this.categoryId).subscribe(data=>{
         this.category=data;
       })
   }
