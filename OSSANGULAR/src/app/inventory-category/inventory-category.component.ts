@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { InventoryCategoryService } from './inventory-category.service';
-import { Router } from '@angular/router';
+import {setCulture } from '@syncfusion/ej2-base';
+import { GridComponent } from '@syncfusion/ej2-angular-grids';
+import { MeasurementUnit } from 'src/model/measurementunit.model';
+import { InventoryCategory } from 'src/model/inventorycategory.model';
+import { UpdateInventoryCategoryComponent } from './update-inventory-category/update-inventory-category.component';
 
 @Component({
   selector: 'app-inventory-category',
@@ -9,9 +13,61 @@ import { Router } from '@angular/router';
 })
 export class InventoryCategoryComponent implements OnInit {
 
-  constructor(private router: Router,private inventoryCategoryService:InventoryCategoryService) { }
+  constructor(private inventoryCategoryService:InventoryCategoryService) { }
 
-  ngOnInit() {
+  ngAfterViewInit(): void {
+    this.grid.pageSettings.pageSize = 5;
   }
 
+  public data: InventoryCategory[];
+  public pageSettings: Object;
+  @ViewChild('updateInventoryCategory') childOne: UpdateInventoryCategoryComponent;
+  @ViewChild('grid') public grid: GridComponent;
+
+  categoryId: number;
+  principal: boolean = true;
+  editSection: boolean = false;
+  modalDelete = false;
+  insertSection = false;
+  inventoryCategoryDelete: InventoryCategory;
+
+  ngOnInit(): void {
+    this.getAllCategories();
+    this.pageSettings = { pageCount: 3 };
+    setCulture('es-CR');
+  }
+
+  getAllCategories() {
+    this.inventoryCategoryService.getAllCategories().subscribe((data:MeasurementUnit[])=>{
+      this.data=data;
+    });
+  }
+
+  edit(element: InventoryCategory) {
+    this.categoryId = element.id;
+    this.principal = false;
+    this.editSection = true;
+  }
+
+  delete(category:InventoryCategory) {
+    this.inventoryCategoryDelete = category;
+    this.modalDelete = true;
+  }
+
+  hideModal() {
+    this.inventoryCategoryDelete = new InventoryCategory();
+    this.modalDelete = false;
+  }
+
+  aceptDelete() {
+    this.inventoryCategoryService.deleteInventoryCategory(this.inventoryCategoryDelete.id).subscribe(data=>{
+      this.getAllCategories();
+    })
+    this.modalDelete = false;
+  }
+
+  insert() {
+    this.principal = false;
+    this.insertSection = true;
+  }
 }

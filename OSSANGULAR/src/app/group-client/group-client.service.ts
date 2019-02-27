@@ -37,6 +37,9 @@ export class GroupClientService {
   public getAllHeadClients(): Observable<Client[]> {
     return this.http.get<Client[]>(this.URLAPI + 'groupclient/headClients');
   }
+  public getAllGroups(): Observable<GroupClient[]> {
+    return this.http.get<GroupClient[]>(this.URLAPI + 'groupclient/');
+  }
 
   public getClientsOfHeadClient(id: String): Observable<Client[]> {
     return this.http.get<Client[]>(this.URLAPI + 'groupclient/clientsOfheadClients/'+id);

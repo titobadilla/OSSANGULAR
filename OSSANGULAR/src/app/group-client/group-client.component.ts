@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Client } from 'src/model/client.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import { setCulture } from '@syncfusion/ej2-base';
+import { GroupClient } from 'src/model/groupclient.model';
 
 @Component({
   selector: 'app-group-client',
@@ -16,6 +17,7 @@ export class GroupClientComponent implements OnInit,AfterViewInit {
     this.initEventSubmit();
   }
 
+  data: GroupClient[] = new Array();
   public fields: Object = { text: 'name', value: 'id' };
   public watermark: string = 'Seleccione un cliente*';
   reactForm: FormGroup;
@@ -38,6 +40,9 @@ export class GroupClientComponent implements OnInit,AfterViewInit {
   ngOnInit() {
    this.formSection=true;   
    setCulture('es-CR');   
+   this.groupClientService.getAllGroups().subscribe(data=>{
+     this.data=data;
+   })
    /* this.groupClientService.getAllHeadClients().subscribe(data => {
       this.clients = data;
     });*/

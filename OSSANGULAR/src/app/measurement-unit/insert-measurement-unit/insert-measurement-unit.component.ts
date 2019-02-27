@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
-import { InventoryCategory } from 'src/model/inventorycategory.model';
-import { InventoryCategoryService } from '../inventory-category.service';
+import { MeasurementUnit } from 'src/model/measurementunit.model';
+import { MeasurementUnitService } from '../measurement-unit.service';
 
 @Component({
-  selector: 'insert-inventory-category',
-  templateUrl: './insert-inventory-category.component.html',
-  styleUrls: ['./insert-inventory-category.component.css']
+  selector: 'insert-measurement-unit',
+  templateUrl: './insert-measurement-unit.component.html',
+  styleUrls: ['./insert-measurement-unit.component.css']
 })
-export class InsertInventoryCategoryComponent implements OnInit {
+export class InsertMeasurementUnitComponent implements OnInit {
 
   reactForm: FormGroup;
-  category: InventoryCategory = new InventoryCategory();
+  measurementUnit: MeasurementUnit = new MeasurementUnit();
 
-  constructor(private categoryService: InventoryCategoryService) {
+  constructor(private measurementUnitService: MeasurementUnitService) {
     this.createReactiveForm();
     this.associateValues();
   }
@@ -38,7 +38,7 @@ export class InsertInventoryCategoryComponent implements OnInit {
   }
 
   associateValues() {
-    this.category.name = this.name.value;
+    this.measurementUnit.name = this.name.value;
   }
 
   createReactiveForm() {
@@ -50,8 +50,7 @@ export class InsertInventoryCategoryComponent implements OnInit {
 
   get name() { return this.reactForm.get('name'); }
 
-  private createInventoryCategory() {
-    this.categoryService.insertInventoryCategory(this.category).subscribe();
+  private createMeasurementUnit() {
+    this.measurementUnitService.insertMeasurementUnit(this.measurementUnit).subscribe();
   }
-
 }

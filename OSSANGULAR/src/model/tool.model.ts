@@ -1,5 +1,6 @@
 import { MeasurementUnit } from './measurementunit.model';
 import { InventoryCategory } from './inventorycategory.model';
+import { Model } from './model.model';
 
 export class Tool{
 

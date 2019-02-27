@@ -1,20 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
-import { InventoryCategory } from 'src/model/inventorycategory.model';
-import { InventoryCategoryService } from '../inventory-category.service';
+import { MeasurementUnit } from 'src/model/measurementunit.model';
+import { MeasurementUnitService } from '../measurement-unit.service';
 
 @Component({
-  selector: 'insert-inventory-category',
-  templateUrl: './insert-inventory-category.component.html',
-  styleUrls: ['./insert-inventory-category.component.css']
+  selector: 'update-measurement-unit',
+  templateUrl: './update-measurement-unit.component.html',
+  styleUrls: ['./update-measurement-unit.component.css']
 })
-export class InsertInventoryCategoryComponent implements OnInit {
+export class UpdateMeasurementUnitComponent implements OnInit {
+
+  @Input() measurementUnitId: number;
 
   reactForm: FormGroup;
-  category: InventoryCategory = new InventoryCategory();
+  measurementUnit:MeasurementUnit = new MeasurementUnit();
 
-  constructor(private categoryService: InventoryCategoryService) {
+  constructor(private measurementUnitService:MeasurementUnitService) {
     this.createReactiveForm();
     this.associateValues();
   }
@@ -35,10 +37,14 @@ export class InsertInventoryCategoryComponent implements OnInit {
           });
         }
       });
+
+      this.measurementUnitService.getByIdMeasurementUnit(this.measurementUnitId).subscribe(data=>{
+        this.measurementUnit=data;
+      })
   }
 
   associateValues() {
-    this.category.name = this.name.value;
+    this.measurementUnit.name = this.name.value;
   }
 
   createReactiveForm() {
@@ -50,8 +56,8 @@ export class InsertInventoryCategoryComponent implements OnInit {
 
   get name() { return this.reactForm.get('name'); }
 
-  private createInventoryCategory() {
-    this.categoryService.insertInventoryCategory(this.category).subscribe();
+  private editMeasurementUnit() {
+    this.measurementUnitService.updateMeasurementUnit(this.measurementUnit).subscribe();
   }
 
 }
