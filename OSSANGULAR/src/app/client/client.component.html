@@ -1,3 +1,107 @@
-<p>
-  client works!
-</p>
+<div *ngIf="principalSection">
+
+
+    <div class="col-lg-3 col-md-3 col-sm-1 col-xs-1"></div>
+    <div class="col-lg-6 col-md-6 col-sm-10 col-xs-10">
+      <div class="control-section">
+        <ejs-toolbar class='e-gridlist' (clicked)="onClicked($event.originalEvent)">
+          <e-items>
+            <e-item text='Identificación'></e-item>
+            <e-item text='Nombre'></e-item>
+            <e-item text='Nombre de contacto'></e-item>
+            <e-item text='Apellidos de contacto'></e-item>
+            <e-item text='Nombre de grupo'></e-item>
+            <e-item text='Dirección'></e-item>
+            <e-item text='Teléfono móvil'></e-item>
+            <e-item text='Otro teléfono'></e-item>
+          </e-items>
+        </ejs-toolbar>
+        <br />
+        <ejs-grid #grid [dataSource]='clients' allowPaging='true' [allowSorting]='true' (dataBound)="dataBound()"
+          allowTextWrap='true' [pageSettings]='pageSettings'>
+  
+          <ng-template #toolbarTemplate>
+            <ejs-toolbar>
+              <div class="e-dlg-header"> Lista de clientes</div>  
+            </ejs-toolbar>
+          </ng-template>
+          
+          <e-columns>
+            <e-column field='id' headerText='Identificación' width='100' textAlign='center'></e-column>
+            <e-column field='name' headerText="Nombre" width='100' textAlign='center'></e-column>
+            <e-column field='contactName' headerText="Nombre de contacto" width='150' textAlign='center'></e-column>
+            <e-column field='contactLastName' headerText="Apellidos de contacto" width='105' textAlign='center'></e-column>
+            <e-column headerText="Nombre de grupo" width='100' textAlign='center'>
+                <ng-template #template let-data>
+                   {{data.group.nameGroup}}
+                  </ng-template>
+            </e-column>
+            <e-column headerText="Dirección" width='105' textAlign='center'>
+              <p>direccion</p>
+            </e-column>
+  
+            <e-column headerText="Teléfono móvil" width='105' textAlign='center'>
+              <ng-template #template let-data>
+                <div *ngIf="data.telephones[0]!=null && data.telephones[0]!=undefined">
+                  {{data.telephones[0].number}}
+                </div>
+                <div *ngIf="data.telephones[0]===null || data.telephones[0]===undefined">
+                  ---
+                </div>
+              </ng-template>
+            </e-column>
+  
+            <e-column headerText="Otro teléfono" width='100' textAlign='center'>
+              <ng-template #template let-data>
+                <div *ngIf="data.telephones[1]!=null && data.telephones[1]!=undefined">
+                  {{data.telephones[1].number}}
+                </div>
+                <div *ngIf="data.telephones[1]===null || data.telephones[1]===undefined">
+                  ---
+                </div>
+              </ng-template>
+            </e-column>
+  
+            <e-column headerText="Editar" width='85' textAlign='center'>
+              <ng-template #template let-data>
+                <button mat-button class="btn btn-warning glyphicon glyphicon-pencil" (click)='edit(data)'></button>
+              </ng-template>
+            </e-column>
+  
+            <e-column headerText="Eliminar" width='115' textAlign='center'>
+              <ng-template #template let-data>
+                <button mat-button class="btn btn-danger glyphicon glyphicon-trash" (click)='delete(data)'></button>
+              </ng-template>
+            </e-column>
+  
+          </e-columns>
+        </ejs-grid>
+      </div>
+  
+      <div *ngIf="modalDelete" class="modal fade in" role="dialog" id="gridTools" tabindex="-1"
+        aria-labelledby="gridModalLabel" style="display:block;padding-right: 15px;">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              <button type="button" class="close" (click)="hideModal()" aria-label="Close">
+                <span style="color: black;" aria-hidden="true">×</span>
+              </button>
+              <div class="modal-title" id="gridModalLabel">
+                ¿Está seguro que desea eliminar el cliente con nombre: {{clientDelete.name}} ?
+              </div>
+            </div>
+  
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" (click)="hideModal()">Cancelar</button>
+              <button type="button" class="btn btn-primary" (click)="aceptDelete()">Aceptar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="clientsSection">
+    <update-client [clientId]="clientId"></update-client>
+  
+  </div>

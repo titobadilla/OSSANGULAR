@@ -27,7 +27,7 @@ export class ClientService {
     return this.http.put<Client>(this.URLAPI+'client/',client);
   }
 
-  public deleteClient(clientId: string) {
+  public deleteClient(clientId: String) {
     return this.http.delete<Client>(this.URLAPI+'client/'+clientId);
   }
 

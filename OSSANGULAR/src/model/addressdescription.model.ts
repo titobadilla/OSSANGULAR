@@ -1,8 +1,9 @@
-import { Address } from './address.model';
+import { District } from './district.model';
+
 
 export class AddressDescription{
 
     id:number;
     description:String;
-    address:Address= new Address();
+    district:District=new District();
 }

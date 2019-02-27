@@ -1,0 +1,178 @@
+<div class="col-lg-2"></div>
+<div class="col-lg-8 control-section">
+    <div class="content-wrapper" style="margin-bottom: 25px;">
+        <div class="formtitle">
+            <span>Agregar un Cliente</span>
+        </div>
+        <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <div class="e-float-input">
+                            <input id="id" type="text" formControlName="id" [(ngModel)]="client.id">
+                            <span class="e-float-line"></span>
+                            <label for="id" class="e-float-text">Identificación*</label>
+                        </div>
+                        <div *ngIf="id.errors">
+                            <div *ngIf="id.errors.required && id.touched" class="e-error">
+                                Debe rellenar este campo.
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="e-float-input">
+                            <input id="name" type="text" formControlName="name" [(ngModel)]="client.name">
+                            <span class="e-float-line"></span>
+                            <label for="name" class="e-float-text">Nombre*</label>
+                        </div>
+                        <div *ngIf="name.errors">
+                            <div *ngIf="name.errors.required && name.touched" class="e-error">
+                                Debe rellenar este campo.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="e-float-input">
+                            <input id="contactName" type="text" formControlName="contactName" [(ngModel)]="client.contactName">
+                            <span class="e-float-line"></span>
+                            <label for="contactName" class="e-float-text">Nombre de contacto*</label>
+                        </div>
+                        <div *ngIf="contactName.errors">
+                            <div *ngIf="contactName.errors.required && contactName.touched" class="e-error">
+                                Debe rellenar este campo.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="e-float-input">
+                            <input id="contactLastName" type="text" formControlName="contactLastName" [(ngModel)]="client.contactLastName">
+                            <span class="e-float-line"></span>
+                            <label for="contactLastName" class="e-float-text">Apellidos de contacto*</label>
+                        </div>
+                        <div *ngIf="contactLastName.errors">
+                            <div *ngIf="contactLastName.errors.required && contactLastName.touched" class="e-error">
+                                Debe rellenar este campo.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <ejs-dropdownlist formControlName="groupClient" name="groupClient" [(ngModel)]="client.group.idGroup"
+                            [dataSource]='dataGroups' [fields]='fields' [placeholder]='watermark' floatLabelType='Auto'>
+
+                        </ejs-dropdownlist>
+                        <div *ngIf="groupClient.errors">
+                            <div *ngIf="groupClient.errors.errorD && groupClient.touched" class="e-error">
+                                Debe seleccionar un grupo.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                            <ejs-dropdownlist #provinceDdl formControlName="province" name="province" [(ngModel)]="client.addressDescription.district.districtId.canton.cantonId.province.id"
+                                [dataSource]='dataProvinces'  [fields]='fieldsProvinces' (change)='activeCanton($event)'  [placeholder]='watermarkProvinces' floatLabelType='Auto'>
+                                
+                            </ejs-dropdownlist>
+                            <div *ngIf="province.errors">
+                                <div *ngIf="province.errors.errorD && province.touched" class="e-error">
+                                    Debe seleccionar una provincia.
+                                </div>
+                            </div>
+                        
+                    </div>   
+                </div>
+
+                <div class="col-lg-6">                   
+                               
+
+                        <div class="form-group">
+                                <ejs-dropdownlist #cantonDdl [enabled]='false' (change)='activeDistrict($event)' formControlName="canton" name="canton" [(ngModel)]="client.addressDescription.district.districtId.canton.cantonId.id"
+                                    [dataSource]='dataCantons' [fields]='fieldsCantons' [placeholder]='watermarkCantons' floatLabelType='Auto'>
+        
+                                </ejs-dropdownlist>
+                                <div *ngIf="canton.errors">
+                                    <div *ngIf="canton.errors.errorD && canton.touched" class="e-error">
+                                        Debe seleccionar un cantón.
+                                    </div>
+                                </div>
+                        </div>     
+
+                        
+                        <div class="form-group">
+                                <ejs-dropdownlist #districtDdl [enabled]='false' formControlName="district" name="district" [(ngModel)]="client.addressDescription.district.districtId.id"
+                                    [dataSource]='dataDistricts' [fields]='fieldsDistricts' [placeholder]='watermarkDistricts' floatLabelType='Auto'>
+        
+                                </ejs-dropdownlist>
+                                <div *ngIf="district.errors">
+                                    <div *ngIf="district.errors.errorD && district.touched" class="e-error">
+                                        Debe seleccionar un distrito.
+                                    </div>
+                                </div>
+                        </div>           
+                        <div class="form-group">
+                                <div class="e-float-input">
+                                    <textarea rows="4" id="addressDescription" name="addressDescription" formControlName="addressDescription" [(ngModel)]="client.addressDescription.description"></textarea>
+                                    <span class="e-float-line"></span>
+                                    <label class="e-float-text" for="addressDescription">Dirección exacta*</label>
+                                </div>
+                                <div *ngIf="addressDescription.errors">
+                                        <div *ngIf="addressDescription.errors.required && addressDescription.touched" class="e-error">
+                                                Debe rellenar este campo.
+                                        </div>
+                                    </div>                               
+    
+                            </div>         
+
+                    <div class="form-group">
+                        <div class="e-float-input">
+                            <input id="mobile" type="text" formControlName="mobile">
+                            <span class="e-float-line"></span>
+                            <label for="mobile" class="e-float-text">Teléfono celular*</label>
+                        </div>
+                        <div *ngIf="mobile.errors">
+                            <div *ngIf="mobile.errors.phoneError && mobile.touched" class="e-error">
+                                El número a digitar debe tener unicamente 8 dígitos.
+                            </div>
+                            <div *ngIf="mobile.errors.required && mobile.touched" class="e-error">
+                                Debe rellenar este campo.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="e-float-input">
+                            <input id="home" type="text" formControlName="home">
+                            <span class="e-float-line"></span>
+                            <label for="home" class="e-float-text">Otro teléfono</label>
+                        </div>
+                        <div *ngIf="home.errors">
+                            <div *ngIf="home.errors.phoneError && home.touched" class="e-error">
+                                El número a digitar debe tener unicamente 8 dígitos.
+                            </div>
+                            <div *ngIf="home.errors.required && home.touched" class="e-error">
+                                Debe rellenar este campo.
+                            </div>
+                        </div>
+                    </div>        
+                   
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div style="width: 320px;margin:0px auto;height: 100px;padding-top: 25px;">
+                    <div style="display: inline-block;">
+                        <button id="validateSubmit" class="samplebtn e-control e-btn e-info" type="submit"
+                            style="height:40px;width: 150px;" data-ripple="true">Agregar</button>
+                    </div>
+                    <div style="float: right;">
+                        <button id="resetbtn" class="samplebtn e-control e-btn" type="reset"
+                            style="height:40px;width: 165px;" data-ripple="true">Limpiar formulario</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

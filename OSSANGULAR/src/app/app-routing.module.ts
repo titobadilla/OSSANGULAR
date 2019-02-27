@@ -39,6 +39,7 @@ import { UpdateInventoryCategoryComponent } from './inventory-category/update-in
 import { InventoryCategory } from 'src/model/inventorycategory.model';
 import { InsertInventoryCategoryComponent } from './inventory-category/insert-inventory-category/insert-inventory-category.component';
 import { SearchWorkOrderDetailComponent } from './work-order-detail/search-work-order-detail/search-work-order-detail.component';
+import { InsertClientComponent } from './client/insert-client/insert-client.component';
 
 const routes: Routes = [
   {path:"",component:AppComponent, canActivate: [AuthGuard]},
@@ -78,7 +79,8 @@ const routes: Routes = [
   {path:'insert-inventory-category',component:InsertInventoryCategoryComponent},
   {path:'update-inventory-category',component:UpdateInventoryCategoryComponent},
   {path:'inventory-category',component:InventoryCategory},
-  {path:'search-work-order-detail',component:SearchWorkOrderDetailComponent}
+  {path:'search-work-order-detail',component:SearchWorkOrderDetailComponent},
+  {path:'insert-client',component:InsertClientComponent}
   /*,
   { path: '**', component: PageNotFoundComponent }*/
 ];

@@ -93,6 +93,8 @@ import { SearchWorkOrderDetailComponent } from './work-order-detail/search-work-
 
 
 import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
+import { InsertClientComponent } from './client/insert-client/insert-client.component';
+import { UpdateClientComponent } from './client/update-client/update-client.component';
 
 declare var require: any;
 
@@ -143,7 +145,9 @@ loadCldr(
     InsertWorkOrderDetailComponent,
     InsertInventoryCategoryComponent,
     UpdateInventoryCategoryComponent,
-    SearchWorkOrderDetailComponent
+    SearchWorkOrderDetailComponent,
+    InsertClientComponent,
+    UpdateClientComponent
   ],
   imports: [
 
