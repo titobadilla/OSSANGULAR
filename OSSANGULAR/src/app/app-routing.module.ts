@@ -39,11 +39,10 @@ import { UpdateInventoryCategoryComponent } from './inventory-category/update-in
 import { InventoryCategory } from 'src/model/inventorycategory.model';
 import { InsertInventoryCategoryComponent } from './inventory-category/insert-inventory-category/insert-inventory-category.component';
 import { SearchWorkOrderDetailComponent } from './work-order-detail/search-work-order-detail/search-work-order-detail.component';
-<<<<<<< HEAD
+
 import { InsertClientComponent } from './client/insert-client/insert-client.component';
-=======
 import { ToolComponent } from './tool/tool.component';
->>>>>>> 8b659ece1dfa93e574a8e9c605f2afe91b148646
+
 
 const routes: Routes = [
   {path:"",component:AppComponent, canActivate: [AuthGuard]},
@@ -84,16 +83,14 @@ const routes: Routes = [
   {path:'update-inventory-category',component:UpdateInventoryCategoryComponent},
   {path:'inventory-category',component:InventoryCategory},
   {path:'search-work-order-detail',component:SearchWorkOrderDetailComponent},
-<<<<<<< HEAD
   {path:'insert-client',component:InsertClientComponent}
   /*,
-=======
+
   {path:'measurement-unit',component:MeasurementUnitComponent},
   {path:'tool',component:ToolComponent},
   {path:'device',component:DeviceComponent},
   {path:'brand',component:BrandComponent},
     /*,
->>>>>>> 8b659ece1dfa93e574a8e9c605f2afe91b148646
   { path: '**', component: PageNotFoundComponent }*/
 ];
 
