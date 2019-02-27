@@ -157,7 +157,7 @@ loadCldr(
     InsertToolComponent,
     UpdateToolComponent,
     InsertDeviceComponent,
-    UpdateDeviceComponent
+    UpdateDeviceComponent,
   ],
   imports: [
 

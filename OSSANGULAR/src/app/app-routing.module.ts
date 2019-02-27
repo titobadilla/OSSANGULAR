@@ -39,7 +39,6 @@ import { UpdateInventoryCategoryComponent } from './inventory-category/update-in
 import { InventoryCategory } from 'src/model/inventorycategory.model';
 import { InsertInventoryCategoryComponent } from './inventory-category/insert-inventory-category/insert-inventory-category.component';
 import { SearchWorkOrderDetailComponent } from './work-order-detail/search-work-order-detail/search-work-order-detail.component';
-import { InsertMeasurementUnitComponent } from './measurement-unit/insert-measurement-unit/insert-measurement-unit.component';
 import { ToolComponent } from './tool/tool.component';
 
 const routes: Routes = [
@@ -84,7 +83,7 @@ const routes: Routes = [
   {path:'measurement-unit',component:MeasurementUnitComponent},
   {path:'tool',component:ToolComponent},
   {path:'device',component:DeviceComponent},
-  {path:'brand',component:BrandComponent}
+  {path:'brand',component:BrandComponent},
     /*,
   { path: '**', component: PageNotFoundComponent }*/
 ];
