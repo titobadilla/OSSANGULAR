@@ -26,6 +26,8 @@ export class GroupClientComponent implements OnInit, AfterViewInit {
   updateSection: boolean = false;
   insertSection: boolean = false;
   formSection: boolean = true;
+  seeMoreSection: boolean = false;
+  clientSeeMore: Client = new Client();
 
   group: GroupClient = new GroupClient();
   clients: Client[] = new Array();
@@ -40,7 +42,7 @@ export class GroupClientComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.formSection = true;
     setCulture('es-CR');
-    this.groupClientService.getAllGroups().subscribe(data => {
+    this.groupClientService.getAllGroupsClients().subscribe(data => {
       this.data = data;
     })
   }
@@ -104,6 +106,11 @@ export class GroupClientComponent implements OnInit, AfterViewInit {
     this.insertSection = true;
   }
 
+  seeMore(client:Client){
+    this.clientSeeMore = client;
+    this.seeMoreSection = true;
+  }
+
   onChangeDdl(value: any) {
     if (value.itemData != undefined) {
       this.group = this.findClientsByIdGroup(value.itemData.idGroup);
@@ -119,5 +126,9 @@ export class GroupClientComponent implements OnInit, AfterViewInit {
       }
     });
     return elementReturn;
+  }
+
+  hideModal() {
+    this.seeMoreSection = false;
   }
 }

@@ -3,17 +3,20 @@
     <div class="col-lg-3"></div>
     <div class="col-lg-4 control-section">
       <div class="content-wrapper">
-        <div class="formtitle">
-          <span class="title">Buscar Jerarquia</span>
-        </div>
+
         <div class="container">
+
           <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
 
             <div class="row">
+              <div class="formtitle">
+                <span>Buscar Jerarquia</span>
+              </div>
               <div class="col-lg-7 col-md-10 col-sm-8 col-xs-8">
                 <div class="form-group">
-                  <ejs-dropdownlist (change)='onChangeDdl($event)' formControlName="client" name="client" [(ngModel)]="headClient"
-                    [dataSource]='data' [fields]='fields' [placeholder]='watermark' floatLabelType='Auto'>
+                  <ejs-dropdownlist (change)='onChangeDdl($event)' formControlName="client" name="client"
+                    [(ngModel)]="headClient" [dataSource]='data' [fields]='fields' [placeholder]='watermark'
+                    floatLabelType='Auto'>
                   </ejs-dropdownlist>
                   <div *ngIf="clients.errors">
                     <div *ngIf="clients.errors.errorD && clients.touched" class="e-error">
@@ -23,10 +26,7 @@
                 </div>
               </div>
               <div class="col-lg-4 col-md-8 col-sm-8 col-xs-8">
-                <button id="validateSubmit" class="samplebtn e-control e-btn e-info" type="submit"
-                  style="height:30px;width: 40px; margin-top: 25px;" data-ripple="true" (click)='search()'><span
-                    class="glyphicon glyphicon-search"></span></button>
-
+                
                 <button class="samplebtn e-control e-btn e-warning" (click)='edit()'
                   style="height:30px;width: 40px;margin-left: 5px;margin-top: 25px;"><span
                     class="glyphicon glyphicon-pencil"></span></button>
@@ -40,7 +40,6 @@
                     class="glyphicon glyphicon-plus"></span></button>
               </div>
             </div>
-
           </form>
         </div>
       </div>
@@ -62,18 +61,14 @@
           </ejs-toolbar>
         </ng-template>
         <e-columns>
-          <e-column field='name' headerText='Nombre del rol' width='50' textAlign='center'></e-column>
-          <e-column field='contactName' headerText="Tipo de rol" width='50' textAlign='center'></e-column>
-          <e-column field='contactLastName' headerText="Tipo de rol" width='50' textAlign='center'></e-column>
-          <e-column field='email' headerText="Tipo de rol" width='50' textAlign='center'></e-column>
-          <e-column field='edit' headerText="Editar" width='50' textAlign='center'>
-            <ng-template #template let-data>
-              <button mat-button class="btn btn-warning glyphicon glyphicon-pencil" (click)='edit(data)'></button>
-            </ng-template>
+          <e-column field='id' headerText='Identificación' width='100' textAlign='center'></e-column>
+          <e-column field='name' headerText="Nombre" width='100' textAlign='center'></e-column>
+          <e-column field='contactName' headerText="Nombre de contacto" width='150' textAlign='center'></e-column>
+          <e-column field='contactLastName' headerText="Apellidos de contacto" width='150' textAlign='center'>
           </e-column>
-          <e-column field='delete' headerText="Eliminar" width='50' textAlign='center'>
+          <e-column field='seeMore' headerText="Ver Más" width='70' textAlign='center'>
             <ng-template #template let-data>
-              <button mat-button class="btn btn-danger glyphicon glyphicon-trash" (click)='delete(data)'></button>
+              <button mat-button class="btn btn-info glyphicon glyphicon-plus" (click)='seeMore(data)'></button>
             </ng-template>
           </e-column>
         </e-columns>
@@ -89,4 +84,56 @@
 
 <div *ngIf="insertSection">
   <insert-group-client></insert-group-client>
+</div>
+
+<div *ngIf="seeMoreSection">
+  <div class="modal fade in" role="dialog" id="gridTools" tabindex="-1" aria-labelledby="gridModalLabel"
+    style="display:block;padding-right: 15px;margin-top: 100px;">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close" (click)="hideModal()" aria-label="Close">
+            <span style="color: black;" aria-hidden="true">×</span>
+          </button>
+
+          <div class="modal-body" id="gridModalLabel">
+            <p>
+              <span class="modal_title">Direccion
+                <hr></span>
+              Provincia:
+              <br>
+              Canton:
+              <br>
+              Distrito:
+              <br>
+              Dirección: {{clientSeeMore.addressDescription.description}}
+              <br>
+              <br>
+              <span class="modal_title">Telefonos
+                <hr></span>
+              Telefono Movil:
+              <span *ngIf="clientSeeMore.telephones[0]!=null && clientSeeMore.telephones[0]!=undefined">
+                {{clientSeeMore.telephones[0].number}}
+              </span>
+              <span *ngIf="clientSeeMore.telephones[0]===null || clientSeeMore.telephones[0]===undefined">
+                ---
+              </span>
+              <br>
+              Otro Telefono:
+              <span *ngIf="clientSeeMore.telephones[1]!=null && clientSeeMore.telephones[1]!=undefined">
+                {{clientSeeMore.telephones[0].number}}
+              </span>
+              <span *ngIf="clientSeeMore.telephones[1]===null || clientSeeMore.telephones[1]===undefined">
+                ---
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" (click)="hideModal()">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
