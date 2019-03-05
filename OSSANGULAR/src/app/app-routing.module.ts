@@ -40,6 +40,9 @@ import { InventoryCategory } from 'src/model/inventorycategory.model';
 import { InsertInventoryCategoryComponent } from './inventory-category/insert-inventory-category/insert-inventory-category.component';
 import { SearchWorkOrderDetailComponent } from './work-order-detail/search-work-order-detail/search-work-order-detail.component';
 import { ToolComponent } from './tool/tool.component';
+import { MenuPrincipalComponent } from './menu-principal/menu-principal.component';
+
+
 
 const routes: Routes = [
   {path:"",component:AppComponent, canActivate: [AuthGuard]},
@@ -84,6 +87,7 @@ const routes: Routes = [
   {path:'tool',component:ToolComponent},
   {path:'device',component:DeviceComponent},
   {path:'brand',component:BrandComponent},
+  {path:'menu',component:MenuPrincipalComponent}
     /*,
   { path: '**', component: PageNotFoundComponent }*/
 ];

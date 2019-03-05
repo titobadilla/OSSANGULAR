@@ -71,7 +71,7 @@ export class UpdateGroupClientComponent implements OnInit {
   }
 
   associateValues() {
-    this.group.idHeadClient = this.client.value;
+    //this.group.idHeadClient = this.client.value;
    // this.group.clients = this.clientsSelected.value;
   }
 

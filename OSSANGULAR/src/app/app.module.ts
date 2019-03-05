@@ -100,6 +100,7 @@ import { InsertToolComponent } from './tool/insert-tool/insert-tool.component';
 import { UpdateToolComponent } from './tool/update-tool/update-tool.component';
 import { InsertDeviceComponent } from './device/insert-device/insert-device.component';
 import { UpdateDeviceComponent } from './device/update-device/update-device.component';
+import { MenuPrincipalComponent } from './menu-principal/menu-principal.component';
 
 declare var require: any;
 
@@ -158,6 +159,7 @@ loadCldr(
     UpdateToolComponent,
     InsertDeviceComponent,
     UpdateDeviceComponent,
+    MenuPrincipalComponent,
   ],
   imports: [
 
@@ -182,6 +184,9 @@ loadCldr(
 
    //date range
    DateRangePickerModule
+
+   //sidebar
+
     
   ],
   providers: [

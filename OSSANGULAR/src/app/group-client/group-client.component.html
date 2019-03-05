@@ -1,4 +1,4 @@
-
+<div *ngIf="formSection">
   <div class="row">
     <div class="col-lg-3"></div>
     <div class="col-lg-4 control-section">
@@ -12,8 +12,8 @@
             <div class="row">
               <div class="col-lg-7 col-md-10 col-sm-8 col-xs-8">
                 <div class="form-group">
-                  <ejs-dropdownlist formControlName="client" name="client" [(ngModel)]="headClient"
-                    [dataSource]='clients' [fields]='fields' [placeholder]='watermark' floatLabelType='Auto'>
+                  <ejs-dropdownlist (change)='onChangeDdl($event)' formControlName="client" name="client" [(ngModel)]="headClient"
+                    [dataSource]='data' [fields]='fields' [placeholder]='watermark' floatLabelType='Auto'>
                   </ejs-dropdownlist>
                   <div *ngIf="clients.errors">
                     <div *ngIf="clients.errors.errorD && clients.touched" class="e-error">
@@ -46,7 +46,7 @@
       </div>
     </div>
 
-</div>
+  </div>
 
 
 
@@ -54,8 +54,8 @@
     <div class="col-lg-3"></div>
     <div class="col-lg-6 control-section">
 
-      <ejs-grid #grid [dataSource]='data' allowPaging='true' [allowSorting]='true'
-        allowTextWrap='true' [pageSettings]='pageSettings'>
+      <ejs-grid #grid [dataSource]='clients' allowPaging='true' [allowSorting]='true' allowTextWrap='true'
+        [pageSettings]='pageSettings'>
         <ng-template #toolbarTemplate>
           <ejs-toolbar>
             <div class="e-dlg-header">Lista de roles de empleados</div>
@@ -63,7 +63,9 @@
         </ng-template>
         <e-columns>
           <e-column field='name' headerText='Nombre del rol' width='50' textAlign='center'></e-column>
-          <e-column field='type' headerText="Tipo de rol" width='50' textAlign='center'></e-column>
+          <e-column field='contactName' headerText="Tipo de rol" width='50' textAlign='center'></e-column>
+          <e-column field='contactLastName' headerText="Tipo de rol" width='50' textAlign='center'></e-column>
+          <e-column field='email' headerText="Tipo de rol" width='50' textAlign='center'></e-column>
           <e-column field='edit' headerText="Editar" width='50' textAlign='center'>
             <ng-template #template let-data>
               <button mat-button class="btn btn-warning glyphicon glyphicon-pencil" (click)='edit(data)'></button>
@@ -79,7 +81,7 @@
     </div>
 
   </div>
-
+</div>
 
 <div *ngIf="updateSection">
   <update-group-client></update-group-client>

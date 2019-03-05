@@ -11,45 +11,42 @@ import { GroupClient } from 'src/model/groupclient.model';
   templateUrl: './group-client.component.html',
   styleUrls: ['./group-client.component.css']
 })
-export class GroupClientComponent implements OnInit,AfterViewInit {
-  
+export class GroupClientComponent implements OnInit, AfterViewInit {
+
   ngAfterViewInit(): void {
     this.initEventSubmit();
   }
 
   data: GroupClient[] = new Array();
-  public fields: Object = { text: 'name', value: 'id' };
-  public watermark: string = 'Seleccione un cliente*';
+  public fields: Object = { text: 'nameGroup', value: 'idGroup' };
+  public watermark: string = 'Seleccione un grupo*';
+
   reactForm: FormGroup;
-  headClient: String;
-  clientsSection:boolean = false;
-  updateSection:boolean = false;
-  insertSection:boolean=false;
-  formSection:boolean = true;
-  clientsOfHeadClient: Client[] = new Array();
-  principal =true;
+  clientsSection: boolean = false;
+  updateSection: boolean = false;
+  insertSection: boolean = false;
+  formSection: boolean = true;
 
+  group: GroupClient = new GroupClient();
+  clients: Client[] = new Array();
 
-  constructor(private router: Router, private groupClientService: GroupClientService) {    
+  constructor(private router: Router, private groupClientService: GroupClientService) {
     this.createReactiveForm();
     this.associateValues();
   }
 
-  clients: Client[] = new Array();
+
 
   ngOnInit() {
-   this.formSection=true;   
-   setCulture('es-CR');   
-   this.groupClientService.getAllGroups().subscribe(data=>{
-     this.data=data;
-   })
-   /* this.groupClientService.getAllHeadClients().subscribe(data => {
-      this.clients = data;
-    });*/
+    this.formSection = true;
+    setCulture('es-CR');
+    this.groupClientService.getAllGroups().subscribe(data => {
+      this.data = data;
+    })
   }
 
   associateValues() {
-    this.headClient = this.client.value;
+    this.group.idGroup = this.client.value
   }
 
   createReactiveForm() {
@@ -72,13 +69,12 @@ export class GroupClientComponent implements OnInit,AfterViewInit {
   }
 
   initEventSubmit() {
-    let formId: HTMLElement = <HTMLElement>document.getElementById('formId'); 
+    let formId: HTMLElement = <HTMLElement>document.getElementById('formId');
     document.getElementById('formId').addEventListener(
       'submit',
       (e: Event) => {
         e.preventDefault();
         if (this.reactForm.valid) {
-          // this.saveEmployee();
         } else {
           // validating whole form
           Object.keys(this.reactForm.controls).forEach(field => {
@@ -94,9 +90,6 @@ export class GroupClientComponent implements OnInit,AfterViewInit {
 
   search() {
     this.clientsSection = true;
-    this.groupClientService.getClientsOfHeadClient(this.headClient).subscribe(data => {
-
-    })
   }
 
   edit() {
@@ -105,9 +98,26 @@ export class GroupClientComponent implements OnInit,AfterViewInit {
     this.updateSection = true;
   }
 
-  insert(){
-    this.formSection=false;
-    this.clientsSection=false;
-    this.insertSection=true;
+  insert() {
+    this.formSection = false;
+    this.clientsSection = false;
+    this.insertSection = true;
+  }
+
+  onChangeDdl(value: any) {
+    if (value.itemData != undefined) {
+      this.group = this.findClientsByIdGroup(value.itemData.idGroup);
+      this.clients = this.group.clients
+    }
+  }
+
+  findClientsByIdGroup(id: number): any {
+    let elementReturn;
+    this.data.forEach(element => {
+      if (element.idGroup == id) {
+        elementReturn = element;
+      }
+    });
+    return elementReturn;
   }
 }
