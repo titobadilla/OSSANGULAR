@@ -4,7 +4,7 @@
       box-shadow: 0 16px 28px 0 rgba(0,0,0,0.58),0 25px 55px 0 rgba(0,0,0,0.21);
       padding-right: 26px;
       padding-left: 26px;
-     background-color:#71ceeb;
+      background-color:rgba(212, 205, 202, 0.849);
     }
   
     .modal-footer {
@@ -77,5 +77,5 @@
     .modal_title{
       font-family:'Questrial', Verdana, sans-serif;
       font-size: 22px;
-      margin-left: 5%;
+      margin-left: 35%;
     }

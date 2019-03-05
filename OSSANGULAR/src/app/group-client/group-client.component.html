@@ -26,7 +26,7 @@
                 </div>
               </div>
               <div class="col-lg-4 col-md-8 col-sm-8 col-xs-8">
-                
+
                 <button class="samplebtn e-control e-btn e-warning" (click)='edit()'
                   style="height:30px;width: 40px;margin-left: 5px;margin-top: 25px;"><span
                     class="glyphicon glyphicon-pencil"></span></button>
@@ -79,7 +79,7 @@
 </div>
 
 <div *ngIf="updateSection">
-  <update-group-client></update-group-client>
+  <update-group-client [groupid]="groupid"></update-group-client>
 </div>
 
 <div *ngIf="insertSection">
@@ -98,20 +98,20 @@
 
           <div class="modal-body" id="gridModalLabel">
             <p>
-              <span class="modal_title">Direccion
+              <span class="modal_title">Dirección
                 <hr></span>
               Provincia:
               <br>
-              Canton:
+              Cantón:
               <br>
               Distrito:
               <br>
               Dirección: {{clientSeeMore.addressDescription.description}}
               <br>
               <br>
-              <span class="modal_title">Telefonos
+              <span class="modal_title">Teléfonos
                 <hr></span>
-              Telefono Movil:
+              Telófono Móvil:
               <span *ngIf="clientSeeMore.telephones[0]!=null && clientSeeMore.telephones[0]!=undefined">
                 {{clientSeeMore.telephones[0].number}}
               </span>
@@ -119,7 +119,7 @@
                 ---
               </span>
               <br>
-              Otro Telefono:
+              Otro Teléfono:
               <span *ngIf="clientSeeMore.telephones[1]!=null && clientSeeMore.telephones[1]!=undefined">
                 {{clientSeeMore.telephones[0].number}}
               </span>

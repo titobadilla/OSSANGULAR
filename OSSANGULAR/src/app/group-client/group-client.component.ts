@@ -5,6 +5,7 @@ import { Client } from 'src/model/client.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import { setCulture } from '@syncfusion/ej2-base';
 import { GroupClient } from 'src/model/groupclient.model';
+import { UpdateGroupClientComponent } from './update-group-client/update-group-client.component';
 
 @Component({
   selector: 'app-group-client',
@@ -16,19 +17,18 @@ export class GroupClientComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.initEventSubmit();
   }
-
+  @ViewChild('updateGroupClient') childOne: UpdateGroupClientComponent;
   data: GroupClient[] = new Array();
   public fields: Object = { text: 'nameGroup', value: 'idGroup' };
   public watermark: string = 'Seleccione un grupo*';
 
   reactForm: FormGroup;
-  clientsSection: boolean = false;
   updateSection: boolean = false;
   insertSection: boolean = false;
   formSection: boolean = true;
   seeMoreSection: boolean = false;
   clientSeeMore: Client = new Client();
-
+  groupid:number;
   group: GroupClient = new GroupClient();
   clients: Client[] = new Array();
 
@@ -36,8 +36,6 @@ export class GroupClientComponent implements OnInit, AfterViewInit {
     this.createReactiveForm();
     this.associateValues();
   }
-
-
 
   ngOnInit() {
     this.formSection = true;
@@ -90,23 +88,17 @@ export class GroupClientComponent implements OnInit, AfterViewInit {
 
   get client() { return this.reactForm.get('client'); }
 
-  search() {
-    this.clientsSection = true;
-  }
-
   edit() {
     this.formSection = false;
-    this.clientsSection = false;
     this.updateSection = true;
   }
 
   insert() {
     this.formSection = false;
-    this.clientsSection = false;
     this.insertSection = true;
   }
 
-  seeMore(client:Client){
+  seeMore(client: Client) {
     this.clientSeeMore = client;
     this.seeMoreSection = true;
   }
@@ -114,6 +106,7 @@ export class GroupClientComponent implements OnInit, AfterViewInit {
   onChangeDdl(value: any) {
     if (value.itemData != undefined) {
       this.group = this.findClientsByIdGroup(value.itemData.idGroup);
+      this.groupid = this.group.idGroup;
       this.clients = this.group.clients
     }
   }
