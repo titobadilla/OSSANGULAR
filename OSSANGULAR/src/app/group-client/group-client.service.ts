@@ -14,7 +14,27 @@ export class GroupClientService {
 
   constructor(private http: HttpClient) { }
 
-  public getAllGroups(): Observable<GroupClient[]> {
-    return this.http.get<GroupClient[]>(this.URLAPI + 'groupclient/');
+  public getAllGroupsClients(): Observable<GroupClient[]> {
+    return this.http.get<GroupClient[]>(this.URLAPI+'groupclient/');
+  }
+
+  public insertGroupClient(groupClient: GroupClient):Observable<GroupClient> {
+    return this.http.post<GroupClient>(this.URLAPI+'groupclient/',groupClient);
+  }
+
+  public updateGroupClient(client: GroupClient):Observable<GroupClient> {
+    return this.http.put<GroupClient>(this.URLAPI+'groupclient/',client);
+  }
+
+  public deleteGroupClient(groupClientId: number) {
+    return this.http.delete<GroupClient>(this.URLAPI+'groupclient/'+groupClientId);
+  }
+
+  public getByIdGroupClient(groupClientId: number) {
+        return this.http.get<GroupClient>(this.URLAPI+'groupclient/'+groupClientId);
+  }
+
+  public getAllHeadClients(): Observable<Client[]> {
+    return this.http.get<Client[]>(this.URLAPI + 'groupclient/headClients');
   }
 }

@@ -93,6 +93,8 @@ import { SearchWorkOrderDetailComponent } from './work-order-detail/search-work-
 
 
 import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
+import { InsertClientComponent } from './client/insert-client/insert-client.component';
+import { UpdateClientComponent } from './client/update-client/update-client.component';
 import { InsertMeasurementUnitComponent } from './measurement-unit/insert-measurement-unit/insert-measurement-unit.component';
 import { UpdateMeasurementUnitComponent } from './measurement-unit/update-measurement-unit/update-measurement-unit.component';
 import { ToolComponent } from './tool/tool.component';
@@ -152,6 +154,8 @@ loadCldr(
     InsertInventoryCategoryComponent,
     UpdateInventoryCategoryComponent,
     SearchWorkOrderDetailComponent,
+    InsertClientComponent,
+    UpdateClientComponent,
     InsertMeasurementUnitComponent,
     UpdateMeasurementUnitComponent,
     ToolComponent,
@@ -160,6 +164,7 @@ loadCldr(
     InsertDeviceComponent,
     UpdateDeviceComponent,
     MenuPrincipalComponent,
+    UpdateDeviceComponent
   ],
   imports: [
 

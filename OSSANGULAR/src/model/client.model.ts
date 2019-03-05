@@ -10,7 +10,7 @@ export class Client{
   contactLastName:String;
   telephones: TelephoneClient[] = new Array();
   addressDescription:AddressDescription= new AddressDescription();
-  group:GroupClient=new GroupClient();
+  group:GroupClient=new GroupClient();  
 
   
 }
