@@ -104,6 +104,11 @@ import { InsertDeviceComponent } from './device/insert-device/insert-device.comp
 import { UpdateDeviceComponent } from './device/update-device/update-device.component';
 import { MenuPrincipalComponent } from './menu-principal/menu-principal.component';
 
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { InventoryOutputComponent } from './inventory-output/inventory-output.component';
+import { InventoryOutputSpecificComponent } from './inventory-output/inventory-output-specific/inventory-output-specific.component';
+
+
 declare var require: any;
 
 loadCldr(
@@ -164,7 +169,9 @@ loadCldr(
     InsertDeviceComponent,
     UpdateDeviceComponent,
     MenuPrincipalComponent,
-    UpdateDeviceComponent
+    InventoryOutputSpecificComponent,
+    InventoryOutputComponent
+
   ],
   imports: [
 
@@ -188,9 +195,10 @@ loadCldr(
    CommonModule, ToolbarModule, GridAllModule, DialogModule,
 
    //date range
-   DateRangePickerModule
+   DateRangePickerModule,
 
-   //sidebar
+   //modal
+   ModalModule.forRoot()
 
     
   ],
@@ -221,6 +229,6 @@ loadCldr(
       useClass: Interceptor,
       multi: true
     }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],entryComponents:[InventoryOutputSpecificComponent]
 })
 export class AppModule { }
