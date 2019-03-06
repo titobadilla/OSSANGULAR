@@ -50,6 +50,7 @@ export class InventoryOutputSpecificComponent implements OnInit, AfterViewInit {
       this.workOrder= data;
     this.modalSection = true;
     this.updateSection = true;
+
      })
   }
   constructor(public modalRef: BsModalRef,

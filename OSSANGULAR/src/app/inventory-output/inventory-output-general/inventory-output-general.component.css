@@ -1,0 +1,84 @@
+.formtitle {
+    font-family:'Questrial', Verdana, sans-serif;
+    text-align:center;
+    font-size:25px;
+    padding:0;
+    margin:0 0 20px 0;
+    position:relative;
+    color:#696969;
+    margin-top: 10px;
+    }
+
+    .row{
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .e-error,
+    .e-float-text {
+        font-weight: 500;
+        font-size:14px;
+    }
+
+    .form-horizontal .form-group {
+        margin-left: 20px;
+    }   
+    .textarea {
+        resize: none;
+      }
+
+    .border-right {
+        border-right: 1px solid #ccc;
+        height: 100%;
+      }
+      form {  
+        margin-bottom: 80px;
+        border: 1px solid #ccc;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.36);
+        border-radius: 5px;
+        background:#fff;
+        margin-top:50px;
+        }
+
+    .form-horizontal .form-group {
+        margin-left: 20px;
+        margin-right: 20px;
+    }  
+
+    
+
+      .btn-default,.btn-primary {
+          border: none;
+          border-radius: 2px;
+          color: #424242;
+          background-color: #FFF;
+          text-align: center;
+          height: 36px;
+      }
+      .btn-default:hover{
+        background-color: #FFF;
+        box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
+      }
+      .btn-primary {
+        color: #FFF;
+        background-color: #2980B9;
+      }
+      .btn-primary:hover{
+        background-color: #2980B9;
+        box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
+      }
+
+      .but_insert {
+        
+        margin-bottom: 2%;
+        background-color: #fff;
+        border: none;
+        border: 1px solid #000;
+        border-radius: 4px;
+        width: 200px;
+        padding: 4px 0;
+        font-size: 18px;
+    }
+    .but_insert:hover {
+       box-shadow: 1px 1px 5px black;
+    }
