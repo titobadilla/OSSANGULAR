@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { GroupClientService } from './group-client.service';
-import { Router } from '@angular/router';
 import { Client } from 'src/model/client.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import { setCulture } from '@syncfusion/ej2-base';
@@ -32,7 +31,7 @@ export class GroupClientComponent implements OnInit, AfterViewInit {
   group: GroupClient = new GroupClient();
   clients: Client[] = new Array();
 
-  constructor(private router: Router, private groupClientService: GroupClientService) {
+  constructor( private groupClientService: GroupClientService) {
     this.createReactiveForm();
     this.associateValues();
   }

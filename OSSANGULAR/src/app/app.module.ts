@@ -107,6 +107,8 @@ import { MenuPrincipalComponent } from './menu-principal/menu-principal.componen
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { InventoryOutputComponent } from './inventory-output/inventory-output.component';
 import { InventoryOutputSpecificComponent } from './inventory-output/inventory-output-specific/inventory-output-specific.component';
+import { InventoryOutputGeneralComponent } from './inventory-output/inventory-output-general/inventory-output-general.component';
+import { MaterialComponent } from './material/material.component';
 
 
 declare var require: any;
@@ -170,7 +172,9 @@ loadCldr(
     UpdateDeviceComponent,
     MenuPrincipalComponent,
     InventoryOutputSpecificComponent,
-    InventoryOutputComponent
+    InventoryOutputComponent,
+    InventoryOutputGeneralComponent,
+    MaterialComponent
 
   ],
   imports: [
