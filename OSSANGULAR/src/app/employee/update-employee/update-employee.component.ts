@@ -8,11 +8,7 @@ import { EmployeeRoleService } from 'src/app/employee-role/employee-role.service
 import { TelephoneEmployee } from 'src/model/telephoneemployee.model';
 import { EmployeeRole } from 'src/model/employeerole.model';
 import { FormBuilder } from '@angular/forms'
-import { DropDownListComponent, FilteringEventArgs } from '@syncfusion/ej2-angular-dropdowns';
-import { element } from '@angular/core/src/render3';
-import { EmitType } from '@syncfusion/ej2-base';
-import { Query } from '@syncfusion/ej2-data';
-import { OpenCloseMenuEventArgs } from '@syncfusion/ej2-navigations';
+import { DropDownListComponent } from '@syncfusion/ej2-angular-dropdowns';
 import { EmployeeComponent } from '../employee.component';
 
 @Component({
@@ -28,7 +24,6 @@ export class UpdateEmployeeComponent implements OnInit {
   public ddlRole:DropDownListComponent;
   
   public data: EmployeeRole[]=new Array();
-  public data2:{ [key: string]: Object; }[];
   public value: number;
   
   public fields: Object = { text: 'name', value: 'id'};
@@ -45,12 +40,8 @@ employee:Employee=new Employee();
 
   constructor(private router: Router,private employeeService:EmployeeService,private employeeRoleService:EmployeeRoleService,
     private fb: FormBuilder,private parent: EmployeeComponent) {
-    
-
-  this.createReactiveForm();
-  
-
-  }
+        this.createReactiveForm();
+    }
 
   getEmployeeRoles(){
     this.employeeRoleService.getAllRoles().subscribe(data=>{
@@ -103,6 +94,7 @@ employee:Employee=new Employee();
     this.role.setValidators(this.roleRequired);
     this.value=this.employee.role.id;
 
+
     this.username.setValue(this.employee.username);
     this.username.setValidators(FormValidators.required);
 
@@ -112,9 +104,12 @@ employee:Employee=new Employee();
     this.home.setValue(this.employee.telephones[1]!=undefined?this.employee.telephones[1].number:"");
     this.home.setValidators([this.phoneLength]);
   }
+
   onChangeDdl(value:any){
-    if(value.itemData!=undefined){     
-    this.employee.role= this.findRoleById(value.itemData.id);
+    if(value.itemData!=undefined){   
+    //this.employee.role= this.findRoleById(value.itemData.id);
+    this.employee.role=value.itemData;
+    console.log(value);
      }
 
   }
@@ -162,7 +157,6 @@ employee:Employee=new Employee();
 
 
   ngOnInit() {
-   //console.log( this.ddlRole.element);
     this.getEmployeeRoles();    
     this.initEventSubmit();
   }
@@ -174,7 +168,7 @@ employee:Employee=new Employee();
       (e: Event) => {
         e.preventDefault();
         if (this.reactForm.valid) {
-          this.editEmployeeRole();
+          this.editEmployee();
         } else {
           // validating whole form
           Object.keys(this.reactForm.controls).forEach(field => {
@@ -197,16 +191,8 @@ employee:Employee=new Employee();
 
   get formValid() { return this.reactForm.valid }
 
-  public onFiltering: EmitType<FilteringEventArgs> = (e: FilteringEventArgs) => {
-    let query: Query = new Query();
-    //frame the query based on search string with filter type.
-    query = (e.text !== '') ? query.where('name', 'startswith', e.text, true) : query;
-    //pass the filter data source, filter query to updateData method.
-    e.updateData(Object.assign(this.data), query);
-}
 
-
-   public editEmployeeRole() {   
+   public editEmployee() {   
 
     if(this.employee.telephones[1]===undefined && this.home.value!=""){      
         var telephoneHome=new TelephoneEmployee();      

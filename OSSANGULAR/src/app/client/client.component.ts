@@ -48,6 +48,7 @@ export class ClientComponent implements OnInit,AfterViewInit {
   getAllClients(){
     this.clientService.getAllClients().subscribe((data: Client[]) => {
       this.clients=data
+      
     });
   }
 

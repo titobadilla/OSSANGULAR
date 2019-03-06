@@ -27,12 +27,12 @@ export class ClientService {
     return this.http.put<Client>(this.URLAPI+'client/',client);
   }
 
-  public deleteClient(clientId: String) {
+  public deleteClient(clientId: String):Observable<Client> {
     return this.http.delete<Client>(this.URLAPI+'client/'+clientId);
   }
 
-  public getByIdClient(clientId: String) {
-        return this.http.get<Client>(this.URLAPI+'client/'+clientId);
+  public getByIdClient(clientId: String):Observable<any> {
+        return this.http.get<any>(this.URLAPI+'client/'+clientId);
   }
 
 
