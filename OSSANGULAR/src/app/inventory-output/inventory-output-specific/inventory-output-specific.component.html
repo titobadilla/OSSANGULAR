@@ -1,0 +1,130 @@
+<div *ngIf="modalSection">
+  <div class="modal-header">
+    <h4 class="modal-title pull-left"> {{ title }} </h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" >
+
+    <div class="col-lg-12">
+      <div class="row">
+        <div class="col-lg-5 border-right">
+
+          <div class="formtitle">
+            <span>Orden de trabajo</span>
+          </div>
+
+          <div class="form-group">
+            <label style="font-size:15px;">Nombre del cliente</label>
+            <br>
+            <input type="text" class="form-control" [disabled]="true" [(ngModel)]="workOrder.client.name">
+          </div>
+
+          <div class="form-group">
+            <label style="font-size:15px;">Descripción</label>
+            <br>
+            <input type="text" class="form-control" [disabled]="true" [(ngModel)]="workOrder.description">
+          </div>
+
+          <div class="form-group">
+            <label style="font-size:15px;">Estado de orden</label>
+            <br>
+            <input type="text" class="form-control" [disabled]="true" [(ngModel)]="workOrder.color.state">
+          </div>
+
+          <div *ngIf="buttonSection2" style="margin-top:10px;">
+            <hr>
+            <div class="row">
+              <button type="button" class="btn btn-basic" (click)="movebuttonsMaterial()">Materiales</button>
+            </div>
+            <div class="row" style="margin-top:35px;">
+              <button type="button" class="btn btn-basic" (click)="movebuttonsTool()">Herramientas</button>
+            </div>
+            <div class="row" style="margin-top:35px;">
+              <button type="button" class="btn btn-basic" (click)="movebuttonsDevice()">Dispositivos</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+
+          <div *ngIf="buttonSection1" style="margin-top:70px;">
+            <div class="row">
+              <button type="button" class="but_insert" (click)="movebuttonsMaterial()">Materiales</button>
+            </div>
+            <div class="row" style="margin-top:35px;">
+              <button type="button" class="but_insert" (click)="movebuttonsTool()">Herramientas</button>
+            </div>
+            <div class="row" style="margin-top:35px;">
+              <button type="button" class="but_insert" (click)="movebuttonsDevice()">Dispositivos</button>
+            </div>
+          </div>
+
+          <div *ngIf="updateSection" style="margin-top:48px;">
+            <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
+              <div class="form-group" style="margin-left:10%;">
+                <ejs-dropdownlist (change)='onChangeDdl($event)' formControlName="element" name="element"
+                  [dataSource]='elements' [fields]='fields' [placeholder]='watermark' floatLabelType='Auto'>
+                </ejs-dropdownlist>
+                <div *ngIf="element.errors">
+                  <div *ngIf="element.errors.errorD && element.touched" class="e-error">
+                    Debe seleccionar un elemento.
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="quantitySection">
+                <div class="form-group" style="margin-left:25%;">
+                  <div class="e-float-input">
+                    <input id="description" type="text" formControlName="description" [(ngModel)]="descriptionElement">
+                    <span class="e-float-line"></span>
+                    <label for="description" class="e-float-text" style="font-size:15px;">Nombre:
+                    </label>
+                  </div>
+                  <div *ngIf="description.errors">
+                    <div *ngIf="description.errors.required && description.touched" class="e-error">
+                      Debe rellenar este campo.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group" style="margin-left:25%;">
+                  <div class="e-float-input">
+                    <input id="quantity" type="text" formControlName="quantity" [(ngModel)]="quantityElement">
+                    <span class="e-float-line"></span>
+                    <label for="quantity" class="e-float-text" style="font-size:15px;">Cantidad Actual
+                    </label>
+                  </div>
+                  <div *ngIf="quantity.errors">
+                    <div *ngIf="quantity.errors.required && quantity.touched" class="e-error">
+                      Debe rellenar este campo.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group" style="margin-left:25%;">
+                  <div class="e-float-input">
+                    <input id="newQuantity" type="number" formControlName="newQuantity" [(ngModel)]="newQuantity">
+                    <span class="e-float-line"></span>
+                    <label for="newQuantity" class="e-float-text" style="font-size:15px;">Nueva Cantidad
+                    </label>
+                  </div>
+                  <div *ngIf="newQuantity.errors">
+                    <div *ngIf="newQuantity.errors.required && newQuantity.touched" class="e-error">
+                      Debe rellenar este campo.
+                    </div>
+                  </div>
+                </div>
+
+                <button type="button" class="btn btn-warning" (click)="updateQuantity()" style="margin-left:25%;">Actualizar</button>
+
+              </div>
+
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

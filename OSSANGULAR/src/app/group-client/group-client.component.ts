@@ -1,55 +1,51 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { GroupClientService } from './group-client.service';
-import { Router } from '@angular/router';
 import { Client } from 'src/model/client.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import { setCulture } from '@syncfusion/ej2-base';
 import { GroupClient } from 'src/model/groupclient.model';
+import { UpdateGroupClientComponent } from './update-group-client/update-group-client.component';
 
 @Component({
   selector: 'app-group-client',
   templateUrl: './group-client.component.html',
   styleUrls: ['./group-client.component.css']
 })
-export class GroupClientComponent implements OnInit,AfterViewInit {
-  
+export class GroupClientComponent implements OnInit, AfterViewInit {
+
   ngAfterViewInit(): void {
     this.initEventSubmit();
   }
-
+  @ViewChild('updateGroupClient') childOne: UpdateGroupClientComponent;
   data: GroupClient[] = new Array();
-  public fields: Object = { text: 'name', value: 'id' };
-  public watermark: string = 'Seleccione un cliente*';
+  public fields: Object = { text: 'nameGroup', value: 'idGroup' };
+  public watermark: string = 'Seleccione un grupo*';
+
   reactForm: FormGroup;
-  headClient: String;
-  clientsSection:boolean = false;
-  updateSection:boolean = false;
-  insertSection:boolean=false;
-  formSection:boolean = true;
-  clientsOfHeadClient: Client[] = new Array();
-  principal =true;
+  updateSection: boolean = false;
+  insertSection: boolean = false;
+  formSection: boolean = true;
+  seeMoreSection: boolean = false;
+  clientSeeMore: Client = new Client();
+  groupid:number;
+  group: GroupClient = new GroupClient();
+  clients: Client[] = new Array();
 
-
-  constructor(private router: Router, private groupClientService: GroupClientService) {    
+  constructor( private groupClientService: GroupClientService) {
     this.createReactiveForm();
     this.associateValues();
   }
 
-  clients: Client[] = new Array();
-
   ngOnInit() {
-   this.formSection=true;   
-   setCulture('es-CR');   
-   this.groupClientService.getAllGroups().subscribe(data=>{
-     this.data=data;
-   })
-   /* this.groupClientService.getAllHeadClients().subscribe(data => {
-      this.clients = data;
-    });*/
+    this.formSection = true;
+    setCulture('es-CR');
+    this.groupClientService.getAllGroupsClients().subscribe(data => {
+      this.data = data;
+    })
   }
 
   associateValues() {
-    this.headClient = this.client.value;
+    this.group.idGroup = this.client.value
   }
 
   createReactiveForm() {
@@ -72,13 +68,12 @@ export class GroupClientComponent implements OnInit,AfterViewInit {
   }
 
   initEventSubmit() {
-    let formId: HTMLElement = <HTMLElement>document.getElementById('formId'); 
+    let formId: HTMLElement = <HTMLElement>document.getElementById('formId');
     document.getElementById('formId').addEventListener(
       'submit',
       (e: Event) => {
         e.preventDefault();
         if (this.reactForm.valid) {
-          // this.saveEmployee();
         } else {
           // validating whole form
           Object.keys(this.reactForm.controls).forEach(field => {
@@ -92,22 +87,40 @@ export class GroupClientComponent implements OnInit,AfterViewInit {
 
   get client() { return this.reactForm.get('client'); }
 
-  search() {
-    this.clientsSection = true;
-    this.groupClientService.getClientsOfHeadClient(this.headClient).subscribe(data => {
-
-    })
-  }
-
   edit() {
     this.formSection = false;
-    this.clientsSection = false;
     this.updateSection = true;
   }
 
-  insert(){
-    this.formSection=false;
-    this.clientsSection=false;
-    this.insertSection=true;
+  insert() {
+    this.formSection = false;
+    this.insertSection = true;
+  }
+
+  seeMore(client: Client) {
+    this.clientSeeMore = client;
+    this.seeMoreSection = true;
+  }
+
+  onChangeDdl(value: any) {
+    if (value.itemData != undefined) {
+      this.group = this.findClientsByIdGroup(value.itemData.idGroup);
+      this.groupid = this.group.idGroup;
+      this.clients = this.group.clients
+    }
+  }
+
+  findClientsByIdGroup(id: number): any {
+    let elementReturn;
+    this.data.forEach(element => {
+      if (element.idGroup == id) {
+        elementReturn = element;
+      }
+    });
+    return elementReturn;
+  }
+
+  hideModal() {
+    this.seeMoreSection = false;
   }
 }

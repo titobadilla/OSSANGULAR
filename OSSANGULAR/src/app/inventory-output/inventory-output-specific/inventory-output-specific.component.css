@@ -1,0 +1,60 @@
+.formtitle {
+    font-family:'Questrial', Verdana, sans-serif;
+    text-align:center;
+    font-size:18px;
+    padding:0;
+    margin:0 0 20px 0;
+    position:relative;
+    color:#696969;
+    }
+
+    
+    .border-right {
+        border-right: 1px solid #ccc;
+        height: 100%;
+      }
+
+      .modal-content {
+        border: none;
+        border-radius: 2px;
+        box-shadow: 0 16px 28px 0 rgba(0,0,0,0.58),0 25px 55px 0 rgba(0,0,0,0.21);
+        padding-top: 2px;
+        padding-right: 20px;
+        padding-left: 20px;
+        padding-bottom: 5px;
+        font-size: 15px;
+        font-family:'Questrial', Verdana, sans-serif;
+      }
+
+      .modal-body{
+          height: 2px;
+      }
+
+      .but_insert {
+        margin-left: 20%;
+        margin-bottom: 2%;
+        background-color: #fff;
+        border: none;
+        border: 1px solid #000;
+        border-radius: 4px;
+        width: 200px;
+        padding: 4px 0;
+        font-size: 18px;
+    }
+    .but_insert:hover {
+       box-shadow: 1px 1px 5px black;
+    }
+
+    .btn{
+      margin-left: 15px;
+      margin-bottom: 2%;
+      border: none;
+      border: 1px solid #000;
+      border-radius: 4px;
+      width: 210px;
+      padding: 4px 0;
+      font-size: 18px;
+    }
+    .btn:hover {
+      box-shadow: 1px 1px 5px black;
+   }

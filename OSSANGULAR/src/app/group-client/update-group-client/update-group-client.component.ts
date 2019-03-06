@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit,ViewChild,Input } from '@angular/core';
 import { GroupClientService } from '../group-client.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Client } from 'src/model/client.model';
@@ -14,6 +14,8 @@ import { RemoveEventArgs } from '@syncfusion/ej2-navigations';
   styleUrls: ['./update-group-client.component.css']
 })
 export class UpdateGroupClientComponent implements OnInit {
+
+  @Input() groupid: number;
   public fields: Object = { text: 'name', value: 'id' };
   public watermark: string = 'Seleccione un cliente*';
   reactForm: FormGroup;
@@ -35,7 +37,6 @@ export class UpdateGroupClientComponent implements OnInit {
     let action=value.name;
     let client=value.itemData as Client;
     let aux;
-
     if(action==='select'){
       this.selectedClients.push(client);
       console.log(this.selectedClients);
@@ -47,20 +48,14 @@ export class UpdateGroupClientComponent implements OnInit {
       });
       this.selectedClients=aux;
     }
-    
-
   }
 
   arrayRemove(arr, value) {
-
     return arr.filter(function(ele,index){
         return index != value;
     });
- 
  }
  
-
-
   ngOnInit() {
     this.initEventSubmit();
     this.clientService.getAllClients().subscribe(data => {
@@ -71,7 +66,6 @@ export class UpdateGroupClientComponent implements OnInit {
   }
 
   associateValues() {
-    //this.group.idHeadClient = this.client.value;
    // this.group.clients = this.clientsSelected.value;
   }
 
@@ -82,7 +76,6 @@ export class UpdateGroupClientComponent implements OnInit {
   }
 
   clientRequired(control: FormControl) {
-
     let value = control.value;
     if ((value === null || value === "" || value === undefined)) {
       return {
@@ -101,9 +94,7 @@ export class UpdateGroupClientComponent implements OnInit {
       (e: Event) => {
         e.preventDefault();
         if (this.reactForm.valid) {
-          // this.saveEmployee();
         } else {
-          // validating whole form
           Object.keys(this.reactForm.controls).forEach(field => {
             const control = this.reactForm.get(field);
             control.markAsTouched({ onlySelf: true });

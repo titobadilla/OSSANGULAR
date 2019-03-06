@@ -102,6 +102,14 @@ import { InsertToolComponent } from './tool/insert-tool/insert-tool.component';
 import { UpdateToolComponent } from './tool/update-tool/update-tool.component';
 import { InsertDeviceComponent } from './device/insert-device/insert-device.component';
 import { UpdateDeviceComponent } from './device/update-device/update-device.component';
+import { MenuPrincipalComponent } from './menu-principal/menu-principal.component';
+
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { InventoryOutputComponent } from './inventory-output/inventory-output.component';
+import { InventoryOutputSpecificComponent } from './inventory-output/inventory-output-specific/inventory-output-specific.component';
+import { InventoryOutputGeneralComponent } from './inventory-output/inventory-output-general/inventory-output-general.component';
+import { MaterialComponent } from './material/material.component';
+
 
 declare var require: any;
 
@@ -161,7 +169,13 @@ loadCldr(
     InsertToolComponent,
     UpdateToolComponent,
     InsertDeviceComponent,
-    UpdateDeviceComponent
+    UpdateDeviceComponent,
+    MenuPrincipalComponent,
+    InventoryOutputSpecificComponent,
+    InventoryOutputComponent,
+    InventoryOutputGeneralComponent,
+    MaterialComponent
+
   ],
   imports: [
 
@@ -185,7 +199,11 @@ loadCldr(
    CommonModule, ToolbarModule, GridAllModule, DialogModule,
 
    //date range
-   DateRangePickerModule
+   DateRangePickerModule,
+
+   //modal
+   ModalModule.forRoot()
+
     
   ],
   providers: [
@@ -215,6 +233,6 @@ loadCldr(
       useClass: Interceptor,
       multi: true
     }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],entryComponents:[InventoryOutputSpecificComponent]
 })
 export class AppModule { }

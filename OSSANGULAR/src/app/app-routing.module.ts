@@ -41,8 +41,8 @@ import { InsertInventoryCategoryComponent } from './inventory-category/insert-in
 import { SearchWorkOrderDetailComponent } from './work-order-detail/search-work-order-detail/search-work-order-detail.component';
 
 import { InsertClientComponent } from './client/insert-client/insert-client.component';
-import { ToolComponent } from './tool/tool.component';
-
+import { InventoryOutputComponent } from './inventory-output/inventory-output.component';
+import { InventoryOutputGeneralComponent } from './inventory-output/inventory-output-general/inventory-output-general.component';
 
 const routes: Routes = [
   {path:"",component:AppComponent, canActivate: [AuthGuard]},
@@ -83,13 +83,16 @@ const routes: Routes = [
   {path:'update-inventory-category',component:UpdateInventoryCategoryComponent},
   {path:'inventory-category',component:InventoryCategory},
   {path:'search-work-order-detail',component:SearchWorkOrderDetailComponent},
-  {path:'insert-client',component:InsertClientComponent}
+  {path:'insert-client',component:InsertClientComponent},
+  {path:'inventory-output',component:InventoryOutputComponent},
+  {path:'inventory-output-general',component:InventoryOutputGeneralComponent}
   /*,
 
   {path:'measurement-unit',component:MeasurementUnitComponent},
   {path:'tool',component:ToolComponent},
   {path:'device',component:DeviceComponent},
   {path:'brand',component:BrandComponent},
+  {path:'menu',component:MenuPrincipalComponent}
     /*,
   { path: '**', component: PageNotFoundComponent }*/
 ];

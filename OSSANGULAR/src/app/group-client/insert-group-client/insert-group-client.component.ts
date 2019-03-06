@@ -71,7 +71,10 @@ export class InsertGroupClientComponent implements OnInit {
   }
 
   associateValues() {
+<<<<<<< HEAD
     //this.group.idHeadClient = this.client.value;
+=======
+>>>>>>> 93c7bd563ab0110aad6a0ad91e3a1ab941404078
    // this.group.clients = this.clientsSelected.value;
   }
 
