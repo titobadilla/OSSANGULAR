@@ -10,10 +10,6 @@ import { EmployeeComponent } from './employee/employee.component';
 import { EmployeeRoleComponent } from "./employee-role/employee-role.component";
 import { GroupClientComponent } from './group-client/group-client.component';
 import { InventoryCategoryComponent } from './inventory-category/inventory-category.component';
-import { ListDeviceWorkOrderComponent } from './list-device-work-order/list-device-work-order.component';
-import { ListMaterialWorkOrderComponent } from './list-material-work-order/list-material-work-order.component';
-import { ListToolWorkOrderComponent } from './list-tool-work-order/list-tool-work-order.component';
-import { ListWorkOrderComponent } from './list-work-order/list-work-order.component';
 import { MeasurementUnitComponent } from './measurement-unit/measurement-unit.component';
 import { ModelComponent } from './model/model.component';
 import { TelephoneClientComponent } from './telephone-client/telephone-client.component';
@@ -56,10 +52,6 @@ const routes: Routes = [
   {path:"employee-role",component:EmployeeRoleComponent, canActivate: [AuthGuard]},
   {path:"group-client",component:GroupClientComponent, canActivate: [AuthGuard]},
   {path:"inventory-category",component:InventoryCategoryComponent, canActivate: [AuthGuard]},
-  {path:"list-device-work-order",component:ListDeviceWorkOrderComponent, canActivate: [AuthGuard]},
-  {path:"list-material-work-oder",component:ListMaterialWorkOrderComponent, canActivate: [AuthGuard]},
-  {path:"list-tool-work-order",component:ListToolWorkOrderComponent, canActivate: [AuthGuard]},
-  {path:"list-work-order",component:ListWorkOrderComponent, canActivate: [AuthGuard]},
   {path:"measurement-unit",component:MeasurementUnitComponent, canActivate: [AuthGuard]},
   {path:"model",component:ModelComponent, canActivate: [AuthGuard]},
   {path:"telephone-client",component:TelephoneClientComponent, canActivate: [AuthGuard]},

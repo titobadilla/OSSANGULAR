@@ -22,10 +22,6 @@ import { AddressComponent } from './address/address.component';
 import { AddressDescriptionComponent } from './address-description/address-description.component';
 import { EmployeeRoleComponent } from "./employee-role/employee-role.component";
 import { GroupClientComponent } from './group-client/group-client.component';
-import { ListDeviceWorkOrderComponent } from './list-device-work-order/list-device-work-order.component';
-import { ListWorkOrderComponent } from './list-work-order/list-work-order.component';
-import { ListMaterialWorkOrderComponent } from './list-material-work-order/list-material-work-order.component';
-import { ListToolWorkOrderComponent } from './list-tool-work-order/list-tool-work-order.component';
 import { TelephoneClientComponent } from './telephone-client/telephone-client.component';
 import { TelephoneEmployeeComponent } from './telephone-employee/telephone-employee.component';
 import { AddressService } from './address/address.service';
@@ -38,10 +34,6 @@ import { EmployeeService } from './employee/employee.service';
 import { EmployeeRoleService } from './employee-role/employee-role.service';
 import { GroupClientService } from './group-client/group-client.service';
 import { InventoryCategoryService } from './inventory-category/inventory-category.service';
-import { ListDeviceWorkOrderService } from './list-device-work-order/list-device-work-order.service';
-import { ListMaterialWorkOrderService } from './list-material-work-order/list-material-work-order.service';
-import { ListToolWorkOrderService } from './list-tool-work-order/list-tool-work-order.service';
-import { ListWorkOrderService } from './list-work-order/list-work-order.service';
 import { MeasurementUnitService } from './measurement-unit/measurement-unit.service';
 import { ModelService } from './model/model.service';
 import { TelephoneClientService } from './telephone-client/telephone-client.service';
@@ -138,10 +130,6 @@ loadCldr(
     AddressDescriptionComponent,
     EmployeeRoleComponent,
     GroupClientComponent,
-    ListDeviceWorkOrderComponent,
-    ListWorkOrderComponent,
-    ListMaterialWorkOrderComponent,
-    ListToolWorkOrderComponent,
     TelephoneClientComponent,
     TelephoneEmployeeComponent,
     MenuAdminComponent,
@@ -217,10 +205,6 @@ loadCldr(
     EmployeeRoleService,
     GroupClientService,
     InventoryCategoryService,
-    ListDeviceWorkOrderService,
-    ListMaterialWorkOrderService,
-    ListToolWorkOrderService,
-    ListWorkOrderService,
     MeasurementUnitService,
     ModelService,
     TelephoneClientService,

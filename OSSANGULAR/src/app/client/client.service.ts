@@ -19,6 +19,10 @@ export class ClientService {
     return this.http.get<Client[]>(this.URLAPI+'client/');
   }
 
+  public getClientsWithoutGroup(): Observable<Client[]> {
+    return this.http.get<Client[]>(this.URLAPI+'client/withoutgroup');
+  }
+
   public insertClient(client: Client):Observable<Client> {
     return this.http.post<Client>(this.URLAPI+'client/',client);
   }
