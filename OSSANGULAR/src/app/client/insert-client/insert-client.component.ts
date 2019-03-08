@@ -58,21 +58,17 @@ export class InsertClientComponent implements OnInit {
   }
 
   activeCanton(event: any) {
-
     if (event.itemData != undefined) {
       this.districtDdl.enabled = false;
       this.getCantons(event.itemData.id);      
       this.client.addressDescription.district.districtId.id=undefined;
       this.district.setValue(undefined);
     }
-
   }
 
   activeDistrict(event: any) {
-
     if (event.itemData != undefined) {
-      this.getDistricts(event.itemData.cantonId.id,event.itemData.cantonId.province.id);
-     
+      this.getDistricts(event.itemData.cantonId.id,event.itemData.cantonId.province.id);     
     }
   }
 

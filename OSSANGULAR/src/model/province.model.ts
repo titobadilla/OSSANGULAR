@@ -1,6 +1,6 @@
 export class Province{
     
     id:String;
-    nameString;
+    name:String;
 
 }
