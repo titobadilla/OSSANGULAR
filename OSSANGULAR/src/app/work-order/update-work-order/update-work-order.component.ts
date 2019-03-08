@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { WorkOrderService } from '../work-order.service';
 import { WorkOrder } from 'src/model/workorder.model';
-import { ListWorkOrder } from 'src/model/listworkorder.model';
 import { Client } from 'src/model/client.model';
 import { Employee } from 'src/model/employee.model';
 import { WorkOrderType } from 'src/model/workordertype.model';
 import { Color } from 'src/model/color.model';
-import { ListWorkOrderService } from 'src/app/list-work-order/list-work-order.service';
 import { WorkOrderTypeService } from 'src/app/work-order-type/work-order-type.service';
 import { ClientService } from 'src/app/client/client.service';
 import { ColorService } from 'src/app/color/color.service';
@@ -21,12 +19,12 @@ import { Time } from '@angular/common';
 export class UpdateWorkOrderComponent implements OnInit {
 
   constructor(private serviceWorkOrder: WorkOrderService,
-    private listservice: ListWorkOrderService, private serviceWorkOrderTypes: WorkOrderTypeService,
+     private serviceWorkOrderTypes: WorkOrderTypeService,
     private serviceClient: ClientService, private serviceEmployee: EmployeeService,
     private serviceColors: ColorService) { }
 
   workOrder: WorkOrder = new WorkOrder();
-  lists: ListWorkOrder[];
+  //lists: ListWorkOrder[];
   workOrdersType: WorkOrderType[];
   clients: Client[];
   employees: Employee[];
@@ -41,9 +39,9 @@ export class UpdateWorkOrderComponent implements OnInit {
       this.workOrder = data;
       this.splitDatesHours(data);
     });
-    this.listservice.getAllLists().subscribe(data => {
-      this.lists = data;
-    });
+   // this.listservice.getAllLists().subscribe(data => {
+  //    this.lists = data;
+   // });
 
     this.serviceWorkOrderTypes.getAllWorkOrdersType().subscribe(data => {
       this.workOrdersType = data;

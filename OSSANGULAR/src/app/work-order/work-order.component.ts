@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WorkOrderService } from './work-order.service';
 import { Router } from '@angular/router';
-import { ListWorkOrderService } from '../list-work-order/list-work-order.service';
-import { ListWorkOrder } from 'src/model/listworkorder.model';
 import { WorkOrder } from 'src/model/workorder.model';
 import { WorkOrderTypeService } from '../work-order-type/work-order-type.service';
 import { ClientService } from '../client/client.service';
@@ -21,12 +19,11 @@ import { Color } from 'src/model/color.model';
 export class WorkOrderComponent implements OnInit {
 
   constructor(private router: Router, private workOrderService: WorkOrderService,
-    private listservice: ListWorkOrderService, private serviceWorkOrderTypes: WorkOrderTypeService,
+ private serviceWorkOrderTypes: WorkOrderTypeService,
     private serviceClient: ClientService, private serviceEmployee: EmployeeService,
     private serviceWorkOrder: WorkOrderService,
     private serviceColors: ColorService) { }
 
-  lists: ListWorkOrder[];
   workOrder: WorkOrder = new WorkOrder();
   workOrdersType: WorkOrderType[];
   clients: Client[];
@@ -37,9 +34,9 @@ export class WorkOrderComponent implements OnInit {
   colors: Color[];
 
   ngOnInit() {
-    this.listservice.getAllLists().subscribe(data => {
-      this.lists = data;
-    });
+   // this.listservice.getAllLists().subscribe(data => {
+   //   this.lists = data;
+   // });
 
     this.serviceWorkOrderTypes.getAllWorkOrdersType().subscribe(data => {
       this.workOrdersType = data;
