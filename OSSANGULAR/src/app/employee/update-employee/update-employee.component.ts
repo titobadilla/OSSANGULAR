@@ -2,12 +2,10 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 import { EmployeeService } from '../employee.service';
-import { Router } from '@angular/router';
 import { Employee } from 'src/model/employee.model';
 import { EmployeeRoleService } from 'src/app/employee-role/employee-role.service';
 import { TelephoneEmployee } from 'src/model/telephoneemployee.model';
 import { EmployeeRole } from 'src/model/employeerole.model';
-import { FormBuilder } from '@angular/forms'
 import { DropDownListComponent } from '@syncfusion/ej2-angular-dropdowns';
 import { EmployeeComponent } from '../employee.component';
 
@@ -21,47 +19,42 @@ export class UpdateEmployeeComponent implements OnInit {
   @Input() employeeId: String;
 
   @ViewChild('ddlRole')
-  public ddlRole:DropDownListComponent;
-  
-  public data: EmployeeRole[]=new Array();
+  public ddlRole: DropDownListComponent;
+
+  public data: EmployeeRole[] = new Array();
   public value: number;
-  
-  public fields: Object = { text: 'name', value: 'id'};
+
+  public fields: Object = { text: 'name', value: 'id' };
   public filterPlaceholder: string = 'Buscar';
-  public height: string = '220px';
   public watermark: string = 'Seleccione un rol*';
-  viewTelephones:boolean=false;
-  
+  viewTelephones: boolean = false;
 
-reactForm: FormGroup;
-employee:Employee=new Employee();
+  reactForm: FormGroup;
+  employee: Employee = new Employee();
 
+  constructor(private employeeService: EmployeeService, private employeeRoleService: EmployeeRoleService,
+    private parent: EmployeeComponent) {
+    this.createReactiveForm();
+  }
 
-
-  constructor(private router: Router,private employeeService:EmployeeService,private employeeRoleService:EmployeeRoleService,
-    private fb: FormBuilder,private parent: EmployeeComponent) {
-        this.createReactiveForm();
-    }
-
-  getEmployeeRoles(){
-    this.employeeRoleService.getAllRoles().subscribe(data=>{
-      this.data=data
+  getEmployeeRoles() {
+    this.employeeRoleService.getAllRoles().subscribe(data => {
+      this.data = data
       this.loadEmployee();
 
     });
   }
 
-  loadEmployee(){
+  loadEmployee() {
     this.employeeService.getByIdEmployee(this.employeeId).subscribe(
       data => {
         this.employee = data;
-        this.loadEmployeeInReactiveFormWithValidation();        
-              }
+        this.loadEmployeeInReactiveFormWithValidation();
+      }
     );
   }
 
- 
-  createReactiveForm(){
+  createReactiveForm() {
 
     this.reactForm = new FormGroup({
       'id': new FormControl(),
@@ -72,11 +65,10 @@ employee:Employee=new Employee();
       'username': new FormControl(),
       'mobile': new FormControl(),
       'home': new FormControl()
-
     });
   }
 
-  loadEmployeeInReactiveFormWithValidation(){
+  loadEmployeeInReactiveFormWithValidation() {
     this.id.setValue(this.employee.id);
     this.id.setValidators(FormValidators.required);
     this.id.disable();
@@ -92,76 +84,68 @@ employee:Employee=new Employee();
 
     this.role.setValue(this.employee.role.name);
     this.role.setValidators(this.roleRequired);
-    this.value=this.employee.role.id;
-
+    this.value = this.employee.role.id;
 
     this.username.setValue(this.employee.username);
     this.username.setValidators(FormValidators.required);
 
-    this.mobile.setValue(this.employee.telephones[0]!=undefined?this.employee.telephones[0].number:"");
-    this.mobile.setValidators([FormValidators.required,this.phoneLength]);
+    this.mobile.setValue(this.employee.telephones[0] != undefined ? this.employee.telephones[0].number : "");
+    this.mobile.setValidators([FormValidators.required, this.phoneLength]);
 
-    this.home.setValue(this.employee.telephones[1]!=undefined?this.employee.telephones[1].number:"");
+    this.home.setValue(this.employee.telephones[1] != undefined ? this.employee.telephones[1].number : "");
     this.home.setValidators([this.phoneLength]);
   }
 
-  onChangeDdl(value:any){
-    if(value.itemData!=undefined){   
-    //this.employee.role= this.findRoleById(value.itemData.id);
-    this.employee.role=value.itemData;
-    console.log(value);
-     }
-
+  onChangeDdl(value: any) {
+    if (value.itemData != undefined) {
+      this.employee.role = value.itemData;
+    }
   }
 
-  
-  findRoleById(id:number):any{
-    let elementReturn;   
-    this.data.forEach(element=>{
-      if(element.id==id){
-        elementReturn=element;
+  findRoleById(id: number): any {
+    let elementReturn;
+    this.data.forEach(element => {
+      if (element.id == id) {
+        elementReturn = element;
       }
     });
     return elementReturn;
-    
   }
 
-
-  phoneLength(control: FormControl) {   
-    let value = control.value; 
-    if(value!=null){
-    if (value.length<8 && value.length>=1|| value.length>8) {  
+  phoneLength(control: FormControl) {
+    let value = control.value;
+    if (value != null) {
+      if (value.length < 8 && value.length >= 1 || value.length > 8) {
         return {
           phoneError: {
             parsed: value
           }
         }
-   
-    }}
+
+      }
+    }
     return null;
   }
 
   roleRequired(control: FormControl) {
-  
+
     let value = control.value;
-    if((value===null || value==="" || value===undefined)){
-        return {
-          errorD: {
-            parsed: value
-          }
-        }    
-  }
+    if ((value === null || value === "" || value === undefined)) {
+      return {
+        errorD: {
+          parsed: value
+        }
+      }
+    }
     return null;
   }
 
-
-
   ngOnInit() {
-    this.getEmployeeRoles();    
+    this.getEmployeeRoles();
     this.initEventSubmit();
   }
 
-  initEventSubmit(){
+  initEventSubmit() {
     let formId: HTMLElement = <HTMLElement>document.getElementById('formId');
     document.getElementById('formId').addEventListener(
       'submit',
@@ -188,35 +172,34 @@ employee:Employee=new Employee();
   get username() { return this.reactForm.get('username'); }
   get mobile() { return this.reactForm.get('mobile'); }
   get home() { return this.reactForm.get('home'); }
-
   get formValid() { return this.reactForm.valid }
 
 
-   public editEmployee() {   
+  public editEmployee() {
 
-    if(this.employee.telephones[1]===undefined && this.home.value!=""){      
-        var telephoneHome=new TelephoneEmployee();      
-        telephoneHome.type="Casa";
-        telephoneHome.number=this.home.value;
-       this.employee.telephones.push(telephoneHome);  
-    }else if(this.home.value===""){
-      this.employee.telephones[1].number='';
-    } 
-    
-    this.employeeService.updateEmployee(this.employee).subscribe(data=>{
+    if (this.employee.telephones[1] === undefined && this.home.value != "") {
+      var telephoneHome = new TelephoneEmployee();
+      telephoneHome.type = "Casa";
+      telephoneHome.number = this.home.value;
+      this.employee.telephones.push(telephoneHome);
+    } else if (this.home.value === "") {
+      this.employee.telephones[1].number = '';
+    }
+
+    this.employeeService.updateEmployee(this.employee).subscribe(data => {
       this.returnView();
     });
 
   }
 
-  returnView(){
+  returnView() {
     this.parent.getAllEmployees();
-    this.parent.employeesSection=false;
-    this.parent.principalSection=true;
+    this.parent.employeesSection = false;
+    this.parent.principalSection = true;
   }
 
-  viewTelephonesHtml(){
-    this.viewTelephones=true;
+  viewTelephonesHtml() {
+    this.viewTelephones = true;
   }
 
 }

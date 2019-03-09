@@ -2,9 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { InventoryOutputSpecificComponent } from './inventory-output-specific/inventory-output-specific.component';
-import { InventoryOutputGeneralComponent } from './inventory-output-general/inventory-output-general.component';
-import { WorkOrder } from 'src/model/workorder.model';
-import { WorkOrderService } from '../work-order/work-order.service';
+
 @Component({
   selector: 'app-inventory-output',
   templateUrl: './inventory-output.component.html',

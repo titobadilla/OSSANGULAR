@@ -1,9 +1,10 @@
 <div *ngIf="principalSection">
-
-
   <div class="col-lg-3 col-md-3 col-sm-1 col-xs-1"></div>
   <div class="col-lg-6 col-md-6 col-sm-10 col-xs-10">
     <div class="control-section">
+
+      <button class="but_insert" (click)="insert()">Agregar nuevo</button>
+
       <ejs-toolbar class='e-gridlist' (clicked)="onClicked($event.originalEvent)">
         <e-items>
           <e-item text='Número de cédula'></e-item>
@@ -25,9 +26,9 @@
 
           </ejs-toolbar>
         </ng-template>
-        
+
         <e-columns>
-          <e-column field='id' headerText='Número de cédula' width='100' textAlign='center'></e-column>
+          <e-column field='id' headerText='Número de cédula' width='120' textAlign='center'></e-column>
           <e-column field='name' headerText="Nombre" width='100' textAlign='center'></e-column>
           <e-column field='lastName' headerText="Apellidos" width='150' textAlign='center'></e-column>
           <e-column field='position' headerText="Posición" width='105' textAlign='center'></e-column>
@@ -63,39 +64,20 @@
 
           <e-column headerText="Eliminar" width='115' textAlign='center'>
             <ng-template #template let-data>
-              <button mat-button class="btn btn-danger glyphicon glyphicon-trash" (click)='delete(data)'></button>
+              <button mat-button class="btn btn-danger glyphicon glyphicon-trash" (click)='openModal(data)'></button>
             </ng-template>
           </e-column>
 
         </e-columns>
       </ejs-grid>
     </div>
-
-    <div *ngIf="modalDelete" class="modal fade in" role="dialog" id="gridTools" tabindex="-1"
-      aria-labelledby="gridModalLabel" style="display:block;padding-right: 15px;">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-body">
-            <button type="button" class="close" (click)="hideModal()" aria-label="Close">
-              <span style="color: black;" aria-hidden="true">×</span>
-            </button>
-            <div class="modal-title" id="gridModalLabel">
-              ¿Está seguro que desea eliminar el empleado con nombre: {{employeeDelete.name}}
-              {{employeeDelete.lastName}}?
-            </div>
-          </div>
-
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" (click)="hideModal()">Cancelar</button>
-            <button type="button" class="btn btn-primary" (click)="aceptDelete()">Aceptar</button>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 
 <div *ngIf="employeesSection">
   <update-employee [employeeId]="employeeId"></update-employee>
+</div>
 
+<div *ngIf="insertSection">
+  <insert-employee></insert-employee>
 </div>

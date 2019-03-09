@@ -46,8 +46,8 @@ export class InventoryOutputSpecificComponent implements OnInit, AfterViewInit {
   quantityElement: number;
 
   ngAfterViewInit(): void {
-     this.workOrderService.getByIdWorkOrder(this.data).subscribe(data=>{
-      this.workOrder= data;
+    this.workOrderService.getByIdWorkOrder(this.data).subscribe(data=>{
+    this.workOrder= data;
     this.modalSection = true;
     this.updateSection = true;
 
