@@ -1,22 +1,7 @@
 .control-section{
-  margin-top: 15%;
+  margin-top: 10%;
 }
-.modal-content {
-    border: none;
-    border-radius: 2px;
-    box-shadow: 0 16px 28px 0 rgba(0,0,0,0.58),0 25px 55px 0 rgba(0,0,0,0.21);
-    padding-top: 2px;
-    padding-right: 26px;
-    padding-left: 26px;
-    padding-bottom: 5px;
-    font-size: 15px;
-    font-family:'Questrial', Verdana, sans-serif;
-  }
 
-  .modal-footer {
-    border-top:0;
-    padding-bottom:10px;
-  }
   .btn-default,.btn-primary {
       border: none;
       border-radius: 2px;
@@ -53,13 +38,17 @@
     text-transform: none;
 }
 
-.e-ghidden {
-    opacity: 0.35;
+.but_insert {
+  margin-left: 70%;
+  margin-bottom: 2%;
+  background-color: rgb(110, 191, 211);
+  border: none;
+  border: 1px solid #000;
+  border-radius: 4px;
+  width: 200px;
+  padding: 16px 0;
+  font-size: 20px;
 }
-
-.e-mastertext {
-    font-size: 15px;
-    font-family: Roboto;
-    opacity: 0.87;
-    padding: 1em;
+.but_insert:hover {
+ box-shadow: 1px 1px 5px black;
 }

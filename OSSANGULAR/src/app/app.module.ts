@@ -101,6 +101,7 @@ import { InventoryOutputComponent } from './inventory-output/inventory-output.co
 import { InventoryOutputSpecificComponent } from './inventory-output/inventory-output-specific/inventory-output-specific.component';
 import { InventoryOutputGeneralComponent } from './inventory-output/inventory-output-general/inventory-output-general.component';
 import { MaterialComponent } from './material/material.component';
+import { DeleteComponent } from './delete/delete.component';
 
 
 declare var require: any;
@@ -162,7 +163,8 @@ loadCldr(
     InventoryOutputSpecificComponent,
     InventoryOutputComponent,
     InventoryOutputGeneralComponent,
-    MaterialComponent
+    MaterialComponent,
+    DeleteComponent
 
   ],
   imports: [
@@ -217,6 +219,6 @@ loadCldr(
       useClass: Interceptor,
       multi: true
     }],
-  bootstrap: [AppComponent],entryComponents:[InventoryOutputSpecificComponent]
+  bootstrap: [AppComponent],entryComponents:[InventoryOutputSpecificComponent,DeleteComponent]
 })
 export class AppModule { }

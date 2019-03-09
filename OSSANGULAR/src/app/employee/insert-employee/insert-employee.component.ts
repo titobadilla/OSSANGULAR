@@ -2,15 +2,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 import { EmployeeService } from '../employee.service';
-import { Router } from '@angular/router';
 import { Employee } from 'src/model/employee.model';
 import { EmployeeRoleService } from 'src/app/employee-role/employee-role.service';
-import { ComboBoxComponent } from '@syncfusion/ej2-angular-dropdowns';
 import { TelephoneEmployee } from 'src/model/telephoneemployee.model';
 import { EmployeeRole } from 'src/model/employeerole.model';
+import { EmployeeComponent } from '../employee.component';
 
 @Component({
-  selector: 'app-insert-employee',
+  selector: 'insert-employee',
   templateUrl: './insert-employee.component.html',
   styleUrls: ['./insert-employee.component.css']
 })
@@ -23,7 +22,8 @@ export class InsertEmployeeComponent implements OnInit {
   reactForm: FormGroup;
   employee: Employee;
 
-  constructor(private router: Router, private employeeService: EmployeeService, private employeeRoleService: EmployeeRoleService) {
+  constructor(private employeeService: EmployeeService, private employeeRoleService: EmployeeRoleService,
+    private parent: EmployeeComponent) {
     this.employee = new Employee();
     this.createReactiveForm();
     this.associateValues();
@@ -136,8 +136,12 @@ export class InsertEmployeeComponent implements OnInit {
     this.employeeService.insertEmployee(this.employee).subscribe(data => {
       this.reactForm.reset;
     });
+  }
 
-
+  returnView() {
+    this.parent.getAllEmployees();
+    this.parent.insertSection = false;
+    this.parent.principalSection = true;
   }
 
 }

@@ -1,11 +1,13 @@
-.formtitle {
-    font-family:'Questrial', Verdana, sans-serif;
-    text-align:center;
-    font-size:32px;
-    padding:0;
-    margin:40px 0 20px 0;
-    position:relative;
-    color:#fff;
+    .control-section{
+          margin-top: 5%;
+     }
+    .formtitle {
+         font-family:'Questrial', Verdana, sans-serif;
+         text-align:center;
+         font-size:32px;
+         padding:0;
+         position:relative;
+         color:#555;
     }
 
     .e-error,
@@ -13,21 +15,13 @@
         font-weight: 500;
         font-size:14px;
     }
-    .input-disabled{
-        font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif, "-apple-system", "BlinkMacSystemFont";
-        font-weight: 500;
-        font-size: 12px;
-        padding-right: 0;
-        font-weight: bold;
-    }
-
 
     form {
         padding-top: 20px;
         margin-bottom: 45px;
         border: 1px solid #ccc;
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.36);
-        border-radius: 5px;
+        box-shadow: 0 5px 4px 0 rgba(0, 0, 0, 0.36);
+        border-radius: 10px;
         background:#fff;
         }
 
@@ -36,19 +30,3 @@
         margin-right: 20px;
         margin-top: 5%;
     }   
-/*
-    .e-popup-full-page {
-        bottom: 0;
-        left: 100px;
-        margin: 100px;
-        overflow: hidden;
-        padding: 40px;
-        right: 0;
-        position: absolute; 
-        top: 200px;
-
-        align-content: center;
-        height: 200px;
-        width: 100px;
-      }
-*/

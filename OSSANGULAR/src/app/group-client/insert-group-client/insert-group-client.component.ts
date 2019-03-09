@@ -85,7 +85,7 @@ export class InsertGroupClientComponent implements OnInit {
       'clientsMulti': new FormControl('', [this.clientRequired]),
       'email': new FormControl('', [FormValidators.email]),
       'phone1': new FormControl('', [FormValidators.required, this.phoneLength]),
-      'phone2': new FormControl('', [FormValidators.required, this.phoneLength]),
+      'phone2': new FormControl('', [ this.phoneLength]),
     });
   }
 
