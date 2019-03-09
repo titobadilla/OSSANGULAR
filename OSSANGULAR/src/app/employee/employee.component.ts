@@ -6,6 +6,7 @@ import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { setCulture, removeClass, addClass } from '@syncfusion/ej2-base';
 import { DeleteComponent } from '../delete/delete.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { DeleteEmitterService } from '../delete/delete.emitter.service';
 
 @Component({
   selector: 'employee',
@@ -35,7 +36,7 @@ export class EmployeeComponent implements OnInit, AfterViewInit {
   }
 
   constructor(private employeeService: EmployeeService, 
-              private modalService: BsModalService) {
+              private modalService: BsModalService,private deleteService:DeleteEmitterService) {
 
   }
 
@@ -43,6 +44,9 @@ export class EmployeeComponent implements OnInit, AfterViewInit {
     this.getAllEmployees();
     this.pageSettings = { pageCount: 3 };
     setCulture('es-CR');
+    this.deleteService.deleteEmployee$.subscribe(data=>{
+      this.aceptDelete();
+    });
   }
 
   getAllEmployees() {

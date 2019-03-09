@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { EmployeeComponent } from '../employee/employee.component';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { viewParentEl } from '@angular/core/src/view/util';
+import { DeleteEmitterService } from './delete.emitter.service';
 @Component({
   selector: 'app-delete',
   templateUrl: './delete.component.html',
@@ -12,7 +15,7 @@ export class DeleteComponent implements OnInit {
   data;
   type;
 
-  constructor(public modalRef: BsModalRef
+  constructor(public modalRef: BsModalRef,private deleteService:DeleteEmitterService
               ) { }
 
   ngOnInit() {
@@ -20,8 +23,8 @@ export class DeleteComponent implements OnInit {
 
   acceptDelete(){
     if(this.type === 'employee'){
-      this.modalRef.hide();
-     // this.employeeParent.aceptDelete();
+      this.deleteService.setDeleteEmployee(true);
+      this.modalRef.hide();        
     }
   }
 
