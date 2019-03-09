@@ -186,7 +186,6 @@ export class UpdateEmployeeComponent implements OnInit {
       this.employee.telephones[1].number = '';
     }
 
-<<<<<<< HEAD
     if(this.employee.telephones[1]===undefined && this.home.value!=""){      
         var telephoneHome=new TelephoneEmployee();      
         telephoneHome.type="Casa";
@@ -196,10 +195,8 @@ export class UpdateEmployeeComponent implements OnInit {
       this.employee.telephones[1].number='';
     } 
     
-    this.employeeService.updateEmployee(this.employee).subscribe(data=>{
-=======
+
     this.employeeService.updateEmployee(this.employee).subscribe(data => {
->>>>>>> ecbd45880d51dc5c1b555a797206e931e1adc82a
       this.returnView();
     });
 
