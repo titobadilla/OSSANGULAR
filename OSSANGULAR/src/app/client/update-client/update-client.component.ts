@@ -287,7 +287,7 @@ constructor(private router: Router,private clientService: ClientService, private
         telephoneHome.type="Casa";
         telephoneHome.number=this.home.value;
        this.client.telephones.push(telephoneHome);  
-    }else if(this.home.value===""){
+    }else if(this.home.value==="" && this.client.telephones[1]!=undefined){
       this.client.telephones[1].number='';
     } 
     

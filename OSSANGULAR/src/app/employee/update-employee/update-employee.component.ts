@@ -199,7 +199,7 @@ employee:Employee=new Employee();
         telephoneHome.type="Casa";
         telephoneHome.number=this.home.value;
        this.employee.telephones.push(telephoneHome);  
-    }else if(this.home.value===""){
+    }else if(this.home.value===""&& this.employee.telephones[1]!=undefined){
       this.employee.telephones[1].number='';
     } 
     
