@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, } from '@angular/core';
 import { EmployeeRoleService } from '../employee-role.service';
 import { EmployeeRole } from 'src/model/employeerole.model';
-import { FormControl, FormGroup, Validators, FormsModule, AbstractControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
+import { EmployeeRoleComponent } from '../employee-role.component';
 
 @Component({
   selector: 'update-employee-role',
@@ -15,7 +16,7 @@ export class UpdateEmployeeRoleComponent implements OnInit {
 
   role: EmployeeRole = new EmployeeRole();
   reactForm: FormGroup = null;
-  constructor(private serviceRole: EmployeeRoleService) {
+  constructor(private serviceRole: EmployeeRoleService, private parent: EmployeeRoleComponent) {
   }
 
   associateValues() {
@@ -36,14 +37,14 @@ export class UpdateEmployeeRoleComponent implements OnInit {
         this.role = data;
       }
     );
-   
+
     let formId: HTMLElement = <HTMLElement>document.getElementById('formId');
     document.getElementById('formId').addEventListener(
       'submit',
       (e: Event) => {
         e.preventDefault();
         if (this.reactForm.valid) {
-          this.reactForm.reset();
+          this.editEmployeeRole();
         } else {
           // validating whole form
           Object.keys(this.reactForm.controls).forEach(field => {
@@ -53,8 +54,8 @@ export class UpdateEmployeeRoleComponent implements OnInit {
         }
       });
 
-      this.createReactiveForm();
-      this.associateValues();
+    this.createReactiveForm();
+    this.associateValues();
 
   }
 
@@ -62,7 +63,16 @@ export class UpdateEmployeeRoleComponent implements OnInit {
   get type() { return this.reactForm.get('type'); }
 
   public editEmployeeRole() {
-    this.serviceRole.updateEmployeeRole(this.role).subscribe();
+    this.serviceRole.updateEmployeeRole(this.role).subscribe(data => {
+      this.returnView();
+    }
+    );
+  }
+
+  returnView() {
+    this.parent.getAllRoles();
+    this.parent.editSection = false;
+    this.parent.principal = true;
   }
 
 }

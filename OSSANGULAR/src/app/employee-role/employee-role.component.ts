@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { EmployeeRoleService } from './employee-role.service';
 import { EmployeeRole } from 'src/model/employeerole.model';
-import { UpdateEmployeeRoleComponent } from './update-employee-role/update-employee-role.component';
-import {setCulture } from '@syncfusion/ej2-base';
+import { setCulture } from '@syncfusion/ej2-base';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
-
-
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { DeleteComponent } from '../delete/delete.component';
+import { DeleteEmitterService } from '../delete/delete.emitter.service';
 
 @Component({
   selector: 'employee-role',
@@ -20,16 +20,16 @@ export class EmployeeRoleComponent implements OnInit, AfterViewInit {
 
   public data: EmployeeRole[];
   public pageSettings: Object;
-  @ViewChild('updateEmployeeRole') childOne: UpdateEmployeeRoleComponent;
   @ViewChild('grid') public grid: GridComponent;
+  modalRef: BsModalRef;
 
-  constructor(private serviceRole: EmployeeRoleService) {
+  constructor(private serviceRole: EmployeeRoleService,
+    private modalService: BsModalService, private deleteService: DeleteEmitterService) {
   }
 
   roleid: number;
   principal: boolean = true;
   editSection: boolean = false;
-  modalDelete = false;
   insertSection = false;
   rolDelete: EmployeeRole;
 
@@ -37,11 +37,15 @@ export class EmployeeRoleComponent implements OnInit, AfterViewInit {
     this.getAllRoles();
     this.pageSettings = { pageCount: 3 };
     setCulture('es-CR');
+    this.deleteService.deleteEmployeeRole$.subscribe(data => {
+      this.aceptDelete();
+    });
   }
 
 
   getAllRoles() {
     this.serviceRole.getAllRoles().subscribe((data: EmployeeRole[]) => {
+      this.grid.pageSettings.pageSize = 5;
       this.data = data;
     });
   }
@@ -52,21 +56,22 @@ export class EmployeeRoleComponent implements OnInit, AfterViewInit {
     this.editSection = true;
   }
 
-  delete(rol: EmployeeRole) {
-    this.rolDelete = rol;
-    this.modalDelete = true;
-  }
+  openModal(employeeRole: EmployeeRole) {
+    this.rolDelete = employeeRole;
 
-  hideModal() {
-    this.rolDelete = new EmployeeRole();
-    this.modalDelete = false;
+    this.modalRef = this.modalService.show(DeleteComponent, {
+      initialState: {
+        title: 'Eliminar Rol de Empleado',
+        data: 'el rol con el nombre: ' + this.rolDelete.name,
+        type: 'role'
+      }
+    });
   }
 
   aceptDelete() {
     this.serviceRole.deleteEmployeeRole(this.rolDelete.id).subscribe(data => {
       this.getAllRoles();
     });
-    this.modalDelete = false;
   }
 
   insert() {

@@ -1,16 +1,23 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DeleteEmitterService {
-  private _message1 = new Subject<boolean>();
-  deleteEmployee$ = this._message1.asObservable();
+  private _messageEmployeeDelete = new Subject<boolean>();
+  deleteEmployee$ = this._messageEmployeeDelete.asObservable();
+
+  private _messageEmployeeRoleDelete = new Subject<boolean>();
+  deleteEmployeeRole$ = this._messageEmployeeRoleDelete.asObservable();
 
   constructor() { }
 
-  public setDeleteEmployee(flat:boolean){
-    this._message1.next(flat);    
+  public setDeleteEmployee(flat: boolean) {
+    this._messageEmployeeDelete.next(flat);
+  }
+
+  public setDeleteEmployeeRole(flat: boolean) {
+    this._messageEmployeeRoleDelete.next(flat);
   }
 }

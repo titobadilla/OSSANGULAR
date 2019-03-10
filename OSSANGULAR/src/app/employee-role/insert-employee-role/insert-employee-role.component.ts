@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 import { EmployeeRole } from 'src/model/employeerole.model';
 import { EmployeeRoleService } from '../employee-role.service';
+import { EmployeeRoleComponent } from '../employee-role.component';
 
 @Component({
   selector: 'insert-employee-role',
@@ -14,7 +15,7 @@ export class InsertEmployeeRoleComponent implements OnInit {
   reactForm: FormGroup;
   role: EmployeeRole = new EmployeeRole();
 
-  constructor(private employeeRoleService: EmployeeRoleService) {
+  constructor(private employeeRoleService: EmployeeRoleService, private parent: EmployeeRoleComponent) {
     this.createReactiveForm();
     this.associateValues();
   }
@@ -26,7 +27,7 @@ export class InsertEmployeeRoleComponent implements OnInit {
       (e: Event) => {
         e.preventDefault();
         if (this.reactForm.valid) {
-          this.reactForm.reset();
+          this.createEmployeeRole();
         } else {
           // validating whole form
           Object.keys(this.reactForm.controls).forEach(field => {
@@ -56,6 +57,13 @@ export class InsertEmployeeRoleComponent implements OnInit {
   private createEmployeeRole() {
     this.employeeRoleService.insertEmployeeRole(this.role)
       .subscribe(data => {
+        this.returnView();
       });
+  }
+
+  returnView() {
+    this.parent.getAllRoles();
+    this.parent.insertSection = false;
+    this.parent.principal = true;
   }
 }

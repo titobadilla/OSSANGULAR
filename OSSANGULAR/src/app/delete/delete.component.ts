@@ -15,20 +15,25 @@ export class DeleteComponent implements OnInit {
   data;
   type;
 
-  constructor(public modalRef: BsModalRef,private deleteService:DeleteEmitterService
-              ) { }
+  constructor(public modalRef: BsModalRef, private deleteService: DeleteEmitterService
+  ) { }
 
   ngOnInit() {
   }
 
-  acceptDelete(){
-    if(this.type === 'employee'){
+  acceptDelete() {
+    if (this.type === 'employee') {
       this.deleteService.setDeleteEmployee(true);
-      this.modalRef.hide();        
+      this.modalRef.hide();
+    }
+
+    if (this.type === 'role') {
+      this.deleteService.setDeleteEmployeeRole(true);
+      this.modalRef.hide();
     }
   }
 
-  cancelDelete(){
+  cancelDelete() {
     this.modalRef.hide();
   }
 

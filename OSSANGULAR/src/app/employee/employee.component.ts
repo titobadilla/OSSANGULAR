@@ -51,7 +51,7 @@ export class EmployeeComponent implements OnInit, AfterViewInit {
 
   getAllEmployees() {
     this.employeeService.getAllEmployees().subscribe((data: Employee[]) => {
-      this.employees = data
+      this.employees = data;
     });
   }
 
@@ -73,13 +73,9 @@ export class EmployeeComponent implements OnInit, AfterViewInit {
     });
   }
 
-
   public onClicked(e: MouseEvent): void {
     if (!this.flag) { return; }
-
     let element: HTMLElement = <HTMLInputElement>e.target;
-
-
     if (!element.classList.contains('e-tbar-btn-text') && !element.classList.contains('e-tbar-btn')) {
       return;
     }
