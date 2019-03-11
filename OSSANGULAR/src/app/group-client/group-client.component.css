@@ -33,16 +33,17 @@
       box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
     }
   
-    .formtitle {
-      font-family:'Questrial', Verdana, sans-serif;
-      text-align:center;
-      font-size:32px;
-      padding:0;
-     margin-top:5%;
-      position:relative;
-      color:#555;
-      }
-
+    .control-section{
+      margin-top: 5%;
+  }
+  .formtitle {
+     font-family:'Questrial', Verdana, sans-serif;
+     text-align:center;
+     font-size:32px;
+     padding:0;
+     position:relative;
+     color:#555;
+  }
     .e-error,
     .e-float-text {
         font-weight: 500;
@@ -52,8 +53,8 @@
     form {  
         margin-bottom: 60px;
         border: 1px solid #ccc;
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.36);
-        border-radius: 5px;
+        box-shadow: 0 5px 4px 0 rgba(0, 0, 0, 0.36);
+        border-radius: 10px;
         background:#fff;
         margin-top:50px;
         }

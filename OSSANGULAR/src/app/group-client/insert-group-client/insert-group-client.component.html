@@ -1,105 +1,115 @@
-<div class="col-lg-4"></div>
-<div class="col-lg-4 control-section">
+<div class="col-lg-3 col-md-3 col-sm-1 col-xs-1"></div>
+<div class="col-lg-6 col-md-6 col-sm-10 col-xs-10 control-section">
     <div class="content-wrapper" style="margin-bottom: 25px;">
 
         <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
             <div class="formtitle">
                 <span>Insertar Jerarquía</span>
             </div>
-            <div class="form-group">
-                <div class="e-float-input">
-                    <input id="nameGroup" type="text" formControlName="nameGroup" [(ngModel)]="group.nameGroup">
-                    <span class="e-float-line"></span>
-                    <label for="nameGroup" class="e-float-text" style="font-size:15px;">Nombre del Grupo</label>
+
+            <div class="row">
+                <div class="col-lg-6">
+
+                    <div class="form-group">
+                        <div class="e-float-input">
+                            <input id="nameGroup" type="text" formControlName="nameGroup" [(ngModel)]="group.nameGroup">
+                            <span class="e-float-line"></span>
+                            <label for="nameGroup" class="e-float-text" style="font-size:15px;">Nombre del Grupo</label>
+                        </div>
+                        <div *ngIf="nameGroup.errors">
+                            <div *ngIf="nameGroup.errors.required && nameGroup.touched" class="e-error">
+                                Debe rellenar este campo.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="e-float-input">
+                            <input id="contactName" type="text" formControlName="contactName"
+                                [(ngModel)]="group.contactName">
+                            <span class="e-float-line"></span>
+                            <label for="contactName" class="e-float-text" style="font-size:15px;">Nombre del
+                                Contacto</label>
+                        </div>
+                        <div *ngIf="contactName.errors">
+                            <div *ngIf="contactName.errors.required && contactName.touched" class="e-error">
+                                Debe rellenar este campo.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="e-float-input">
+                            <input id="contactLastName" type="text" formControlName="contactLastName"
+                                [(ngModel)]="group.contactLastName">
+                            <span class="e-float-line"></span>
+                            <label for="contactLastName" class="e-float-text" style="font-size:15px;">Apellidos del
+                                Contacto</label>
+                        </div>
+                        <div *ngIf="contactLastName.errors">
+                            <div *ngIf="contactLastName.errors.required && contactLastName.touched" class="e-error">
+                                Debe rellenar este campo.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="e-float-input">
+                            <input id="email" type="text" formControlName="email" [(ngModel)]="group.email">
+                            <span class="e-float-line"></span>
+                            <label for="email" class="e-float-text" style="font-size:15px;">Correo</label>
+                        </div>
+                        <div *ngIf="email.errors">
+                            <div *ngIf="email.errors.email && email.touched" class="e-error">
+                                Debe ingresar un correo válido.
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div *ngIf="nameGroup.errors">
-                    <div *ngIf="nameGroup.errors.required && nameGroup.touched" class="e-error">
-                        Debe rellenar este campo.
+
+                <div class="col-lg-6">
+
+                    <div class="form-group">
+                        <div class="e-float-input">
+                            <input id="phone1" type="text" formControlName="phone1" [(ngModel)]="group.phone1">
+                            <span class="e-float-line"></span>
+                            <label for="phone1" class="e-float-text" style="font-size:15px;">Teléfono 1</label>
+                        </div>
+                        <div *ngIf="phone1.errors">
+                            <div *ngIf="phone1.errors.phoneError && phone1.touched" class="e-error">
+                                El número a digitar debe tener unicamente 8 dígitos.
+                            </div>
+                            <div *ngIf="phone1.errors.required && phone1.touched" class="e-error">
+                                Debe rellenar este campo.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="e-float-input">
+                            <input id="phone2" type="text" formControlName="phone2" [(ngModel)]="group.phone2">
+                            <span class="e-float-line"></span>
+                            <label for="phone2" class="e-float-text" style="font-size:15px;">Teléfono 2</label>
+                        </div>
+                        <div *ngIf="phone2.errors">
+                            <div *ngIf="phone2.errors.phoneError && phone2.touched" class="e-error">
+                                El número a digitar debe tener unicamente 8 dígitos.
+                            </div>
+                            <div *ngIf="phone2.errors.required && phone2.touched" class="e-error">
+                                Debe rellenar este campo.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <ejs-multiselect formControlName="clientsMulti" (removing)='select($event)'
+                            (select)='select($event)' id='multiselect-checkbox' [dataSource]='clients' [mode]='box'
+                            [fields]='fields' [placeholder]='watermarkMultiple' [popupHeight]='popHeight'
+                            showDropDownIcon='true' floatLabelType='Auto' [allowFiltering]='true'></ejs-multiselect>
+
                     </div>
                 </div>
             </div>
-
-            <div class="form-group">
-                <div class="e-float-input">
-                    <input id="contactName" type="text" formControlName="contactName" [(ngModel)]="group.contactName">
-                    <span class="e-float-line"></span>
-                    <label for="contactName" class="e-float-text" style="font-size:15px;">Nombre del Contacto</label>
-                </div>
-                <div *ngIf="contactName.errors">
-                    <div *ngIf="contactName.errors.required && contactName.touched" class="e-error">
-                        Debe rellenar este campo.
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="e-float-input">
-                    <input id="contactLastName" type="text" formControlName="contactLastName"
-                        [(ngModel)]="group.contactLastName">
-                    <span class="e-float-line"></span>
-                    <label for="contactLastName" class="e-float-text" style="font-size:15px;">Apellidos del
-                        Contacto</label>
-                </div>
-                <div *ngIf="contactLastName.errors">
-                    <div *ngIf="contactLastName.errors.required && contactLastName.touched" class="e-error">
-                        Debe rellenar este campo.
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="e-float-input">
-                    <input id="email" type="text" formControlName="email" [(ngModel)]="group.email">
-                    <span class="e-float-line"></span>
-                    <label for="email" class="e-float-text" style="font-size:15px;">Correo</label>
-                </div>
-                <div *ngIf="email.errors">
-                    <div *ngIf="email.errors.email && email.touched" class="e-error">
-                        Debe ingresar un correo válido.
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="e-float-input">
-                    <input id="phone1" type="text" formControlName="phone1" [(ngModel)]="group.phone1">
-                    <span class="e-float-line"></span>
-                    <label for="phone1" class="e-float-text" style="font-size:15px;">Teléfono 1</label>
-                </div>
-                <div *ngIf="phone1.errors">
-                    <div *ngIf="phone1.errors.phoneError && phone1.touched" class="e-error">
-                        El número a digitar debe tener unicamente 8 dígitos.
-                    </div>
-                    <div *ngIf="phone1.errors.required && phone1.touched" class="e-error">
-                        Debe rellenar este campo.
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="e-float-input">
-                    <input id="phone2" type="text" formControlName="phone2" [(ngModel)]="group.phone2">
-                    <span class="e-float-line"></span>
-                    <label for="phone2" class="e-float-text" style="font-size:15px;">Teléfono 2</label>
-                </div>
-                <div *ngIf="phone2.errors">
-                    <div *ngIf="phone2.errors.phoneError && phone2.touched" class="e-error">
-                        El número a digitar debe tener unicamente 8 dígitos.
-                    </div>
-                    <div *ngIf="phone2.errors.required && phone2.touched" class="e-error">
-                        Debe rellenar este campo.
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <ejs-multiselect formControlName="clientsMulti" (removing)='select($event)' (select)='select($event)'
-                    id='multiselect-checkbox' [dataSource]='clients' [mode]='box' [fields]='fields'
-                    [placeholder]='watermarkMultiple' [popupHeight]='popHeight' showDropDownIcon='true'
-                     floatLabelType='Auto' [allowFiltering]='true'></ejs-multiselect>
-
-            </div>
-
             <div class="row">
                 <div style="width: 325px;margin:0px auto;height: 100px;padding-top: 25px;">
                     <div style="display: inline-block;">
@@ -108,8 +118,8 @@
                             (click)="insertGroup()">Agregar</button>
                     </div>
                     <div style="float: right;">
-                        <button id="resetbtn" class="samplebtn e-control e-btn" type="reset"
-                            style="height:40px;width: 165px;" data-ripple="true">Limpiar Formulario</button>
+                        <button class="samplebtn e-control e-btn" type="button" (click)='returnView()'
+                            style="height:40px;width: 165px;">Cancelar</button>
                     </div>
                 </div>
             </div>

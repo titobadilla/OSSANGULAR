@@ -7,6 +7,7 @@ import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 import { GroupClient } from 'src/model/groupclient.model';
 import { MultiSelectComponent } from '@syncfusion/ej2-angular-dropdowns';
 import { CheckBoxComponent } from '@syncfusion/ej2-angular-buttons';
+import { GroupClientComponent } from '../group-client.component';
 
 @Component({
   selector: 'update-group-client',
@@ -34,7 +35,7 @@ export class UpdateGroupClientComponent implements OnInit {
   reactForm: FormGroup;
   group: GroupClient = new GroupClient();
 
-  constructor(private groupClientService: GroupClientService, private clientService: ClientService) {
+  constructor(private groupClientService: GroupClientService, private clientService: ClientService, private parent:GroupClientComponent) {
     this.createReactiveForm();
     this.associateValues();
   }
@@ -160,6 +161,10 @@ export class UpdateGroupClientComponent implements OnInit {
     );/*/
       console.log(this.group)
   }
-
+  returnView() {
+    this.parent.getAllGroups();
+    this.parent.updateSection = false;
+    this.parent.formSection = true;
+  }
 
 }

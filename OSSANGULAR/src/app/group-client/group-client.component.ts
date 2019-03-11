@@ -4,7 +4,10 @@ import { Client } from 'src/model/client.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import { setCulture } from '@syncfusion/ej2-base';
 import { GroupClient } from 'src/model/groupclient.model';
-import { UpdateGroupClientComponent } from './update-group-client/update-group-client.component';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { DeleteComponent } from '../delete/delete.component';
+import { DeleteEmitterService } from '../delete/delete.emitter.service';
 
 @Component({
   selector: 'app-group-client',
@@ -16,7 +19,7 @@ export class GroupClientComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.initEventSubmit();
   }
-  @ViewChild('updateGroupClient') childOne: UpdateGroupClientComponent;
+  modalRef: BsModalRef;
   data: GroupClient[] = new Array();
   public fields: Object = { text: 'nameGroup', value: 'idGroup' };
   public watermark: string = 'Seleccione un grupo*';
@@ -25,13 +28,13 @@ export class GroupClientComponent implements OnInit, AfterViewInit {
   updateSection: boolean = false;
   insertSection: boolean = false;
   formSection: boolean = true;
-  seeMoreSection: boolean = false;
-  clientSeeMore: Client = new Client();
-  groupid:number;
+  groupid: number;
   group: GroupClient = new GroupClient();
   clients: Client[] = new Array();
+  groupDelete: GroupClient = new GroupClient();
 
-  constructor( private groupClientService: GroupClientService) {
+  constructor(private groupClientService: GroupClientService,
+    private modalService: BsModalService, private deleteService: DeleteEmitterService) {
     this.createReactiveForm();
     this.associateValues();
   }
@@ -39,6 +42,19 @@ export class GroupClientComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.formSection = true;
     setCulture('es-CR');
+    this.getAllGroups();
+    this.deleteService.deleteGroupClient$.subscribe(data => {
+      this.aceptDelete();
+    });
+  }
+
+  aceptDelete() {
+    this.groupClientService.deleteGroupClient(this.groupDelete.idGroup).subscribe(data => {
+      this.getAllGroups();
+    });
+  }
+
+  getAllGroups() {
     this.groupClientService.getAllGroupsClients().subscribe(data => {
       this.data = data;
     })
@@ -74,6 +90,7 @@ export class GroupClientComponent implements OnInit, AfterViewInit {
       (e: Event) => {
         e.preventDefault();
         if (this.reactForm.valid) {
+
         } else {
           // validating whole form
           Object.keys(this.reactForm.controls).forEach(field => {
@@ -98,8 +115,14 @@ export class GroupClientComponent implements OnInit, AfterViewInit {
   }
 
   seeMore(client: Client) {
-    this.clientSeeMore = client;
-    this.seeMoreSection = true;
+
+    this.modalRef = this.modalService.show(DeleteComponent, {
+      initialState: {
+        title: 'Ver Mas',
+        data: client,
+        type: 'seeMore'
+      }
+    });
   }
 
   onChangeDdl(value: any) {
@@ -107,6 +130,7 @@ export class GroupClientComponent implements OnInit, AfterViewInit {
       this.group = this.findClientsByIdGroup(value.itemData.idGroup);
       this.groupid = this.group.idGroup;
       this.clients = this.group.clients
+      this.groupDelete = this.group;
     }
   }
 
@@ -120,7 +144,14 @@ export class GroupClientComponent implements OnInit, AfterViewInit {
     return elementReturn;
   }
 
-  hideModal() {
-    this.seeMoreSection = false;
+  openModal() {
+
+    this.modalRef = this.modalService.show(DeleteComponent, {
+      initialState: {
+        title: 'Eliminar Grupo',
+        data: 'el grupo con el nombre: ' + this.group.nameGroup,
+        type: 'groupClient'
+      }
+    });
   }
 }

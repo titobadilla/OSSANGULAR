@@ -12,11 +12,12 @@
               <div class="formtitle">
                 <span>Buscar Jerarquia</span>
               </div>
+
               <div class="col-lg-7 col-md-10 col-sm-8 col-xs-8">
+
                 <div class="form-group">
                   <ejs-dropdownlist (change)='onChangeDdl($event)' formControlName="client" name="client"
-                    [(ngModel)]="headClient" [dataSource]='data' [fields]='fields' [placeholder]='watermark'
-                    floatLabelType='Auto'>
+                    [dataSource]='data' [fields]='fields' [placeholder]='watermark' floatLabelType='Auto'>
                   </ejs-dropdownlist>
                   <div *ngIf="clients.errors">
                     <div *ngIf="clients.errors.errorD && clients.touched" class="e-error">
@@ -25,13 +26,14 @@
                   </div>
                 </div>
               </div>
+
               <div class="col-lg-4 col-md-8 col-sm-8 col-xs-8">
 
                 <button class="samplebtn e-control e-btn e-warning" (click)='edit()'
                   style="height:30px;width: 40px;margin-left: 5px;margin-top: 25px;"><span
                     class="glyphicon glyphicon-pencil"></span></button>
 
-                <button class="samplebtn e-control e-btn e-danger" (click)='delete()'
+                <button class="samplebtn e-control e-btn e-danger" (click)='openModal()'
                   style="height:30px;width: 40px;margin-left: 5px;margin-top: 25px;"><span
                     class="glyphicon glyphicon-trash"></span></button>
 
@@ -51,7 +53,7 @@
 
   <div class="row">
     <div class="col-lg-3"></div>
-    <div class="col-lg-6 control-section">
+    <div class="col-lg-6">
 
       <ejs-grid #grid [dataSource]='clients' allowPaging='true' [allowSorting]='true' allowTextWrap='true'
         [pageSettings]='pageSettings'>
@@ -84,56 +86,4 @@
 
 <div *ngIf="insertSection">
   <insert-group-client></insert-group-client>
-</div>
-
-<div *ngIf="seeMoreSection">
-  <div class="modal fade in" role="dialog" id="gridTools" tabindex="-1" aria-labelledby="gridModalLabel"
-    style="display:block;padding-right: 15px;margin-top: 100px;">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-body">
-          <button type="button" class="close" (click)="hideModal()" aria-label="Close">
-            <span style="color: black;" aria-hidden="true">×</span>
-          </button>
-
-          <div class="modal-body" id="gridModalLabel">
-            <p>
-              <span class="modal_title">Dirección
-                <hr></span>
-              Provincia:
-              <br>
-              Cantón:
-              <br>
-              Distrito:
-              <br>
-              Dirección: {{clientSeeMore.addressDescription.description}}
-              <br>
-              <br>
-              <span class="modal_title">Teléfonos
-                <hr></span>
-              Telófono Móvil:
-              <span *ngIf="clientSeeMore.telephones[0]!=null && clientSeeMore.telephones[0]!=undefined">
-                {{clientSeeMore.telephones[0].number}}
-              </span>
-              <span *ngIf="clientSeeMore.telephones[0]===null || clientSeeMore.telephones[0]===undefined">
-                ---
-              </span>
-              <br>
-              Otro Teléfono:
-              <span *ngIf="clientSeeMore.telephones[1]!=null && clientSeeMore.telephones[1]!=undefined">
-                {{clientSeeMore.telephones[0].number}}
-              </span>
-              <span *ngIf="clientSeeMore.telephones[1]===null || clientSeeMore.telephones[1]===undefined">
-                ---
-              </span>
-            </p>
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" (click)="hideModal()">Aceptar</button>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>

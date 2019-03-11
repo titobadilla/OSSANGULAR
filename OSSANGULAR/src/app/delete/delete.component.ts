@@ -15,10 +15,18 @@ export class DeleteComponent implements OnInit {
   data;
   type;
 
+  deleteSection = false;
+  seeMoreSection = false;
   constructor(public modalRef: BsModalRef, private deleteService: DeleteEmitterService
   ) { }
 
   ngOnInit() {
+    if (this.type === 'seeMore') {
+      this.seeMoreSection = true;
+    }
+    else {
+      this.deleteSection = true;
+    }
   }
 
   acceptDelete() {
@@ -29,6 +37,14 @@ export class DeleteComponent implements OnInit {
 
     if (this.type === 'role') {
       this.deleteService.setDeleteEmployeeRole(true);
+      this.modalRef.hide();
+    }
+    if (this.type === 'seeMore') {
+      this.modalRef.hide();
+    }
+
+    if (this.type === 'groupClient') {
+      this.deleteService.setDeleteGroupClient(true);
       this.modalRef.hide();
     }
   }
