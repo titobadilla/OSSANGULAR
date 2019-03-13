@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { InventoryCategoryService } from './inventory-category.service';
-import {setCulture } from '@syncfusion/ej2-base';
+import { setCulture } from '@syncfusion/ej2-base';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { MeasurementUnit } from 'src/model/measurementunit.model';
 import { InventoryCategory } from 'src/model/inventorycategory.model';
-import { UpdateInventoryCategoryComponent } from './update-inventory-category/update-inventory-category.component';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { DeleteEmitterService } from '../delete/delete.emitter.service';
+import { DeleteComponent } from '../delete/delete.component';
 
 @Component({
   selector: 'app-inventory-category',
@@ -13,7 +15,8 @@ import { UpdateInventoryCategoryComponent } from './update-inventory-category/up
 })
 export class InventoryCategoryComponent implements OnInit {
 
-  constructor(private inventoryCategoryService:InventoryCategoryService) { }
+  constructor(private inventoryCategoryService: InventoryCategoryService,
+    private modalService: BsModalService, private deleteService: DeleteEmitterService) { }
 
   ngAfterViewInit(): void {
     this.grid.pageSettings.pageSize = 5;
@@ -21,13 +24,12 @@ export class InventoryCategoryComponent implements OnInit {
 
   public data: InventoryCategory[];
   public pageSettings: Object;
-  @ViewChild('updateInventoryCategory') childOne: UpdateInventoryCategoryComponent;
+  modalRef: BsModalRef;
   @ViewChild('grid') public grid: GridComponent;
 
   categoryId: number;
   principal: boolean = true;
   editSection: boolean = false;
-  modalDelete = false;
   insertSection = false;
   inventoryCategoryDelete: InventoryCategory;
 
@@ -35,11 +37,15 @@ export class InventoryCategoryComponent implements OnInit {
     this.getAllCategories();
     this.pageSettings = { pageCount: 3 };
     setCulture('es-CR');
+
+    this.deleteService.deleteInventoryCategory$.subscribe(data => {
+      this.aceptDelete();
+    });
   }
 
   getAllCategories() {
-    this.inventoryCategoryService.getAllCategories().subscribe((data:MeasurementUnit[])=>{
-      this.data=data;
+    this.inventoryCategoryService.getAllCategories().subscribe((data: MeasurementUnit[]) => {
+      this.data = data;
     });
   }
 
@@ -49,25 +55,26 @@ export class InventoryCategoryComponent implements OnInit {
     this.editSection = true;
   }
 
-  delete(category:InventoryCategory) {
-    this.inventoryCategoryDelete = category;
-    this.modalDelete = true;
-  }
-
-  hideModal() {
-    this.inventoryCategoryDelete = new InventoryCategory();
-    this.modalDelete = false;
-  }
-
   aceptDelete() {
-    this.inventoryCategoryService.deleteInventoryCategory(this.inventoryCategoryDelete.id).subscribe(data=>{
+    this.inventoryCategoryService.deleteInventoryCategory(this.inventoryCategoryDelete.id).subscribe(data => {
       this.getAllCategories();
     })
-    this.modalDelete = false;
   }
 
   insert() {
     this.principal = false;
     this.insertSection = true;
+  }
+
+  openModal(inventoryCategory: InventoryCategory) {
+    this.inventoryCategoryDelete = inventoryCategory;
+
+    this.modalRef = this.modalService.show(DeleteComponent, {
+      initialState: {
+        title: 'Eliminar la Categoría de Inventario',
+        data: 'la categoría con el nombre: ' + inventoryCategory.name,
+        type: 'inventoryCategory'
+      }
+    });
   }
 }

@@ -14,6 +14,9 @@ export class DeleteEmitterService {
   private _messageGroupClientDelete = new Subject<boolean>();
   deleteGroupClient$ = this._messageGroupClientDelete.asObservable();
 
+  private _messageInventoryCategoryDelete = new Subject<boolean>();
+  deleteInventoryCategory$ = this._messageInventoryCategoryDelete.asObservable();
+
   constructor() { }
 
   public setDeleteEmployee(flat: boolean) {
@@ -26,5 +29,9 @@ export class DeleteEmitterService {
 
   public setDeleteGroupClient(flat: boolean) {
     this._messageGroupClientDelete.next(flat);
+  }
+
+  public setDeleteInventoryCategory(flat: boolean) {
+    this._messageInventoryCategoryDelete.next(flat);
   }
 }

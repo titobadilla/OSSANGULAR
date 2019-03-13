@@ -47,10 +47,15 @@ export class DeleteComponent implements OnInit {
       this.deleteService.setDeleteGroupClient(true);
       this.modalRef.hide();
     }
-  }
 
-  cancelDelete() {
-    this.modalRef.hide();
-  }
+    if (this.type === 'inventoryCategory') {
+      this.deleteService.setDeleteInventoryCategory(true);
+      this.modalRef.hide();
+    }
+    }
 
-}
+    cancelDelete() {
+      this.modalRef.hide();
+    }
+
+  }
