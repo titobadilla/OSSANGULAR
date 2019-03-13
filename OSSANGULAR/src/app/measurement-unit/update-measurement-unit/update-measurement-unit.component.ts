@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 import { MeasurementUnit } from 'src/model/measurementunit.model';
 import { MeasurementUnitService } from '../measurement-unit.service';
+import { MeasurementUnitComponent } from '../measurement-unit.component';
 
 @Component({
   selector: 'update-measurement-unit',
@@ -16,7 +17,7 @@ export class UpdateMeasurementUnitComponent implements OnInit {
   reactForm: FormGroup;
   measurementUnit:MeasurementUnit = new MeasurementUnit();
 
-  constructor(private measurementUnitService:MeasurementUnitService) {
+  constructor(private measurementUnitService:MeasurementUnitService, private parent: MeasurementUnitComponent) {
     this.createReactiveForm();
     this.associateValues();
   }
@@ -28,7 +29,7 @@ export class UpdateMeasurementUnitComponent implements OnInit {
       (e: Event) => {
         e.preventDefault();
         if (this.reactForm.valid) {
-          this.reactForm.reset();
+          this.editMeasurementUnit();
         } else {
           // validating whole form
           Object.keys(this.reactForm.controls).forEach(field => {
@@ -51,13 +52,20 @@ export class UpdateMeasurementUnitComponent implements OnInit {
     this.reactForm = new FormGroup({
       'name': new FormControl('', [FormValidators.required]),
     });
-
   }
 
   get name() { return this.reactForm.get('name'); }
 
   private editMeasurementUnit() {
-    this.measurementUnitService.updateMeasurementUnit(this.measurementUnit).subscribe();
+    this.measurementUnitService.updateMeasurementUnit(this.measurementUnit).subscribe(data=>{
+      this.returnView();
+    });
+  }
+
+  returnView() {
+    this.parent.getAllMeasurementUnits();
+    this.parent.editSection = false;
+    this.parent.principal = true;
   }
 
 }

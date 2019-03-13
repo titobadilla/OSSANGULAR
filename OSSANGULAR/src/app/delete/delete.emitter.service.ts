@@ -17,6 +17,9 @@ export class DeleteEmitterService {
   private _messageInventoryCategoryDelete = new Subject<boolean>();
   deleteInventoryCategory$ = this._messageInventoryCategoryDelete.asObservable();
 
+  private _messageMeasurementUnitDelete = new Subject<boolean>();
+  deleteMeasurementUnit$ = this._messageMeasurementUnitDelete.asObservable();
+
   constructor() { }
 
   public setDeleteEmployee(flat: boolean) {
@@ -33,5 +36,9 @@ export class DeleteEmitterService {
 
   public setDeleteInventoryCategory(flat: boolean) {
     this._messageInventoryCategoryDelete.next(flat);
+  }
+
+  public setDeleteMeasurementUnit(flat: boolean) {
+    this._messageMeasurementUnitDelete.next(flat);
   }
 }

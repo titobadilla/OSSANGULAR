@@ -52,10 +52,14 @@ export class DeleteComponent implements OnInit {
       this.deleteService.setDeleteInventoryCategory(true);
       this.modalRef.hide();
     }
-    }
-
-    cancelDelete() {
+    if (this.type === 'measurementUnit') {
+      this.deleteService.setDeleteMeasurementUnit(true);
       this.modalRef.hide();
     }
-
   }
+
+  cancelDelete() {
+    this.modalRef.hide();
+  }
+
+}
