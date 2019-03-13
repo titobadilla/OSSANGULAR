@@ -56,6 +56,10 @@ export class DeleteComponent implements OnInit {
       this.deleteService.setDeleteMeasurementUnit(true);
       this.modalRef.hide();
     }
+    if (this.type === 'tool') {
+      this.deleteService.setDeleteTool(true);
+      this.modalRef.hide();
+    }
   }
 
   cancelDelete() {

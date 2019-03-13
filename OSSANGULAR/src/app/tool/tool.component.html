@@ -26,7 +26,7 @@
             </e-column>
             <e-column field='delete' headerText="Eliminar" width='50' textAlign='center'>
               <ng-template #template let-data>
-                <button mat-button class="btn btn-danger glyphicon glyphicon-trash" (click)='delete(data)'></button>
+                <button mat-button class="btn btn-danger glyphicon glyphicon-trash" (click)='openModal(data)'></button>
               </ng-template>
             </e-column>
           </e-columns>
@@ -43,24 +43,3 @@
     <insert-tool></insert-tool>
   </div>
   
-  <div *ngIf="modalDelete" class="modal fade in" role="dialog" id="gridTools" tabindex="-1"
-    aria-labelledby="gridModalLabel" style="display:block;padding-right: 15px;margin-top: 225px;">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-body">
-          <button type="button" class="close" (click)="hideModal()" aria-label="Close">
-            <span style="color: black;" aria-hidden="true">×</span>
-          </button>
-  
-          <div class="modal-body" id="gridModalLabel">
-            ¿Está seguro que desea eliminar el Material llamado: {{toolDelete.name}}?
-          </div>
-        </div>
-  
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" (click)="hideModal()">Cancelar</button>
-          <button type="button" class="btn btn-primary" (click)="aceptDelete()">Aceptar</button>
-        </div>
-      </div>
-    </div>
-  </div>

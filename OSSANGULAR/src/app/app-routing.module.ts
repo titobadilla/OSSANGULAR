@@ -40,6 +40,7 @@ import { InsertClientComponent } from './client/insert-client/insert-client.comp
 import { InventoryOutputComponent } from './inventory-output/inventory-output.component';
 import { InventoryOutputGeneralComponent } from './inventory-output/inventory-output-general/inventory-output-general.component';
 import { DeleteComponent } from './delete/delete.component';
+import { ToolComponent } from './tool/tool.component';
 
 const routes: Routes = [
   {path:"",component:AppComponent, canActivate: [AuthGuard]},
@@ -71,7 +72,8 @@ const routes: Routes = [
   {path:'insert-client',component:InsertClientComponent},
   {path:'inventory-output',component:InventoryOutputComponent},
   {path:'inventory-output-general',component:InventoryOutputGeneralComponent},
-  {path:'delete',component:DeleteComponent}
+  {path:'delete',component:DeleteComponent},
+  {path:'tool',component:ToolComponent}
   /*,
 
   {path:'measurement-unit',component:MeasurementUnitComponent},
