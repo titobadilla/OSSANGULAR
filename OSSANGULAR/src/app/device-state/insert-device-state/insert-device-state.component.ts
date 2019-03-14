@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
-import { InventoryCategory } from 'src/model/inventorycategory.model';
-import { InventoryCategoryService } from '../inventory-category.service';
-import { InventoryCategoryComponent } from '../inventory-category.component';
+import { DeviceState } from 'src/model/devicestate.model';
+import { DeviceStateService } from '../device-state.service';
+import { DeviceStateComponent } from '../device-state.component';
 
 @Component({
-  selector: 'insert-inventory-category',
-  templateUrl: './insert-inventory-category.component.html',
-  styleUrls: ['./insert-inventory-category.component.css']
+  selector: 'insert-device-state',
+  templateUrl: './insert-device-state.component.html',
+  styleUrls: ['./insert-device-state.component.css']
 })
-export class InsertInventoryCategoryComponent implements OnInit {
+export class InsertDeviceStateComponent implements OnInit {
 
   reactForm: FormGroup;
-  category: InventoryCategory = new InventoryCategory();
+  deviceState: DeviceState = new DeviceState();
 
-  constructor(private categoryService: InventoryCategoryService, private parent: InventoryCategoryComponent) {
+  constructor(private deviceStateService:DeviceStateService, private parent: DeviceStateComponent) {
     this.createReactiveForm();
     this.associateValues();
   }
@@ -27,7 +27,7 @@ export class InsertInventoryCategoryComponent implements OnInit {
       (e: Event) => {
         e.preventDefault();
         if (this.reactForm.valid) {
-          this.createInventoryCategory();
+          this.createDeviceState();
         } else {
           // validating whole form
           Object.keys(this.reactForm.controls).forEach(field => {
@@ -39,26 +39,26 @@ export class InsertInventoryCategoryComponent implements OnInit {
   }
 
   associateValues() {
-    this.category.name = this.name.value;
+    this.deviceState.state = this.state.value;
   }
 
   createReactiveForm() {
     this.reactForm = new FormGroup({
-      'name': new FormControl('', [FormValidators.required]),
+      'state': new FormControl('', [FormValidators.required]),
     });
 
   }
 
-  get name() { return this.reactForm.get('name'); }
+  get state() { return this.reactForm.get('state'); }
 
-  private createInventoryCategory() {
-    this.categoryService.insertInventoryCategory(this.category).subscribe(data=>{
+  private createDeviceState() {
+    this.deviceStateService.insertDeviceState(this.deviceState).subscribe(data=>{
       this.returnView();
     });
   }
 
   returnView() {
-    this.parent.getAllCategories();
+    this.parent.getAllStates();
     this.parent.insertSection = false;
     this.parent.principal = true;
   }

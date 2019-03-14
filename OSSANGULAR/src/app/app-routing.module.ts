@@ -73,7 +73,8 @@ const routes: Routes = [
   {path:'inventory-output',component:InventoryOutputComponent},
   {path:'inventory-output-general',component:InventoryOutputGeneralComponent},
   {path:'delete',component:DeleteComponent},
-  {path:'tool',component:ToolComponent}
+  {path:'tool',component:ToolComponent},
+  {path:'device-state',component:DeviceStateComponent}
   /*,
 
   {path:'measurement-unit',component:MeasurementUnitComponent},

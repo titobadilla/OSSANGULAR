@@ -60,6 +60,10 @@ export class DeleteComponent implements OnInit {
       this.deleteService.setDeleteTool(true);
       this.modalRef.hide();
     }
+    if (this.type === 'deviceState') {
+      this.deleteService.setDeleteDeviceState(true);
+      this.modalRef.hide();
+    }
   }
 
   cancelDelete() {

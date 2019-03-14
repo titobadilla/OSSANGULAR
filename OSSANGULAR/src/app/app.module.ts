@@ -102,6 +102,8 @@ import { InventoryOutputSpecificComponent } from './inventory-output/inventory-o
 import { InventoryOutputGeneralComponent } from './inventory-output/inventory-output-general/inventory-output-general.component';
 import { MaterialComponent } from './material/material.component';
 import { DeleteComponent } from './delete/delete.component';
+import { InsertDeviceStateComponent } from './device-state/insert-device-state/insert-device-state.component';
+import { UpdateDeviceStateComponent } from './device-state/update-device-state/update-device-state.component';
 
 
 declare var require: any;
@@ -164,7 +166,9 @@ loadCldr(
     InventoryOutputComponent,
     InventoryOutputGeneralComponent,
     MaterialComponent,
-    DeleteComponent
+    DeleteComponent,
+    InsertDeviceStateComponent,
+    UpdateDeviceStateComponent
 
   ],
   imports: [
