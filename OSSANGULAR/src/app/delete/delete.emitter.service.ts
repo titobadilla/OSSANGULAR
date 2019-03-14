@@ -26,6 +26,9 @@ export class DeleteEmitterService {
   private _messageDeviceStateDelete = new Subject<boolean>();
   deleteDeviceState$ = this._messageDeviceStateDelete.asObservable();
 
+  private _messageBrandDelete = new Subject<boolean>();
+  deleteBrand$ = this._messageBrandDelete.asObservable();
+
   constructor() { }
 
   public setDeleteEmployee(flat: boolean) {
@@ -54,5 +57,9 @@ export class DeleteEmitterService {
 
   public setDeleteDeviceState(flat: boolean) {
     this._messageDeviceStateDelete.next(flat);
+  }
+
+  public setDeleteBrand(flat: boolean) {
+    this._messageBrandDelete.next(flat);
   }
 }

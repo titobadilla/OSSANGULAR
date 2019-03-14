@@ -104,6 +104,8 @@ import { MaterialComponent } from './material/material.component';
 import { DeleteComponent } from './delete/delete.component';
 import { InsertDeviceStateComponent } from './device-state/insert-device-state/insert-device-state.component';
 import { UpdateDeviceStateComponent } from './device-state/update-device-state/update-device-state.component';
+import { InsertBrandComponent } from './brand/insert-brand/insert-brand.component';
+import { UpdateBrandComponent } from './brand/update-brand/update-brand.component';
 
 
 declare var require: any;
@@ -168,7 +170,9 @@ loadCldr(
     MaterialComponent,
     DeleteComponent,
     InsertDeviceStateComponent,
-    UpdateDeviceStateComponent
+    UpdateDeviceStateComponent,
+    InsertBrandComponent,
+    UpdateBrandComponent
 
   ],
   imports: [

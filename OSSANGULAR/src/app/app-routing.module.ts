@@ -74,13 +74,14 @@ const routes: Routes = [
   {path:'inventory-output-general',component:InventoryOutputGeneralComponent},
   {path:'delete',component:DeleteComponent},
   {path:'tool',component:ToolComponent},
+  {path:'brand',component:BrandComponent},
   {path:'device-state',component:DeviceStateComponent}
   /*,
 
   {path:'measurement-unit',component:MeasurementUnitComponent},
   {path:'tool',component:ToolComponent},
   {path:'device',component:DeviceComponent},
-  {path:'brand',component:BrandComponent},
+  
   {path:'menu',component:MenuPrincipalComponent}
     /*,
   { path: '**', component: PageNotFoundComponent }*/

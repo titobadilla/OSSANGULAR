@@ -5,14 +5,13 @@
     <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
 
       <div class="formtitle">
-        <span>Categorías de inventario</span>
+        <span>Marca</span>
       </div>
-
       <div class="form-group">
         <div class="e-float-input">
-          <input id="name" type="text" formControlName="name" [(ngModel)]="category.name">
+          <input id="name" type="text" formControlName="name" [(ngModel)]="brand.name">
           <span class="e-float-line"></span>
-          <label for="name" class="e-float-text" style="font-size:15px;">Nombre de la categoría</label>
+          <label for="name" class="e-float-text" style="font-size:15px;">Nombre de la marca</label>
         </div>
         <div *ngIf="name.errors">
           <div *ngIf="name.errors.required && name.touched" class="e-error">
@@ -25,7 +24,7 @@
         <div style="width: 325px;margin:0px auto;height: 100px;margin-top:5%;">
           <div style="display: inline-block;">
             <button id="validateSubmit" class="samplebtn e-control e-btn e-info" type="submit"
-              style="height:40px;width: 150px;" data-ripple="true">Editar</button>
+              style="height:40px;width: 150px;" data-ripple="true">Agregar</button>
           </div>
           <div style="float: right;">
             <button class="samplebtn e-control e-btn" type="button" (click)='returnView()'
