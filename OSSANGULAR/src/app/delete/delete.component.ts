@@ -68,6 +68,10 @@ export class DeleteComponent implements OnInit {
       this.deleteService.setDeleteBrand(true);
       this.modalRef.hide();
     }
+    if (this.type === 'model') {
+      this.deleteService.setDeleteModel(true);
+      this.modalRef.hide();
+    }
   }
 
   cancelDelete() {

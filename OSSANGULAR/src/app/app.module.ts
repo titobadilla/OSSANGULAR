@@ -106,6 +106,8 @@ import { InsertDeviceStateComponent } from './device-state/insert-device-state/i
 import { UpdateDeviceStateComponent } from './device-state/update-device-state/update-device-state.component';
 import { InsertBrandComponent } from './brand/insert-brand/insert-brand.component';
 import { UpdateBrandComponent } from './brand/update-brand/update-brand.component';
+import { InsertModelComponent } from './model/insert-model/insert-model.component';
+import { UpdateModelComponent } from './model/update-model/update-model.component';
 
 
 declare var require: any;
@@ -172,7 +174,9 @@ loadCldr(
     InsertDeviceStateComponent,
     UpdateDeviceStateComponent,
     InsertBrandComponent,
-    UpdateBrandComponent
+    UpdateBrandComponent,
+    InsertModelComponent,
+    UpdateModelComponent
 
   ],
   imports: [
