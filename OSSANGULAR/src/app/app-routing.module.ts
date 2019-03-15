@@ -41,6 +41,7 @@ import { InventoryOutputComponent } from './inventory-output/inventory-output.co
 import { InventoryOutputGeneralComponent } from './inventory-output/inventory-output-general/inventory-output-general.component';
 import { DeleteComponent } from './delete/delete.component';
 import { ToolComponent } from './tool/tool.component';
+import { MaterialComponent } from './material/material.component';
 
 const routes: Routes = [
   {path:"",component:AppComponent, canActivate: [AuthGuard]},
@@ -75,7 +76,8 @@ const routes: Routes = [
   {path:'delete',component:DeleteComponent},
   {path:'tool',component:ToolComponent},
   {path:'brand',component:BrandComponent},
-  {path:'device-state',component:DeviceStateComponent}
+  {path:'device-state',component:DeviceStateComponent},
+  {path:'material',component:MaterialComponent}
   /*,
 
   {path:'measurement-unit',component:MeasurementUnitComponent},

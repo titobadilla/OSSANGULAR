@@ -108,6 +108,8 @@ import { InsertBrandComponent } from './brand/insert-brand/insert-brand.componen
 import { UpdateBrandComponent } from './brand/update-brand/update-brand.component';
 import { InsertModelComponent } from './model/insert-model/insert-model.component';
 import { UpdateModelComponent } from './model/update-model/update-model.component';
+import { InsertMaterialComponent } from './material/insert-material/insert-material.component';
+import { UpdateMaterialComponent } from './material/update-material/update-material.component';
 
 
 declare var require: any;
@@ -176,7 +178,9 @@ loadCldr(
     InsertBrandComponent,
     UpdateBrandComponent,
     InsertModelComponent,
-    UpdateModelComponent
+    UpdateModelComponent,
+    InsertMaterialComponent,
+    UpdateMaterialComponent
 
   ],
   imports: [

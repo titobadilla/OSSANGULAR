@@ -32,6 +32,9 @@ export class DeleteEmitterService {
   private _messageModelDelete = new Subject<boolean>();
   deleteModel$ = this._messageModelDelete.asObservable();
 
+  private _messageMaterialDelete = new Subject<boolean>();
+  deleteMaterial$ = this._messageMaterialDelete.asObservable();
+
   constructor() { }
 
   public setDeleteEmployee(flat: boolean) {
@@ -67,5 +70,9 @@ export class DeleteEmitterService {
   }
   public setDeleteModel(flat: boolean) {
     this._messageModelDelete.next(flat);
+  }
+
+  public setDeleteMaterial(flat: boolean) {
+    this._messageMaterialDelete.next(flat);
   }
 }
