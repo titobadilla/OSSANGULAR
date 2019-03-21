@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EventEmitterLogoutService } from '../event-emitter-logout.service';
+import { JwtHelper } from './jwt-helper';
 
 
 const TOKEN_KEY = 'userToken';
@@ -7,7 +8,7 @@ const TOKEN_KEY = 'userToken';
 @Injectable()
 export class TokenStorage {
   token:any;
-    constructor(private emitterService:EventEmitterLogoutService) { }
+    constructor(private emitterService:EventEmitterLogoutService,private jwt:JwtHelper) { }
 
   signOut() {
     window.sessionStorage.removeItem(TOKEN_KEY);
@@ -30,4 +31,6 @@ export class TokenStorage {
     this.token=sessionStorage.getItem(TOKEN_KEY);
     return this.token=!null?this.token:null;
   }
+
+  
 }

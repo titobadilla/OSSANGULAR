@@ -5,9 +5,11 @@ import { TokenStorage } from './helper/token-storage';
 import { FormControl, FormGroup, Validators, FormsModule, AbstractControl } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 import { EventEmitterLogoutService } from './event-emitter-logout.service';
+import { AppComponent } from '../app.component';
+
 
 @Component({
-  selector: 'app-login',
+  selector: 'login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
@@ -22,7 +24,7 @@ export class LoginComponent  implements OnInit{
   messageSesionClosedBySystem:boolean=false;
 
 
-  constructor(private router: Router, private authService: AuthService, private token: TokenStorage,private emitterService:EventEmitterLogoutService) {
+  constructor(private router: Router,private app:AppComponent,private authService: AuthService, private token: TokenStorage,private emitterService:EventEmitterLogoutService) {
     //this.signOut();
     this.reactForm = new FormGroup({
       'username': new FormControl('', [FormValidators.required]),
@@ -34,7 +36,7 @@ export class LoginComponent  implements OnInit{
  
 
   ngOnInit(): void {
-    this.signOut();
+    //this.signOut();
     this.initEventSubmit();
 
     
@@ -78,7 +80,10 @@ export class LoginComponent  implements OnInit{
     this.authService.authentication( this.reactForm.get('username').value, this.reactForm.get('password').value).subscribe(
       data => {
         this.token.saveToken(data.token);
-        this.router.navigate(['/']);
+        this.loading = false;
+         this.app.login=true;
+         this.app.detectChanges();
+        this.router.navigate(['/']);        
       },error=>{
         alert('Ha ocurrido un error con su datos de autenticación: '+error.status);        
         this.loading = false;   

@@ -104,6 +104,15 @@ import { MaterialComponent } from './material/material.component';
 import { DeleteComponent } from './delete/delete.component';
 
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ThemeModule } from './@theme/theme.module';
+import { CoreModule } from './@core/core.module';
+import { NbContextMenuModule } from '@nebular/theme';
+
+
 declare var require: any;
 
 loadCldr(
@@ -192,7 +201,15 @@ loadCldr(
    DateRangePickerModule,
 
    //modal
-   ModalModule.forRoot()
+   ModalModule.forRoot(),
+
+   //Menu
+   BrowserAnimationsModule,
+   NgbModule.forRoot(),
+    ThemeModule.forRoot(),
+    CoreModule.forRoot(),
+    NbContextMenuModule
+    
 
     
   ],

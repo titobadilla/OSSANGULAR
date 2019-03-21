@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { MENU_ITEMS } from './pages-menu';
 
 @Component({
-  selector: 'app-menu',
+  selector: 'menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent  {
 
-  constructor() { }
+  menu = MENU_ITEMS;
 
-  ngOnInit() {
-  }
 
 }

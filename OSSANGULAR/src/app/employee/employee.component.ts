@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { EmployeeService } from './employee.service';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { Employee } from 'src/model/employee.model';
@@ -11,6 +11,7 @@ import { DeleteEmitterService } from '../delete/delete.emitter.service';
 @Component({
   selector: 'employee',
   templateUrl: './employee.component.html',
+  //encapsulation: ViewEncapsulation.Native,
   styleUrls: ['./employee.component.css']
 })
 export class EmployeeComponent implements OnInit, AfterViewInit {

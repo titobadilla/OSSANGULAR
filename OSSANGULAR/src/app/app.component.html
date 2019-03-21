@@ -1,2 +1,9 @@
-
-        <router-outlet></router-outlet>
+<div *ngIf='login'>
+        <ngx-sample-layout>
+                <nb-menu [items]="menu"></nb-menu>
+                <router-outlet></router-outlet>
+        </ngx-sample-layout>
+</div>
+<div *ngIf='!login'>
+        <login></login>
+</div>

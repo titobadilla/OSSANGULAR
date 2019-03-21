@@ -80,6 +80,36 @@ export class JwtHelper {
       let parts = token.split('.');
   
       if (parts.length !== 3) {
+        return null;
+        throw new Error('JWT must have 3 parts');
+      }
+  
+      let decoded = this.urlBase64Decode(parts[1]);
+      if (!decoded) {
+        throw new Error('Cannot decode the token');
+      }
+  
+      return JSON.parse(decoded);
+      //return decoded;
+    }
+
+    public getUserToken(token?: string): Iuser {
+  
+      if (token == null) {
+        token = sessionStorage.getItem('userToken');
+      }
+  
+      /**
+       * if it is still null, we return null since no token yet
+       */
+      if (token == null) {
+        return null;
+      }
+  
+      let parts = token.split('.');
+  
+      if (parts.length !== 3) {
+        return null;
         throw new Error('JWT must have 3 parts');
       }
   
@@ -114,6 +144,9 @@ export class JwtHelper {
     public isTokenExpired(token?: string, offsetSeconds?: number): boolean {
       if (token == null) {
         token = sessionStorage.getItem('userToken');
+      }
+      if(this.decodeToken()===null){
+        return false;
       }
   
       let date = this.getTokenExpirationDate(token);
