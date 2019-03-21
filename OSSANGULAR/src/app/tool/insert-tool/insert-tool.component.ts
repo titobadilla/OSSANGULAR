@@ -3,12 +3,11 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 import { Tool } from 'src/model/tool.model';
 import { ToolService } from '../tool.service';
-import { Model } from 'src/model/model.model';
-import { ModelService } from 'src/app/model/model.service';
 import { InventoryCategory } from 'src/model/inventorycategory.model';
 import { InventoryCategoryService } from 'src/app/inventory-category/inventory-category.service';
 import { MeasurementUnit } from 'src/model/measurementunit.model';
 import { MeasurementUnitService } from 'src/app/measurement-unit/measurement-unit.service';
+import { ToolComponent } from '../tool.component';
 
 @Component({
   selector: 'insert-tool',
@@ -30,7 +29,7 @@ export class InsertToolComponent implements OnInit {
 
   constructor(private toolService: ToolService,
     private categoryService: InventoryCategoryService,
-    private measurementUnitService: MeasurementUnitService) {
+    private measurementUnitService: MeasurementUnitService, private parent: ToolComponent) {
     this.createReactiveForm();
     this.associateValues();
   }
@@ -43,7 +42,7 @@ export class InsertToolComponent implements OnInit {
       (e: Event) => {
         e.preventDefault();
         if (this.reactForm.valid) {
-          this.reactForm.reset();
+          this.createTool();
         } else {
           // validating whole form
           Object.keys(this.reactForm.controls).forEach(field => {
@@ -89,7 +88,7 @@ export class InsertToolComponent implements OnInit {
 
   private createTool() {
     this.toolService.insertTool(this.tool).subscribe(data => {
-      this.reactForm.reset;
+      this.returnView();
     });
 
   }
@@ -105,5 +104,11 @@ export class InsertToolComponent implements OnInit {
       }
     }
     return null;
+  }
+
+  returnView() {
+    this.parent.getAlltools();
+    this.parent.insertSection = false;
+    this.parent.principal = true;
   }
 }

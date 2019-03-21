@@ -12,23 +12,23 @@ export class MeasurementUnitService {
 
   constructor(private http: HttpClient) { }
 
-  public insertMeasurementUnit(category: MeasurementUnit): Observable<MeasurementUnit> {
-    return this.http.post<MeasurementUnit>(this.URLAPI + 'measurementunit/', category);
+  public insertMeasurementUnit(measurementunit: MeasurementUnit): Observable<MeasurementUnit> {
+    return this.http.post<MeasurementUnit>(this.URLAPI + 'measurementunit/', measurementunit);
   }
 
   public getAllMeasurementUnit(): Observable<MeasurementUnit[]> {
     return this.http.get<MeasurementUnit[]>(this.URLAPI + 'measurementunit/');
   }
 
-  public getByIdMeasurementUnit(categoryID:number):Observable<MeasurementUnit>{
-    return this.http.get<MeasurementUnit>(this.URLAPI+'measurementunit/'+categoryID);
+  public getByIdMeasurementUnit(measurementUnitID:number):Observable<MeasurementUnit>{
+    return this.http.get<MeasurementUnit>(this.URLAPI+'measurementunit/'+measurementUnitID);
   }
 
-  public updateMeasurementUnit(category:MeasurementUnit):Observable<MeasurementUnit>{
-    return this.http.put<MeasurementUnit>(this.URLAPI+'measurementunit/',category);
+  public updateMeasurementUnit(measurementUnit:MeasurementUnit):Observable<MeasurementUnit>{
+    return this.http.put<MeasurementUnit>(this.URLAPI+'measurementunit/',measurementUnit);
   }
 
-  public deleteMeasurementUnit(categoryID:number):Observable<MeasurementUnit>{
-    return this.http.delete<MeasurementUnit>(this.URLAPI+'measurementunit/'+categoryID);
+  public deleteMeasurementUnit(measurementUnitID:number):Observable<MeasurementUnit>{
+    return this.http.delete<MeasurementUnit>(this.URLAPI+'measurementunit/'+measurementUnitID);
   }
 }

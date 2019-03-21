@@ -1,8 +1,9 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 import { InventoryCategory } from 'src/model/inventorycategory.model';
 import { InventoryCategoryService } from '../inventory-category.service';
+import { InventoryCategoryComponent } from '../inventory-category.component';
 
 @Component({
   selector: 'update-inventory-category',
@@ -16,7 +17,7 @@ export class UpdateInventoryCategoryComponent implements OnInit {
   reactForm: FormGroup;
   category: InventoryCategory = new InventoryCategory();
 
-  constructor(private categoryService: InventoryCategoryService) {
+  constructor(private categoryService: InventoryCategoryService, private parent: InventoryCategoryComponent) {
     this.createReactiveForm();
     this.associateValues();
   }
@@ -28,7 +29,7 @@ export class UpdateInventoryCategoryComponent implements OnInit {
       (e: Event) => {
         e.preventDefault();
         if (this.reactForm.valid) {
-          this.reactForm.reset();
+          this.editInventoryCategory();
         } else {
           // validating whole form
           Object.keys(this.reactForm.controls).forEach(field => {
@@ -38,9 +39,9 @@ export class UpdateInventoryCategoryComponent implements OnInit {
         }
       });
 
-      this.categoryService.getByIdInventoryCategory(this.categoryId).subscribe(data=>{
-        this.category=data;
-      })
+    this.categoryService.getByIdInventoryCategory(this.categoryId).subscribe(data => {
+      this.category = data;
+    })
   }
 
   associateValues() {
@@ -57,7 +58,18 @@ export class UpdateInventoryCategoryComponent implements OnInit {
   get name() { return this.reactForm.get('name'); }
 
   private editInventoryCategory() {
-    this.categoryService.updateInventoryCategory(this.category).subscribe();
+    this.categoryService.updateInventoryCategory(this.category).subscribe(
+      data => {
+        this.returnView();
+      }
+    );
+
+  }
+
+  returnView() {
+    this.parent.getAllCategories();
+    this.parent.editSection = false;
+    this.parent.principal = true;
   }
 
 }

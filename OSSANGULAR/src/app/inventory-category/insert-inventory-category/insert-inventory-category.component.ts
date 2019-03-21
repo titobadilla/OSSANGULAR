@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 import { InventoryCategory } from 'src/model/inventorycategory.model';
 import { InventoryCategoryService } from '../inventory-category.service';
+import { InventoryCategoryComponent } from '../inventory-category.component';
 
 @Component({
   selector: 'insert-inventory-category',
@@ -14,7 +15,7 @@ export class InsertInventoryCategoryComponent implements OnInit {
   reactForm: FormGroup;
   category: InventoryCategory = new InventoryCategory();
 
-  constructor(private categoryService: InventoryCategoryService) {
+  constructor(private categoryService: InventoryCategoryService, private parent: InventoryCategoryComponent) {
     this.createReactiveForm();
     this.associateValues();
   }
@@ -26,7 +27,7 @@ export class InsertInventoryCategoryComponent implements OnInit {
       (e: Event) => {
         e.preventDefault();
         if (this.reactForm.valid) {
-          this.reactForm.reset();
+          this.createInventoryCategory();
         } else {
           // validating whole form
           Object.keys(this.reactForm.controls).forEach(field => {
@@ -51,7 +52,15 @@ export class InsertInventoryCategoryComponent implements OnInit {
   get name() { return this.reactForm.get('name'); }
 
   private createInventoryCategory() {
-    this.categoryService.insertInventoryCategory(this.category).subscribe();
+    this.categoryService.insertInventoryCategory(this.category).subscribe(data=>{
+      this.returnView();
+    });
+  }
+
+  returnView() {
+    this.parent.getAllCategories();
+    this.parent.insertSection = false;
+    this.parent.principal = true;
   }
 
 }

@@ -47,6 +47,36 @@ export class DeleteComponent implements OnInit {
       this.deleteService.setDeleteGroupClient(true);
       this.modalRef.hide();
     }
+
+    if (this.type === 'inventoryCategory') {
+      this.deleteService.setDeleteInventoryCategory(true);
+      this.modalRef.hide();
+    }
+    if (this.type === 'measurementUnit') {
+      this.deleteService.setDeleteMeasurementUnit(true);
+      this.modalRef.hide();
+    }
+    if (this.type === 'tool') {
+      this.deleteService.setDeleteTool(true);
+      this.modalRef.hide();
+    }
+    if (this.type === 'deviceState') {
+      this.deleteService.setDeleteDeviceState(true);
+      this.modalRef.hide();
+    }
+    if (this.type === 'brand') {
+      this.deleteService.setDeleteBrand(true);
+      this.modalRef.hide();
+    }
+    if (this.type === 'model') {
+      this.deleteService.setDeleteModel(true);
+      this.modalRef.hide();
+    }
+
+    if (this.type === 'material') {
+      this.deleteService.setDeleteMaterial(true);
+      this.modalRef.hide();
+    }
   }
 
   cancelDelete() {

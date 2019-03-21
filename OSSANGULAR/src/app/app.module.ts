@@ -102,6 +102,14 @@ import { InventoryOutputSpecificComponent } from './inventory-output/inventory-o
 import { InventoryOutputGeneralComponent } from './inventory-output/inventory-output-general/inventory-output-general.component';
 import { MaterialComponent } from './material/material.component';
 import { DeleteComponent } from './delete/delete.component';
+import { InsertDeviceStateComponent } from './device-state/insert-device-state/insert-device-state.component';
+import { UpdateDeviceStateComponent } from './device-state/update-device-state/update-device-state.component';
+import { InsertBrandComponent } from './brand/insert-brand/insert-brand.component';
+import { UpdateBrandComponent } from './brand/update-brand/update-brand.component';
+import { InsertModelComponent } from './model/insert-model/insert-model.component';
+import { UpdateModelComponent } from './model/update-model/update-model.component';
+import { InsertMaterialComponent } from './material/insert-material/insert-material.component';
+import { UpdateMaterialComponent } from './material/update-material/update-material.component';
 
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -173,7 +181,15 @@ loadCldr(
     InventoryOutputComponent,
     InventoryOutputGeneralComponent,
     MaterialComponent,
-    DeleteComponent
+    DeleteComponent,
+    InsertDeviceStateComponent,
+    UpdateDeviceStateComponent,
+    InsertBrandComponent,
+    UpdateBrandComponent,
+    InsertModelComponent,
+    UpdateModelComponent,
+    InsertMaterialComponent,
+    UpdateMaterialComponent
 
   ],
   imports: [

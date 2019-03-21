@@ -14,6 +14,27 @@ export class DeleteEmitterService {
   private _messageGroupClientDelete = new Subject<boolean>();
   deleteGroupClient$ = this._messageGroupClientDelete.asObservable();
 
+  private _messageInventoryCategoryDelete = new Subject<boolean>();
+  deleteInventoryCategory$ = this._messageInventoryCategoryDelete.asObservable();
+
+  private _messageMeasurementUnitDelete = new Subject<boolean>();
+  deleteMeasurementUnit$ = this._messageMeasurementUnitDelete.asObservable();
+
+  private _messageToolDelete = new Subject<boolean>();
+  deleteTool$ = this._messageToolDelete.asObservable();
+
+  private _messageDeviceStateDelete = new Subject<boolean>();
+  deleteDeviceState$ = this._messageDeviceStateDelete.asObservable();
+
+  private _messageBrandDelete = new Subject<boolean>();
+  deleteBrand$ = this._messageBrandDelete.asObservable();
+
+  private _messageModelDelete = new Subject<boolean>();
+  deleteModel$ = this._messageModelDelete.asObservable();
+
+  private _messageMaterialDelete = new Subject<boolean>();
+  deleteMaterial$ = this._messageMaterialDelete.asObservable();
+
   constructor() { }
 
   public setDeleteEmployee(flat: boolean) {
@@ -26,5 +47,32 @@ export class DeleteEmitterService {
 
   public setDeleteGroupClient(flat: boolean) {
     this._messageGroupClientDelete.next(flat);
+  }
+
+  public setDeleteInventoryCategory(flat: boolean) {
+    this._messageInventoryCategoryDelete.next(flat);
+  }
+
+  public setDeleteMeasurementUnit(flat: boolean) {
+    this._messageMeasurementUnitDelete.next(flat);
+  }
+
+  public setDeleteTool(flat: boolean) {
+    this._messageToolDelete.next(flat);
+  }
+
+  public setDeleteDeviceState(flat: boolean) {
+    this._messageDeviceStateDelete.next(flat);
+  }
+
+  public setDeleteBrand(flat: boolean) {
+    this._messageBrandDelete.next(flat);
+  }
+  public setDeleteModel(flat: boolean) {
+    this._messageModelDelete.next(flat);
+  }
+
+  public setDeleteMaterial(flat: boolean) {
+    this._messageMaterialDelete.next(flat);
   }
 }

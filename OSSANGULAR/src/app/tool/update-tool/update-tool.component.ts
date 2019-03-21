@@ -7,6 +7,7 @@ import { InventoryCategory } from 'src/model/inventorycategory.model';
 import { InventoryCategoryService } from 'src/app/inventory-category/inventory-category.service';
 import { MeasurementUnitService } from 'src/app/measurement-unit/measurement-unit.service';
 import { MeasurementUnit } from 'src/model/measurementunit.model';
+import { ToolComponent } from '../tool.component';
 
 @Component({
   selector: 'update-tool',
@@ -32,7 +33,7 @@ export class UpdateToolComponent implements OnInit {
 
   constructor(private toolService: ToolService,
     private categoryService: InventoryCategoryService,
-    private measurementUnitService: MeasurementUnitService) {
+    private measurementUnitService: MeasurementUnitService, private parent: ToolComponent) {
     this.createReactiveForm();
     this.associateValues();
   }
@@ -44,7 +45,7 @@ export class UpdateToolComponent implements OnInit {
       (e: Event) => {
         e.preventDefault();
         if (this.reactForm.valid) {
-          this.reactForm.reset();
+          this.editTool();
         } else {
           // validating whole form
           Object.keys(this.reactForm.controls).forEach(field => {
@@ -54,7 +55,7 @@ export class UpdateToolComponent implements OnInit {
         }
       });
     this.getValues();
-   
+
   }
 
   setValuesInDropdown() {
@@ -104,12 +105,12 @@ export class UpdateToolComponent implements OnInit {
   }
 
   private editTool() {
-    
-    this.toolService.updateTool(this.tool).subscribe();
+    this.toolService.updateTool(this.tool).subscribe(data => {
+      this.returnView();
+    });
   }
 
   onChangeDdl(value: any) {
-
     if (value.itemData != undefined) {
       this.tool.inventoryCategory = this.findCategoryById(value.itemData.id);
     }
@@ -117,7 +118,7 @@ export class UpdateToolComponent implements OnInit {
   }
 
   onChangeUnit(value: any) {
-        if (value.itemData != undefined) {
+    if (value.itemData != undefined) {
       this.tool.measurementUnit = this.findMeasurementUnitById(value.itemData.id);
     }
   }
@@ -153,5 +154,11 @@ export class UpdateToolComponent implements OnInit {
       this.tool = data;
       this.setValuesInDropdown();
     });
+  }
+
+  returnView() {
+    this.parent.getAlltools();
+    this.parent.editSection = false;
+    this.parent.principal = true;
   }
 }

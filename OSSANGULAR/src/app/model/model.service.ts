@@ -32,7 +32,7 @@ export class ModelService {
     return this.http.put<Model>(this.URLAPI+'model/',model);
   }
 
-  public deleteModel(id:String):Observable<Model>{
+  public deleteModel(id:number):Observable<Model>{
     return this.http.delete<Model>(this.URLAPI+'model/' + id);
   }
 

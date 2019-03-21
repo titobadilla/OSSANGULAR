@@ -1,0 +1,37 @@
+<div class="col-lg-4 control-section"></div>
+<div class="col-lg-4 control-section">
+  <div class="content-wrapper" style="margin-bottom: 25px; height: 600px;">
+
+    <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
+
+      <div class="formtitle">
+        <span>Estado de Dispositivo</span>
+      </div>
+      <div class="form-group">
+        <div class="e-float-input">
+          <input id="state" type="text" formControlName="state" [(ngModel)]="deviceState.state">
+          <span class="e-float-line"></span>
+          <label for="state" class="e-float-text" style="font-size:15px;">Nombre del estado</label>
+        </div>
+        <div *ngIf="state.errors">
+          <div *ngIf="state.errors.required && state.touched" class="e-error">
+            Debe rellenar este campo.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div style="width: 325px;margin:0px auto;height: 100px;margin-top:5%;">
+          <div style="display: inline-block;">
+            <button id="validateSubmit" class="samplebtn e-control e-btn e-info" type="submit"
+              style="height:40px;width: 150px;" data-ripple="true">Agregar</button>
+          </div>
+          <div style="float: right;">
+            <button class="samplebtn e-control e-btn" type="button" (click)='returnView()'
+              style="height:40px;width: 165px;">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -40,6 +40,8 @@ import { InsertClientComponent } from './client/insert-client/insert-client.comp
 import { InventoryOutputComponent } from './inventory-output/inventory-output.component';
 import { InventoryOutputGeneralComponent } from './inventory-output/inventory-output-general/inventory-output-general.component';
 import { DeleteComponent } from './delete/delete.component';
+import { ToolComponent } from './tool/tool.component';
+import { MaterialComponent } from './material/material.component';
 
 const routes: Routes = [
   {path:"address",component:AddressComponent, canActivate: [AuthGuard]},
@@ -63,28 +65,24 @@ const routes: Routes = [
   {path:"calendar",component:CalendarComponent, canActivate: [AuthGuard]},
   {path:"calendar",component:CalendarComponent},
   {path:"update-work-order",component:UpdateWorkOrderComponent},
-  {path:"insert-employee",component:InsertEmployeeComponent},
-  {path:"insert-employee-role",component:InsertEmployeeRoleComponent},
-  {path:'update-employee-role',component:UpdateEmployeeRoleComponent},
-  {path:'insert-group-client',component:InsertGroupClientComponent},
-  {path:'update-group-client',component:UpdateGroupClientComponent},
   {path:'work-order-detail',component:WorkOrderDetailComponent},
   {path:'insert-work-order-detail',component:InsertWorkOrderDetailComponent},
   {path:'update-work-order-detail',component:UpdateWorkOrderDetailComponent},
-  {path:'insert-inventory-category',component:InsertInventoryCategoryComponent},
-  {path:'update-inventory-category',component:UpdateInventoryCategoryComponent},
-  {path:'inventory-category',component:InventoryCategory},
   {path:'search-work-order-detail',component:SearchWorkOrderDetailComponent},
   {path:'insert-client',component:InsertClientComponent},
   {path:'inventory-output',component:InventoryOutputComponent},
   {path:'inventory-output-general',component:InventoryOutputGeneralComponent},
-  {path:'delete',component:DeleteComponent}
+  {path:'delete',component:DeleteComponent},
+  {path:'tool',component:ToolComponent},
+  {path:'brand',component:BrandComponent},
+  {path:'device-state',component:DeviceStateComponent},
+  {path:'material',component:MaterialComponent}
   /*,
 
   {path:'measurement-unit',component:MeasurementUnitComponent},
   {path:'tool',component:ToolComponent},
   {path:'device',component:DeviceComponent},
-  {path:'brand',component:BrandComponent},
+  
   {path:'menu',component:MenuPrincipalComponent}
     /*,
   { path: '**', component: PageNotFoundComponent }*/

@@ -1,3 +1,44 @@
-<p>
-  material works!
-</p>
+<div *ngIf="principal">
+  <div class="col-lg-3 col-md-3 col-sm-1 col-xs-1"></div>
+  <div class="col-lg-6 col-md-6 col-sm-10 col-xs-10">
+    <div class="control-section">
+
+      <button class="but_insert" (click)="insert()">Agregar nuevo</button>
+
+      <ejs-grid #grid [dataSource]='data' allowPaging='true' [allowSorting]='true' allowTextWrap='true'
+        [pageSettings]='pageSettings'>
+        <ng-template #toolbarTemplate>
+          <ejs-toolbar>
+            <div class="e-dlg-header">Lista de Categorías de Inventario</div>
+          </ejs-toolbar>
+        </ng-template>
+        <e-columns>
+          <e-column field='name' headerText='Nombre' width='50' textAlign='center'></e-column>
+          <e-column field='quantity' headerText='Cantidad' width='50' textAlign='center'></e-column>
+          <e-column field='description' headerText='Descripción' width='50' textAlign='center'></e-column>
+          <e-column field='model.name' headerText='Modelo' width='50' textAlign='center'></e-column>
+          <e-column field='inventoryCategory.name' headerText='Categoría' width='50' textAlign='center'></e-column>
+          <e-column field='measurementUnit.name' headerText='Unidad de Medida' width='50' textAlign='center'></e-column>
+          <e-column field='edit' headerText="Editar" width='50' textAlign='center'>
+            <ng-template #template let-data>
+              <button mat-button class="btn btn-warning glyphicon glyphicon-pencil" (click)='edit(data)'></button>
+            </ng-template>
+          </e-column>
+          <e-column field='delete' headerText="Eliminar" width='50' textAlign='center'>
+            <ng-template #template let-data>
+              <button mat-button class="btn btn-danger glyphicon glyphicon-trash" (click)='openModal(data)'></button>
+            </ng-template>
+          </e-column>
+        </e-columns>
+      </ejs-grid>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="editSection">
+  <update-material [materialId]="materialId"></update-material>
+</div>
+
+<div *ngIf="insertSection">
+  <insert-material></insert-material>
+</div>
