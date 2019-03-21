@@ -1,5 +1,6 @@
+
 .control-section{
-  margin-top: 10%;
+  
 }
 
   .btn-default,.btn-primary {
@@ -48,6 +49,7 @@
   width: 200px;
   padding: 16px 0;
   font-size: 20px;
+  color: #424242;
 }
 .but_insert:hover {
  box-shadow: 1px 1px 5px black;

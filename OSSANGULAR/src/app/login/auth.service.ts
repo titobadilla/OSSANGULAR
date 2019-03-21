@@ -39,6 +39,10 @@ export class AuthService {
       return this.jwtHelper.isTokenExpired(token);
   }
 
+  public getTokenUser(): any {
+    return this.jwtHelper.getUserToken().sub;
+}
+
   public authentication(username: string, password: string): Observable<any> {
 
     this.credentials.username=username;

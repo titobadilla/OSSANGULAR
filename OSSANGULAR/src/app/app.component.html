@@ -1,2 +1,17 @@
+<div *ngIf='login'>
+        <ngx-sample-layout>
+                <nb-menu [items]="menu"></nb-menu>
+                <router-outlet></router-outlet>
+        </ngx-sample-layout>
+</div>
+<div *ngIf='!login'>
+        <login>
 
-        <router-outlet></router-outlet>
+        </login>
+        <div *ngIf="messageSesionClosedByUser" class="notify bar-top do-show" data-notification-status="success">
+                Se ha cerrado sesión correctamente.
+        </div>
+        <div *ngIf="messageSesionClosedBySystem" class="notify bar-top do-show" data-notification-status="warning">
+                Se ha cerrado sesión por inactividad en la pagina.
+        </div>
+</div>

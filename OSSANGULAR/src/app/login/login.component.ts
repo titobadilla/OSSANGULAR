@@ -5,9 +5,11 @@ import { TokenStorage } from './helper/token-storage';
 import { FormControl, FormGroup, Validators, FormsModule, AbstractControl } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 import { EventEmitterLogoutService } from './event-emitter-logout.service';
+import { AppComponent } from '../app.component';
+
 
 @Component({
-  selector: 'app-login',
+  selector: 'login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
@@ -18,26 +20,18 @@ export class LoginComponent  implements OnInit{
   returnUrl: string;
   error = '';
   reactForm: FormGroup;
-  messageSesionClosedByUser:boolean=false;
-  messageSesionClosedBySystem:boolean=false;
 
 
-  constructor(private router: Router, private authService: AuthService, private token: TokenStorage,private emitterService:EventEmitterLogoutService) {
-    //this.signOut();
+  constructor(private router: Router,private app:AppComponent,private authService: AuthService, private token: TokenStorage,private emitterService:EventEmitterLogoutService) {
     this.reactForm = new FormGroup({
       'username': new FormControl('', [FormValidators.required]),
       'password': new FormControl('', [FormValidators.required])
     });
-    emitterService.messageSesionClosedByUser$.subscribe(data=>{this.messageSesionClosedByUser=data});
-    emitterService.messageSesionClosedBySystem$.subscribe(data=>{this.messageSesionClosedBySystem=data});
   }
  
 
   ngOnInit(): void {
-    this.signOut();
-    this.initEventSubmit();
-
-    
+    this.initEventSubmit();    
   }
 
   initEventSubmit(){
@@ -64,21 +58,17 @@ export class LoginComponent  implements OnInit{
   
 
    
-  signOut(){
-    if(this.authService.isAuthenticated() && !this.authService.isTokenExpired()){
-       this.token.signOut();
-      }
-    else if(this.authService.isAuthenticated() && this.authService.isTokenExpired()){
-      this.token.signOutSystem();
-    }   
-  }
+  
 
   login(): void {
     this.loading = true;
     this.authService.authentication( this.reactForm.get('username').value, this.reactForm.get('password').value).subscribe(
       data => {
         this.token.saveToken(data.token);
-        this.router.navigate(['/']);
+        this.loading = false;
+         this.app.login=true;
+         this.app.detectChanges();
+        this.router.navigate(['/']);        
       },error=>{
         alert('Ha ocurrido un error con su datos de autenticación: '+error.status);        
         this.loading = false;   

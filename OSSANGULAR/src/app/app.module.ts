@@ -114,6 +114,15 @@ import { InsertInventoryWorkOrderComponent } from './work-order/insert-inventory
 import { InsertAdicionalInventoryWorkOrderComponent } from './work-order/insert-adicional-inventory-work-order/insert-adicional-inventory-work-order.component';
 
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ThemeModule } from './@theme/theme.module';
+import { CoreModule } from './@core/core.module';
+import { NbContextMenuModule } from '@nebular/theme';
+
+
 declare var require: any;
 
 loadCldr(
@@ -212,7 +221,15 @@ loadCldr(
    DateRangePickerModule,
 
    //modal
-   ModalModule.forRoot()
+   ModalModule.forRoot(),
+
+   //Menu
+   BrowserAnimationsModule,
+   NgbModule.forRoot(),
+    ThemeModule.forRoot(),
+    CoreModule.forRoot(),
+    NbContextMenuModule
+    
 
     
   ],

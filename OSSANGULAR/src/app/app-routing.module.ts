@@ -46,7 +46,6 @@ import { InsertInventoryWorkOrderComponent } from './work-order/insert-inventory
 import { InsertAdicionalInventoryWorkOrderComponent } from './work-order/insert-adicional-inventory-work-order/insert-adicional-inventory-work-order.component';
 
 const routes: Routes = [
-  {path:"",component:AppComponent, canActivate: [AuthGuard]},
   {path:"address",component:AddressComponent, canActivate: [AuthGuard]},
   {path: "device",component:DeviceComponent, canActivate: [AuthGuard]},
   {path:"address-description",component:AddressDescriptionComponent, canActivate: [AuthGuard]},
@@ -64,7 +63,7 @@ const routes: Routes = [
   {path:"work-order",component:WorkOrderComponent},
   {path:"work-order-detail",component:WorkOrderDetailComponent, canActivate: [AuthGuard]},
   {path:"work-order-type",component:WorkOrderTypeComponent, canActivate: [AuthGuard]},
-  {path:"login",component:LoginComponent},
+  /*{path:"login",component:LoginComponent},*/
   {path:"calendar",component:CalendarComponent, canActivate: [AuthGuard]},
   {path:"calendar",component:CalendarComponent},
   {path:"update-work-order",component:UpdateWorkOrderComponent},
