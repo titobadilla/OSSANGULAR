@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, AfterContentInit } from '@angular/core';
 
 import { NbMenuService, NbSidebarService, NbMenuItem } from '@nebular/theme';
 import { UserService } from '../../../@core/data/users.service';
@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit {
 
   user: any;
   tag = 'my-context-menu';
+  
 
   userMenu = [{ title: 'Cambiar Contraseña', data: { id: 'changePassword' } }, { title: 'Cerrar Sesión', data: { id: 'logout' } }];
 
@@ -35,9 +36,8 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private token: TokenStorage,
     private app: AppComponent) {
+
   }
-
-
 
   ngOnInit() {
     this.user = this.authService.getTokenUser();
@@ -58,7 +58,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.token.signOut();
+    this.token.signOut();    
     this.app.ngOnInit();
   }
 

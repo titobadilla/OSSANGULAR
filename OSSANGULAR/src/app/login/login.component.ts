@@ -20,26 +20,18 @@ export class LoginComponent  implements OnInit{
   returnUrl: string;
   error = '';
   reactForm: FormGroup;
-  messageSesionClosedByUser:boolean=false;
-  messageSesionClosedBySystem:boolean=false;
 
 
   constructor(private router: Router,private app:AppComponent,private authService: AuthService, private token: TokenStorage,private emitterService:EventEmitterLogoutService) {
-    //this.signOut();
     this.reactForm = new FormGroup({
       'username': new FormControl('', [FormValidators.required]),
       'password': new FormControl('', [FormValidators.required])
     });
-    emitterService.messageSesionClosedByUser$.subscribe(data=>{this.messageSesionClosedByUser=data});
-    emitterService.messageSesionClosedBySystem$.subscribe(data=>{this.messageSesionClosedBySystem=data});
   }
  
 
   ngOnInit(): void {
-    //this.signOut();
-    this.initEventSubmit();
-
-    
+    this.initEventSubmit();    
   }
 
   initEventSubmit(){
@@ -66,14 +58,7 @@ export class LoginComponent  implements OnInit{
   
 
    
-  signOut(){
-    if(this.authService.isAuthenticated() && !this.authService.isTokenExpired()){
-       this.token.signOut();
-      }
-    else if(this.authService.isAuthenticated() && this.authService.isTokenExpired()){
-      this.token.signOutSystem();
-    }   
-  }
+  
 
   login(): void {
     this.loading = true;

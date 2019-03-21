@@ -36,7 +36,7 @@ return next.handle(authReq)
            // http response status code
            if (error.status === 401) {
             status = 'failed'
-            this.router.navigate(['login']);            
+            this.router.navigate(['']);            
           }
         
     }),
