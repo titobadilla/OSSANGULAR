@@ -110,6 +110,8 @@ import { InsertModelComponent } from './model/insert-model/insert-model.componen
 import { UpdateModelComponent } from './model/update-model/update-model.component';
 import { InsertMaterialComponent } from './material/insert-material/insert-material.component';
 import { UpdateMaterialComponent } from './material/update-material/update-material.component';
+import { InsertInventoryWorkOrderComponent } from './work-order/insert-inventory-work-order/insert-inventory-work-order.component';
+import { InsertAdicionalInventoryWorkOrderComponent } from './work-order/insert-adicional-inventory-work-order/insert-adicional-inventory-work-order.component';
 
 
 declare var require: any;
@@ -180,7 +182,9 @@ loadCldr(
     InsertModelComponent,
     UpdateModelComponent,
     InsertMaterialComponent,
-    UpdateMaterialComponent
+    UpdateMaterialComponent,
+    InsertInventoryWorkOrderComponent,
+    InsertAdicionalInventoryWorkOrderComponent
 
   ],
   imports: [

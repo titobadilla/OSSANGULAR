@@ -42,6 +42,8 @@ import { InventoryOutputGeneralComponent } from './inventory-output/inventory-ou
 import { DeleteComponent } from './delete/delete.component';
 import { ToolComponent } from './tool/tool.component';
 import { MaterialComponent } from './material/material.component';
+import { InsertInventoryWorkOrderComponent } from './work-order/insert-inventory-work-order/insert-inventory-work-order.component';
+import { InsertAdicionalInventoryWorkOrderComponent } from './work-order/insert-adicional-inventory-work-order/insert-adicional-inventory-work-order.component';
 
 const routes: Routes = [
   {path:"",component:AppComponent, canActivate: [AuthGuard]},
@@ -59,7 +61,7 @@ const routes: Routes = [
   {path:"model",component:ModelComponent, canActivate: [AuthGuard]},
   {path:"telephone-client",component:TelephoneClientComponent, canActivate: [AuthGuard]},
   {path:"telephone-employee",component:TelephoneEmployeeComponent, canActivate: [AuthGuard]},
-  {path:"work-order",component:WorkOrderComponent, canActivate: [AuthGuard]},
+  {path:"work-order",component:WorkOrderComponent},
   {path:"work-order-detail",component:WorkOrderDetailComponent, canActivate: [AuthGuard]},
   {path:"work-order-type",component:WorkOrderTypeComponent, canActivate: [AuthGuard]},
   {path:"login",component:LoginComponent},
@@ -77,7 +79,9 @@ const routes: Routes = [
   {path:'tool',component:ToolComponent},
   {path:'brand',component:BrandComponent},
   {path:'device-state',component:DeviceStateComponent},
-  {path:'material',component:MaterialComponent}
+  {path:'material',component:MaterialComponent},
+  {path:'insert-work-order',component:InsertInventoryWorkOrderComponent},
+  {path:'insert-adicional-inventory',component:InsertAdicionalInventoryWorkOrderComponent}
   /*,
 
   {path:'measurement-unit',component:MeasurementUnitComponent},
