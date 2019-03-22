@@ -110,6 +110,7 @@ import { InsertModelComponent } from './model/insert-model/insert-model.componen
 import { UpdateModelComponent } from './model/update-model/update-model.component';
 import { InsertMaterialComponent } from './material/insert-material/insert-material.component';
 import { UpdateMaterialComponent } from './material/update-material/update-material.component';
+import { InsertInventoryWorkOrderComponent } from './work-order/insert-inventory-work-order/insert-inventory-work-order.component';
 
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -119,6 +120,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ThemeModule } from './@theme/theme.module';
 import { CoreModule } from './@core/core.module';
 import { NbContextMenuModule } from '@nebular/theme';
+import { InsertAdicionalMaterialWorkOrderComponent } from './work-order/insert-adicional-material-work-order/insert-adicional-material-work-order.component';
+import { InsertAdicionalToolWorkOrderComponent } from './work-order/insert-adicional-tool-work-order/insert-adicional-tool-work-order.component';
+import { InsertAdicionalDeviceWorkOrderComponent } from './work-order/insert-adicional-device-work-order/insert-adicional-device-work-order.component';
 
 
 declare var require: any;
@@ -189,7 +193,11 @@ loadCldr(
     InsertModelComponent,
     UpdateModelComponent,
     InsertMaterialComponent,
-    UpdateMaterialComponent
+    UpdateMaterialComponent,
+    InsertInventoryWorkOrderComponent,
+    InsertAdicionalMaterialWorkOrderComponent,
+    InsertAdicionalToolWorkOrderComponent,
+    InsertAdicionalDeviceWorkOrderComponent
 
   ],
   imports: [
