@@ -57,7 +57,7 @@ export class UpdateMaterialComponent implements OnInit {
     this.reactForm = new FormGroup({
       'name': new FormControl('', [FormValidators.required]),
       'description': new FormControl('', [FormValidators.required]),
-      'quantity': new FormControl('', [FormValidators.required]),
+      'quantity': new FormControl('', []),
       'model': new FormControl('', [this.valueRequired]),
       'category': new FormControl('', [this.valueRequired]),
       'measurementUnit': new FormControl('', [this.valueRequired]),

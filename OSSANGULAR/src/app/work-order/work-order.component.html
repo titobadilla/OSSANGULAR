@@ -1,187 +1,160 @@
-<div id="panel" class="panel panel-default">
-  <div class="panel-body">
+<div class="col-lg-2"></div>
+<div class="e-tab-section">
 
-    <div class="row">
-      <div class="col-md-3 border-right">
+  <div class="col-lg-8 content-wrapper control-section">
+    <div class="e-sample-resize-container">
 
-        <h1>Orden de trabajo</h1>
-        <div class="form-group">
+      <ejs-tab id="tab_adaptive" #adaptiveTab heightAdjustMode='None' height='900px'>
+        <e-tabitems>
+          <e-tabitem [header]='headerText[0]'>
+            <ng-template #content>
 
-          <div class="form-group" style="width: 80%; margin-left: 15%">
-            <label> Descripción</label>
-            <br>
-            <input type="text" class="form-control" [(ngModel)]="workOrder.description">
-          </div>
+              <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
 
-          <div class="form-group" style="width: 80%; margin-left: 15%">
-            <label class="icon-user">Fecha Inicial</label>
-            <br>
-            <input type="date" class="form-control" placeholder="Date" [(ngModel)]="workOrder.startDate" name="date">
-          </div>
+                <div class="formtitle">
+                  <span>Orden de Trabajo</span>
+                </div>
 
-          <div class="form-group" style="width: 80%; margin-left: 15%">
-            <label class="icon-user">Hora incial</label>
-            <br>
-            <input type="time" class="form-control" [(ngModel)]="startHour">
-          </div>
+                <div class="row">
+                  <div class="col-lg-6">
 
-          <div class="form-group" style="width: 80%; margin-left: 15%">
-            <label class="icon-user">Fecha Final</label>
-            <br>
-            <input type="date" class="form-control" placeholder="Date" [(ngModel)]="workOrder.endDate" name="date">
-          </div>
+                    <div class="form-group">
+                      <div class="e-float-input">
+                        <input id="description" type="text" formControlName="description">
+                        <span class="e-float-line"></span>
+                        <label for="description" class="e-float-text" style="font-size:15px;">Descripción</label>
+                      </div>
+                      <div *ngIf="description.errors">
+                        <div *ngIf="description.errors.required && description.touched" class="e-error">
+                          Debe rellenar este campo.
+                        </div>
+                      </div>
+                    </div>
 
-          <div class="form-group" style="width: 80%; margin-left: 15%">
-            <label class="icon-user">Hora final</label>
-            <br>
-            <input type="time" class="form-control" [(ngModel)]="endHour">
-          </div>
+                    <div class="form-group">
+                      <div class="e-float-input">
+                        <input id="startDate" type="date" formControlName="startDate">
+                        <span class="e-float-line"></span>
+                        <label for="startDate" class="e-float-text" style="font-size:15px;">Fecha inicial</label>
+                      </div>
+                      <div *ngIf="startDate.errors">
+                        <div *ngIf="startDate.errors.required && startDate.touched" class="e-error">
+                          Debe rellenar este campo.
+                        </div>
+                      </div>
+                    </div>
 
-          <div class="form-group" style="width: 80%; margin-left: 15%">
-            <label>Elija un cliente</label>
-            <ng-select [items]="clients" bindLabel="name" bindValue="id" placeholder="Seleccione un cliente"
-              [(ngModel)]="workOrder.client.id" name="clients">
-            </ng-select>
-          </div>
+                    <div class="form-group">
+                      <div class="e-float-input">
+                        <input id="endDate" type="date" formControlName="endDate">
+                        <span class="e-float-line"></span>
+                        <label for="endDate" class="e-float-text" style="font-size:15px;">Fecha final</label>
+                      </div>
+                      <div *ngIf="endDate.errors">
+                        <div *ngIf="endDate.errors.required && endDate.touched" class="e-error">
+                          Debe rellenar este campo.
+                        </div>
+                      </div>
+                    </div>
 
-          <div class="form-group" style="width: 80%; margin-left: 15%">
-            <label>Elija un estado</label>
-            <ng-select [items]="colors" bindLabel="state" bindValue="id" placeholder="Seleccione un color"
-             [(ngModel)]="workOrder.color.id"
-              name="colors">
+                    <div class="form-group">
+                      <div class="e-float-input">
+                        <input id="startHour" type="time" formControlName="startHour">
+                        <span class="e-float-line"></span>
+                        <label for="startHour" class="e-float-text" style="font-size:15px;">Hora inicial</label>
+                      </div>
+                      <div *ngIf="startHour.errors">
+                        <div *ngIf="startHour.errors.required && startHour.touched" class="e-error">
+                          Debe rellenar este campo.
+                        </div>
+                      </div>
+                    </div>
 
-              <ng-template ng-label-tmp let-item="item">
-                <img height="20" width="20" [style.background-color]="item.color" />
-                <b> {{item.state}}</b>
+                    <div class="form-group">
+                      <div class="e-float-input">
+                        <input id="endHour" type="time" formControlName="endHour">
+                        <span class="e-float-line"></span>
+                        <label for="endHour" class="e-float-text" style="font-size:15px;">Hora final</label>
+                      </div>
+                      <div *ngIf="endHour.errors">
+                        <div *ngIf="endHour.errors.required && endHour.touched" class="e-error">
+                          Debe rellenar este campo.
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="col-lg-6">
+
+                    <div class="form-group">
+                      <ejs-multiselect formControlName="employeesMulti" (removing)='select($event)'
+                        (select)='select($event)' id='multiselect-checkbox' [dataSource]='employees' [mode]='box'
+                        [fields]='employeeWorkOrder' [placeholder]='employeeWatermark' [popupHeight]='popHeight'
+                        showDropDownIcon='true' floatLabelType='Auto' [allowFiltering]='true'></ejs-multiselect>
+                    </div>
+
+                    <div class="form-group">
+                      <ejs-dropdownlist formControlName="client" name="client" [(ngModel)]="workOrder.client.id"
+                        [dataSource]='clients' [fields]='clientWorkOrder' [placeholder]='clientWatermark'
+                        floatLabelType='Auto'>
+                      </ejs-dropdownlist>
+                    </div>
+
+                    <div class="form-group">
+                      <ejs-dropdownlist formControlName="type" name="type" [(ngModel)]="workOrder.workOrderType.id"
+                        [dataSource]='workOrdersType' [fields]='typeWorkOrder' [placeholder]='typeWatermark'
+                        floatLabelType='Auto'>
+                      </ejs-dropdownlist>
+                    </div>
+
+                    <div class="form-group">
+                      <ejs-dropdownlist formControlName="color" name="color" [(ngModel)]="workOrder.color.id"
+                        [dataSource]='colors' [fields]='colorWorkOrder' [placeholder]='colorWatermark'
+                        floatLabelType='Auto'>
+                      </ejs-dropdownlist>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div style="width: 325px;margin:0px auto;height: 100px; padding-top: 25px;">
+                    <div style="display: inline-block;">
+                      <button id="validateSubmit" class="samplebtn e-control e-btn e-info" type="submit"
+                        style="height:40px;width: 150px;" data-ripple="true">Agregar</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </ng-template>
+          </e-tabitem>
+          
+            <e-tabitem [header]='headerText[1]'>
+              <ng-template #content>
+                <insert-inventory-work-order></insert-inventory-work-order>
               </ng-template>
-            </ng-select>
-          </div>
+            </e-tabitem>
 
+            <e-tabitem [header]='headerText[2]'>
+              <ng-template #content>
+                <insert-adicional-material-work-order></insert-adicional-material-work-order>
+              </ng-template>
+            </e-tabitem>
 
-          <!--[style.backgroundColor]="item.bgcolor"   <hr />-->
-
-
-          <div class="form-group" style="width: 80%; margin-left: 15%">
-            <label>Seleccione los empleados asociados</label>
-            <ng-select [items]="employees" bindLabel='name' bindValue="id" [multiple]="true" placeholder="Seleccione los empleados"
-              [(ngModel)]="selectedEmployees" name="employees">
-            </ng-select>
-          </div>
-
-          <div class="form-group" style="width: 80%; margin-left: 15%">
-            <label class="icon-user">Tipo de orden de trabajo</label>
-            <br>
-            <ng-select [items]="workOrdersType" bindLabel="name" bindValue="id" placeholder="Seleccione un tipo de orden de trabajo"
-              name="WorkOrderType" [(ngModel)]="workOrder.workOrderType.id"></ng-select>
-          </div>
-        </div>
-      </div>
-      <!--end of first column-->
-
-      <div class="col-md-8" style="margin-left:2%;">
-        <h1>Inventario</h1>
-        <div class="row">
-
-          <div class="col-md-5">
-            <h4>Listas de inventario</h4>
-            <ng-select [items]="lists" bindLabel="name" bindValue="id" placeholder="Seleccione una lista de inventario"
-              [(ngModel)]="workOrder.listWorkOrder.id" name="listWorkOrder">
-            </ng-select>
-          </div>
-        </div>
-
-        <div class="row" style="margin-top:3%;">
-
-          <div class="col-md-4">
-            <h4>Herramientas</h4>
-            <table class="table table table-bordered table-hover table-responsive">
-              <tr>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Cantidad</th>
-              </tr>
-              <tr>
-                <td>Martillo</td>
-                <td>Punta de metal</td>
-                <td>50</td>
-              </tr>
-              <tr>
-                <td>Cable</td>
-                <td>Grueso</td>
-                <td>50</td>
-              </tr>
-              <tr>
-                <td>Clavos</td>
-                <td>Punta fina</td>
-                <td>50</td>
-              </tr>
-            </table>
-          </div>
-
-          <div class="col-md-4">
-            <h4>Dispositivos</h4>
-            <table class="table table table-bordered table-hover table-responsive">
-              <tr>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Cantidad</th>
-              </tr>
-              <tr>
-                <td>Martillo</td>
-                <td>Punta de metal</td>
-                <td>50</td>
-              </tr>
-              <tr>
-                <td>Cable</td>
-                <td>Grueso</td>
-                <td>50</td>
-              </tr>
-              <tr>
-                <td>Clavos</td>
-                <td>Punta fina</td>
-                <td>50</td>
-              </tr>
-            </table>
-          </div>
-
-          <div class="col-md-4">
-            <h4>Materiales</h4>
-            <table class="table table table-bordered table-hover table-responsive">
-              <tr>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Cantidad</th>
-              </tr>
-              <tr>
-                <td>Martillo</td>
-                <td>Punta de metal</td>
-                <td>50</td>
-              </tr>
-              <tr>
-                <td>Cable</td>
-                <td>Grueso</td>
-                <td>50</td>
-              </tr>
-              <tr>
-                <td>Clavos</td>
-                <td>Punta fina</td>
-                <td>50</td>
-              </tr>
-            </table>
-          </div>
-
-        </div>
-        <!--end of row-->
-
-        <div class="row-fluid">
-          <div class="col-md-8"></div>
-          <div class="col-md-2"><button type="submit" class="btn btn-primary enviar" (click)="createWorkOrder()">Guardar</button></div>
-          <div class="col-md-2"><button class="btn btn-warning enviar">Crear lista</button></div>
-        </div>
-      </div>
+            <e-tabitem [header]='headerText[3]'>
+              <ng-template #content>
+                <insert-adicional-tool-work-order></insert-adicional-tool-work-order>
+              </ng-template>
+            </e-tabitem>
+            <e-tabitem [header]='headerText[4]'>
+              <ng-template #content>
+                <insert-adicional-device-work-order></insert-adicional-device-work-order>
+              </ng-template>
+            </e-tabitem>
+          
+        </e-tabitems>
+      </ejs-tab>
 
     </div>
-
-
   </div>
 </div>

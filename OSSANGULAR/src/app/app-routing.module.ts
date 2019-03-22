@@ -43,7 +43,6 @@ import { DeleteComponent } from './delete/delete.component';
 import { ToolComponent } from './tool/tool.component';
 import { MaterialComponent } from './material/material.component';
 import { InsertInventoryWorkOrderComponent } from './work-order/insert-inventory-work-order/insert-inventory-work-order.component';
-import { InsertAdicionalInventoryWorkOrderComponent } from './work-order/insert-adicional-inventory-work-order/insert-adicional-inventory-work-order.component';
 
 const routes: Routes = [
   {path:"address",component:AddressComponent, canActivate: [AuthGuard]},
@@ -79,8 +78,7 @@ const routes: Routes = [
   {path:'brand',component:BrandComponent},
   {path:'device-state',component:DeviceStateComponent},
   {path:'material',component:MaterialComponent},
-  {path:'insert-work-order',component:InsertInventoryWorkOrderComponent},
-  {path:'insert-adicional-inventory',component:InsertAdicionalInventoryWorkOrderComponent}
+  {path:'insert-work-order',component:InsertInventoryWorkOrderComponent}
   /*,
 
   {path:'measurement-unit',component:MeasurementUnitComponent},

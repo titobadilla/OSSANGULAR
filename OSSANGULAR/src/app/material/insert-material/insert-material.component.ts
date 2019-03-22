@@ -66,7 +66,6 @@ export class InsertMaterialComponent implements OnInit {
     this.reactForm = new FormGroup({
       'name': new FormControl('', [FormValidators.required]),
       'description': new FormControl('', [FormValidators.required]),
-      'quantity': new FormControl('', [FormValidators.required]),
       'model': new FormControl('', [this.valueRequired]),
       'category': new FormControl('', [this.valueRequired]),
       'measurementUnit': new FormControl('', [this.valueRequired]),
@@ -76,7 +75,6 @@ export class InsertMaterialComponent implements OnInit {
 
   get name() { return this.reactForm.get('name'); }
   get description() { return this.reactForm.get('description'); }
-  get quantity() { return this.reactForm.get('quantity'); }
   get model() { return this.reactForm.get('model'); }
   get category() { return this.reactForm.get('category'); }
   get measurementUnit() { return this.reactForm.get('measurementUnit'); }

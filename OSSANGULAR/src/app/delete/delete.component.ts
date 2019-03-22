@@ -17,12 +17,16 @@ export class DeleteComponent implements OnInit {
 
   deleteSection = false;
   seeMoreSection = false;
+  workOrderValidateQuantitySection = false;
   constructor(public modalRef: BsModalRef, private deleteService: DeleteEmitterService
   ) { }
 
   ngOnInit() {
     if (this.type === 'seeMore') {
       this.seeMoreSection = true;
+    }
+    if (this.type === 'quantityValidate') {
+      this.workOrderValidateQuantitySection = true;
     }
     else {
       this.deleteSection = true;
@@ -75,6 +79,24 @@ export class DeleteComponent implements OnInit {
 
     if (this.type === 'material') {
       this.deleteService.setDeleteMaterial(true);
+      this.modalRef.hide();
+    }
+
+    if (this.type === 'quantityValidate') {
+      this.modalRef.hide();
+    }
+
+    if (this.type === 'materialOfWorkOrder') {
+      this.deleteService.setDeleteMaterialOfWorkOrder(true);
+      this.modalRef.hide();
+    }
+    if (this.type === 'toolOfWorkOrder') {
+      this.deleteService.setDeleteToolOfWorkOrder(true);
+      this.modalRef.hide();
+    }
+
+    if (this.type === 'deviceOfWorkOrder') {
+      this.deleteService.setDeleteDeviceOfWorkOrder(true);
       this.modalRef.hide();
     }
   }
