@@ -11,7 +11,7 @@
         [fields]='materialWorkOrder' [placeholder]='materialWatermark' floatLabelType='Auto' id='dropdown'>
       </ejs-dropdownlist>
     </div>
-    <div class="row" style="margin-top:5%; margin-left: 2%; margin-right: 2%; margin-bottom: 11%;">
+    <div class="row" style="margin-top:5%; margin-left: 2%; margin-right: 2%; margin-bottom: 15%;">
 
 
       <div class="col-lg-4">
@@ -46,10 +46,10 @@
             </ejs-toolbar>
           </ng-template>
           <e-columns>
-            <e-column field='name' headerText='Nombre' width='50' textAlign='center'></e-column>
-            <e-column field='description' headerText='Descripción' width='60' textAlign='center'></e-column>
-            <e-column field='quantity' headerText='Cantidad' width='50' textAlign='center'></e-column>
-            <e-column field='delete' headerText="Eliminar" width='50' textAlign='center'>
+            <e-column field='id.material.name' headerText='Nombre' width='50' textAlign='center'></e-column>
+            <e-column field='id.material.description' headerText='Descripción' width='60' textAlign='center'></e-column>
+            <e-column field='id.material.quantity' headerText='Cantidad' width='50' textAlign='center'></e-column>
+            <e-column field='id.material.delete' headerText="Eliminar" width='50' textAlign='center'>
               <ng-template #template let-data>
                 <button mat-button class="btn btn-danger glyphicon glyphicon-trash" (click)='openModal(data)'></button>
               </ng-template>

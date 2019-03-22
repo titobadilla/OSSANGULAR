@@ -11,7 +11,7 @@
         [fields]='deviceWorkOrder' [placeholder]='deviceWatermark' floatLabelType='Auto' id='dropdown'>
       </ejs-dropdownlist>
     </div>
-    <div class="row" style="margin-top:5%; margin-left: 2%; margin-right: 2%; margin-bottom: 11%;">
+    <div class="row" style="margin-top:5%; margin-left: 2%; margin-right: 2%; margin-bottom: 15%;">
 
       <div class="col-lg-4">
         <div *ngIf="addQuantityD">
@@ -45,8 +45,8 @@
             </ejs-toolbar>
           </ng-template>
           <e-columns>
-            <e-column field='name' headerText='Nombre' width='50' textAlign='center'></e-column>
-            <e-column field='description' headerText='Descripción' width='60' textAlign='center'></e-column>
+            <e-column field='id.device.name' headerText='Nombre' width='50' textAlign='center'></e-column>
+            <e-column field='id.device.description' headerText='Descripción' width='60' textAlign='center'></e-column>
             <e-column field='quantity' headerText='Cantidad' width='50' textAlign='center'></e-column>
             <e-column field='delete' headerText="Eliminar" width='50' textAlign='center'>
               <ng-template #template let-data>

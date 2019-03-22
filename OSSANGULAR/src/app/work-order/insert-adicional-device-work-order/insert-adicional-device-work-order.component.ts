@@ -9,30 +9,36 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { DeleteEmitterService } from 'src/app/delete/delete.emitter.service';
 import { Device } from 'src/model/device.model';
 import { DeviceService } from 'src/app/device/device.service';
+import { WorkOrderDevice } from 'src/model/workOrderdevice.model';
 @Component({
   selector: 'insert-adicional-device-work-order',
   templateUrl: './insert-adicional-device-work-order.component.html',
   styleUrls: ['./insert-adicional-device-work-order.component.css']
 })
 export class InsertAdicionalDeviceWorkOrderComponent implements OnInit {
+
+  //basic variables
   reactForm: FormGroup;
   modalRef: BsModalRef;
   public pageSettings: Object;
   @ViewChild('grid') public grid: GridComponent;
-  @ViewChild('dropdown') public listObj: DropDownListComponent;
 
-  devices: Device[] = new Array();
-  selectedDevices: Device[] = new Array();
+  //dropdown variables
+  @ViewChild('dropdown') public listObj: DropDownListComponent;
   public deviceWorkOrder: Object = { text: 'name', value: 'id' };
   public deviceWatermark: string = 'Seleccione los Dispositivos';
-  device: Device = new Device();
+  devices: Device[] = new Array();
+
+  //necessary variables
+  selectedDevices: WorkOrderDevice[] = new Array();
   quantityDevice: number = 0;
   newQuantityDevice: number = 0;
-  deviceSelected: Device = new Device();
+  deviceSelected: WorkOrderDevice = new WorkOrderDevice();
   addQuantityD: boolean = false;
-  deviceDelete: Device = new Device();
+  deviceDelete: WorkOrderDevice = new WorkOrderDevice();
 
-  constructor(private serviceDevice: DeviceService, private modalService: BsModalService,
+  constructor(private serviceDevice: DeviceService, 
+    private modalService: BsModalService,
     private deleteService: DeleteEmitterService) {
     this.createReactiveForm();
   }
@@ -84,8 +90,8 @@ export class InsertAdicionalDeviceWorkOrderComponent implements OnInit {
 
   onChangeDdlDevice(value: any) {
     if (value.itemData != undefined) {
-      this.deviceSelected = this.findDeviceById(value.itemData.id);
-      this.quantityDevice = this.deviceSelected.quantity;
+      this.deviceSelected.id.device = this.findDeviceById(value.itemData.id);
+      this.quantityDevice = this.deviceSelected.id.device.quantity;
       this.newQuantityDevice = this.quantityDevice;
 
       this.quantityDev.setValue(this.quantityDevice);
@@ -115,7 +121,7 @@ export class InsertAdicionalDeviceWorkOrderComponent implements OnInit {
       this.selectedDevices.push(this.deviceSelected);
       this.grid.refresh();
 
-      this.devices = this.removeElementAdded(this.devices, this.deviceSelected)
+      this.devices = this.removeElementAdded(this.devices, this.deviceSelected.id.device)
       this.addQuantityD = false;
     } if (this.quantityDeviceNew.value <= 0) {
       this.openModalValidate(this.deviceSelected);
@@ -138,34 +144,44 @@ export class InsertAdicionalDeviceWorkOrderComponent implements OnInit {
     });
     return aux
   }
+  
+  removeElementAddedOfTable(arr, elementSelected) {
+    let aux;
+    arr.forEach((element, index) => {
+      if (element.id.device.id === elementSelected.id.device.id) {
+        aux = this.arrayRemove(arr, index);
+      }
+    });
+    return aux
+  }
 
-  openModal(device: Device) {
+  openModal(device:WorkOrderDevice) {
     this.deviceDelete = device;
 
     this.modalRef = this.modalService.show(DeleteComponent, {
       initialState: {
         title: 'Eliminar el Dispositivo de la Orden de Trabajo',
-        data: 'el dispositivo con el nombre: ' + device.name,
+        data: 'el dispositivo con el nombre: ' + device.id.device.name,
         type: 'deviceOfWorkOrder'
       }
     });
   }
 
-  openModalValidate(device: Device) {
+  openModalValidate(device:WorkOrderDevice) {
 
     this.modalRef = this.modalService.show(DeleteComponent, {
       initialState: {
         title: 'Alerta!',
-        data: device.name,
+        data: device.id.device.name,
         type: 'quantityValidate'
       }
     });
   }
 
   deleteOfTable() {
-    this.selectedDevices = this.removeElementAdded(this.selectedDevices, this.deviceDelete)
+    this.selectedDevices = this.removeElementAddedOfTable(this.selectedDevices, this.deviceDelete)
     this.grid.refresh();
-    this.devices.push(this.deviceDelete);
+    this.devices.push(this.deviceDelete.id.device);
     //this.listObj.refresh();
   }
 }
