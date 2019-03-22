@@ -12,6 +12,10 @@ import { filter, map } from 'rxjs/operators';
 import { NbMenuBag } from '@nebular/theme/components/menu/menu.service';
 import { NbLogoutComponent } from '@nebular/auth';
 import { AppComponent } from 'src/app/app.component';
+import { EventEmitterLogoutService } from 'src/app/login/event-emitter-logout.service';
+import 'rxjs/add/observable/interval';
+import 'rxjs/add/operator/takeWhile';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ngx-header',
@@ -24,7 +28,7 @@ export class HeaderComponent implements OnInit {
 
   user: any;
   tag = 'my-context-menu';
-  
+  stopCondition:boolean=false;
 
   userMenu = [{ title: 'Cambiar Contraseña', data: { id: 'changePassword' } }, { title: 'Cerrar Sesión', data: { id: 'logout' } }];
 
@@ -50,17 +54,37 @@ export class HeaderComponent implements OnInit {
           this.changePassword();
         }
       });
+      this.logoutSystem();
   }
 
+logoutSystem(){
+ /* Observable.interval(1000)
+    .takeWhile(() => !this.stopCondition)
+    .subscribe(i => { 
+       this.logoutPrivateBySystem();
+       console.log(i);
+    })*/
 
+}
+
+logoutPrivateBySystem(){
+  if(this.authService.isAuthenticated() && this.authService.isTokenExpired()){
+    this.token.signOutSystem();    
+    this.app.ngOnInit();
+    this.stopCondition=true;
+  }
+}
   changePassword() {
 
   }
 
   logout() {
+    this.stopCondition=true;
     this.token.signOut();    
     this.app.ngOnInit();
   }
+
+  
 
   toggleSidebar(): boolean {
     this.sidebarService.toggle(true, 'menu-sidebar');
