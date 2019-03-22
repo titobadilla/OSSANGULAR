@@ -1,7 +1,8 @@
-<div class="col-lg-2"></div>
+<div class="col-lg-1"></div>
 <div class="e-tab-section">
 
-  <div class="col-lg-8 content-wrapper control-section">
+  <div class="col-lg-10 content-wrapper control-section">
+      <button class="but_insert" (click)="insert()">Crear Orden</button>
     <div class="e-sample-resize-container">
 
       <ejs-tab id="tab_adaptive" #adaptiveTab heightAdjustMode='None' height='900px'>
@@ -20,7 +21,7 @@
 
                     <div class="form-group">
                       <div class="e-float-input">
-                        <input id="description" type="text" formControlName="description">
+                        <input id="description" type="text" formControlName="description" [(ngModel)]="workOrder.description">
                         <span class="e-float-line"></span>
                         <label for="description" class="e-float-text" style="font-size:15px;">Descripción</label>
                       </div>
@@ -33,7 +34,7 @@
 
                     <div class="form-group">
                       <div class="e-float-input">
-                        <input id="startDate" type="date" formControlName="startDate">
+                        <input id="startDate" type="date" formControlName="startDate" [(ngModel)]="workOrder.startDate">
                         <span class="e-float-line"></span>
                         <label for="startDate" class="e-float-text" style="font-size:15px;">Fecha inicial</label>
                       </div>
@@ -46,7 +47,7 @@
 
                     <div class="form-group">
                       <div class="e-float-input">
-                        <input id="endDate" type="date" formControlName="endDate">
+                        <input id="endDate" type="date" formControlName="endDate"[(ngModel)]="workOrder.endDate">
                         <span class="e-float-line"></span>
                         <label for="endDate" class="e-float-text" style="font-size:15px;">Fecha final</label>
                       </div>
@@ -59,7 +60,7 @@
 
                     <div class="form-group">
                       <div class="e-float-input">
-                        <input id="startHour" type="time" formControlName="startHour">
+                        <input id="startHour" type="time" formControlName="startHour" >
                         <span class="e-float-line"></span>
                         <label for="startHour" class="e-float-text" style="font-size:15px;">Hora inicial</label>
                       </div>
@@ -72,7 +73,7 @@
 
                     <div class="form-group">
                       <div class="e-float-input">
-                        <input id="endHour" type="time" formControlName="endHour">
+                        <input id="endHour" type="time" formControlName="endHour" >
                         <span class="e-float-line"></span>
                         <label for="endHour" class="e-float-text" style="font-size:15px;">Hora final</label>
                       </div>
@@ -89,7 +90,7 @@
 
                     <div class="form-group">
                       <ejs-multiselect formControlName="employeesMulti" (removing)='select($event)'
-                        (select)='select($event)' id='multiselect-checkbox' [dataSource]='employees' [mode]='box'
+                        (select)='selectEmployee($event)' id='multiselect-checkbox' [dataSource]='employees' [mode]='box'
                         [fields]='employeeWorkOrder' [placeholder]='employeeWatermark' [popupHeight]='popHeight'
                         showDropDownIcon='true' floatLabelType='Auto' [allowFiltering]='true'></ejs-multiselect>
                     </div>
@@ -112,6 +113,10 @@
                       <ejs-dropdownlist formControlName="color" name="color" [(ngModel)]="workOrder.color.id"
                         [dataSource]='colors' [fields]='colorWorkOrder' [placeholder]='colorWatermark'
                         floatLabelType='Auto'>
+                       <ng-template #itemTemplate let-data>
+                          <img height="20" width="20" [style.background-color]="data.color" />
+                          <b> {{data.state}}</b>
+                        </ng-template>
                       </ejs-dropdownlist>
                     </div>
                   </div>
@@ -120,7 +125,7 @@
                 <div class="row">
                   <div style="width: 325px;margin:0px auto;height: 100px; padding-top: 25px;">
                     <div style="display: inline-block;">
-                      <button id="validateSubmit" class="samplebtn e-control e-btn e-info" type="submit"
+                      <button id="validateSubmit" class="samplebtn e-control e-btn e-info" type="submit" (click)='formatDates()'
                         style="height:40px;width: 150px;" data-ripple="true">Agregar</button>
                     </div>
                   </div>

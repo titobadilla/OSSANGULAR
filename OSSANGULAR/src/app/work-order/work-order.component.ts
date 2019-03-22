@@ -13,6 +13,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 import { MultiSelectComponent } from '@syncfusion/ej2-angular-dropdowns';
 import { CheckBoxComponent } from '@syncfusion/ej2-angular-buttons';
+import { Timestamp } from 'rxjs/internal/operators/timestamp';
 
 @Component({
   selector: 'work-order',
@@ -22,10 +23,15 @@ import { CheckBoxComponent } from '@syncfusion/ej2-angular-buttons';
 export class WorkOrderComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     setTimeout(this.initEventSubmit, 1);
+    this.createReactiveForm();
+    this.associateValues();
     //this.initEventSubmit();
   }
 
-  reactForm: FormGroup;
+  startHourWo: String;
+  endHourWo: String;
+
+  reactForm: FormGroup = null;
 
   constructor(private workOrderService: WorkOrderService,
     private serviceWorkOrderTypes: WorkOrderTypeService,
@@ -34,8 +40,8 @@ export class WorkOrderComponent implements OnInit, AfterViewInit {
     private serviceWorkOrder: WorkOrderService,
     private serviceColors: ColorService) {
 
-    this.createReactiveForm();
-    this.associateValues();
+
+   
   }
 
   //multi select
@@ -58,14 +64,10 @@ export class WorkOrderComponent implements OnInit, AfterViewInit {
   public clientWatermark: string = 'Seleccione un cliente*';
 
   colors: Color[];
-  public colorWorkOrder: Object = { text: 'color', value: 'id' };
+  public colorWorkOrder: Object = { text: 'state', value: 'id' };
   public colorWatermark: string = 'Seleccione un color*';
   completeWorkOrder: boolean = false;
   ngOnInit() {
-    // this.listservice.getAllLists().subscribe(data => {
-    //   this.lists = data;
-    // });
-
     this.serviceWorkOrderTypes.getAllWorkOrdersType().subscribe(data => {
       this.workOrdersType = data;
     });
@@ -90,6 +92,7 @@ export class WorkOrderComponent implements OnInit, AfterViewInit {
       (e: Event) => {
         e.preventDefault();
         if (this.reactForm.valid) {
+          console.log('prueba')
           this.completeWorkOrder = true;
         } else {
           // validating whole form
@@ -102,16 +105,13 @@ export class WorkOrderComponent implements OnInit, AfterViewInit {
   }
 
   associateValues() {
-    /*/ this.workOrder.description = this.description.value;
-     this.workOrder.client.id = this.client.value;
-     this.workOrder.startDate = "" + this.startDate.value + "T" + this.startHour.value + "-0600";
-     this.workOrder.endDate = "" + this.endDate.value + "T" + this.endHour.value + "-0600";
-     this.workOrder.workOrderType.id = this.workOrderType.value;
-     this.workOrder.color.id = this.color.value;
-     this.workOrder.employees = this.selectedEmployees;/*/
-    // this.workOrder.listWorkOrderDevices = this.selectedDevices;
-    //this.workOrder.listWorkOrderMaterials = this.selectedMaterials;
-    //this.workOrder.listWorkOrderTools = this.selectedTools;
+    this.workOrder.description = this.description.value;
+    this.workOrder.client.id = this.client.value;
+    this.workOrder.startDate = "" + this.workOrder.startDate + "T" + this.startHour.value + "-0600"
+    this.workOrder.endDate = "" + this.workOrder.endDate + "T" + this.endHour.value + "-0600"
+    this.workOrder.workOrderType.id = this.workOrderType.value;
+    this.workOrder.color.id = this.color.value;
+    this.workOrder.employees = this.selectedEmployees;
   }
 
   createReactiveForm() {
@@ -221,5 +221,12 @@ export class WorkOrderComponent implements OnInit, AfterViewInit {
     { text: 'Agregar Material Adicional' },
     { text: 'Agregar Herramienta Adicional' },
     { text: 'Agregar Dispositivo Adicional' }];
+
+  formatDates() {
+    this.workOrder.startDate = "" + this.workOrder.startDate + "T" + this.startHour.value + "-0600"
+    this.workOrder.endDate = "" + this.workOrder.endDate + "T" + this.endHour.value + "-0600"
+    console.log(this.reactForm.status)
+    console.log(this.workOrder)
+  }
 }
 

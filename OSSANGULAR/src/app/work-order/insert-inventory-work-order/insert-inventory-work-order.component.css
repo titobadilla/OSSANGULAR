@@ -28,14 +28,13 @@
     .form-horizontal .form-group {
         margin-left: 60px;
         margin-right: 60px;
-        margin-top: 5%;
+        
     }   
     
     .e-dlg-header  {
         font-family:'Questrial', Verdana, sans-serif;
         display: block;
         font-size: 18px;
-        font-weight: bold;
         margin-top: 2%;  
         text-align: center;
       }

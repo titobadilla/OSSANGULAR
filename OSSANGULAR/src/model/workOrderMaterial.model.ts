@@ -1,4 +1,4 @@
-import { WorkOrderMaterialId } from './workOrderMaterialId.model';
+import { WorkOrderMaterialId } from './workOrdermaterialId.model';
 
 export class WorkOrderMaterial{
 

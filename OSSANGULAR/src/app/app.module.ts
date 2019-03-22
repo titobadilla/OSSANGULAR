@@ -123,6 +123,7 @@ import { NbContextMenuModule } from '@nebular/theme';
 import { InsertAdicionalMaterialWorkOrderComponent } from './work-order/insert-adicional-material-work-order/insert-adicional-material-work-order.component';
 import { InsertAdicionalToolWorkOrderComponent } from './work-order/insert-adicional-tool-work-order/insert-adicional-tool-work-order.component';
 import { InsertAdicionalDeviceWorkOrderComponent } from './work-order/insert-adicional-device-work-order/insert-adicional-device-work-order.component';
+import { KitWorkOrderComponent } from './kit-work-order/kit-work-order.component';
 
 
 declare var require: any;
@@ -197,7 +198,8 @@ loadCldr(
     InsertInventoryWorkOrderComponent,
     InsertAdicionalMaterialWorkOrderComponent,
     InsertAdicionalToolWorkOrderComponent,
-    InsertAdicionalDeviceWorkOrderComponent
+    InsertAdicionalDeviceWorkOrderComponent,
+    KitWorkOrderComponent
 
   ],
   imports: [

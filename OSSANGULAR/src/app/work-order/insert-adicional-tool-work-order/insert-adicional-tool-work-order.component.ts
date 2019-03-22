@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
@@ -14,7 +14,10 @@ import { ToolService } from 'src/app/tool/tool.service';
   templateUrl: './insert-adicional-tool-work-order.component.html',
   styleUrls: ['./insert-adicional-tool-work-order.component.css']
 })
-export class InsertAdicionalToolWorkOrderComponent implements OnInit {
+export class InsertAdicionalToolWorkOrderComponent implements OnInit,AfterViewInit {
+  ngAfterViewInit(): void {
+    this.grid.pageSettings.pageSize = 5;
+  }
   reactForm: FormGroup;
   modalRef: BsModalRef;
   public pageSettings: Object;
@@ -32,8 +35,8 @@ export class InsertAdicionalToolWorkOrderComponent implements OnInit {
   addQuantityT: boolean = false;
   toolDelete: Tool = new Tool();
 
-  constructor(private serviceTool: ToolService,private modalService: BsModalService,
-     private deleteService: DeleteEmitterService) {
+  constructor(private serviceTool: ToolService, private modalService: BsModalService,
+    private deleteService: DeleteEmitterService) {
     this.createReactiveForm();
   }
 
@@ -59,7 +62,7 @@ export class InsertAdicionalToolWorkOrderComponent implements OnInit {
       (e: Event) => {
         e.preventDefault();
         if (this.quantityToolNew.valid) {
-         
+
         } else {
           // validating whole form
           Object.keys(this.reactForm.controls).forEach(field => {
@@ -110,16 +113,16 @@ export class InsertAdicionalToolWorkOrderComponent implements OnInit {
   }
 
   addSelectedInventory() {
-    if(this.quantityToolNew.value!='null' && this.quantityToolNew.value>0){
-    this.toolSelected.quantity = this.newQuantityTool;
-    this.selectedTools.push(this.toolSelected);
-    this.grid.refresh();
+    if (this.quantityToolNew.value != 'null' && this.quantityToolNew.value > 0) {
+      this.toolSelected.quantity = this.newQuantityTool;
+      this.selectedTools.push(this.toolSelected);
+      this.grid.refresh();
 
-    this.tools = this.removeElementAdded(this.tools, this.toolSelected)
-    this.addQuantityT = false;
-    }if(this.quantityToolNew.value<=0){
-       this.openModalValidate(this.toolSelected);
-        this.quantityToolNew.reset();
+      this.tools = this.removeElementAdded(this.tools, this.toolSelected)
+      this.addQuantityT = false;
+    } if (this.quantityToolNew.value <= 0) {
+      this.openModalValidate(this.toolSelected);
+      this.quantityToolNew.reset();
     }
   }
 
@@ -162,10 +165,10 @@ export class InsertAdicionalToolWorkOrderComponent implements OnInit {
     });
   }
 
-  deleteOfTable(){
+  deleteOfTable() {
     this.selectedTools = this.removeElementAdded(this.selectedTools, this.toolDelete)
     this.grid.refresh();
-    this.tools.push(this.toolDelete); 
+    this.tools.push(this.toolDelete);
     //this.listObj.refresh();
   }
 }

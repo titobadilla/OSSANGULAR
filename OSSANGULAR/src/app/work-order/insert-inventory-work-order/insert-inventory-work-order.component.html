@@ -1,78 +1,75 @@
+<div class="content-wrapper" style="margin-bottom: 25px;">
 
-  <div class="content-wrapper" style="margin-bottom: 25px;">
+  <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
 
-    <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
-
-      <div class="formtitle">
-        <span>Orden de Trabajo</span>
-      </div>
-
-      <div class="form-group">
-        <ejs-dropdownlist formControlName="kit" name="kit" [dataSource]='kitsWorkOrder' [fields]='kitWorkOrder'
-          [placeholder]='kitWatermark' floatLabelType='Auto'>
-        </ejs-dropdownlist>
-      </div>
-
-      <div class="row" style="margin-top:5%; margin-left: 2%; margin-right: 2%; margin-bottom: 11%;">
-
-          
-        <div class="col-lg-4">
-
-          <ejs-grid #grid [dataSource]='tools' allowPaging='true' [allowSorting]='true' allowTextWrap='true'
-            [pageSettings]='pageSettings'>
-            <ng-template #toolbarTemplate>
-              <ejs-toolbar>
-                <div class="e-dlg-header">Herramientas</div>
-              </ejs-toolbar>
-            </ng-template>
-            <e-columns>
-              <e-column field='name' headerText='Nombre' width='50' textAlign='center'></e-column>
-              <e-column field='description' headerText='Descripción' width='60' textAlign='center'></e-column>
-              <e-column field='quantity' headerText='Cantidad' width='50' textAlign='center'></e-column>
-            </e-columns>
-          </ejs-grid>
-
-
-        </div>
-
-        <div class="col-lg-4">
-
-          <ejs-grid #grid [dataSource]='tools' allowPaging='true' [allowSorting]='true' allowTextWrap='true'
-            [pageSettings]='pageSettings'>
-            <ng-template #toolbarTemplate>
-              <ejs-toolbar>
-                <div class="e-dlg-header">Dispositivos</div>
-              </ejs-toolbar>
-            </ng-template>
-            <e-columns>
-              <e-column field='name' headerText='Nombre' width='50' textAlign='center'></e-column>
-              <e-column field='description' headerText='Descripción' width='70' textAlign='center'></e-column>
-              <e-column field='quantity' headerText='Cantidad' width='50' textAlign='center'></e-column>
-            </e-columns>
-          </ejs-grid>
-
-        </div>
-
-        <div class="col-lg-4">
-
-          <ejs-grid #grid [dataSource]='tools' allowPaging='true' [allowSorting]='true' allowTextWrap='true'
-            [pageSettings]='pageSettings'>
-            <ng-template #toolbarTemplate>
-              <ejs-toolbar>
-                <div class="e-dlg-header">Materiales</div>
-              </ejs-toolbar>
-            </ng-template>
-            <e-columns>
-              <e-column field='name' headerText='Nombre' width='50' textAlign='center'></e-column>
-              <e-column field='description' headerText='Descripción' width='60' textAlign='center'></e-column>
-              <e-column field='quantity' headerText='Cantidad' width='50' textAlign='center'></e-column>
-            </e-columns>
-          </ejs-grid>
-
-        </div>
-
-      </div>
-
-    </form>
+    <div class="formtitle">
+      <span>Asignar Lista Predefinida</span>
     </div>
- 
+
+    <div class="form-group">
+      <ejs-dropdownlist (change)='onChangeDdl($event)' formControlName="kit" name="kit" [dataSource]='kitsWorkOrder'
+        [fields]='kitWorkOrder' [placeholder]='kitWatermark' floatLabelType='Auto'>
+      </ejs-dropdownlist>
+    </div>
+
+    <div class="row" style="margin-top:5%; margin-left: 2%; margin-right: 2%;">
+
+      <div class="col-lg-6">
+
+        <ejs-grid #grid [dataSource]='tools' allowPaging='true' [allowSorting]='true' allowTextWrap='true'
+          [pageSettings]='pageSettings'>
+          <ng-template #toolbarTemplate>
+            <ejs-toolbar>
+              <div class="e-dlg-header">Herramientas</div>
+            </ejs-toolbar>
+          </ng-template>
+          <e-columns>
+            <e-column field='id.tool.name' headerText='Nombre' width='50' textAlign='center'></e-column>
+            <e-column field='id.tool.description' headerText='Descripción' width='60' textAlign='center'></e-column>
+            <e-column field='quantity' headerText='Cantidad' width='50' textAlign='center'></e-column>
+          </e-columns>
+        </ejs-grid>
+
+      </div>
+
+      <div class="col-lg-6">
+
+        <ejs-grid #grid [dataSource]='devices' allowPaging='true' [allowSorting]='true' allowTextWrap='true'
+          [pageSettings]='pageSettings'>
+          <ng-template #toolbarTemplate>
+            <ejs-toolbar>
+              <div class="e-dlg-header">Dispositivos</div>
+            </ejs-toolbar>
+          </ng-template>
+          <e-columns>
+            <e-column field='id.device.name' headerText='Nombre' width='50' textAlign='center'></e-column>
+            <e-column field='id.device.description' headerText='Descripción' width='70' textAlign='center'></e-column>
+            <e-column field='quantity' headerText='Cantidad' width='50' textAlign='center'></e-column>
+          </e-columns>
+        </ejs-grid>
+
+      </div>
+    </div>
+    <div class="row" style="margin-top:3%; margin-right: 2%; margin-bottom: 4%;">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-6">
+        <ejs-grid #grid [dataSource]='materials' allowPaging='true' [allowSorting]='true' allowTextWrap='true'
+          [pageSettings]='pageSettings'>
+          <ng-template #toolbarTemplate>
+            <ejs-toolbar>
+              <div class="e-dlg-header">Materiales</div>
+            </ejs-toolbar>
+          </ng-template>
+          <e-columns>
+            <e-column field='id.material.name' headerText='Nombre' width='50' textAlign='center'></e-column>
+            <e-column field='id.material.description' headerText='Descripción' width='60' textAlign='center'></e-column>
+            <e-column field='quantity' headerText='Cantidad' width='50' textAlign='center'></e-column>
+          </e-columns>
+        </ejs-grid>
+
+      </div>
+
+    </div>
+
+  </form>
+</div>
