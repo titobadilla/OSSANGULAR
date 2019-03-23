@@ -81,8 +81,6 @@ import { UpdateWorkOrderDetailComponent } from './work-order-detail/update-work-
 import { InsertWorkOrderDetailComponent } from './work-order-detail/insert-work-order-detail/insert-work-order-detail.component';
 import { InsertInventoryCategoryComponent } from './inventory-category/insert-inventory-category/insert-inventory-category.component';
 import { UpdateInventoryCategoryComponent } from './inventory-category/update-inventory-category/update-inventory-category.component';
-import { SearchWorkOrderDetailComponent } from './work-order-detail/search-work-order-detail/search-work-order-detail.component';
-
 
 import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { InsertClientComponent } from './client/insert-client/insert-client.component';
@@ -124,6 +122,7 @@ import { InsertAdicionalMaterialWorkOrderComponent } from './work-order/insert-a
 import { InsertAdicionalToolWorkOrderComponent } from './work-order/insert-adicional-tool-work-order/insert-adicional-tool-work-order.component';
 import { InsertAdicionalDeviceWorkOrderComponent } from './work-order/insert-adicional-device-work-order/insert-adicional-device-work-order.component';
 import { KitWorkOrderComponent } from './kit-work-order/kit-work-order.component';
+import { SeeWorkOrderDetailComponent } from './work-order-detail/see-work-order-detail/see-work-order-detail.component';
 
 
 declare var require: any;
@@ -171,7 +170,6 @@ loadCldr(
     InsertWorkOrderDetailComponent,
     InsertInventoryCategoryComponent,
     UpdateInventoryCategoryComponent,
-    SearchWorkOrderDetailComponent,
     InsertClientComponent,
     UpdateClientComponent,
     InsertMeasurementUnitComponent,
@@ -199,7 +197,8 @@ loadCldr(
     InsertAdicionalMaterialWorkOrderComponent,
     InsertAdicionalToolWorkOrderComponent,
     InsertAdicionalDeviceWorkOrderComponent,
-    KitWorkOrderComponent
+    KitWorkOrderComponent,
+    SeeWorkOrderDetailComponent
 
   ],
   imports: [

@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { WorkOrderDetail } from 'src/model/workorderdetail.model';
-import { WorkOrder } from 'src/model/workorder.model';
-import { WorkOrderService } from 'src/app/work-order/work-order.service';
+import { setCulture, removeClass, addClass } from '@syncfusion/ej2-base';
+import { GridComponent } from '@syncfusion/ej2-angular-grids';
+import { DeleteComponent } from 'src/app/delete/delete.component';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { DeleteEmitterService } from 'src/app/delete/delete.emitter.service';
 import { WorkOrderDetailService } from './work-order-detail.service';
-import { UpdateWorkOrderDetailComponent } from './update-work-order-detail/update-work-order-detail.component';
-
 @Component({
   selector: 'work-order-detail',
   templateUrl: './work-order-detail.component.html',
@@ -12,59 +13,109 @@ import { UpdateWorkOrderDetailComponent } from './update-work-order-detail/updat
 })
 export class WorkOrderDetailComponent implements OnInit {
 
-  workOrder: WorkOrder = new WorkOrder();
-  detail: WorkOrderDetail;
-  detailid: number;
-  principal: boolean = true;
-  modalDelete: boolean = false;
-  update: boolean = false;
+  ngAfterViewInit(): void {
+    this.grid.pageSettings.pageSize = 5;
+  }
 
-  @ViewChild('updateWorkOrderDetail') childOne: UpdateWorkOrderDetailComponent;
+  //variables of range date
+  public date: Object = new Date();
+  fecha: Date[];
 
-  constructor(private workOrderDetailService: WorkOrderDetailService, private workOrderService: WorkOrderService) {
-    this.detail = new WorkOrderDetail();
+  //sections
+  rangeSection = true;
+  insertSection = false;
+  editSection = false;
+
+  modalRef: BsModalRef;
+  detailDelete: WorkOrderDetail = new WorkOrderDetail();
+  detailid:number;
+
+  //variables of table
+  public data: WorkOrderDetail[];
+  public pageSettings: Object;
+  @ViewChild('grid') public grid: GridComponent;
+
+  //variables of header table options
+  public flag: boolean = false;
+  public dataBound(): void {
+    this.flag = true;
+  }
+
+  constructor(private detailService: WorkOrderDetailService,
+    private modalService: BsModalService
+    , private deleteService: DeleteEmitterService) {
+    this.data = new Array();
   }
 
   ngOnInit() {
-    this.workOrderService.getByIdWorkOrder(3).subscribe(data => {
-      this.workOrder = data;
+    this.pageSettings = { pageCount: 3 };
+    setCulture('es-CR');
+
+    this.deleteService.deleteWorkOrderDetail$.subscribe(data => {
+      this.acceptDelete(this.detailDelete.id);
     });
+  }
 
-    this.workOrderDetailService.getByIdWorkOrderDetail(10).subscribe(data => {
-      this.detail = data;
-      this.splitDatesHours(this.detail);
+  list() {
+    this.detailService.getByDatesWorkOrderDetail(this.fecha[0], this.fecha[1]).subscribe(data => {
+      this.data = data;
+      this.splitDatesHours(this.data);
     });
-
   }
 
-  private createWorkOrderDetail() {
-    this.workOrderDetailService.insertWorkOrderDetail(this.detail).subscribe();
+  insert() {
+    this.rangeSection = false;
+    this.insertSection = true;
   }
 
-  private splitDatesHours(data: WorkOrderDetail) {
-    let date = data.date.split("T");
-    let checkIn = data.checkIn.split(".");
-    let checkOut = data.checkOut.split(".");
-    this.detail.date = date[0];
-    this.detail.checkIn = checkIn[0];
-    this.detail.checkOut = checkOut[0];
+  edit(detail:WorkOrderDetail) {
+    this.detailid = detail.id;
+    this.rangeSection = false;
+    this.editSection = true;
   }
 
-  edit() {
-    this.detailid = this.detail.id;
-    this.principal = false;
-    this.update = true;
-  }
-  delete() {
-    this.modalDelete = true;
+  public onClicked(e: MouseEvent): void {
+    if (!this.flag) { return; }
+    let element: HTMLElement = <HTMLInputElement>e.target;
+    if (!element.classList.contains('e-tbar-btn-text') && !element.classList.contains('e-tbar-btn')) {
+      return;
+    }
+    element = <HTMLElement>(element.tagName === 'BUTTON' ? element.firstElementChild : element);
+    this.flag = false;
+    let hidden: boolean = element.classList.contains('e-ghidden');
+    let classFn: Function = hidden ? removeClass : addClass;
+    classFn([element], 'e-ghidden');
+    if (hidden) {
+      this.grid.showColumns(element.innerHTML);
+    } else {
+      this.grid.hideColumns(element.innerHTML);
+    }
   }
 
-  hideModal() {
-    this.modalDelete = false;
+  splitDatesHours(data: WorkOrderDetail[]) {
+    data.forEach(element => {
+      element.date = element.date.split("T")[0];
+      element.checkIn = element.checkIn.split(".")[0];
+      element.checkOut = element.checkOut.split(".")[0];
+    });
   }
 
-  aceptDelete() {
-    this.workOrderDetailService.deleteWorkOrderDetail(this.detail.id).subscribe();
-    this.modalDelete = false;
+  acceptDelete(detailid:number) {
+    this.detailService.deleteWorkOrderDetail(detailid).subscribe(data => {
+      this.list();
+    });
   }
+
+  openModal(detail: WorkOrderDetail) {
+    this.detailDelete = detail;
+
+    this.modalRef = this.modalService.show(DeleteComponent, {
+      initialState: {
+        title: 'Eliminar Detalle de Orden',
+        data: 'el detalle de la factura: ' + detail.invoiceId,
+        type: 'workOrderDetail'
+      }
+    });
+  }
+
 }
