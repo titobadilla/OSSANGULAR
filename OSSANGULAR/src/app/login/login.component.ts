@@ -6,6 +6,9 @@ import { FormControl, FormGroup, Validators, FormsModule, AbstractControl } from
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 import { EventEmitterLogoutService } from './event-emitter-logout.service';
 import { AppComponent } from '../app.component';
+import 'rxjs/add/observable/interval';
+import 'rxjs/add/operator/takeWhile';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -13,28 +16,30 @@ import { AppComponent } from '../app.component';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent  implements OnInit{
+export class LoginComponent implements OnInit {
 
   model: any = {};
   loading = false;
+  errorSesion: boolean = false;
   returnUrl: string;
   error = '';
   reactForm: FormGroup;
 
 
-  constructor(private router: Router,private app:AppComponent,private authService: AuthService, private token: TokenStorage,private emitterService:EventEmitterLogoutService) {
+
+  constructor(private router: Router, private app: AppComponent, private authService: AuthService, private token: TokenStorage, private emitterService: EventEmitterLogoutService) {
     this.reactForm = new FormGroup({
       'username': new FormControl('', [FormValidators.required]),
       'password': new FormControl('', [FormValidators.required])
     });
   }
- 
+
 
   ngOnInit(): void {
-    this.initEventSubmit();    
+    this.initEventSubmit();
   }
 
-  initEventSubmit(){
+  initEventSubmit() {
     let formId: HTMLElement = <HTMLElement>document.getElementById('formId');
     document.getElementById('formId').addEventListener(
       'submit',
@@ -55,26 +60,37 @@ export class LoginComponent  implements OnInit{
 
   get username() { return this.reactForm.get('username'); }
   get password() { return this.reactForm.get('password'); }
-  
 
-   
-  
+
+
+  errorSesionMethod() {
+    Observable.interval(1000)
+      .takeWhile(() => this.errorSesion)
+      .subscribe(i => {
+        if (i == 7) {
+          this.errorSesion = false;
+        }
+      })
+
+  }
+
 
   login(): void {
     this.loading = true;
-    this.authService.authentication( this.reactForm.get('username').value, this.reactForm.get('password').value).subscribe(
+    this.authService.authentication(this.reactForm.get('username').value, this.reactForm.get('password').value).subscribe(
       data => {
         this.token.saveToken(data.token);
         this.loading = false;
-         this.app.login=true;
-         this.app.detectChanges();
-        this.router.navigate(['/']);        
-      },error=>{
-        alert('Ha ocurrido un error con su datos de autenticación: '+error.status);        
-        this.loading = false;   
-        this.reactForm.reset();     
+        this.app.login = true;
+        this.app.detectChanges();
+        this.router.navigate(['/']);
+      }, error => {
+        this.errorSesion = true;
+        this.errorSesionMethod();
+        this.loading = false;
+        this.reactForm.reset();
       }
-      
+
     );
   }
 }

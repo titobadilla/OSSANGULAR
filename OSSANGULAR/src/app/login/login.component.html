@@ -1,56 +1,43 @@
-<div class="container">
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+        <h2 class="active"> Iniciar Sesión </h2>
 
-    <div class="row">
-        <div class="col-lg-4"></div>
-        <div class="col-lg-4 ">
-
-                <div class="content-wrapper" style="margin-bottom: 25px;">
-                        <div class="formtitle">
-                            <span>Ingreso al sistema OSS</span>
-                        </div>
-                
-                        <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
-                
-                            <div class="form-group">
-                                <div class="e-float-input">
-                                    <input id="username"  type="text" formControlName="username">
-                                    <span class="e-float-line"></span>
-                                    <label for="username" class="e-float-text">Usuario</label>
-                                </div>
-                                <div *ngIf="username.errors">
-                                    <div *ngIf="username.errors.required && username.touched" class="e-error">
-                                        El usuario es obligatorio.
-                                    </div>
-                                </div>
-                            </div>
-                
-                            <div class="form-group">
-                                <div class="e-float-input">
-                                    <input id="password" type="password" formControlName="password">
-                                    <span class="e-float-line"></span>
-                                    <label for="password" class="e-float-text">Contraseña</label>
-                                </div>
-                                <div *ngIf="password.errors">
-                                    <div *ngIf="password.errors.required && password.touched" class="e-error">
-                                        La contraseña es obligatoria.
-                                    </div>
-                                </div>
-                            </div>
-                                                                                      
-                            <div class="row">
-                                <div style=" text-align: center;width: 320px;margin:0px auto;height: 100px;padding-top: 10px;">
-                                    <div style="display: inline-block;">
-                                        <button id="validateSubmit" class="samplebtn e-control e-btn e-success" type="submit" style="height:40px;width: 150px;" data-ripple="true">Iniciar Sesión</button>
-                                        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-                                    </div>
-            
-                                </div>
-                            </div>
-                        </form>
-
-
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <img src="assets/images/perfilIcon.jpg" id="icon" alt="User Icon" />
         </div>
-        <div class="col-lg-4"></div>
-    </div>
 
+        <!-- Login Form -->
+        <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
+            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Usuario" formControlName="username">
+            <div *ngIf="username.errors">
+                <div *ngIf="username.errors.required && username.touched" class="e-error">
+                    El usuario es obligatorio.
+                </div>
+            </div>
+            <input type="password" id="password" class="fadeIn third" name="login" placeholder="Contraseña" formControlName="password">
+            <div *ngIf="password.errors">
+                <div *ngIf="password.errors.required && password.touched" class="e-error">
+                    La contraseña es obligatoria.
+                </div>
+            </div>
+            <div>
+
+                <input id="validateSubmit" class="fadeIn fourth" type="submit"  value="Empezar a trabajar">
+
+                <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                <div *ngIf="errorSesion" class="e-error" style="font-weight:1000">
+                       El usuario y/o la contraseña son incorrectos.
+                    </div>
+            </div>
+
+        </form>
+
+        <!-- Remind Passowrd -->
+        <div id="formFooter">
+            <a class="underlineHover" >OSS TVO</a>
+        </div>
+
+    </div>
 </div>

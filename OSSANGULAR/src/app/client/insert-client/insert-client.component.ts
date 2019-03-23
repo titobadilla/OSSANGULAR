@@ -14,6 +14,7 @@ import { ProvinceService } from '../province.service';
 import { CantonService } from '../canton.service';
 import { DistrictService } from '../district.service';
 import { DropDownListComponent } from '@syncfusion/ej2-angular-dropdowns';
+import { ClientComponent } from '../client.component';
 
 @Component({
   selector: 'insert-client',
@@ -45,7 +46,8 @@ export class InsertClientComponent implements OnInit {
   public districtDdl: DropDownListComponent;
 
   constructor(private router: Router, private clientService: ClientService, private groupClientService: GroupClientService,
-    private provinceService: ProvinceService, private cantonService: CantonService, private districtService: DistrictService) {
+    private provinceService: ProvinceService, private cantonService: CantonService, private districtService: DistrictService
+    ,private parent: ClientComponent) {
     this.client = new Client();
     this.createReactiveForm();
     this.associateValues();
@@ -64,6 +66,12 @@ export class InsertClientComponent implements OnInit {
       this.client.addressDescription.district.districtId.id=undefined;
       this.district.setValue(undefined);
     }
+  }
+
+  returnView(){
+    this.parent.getAllClients();
+    this.parent.insertSection=false;
+    this.parent.principalSection=true;
   }
 
   activeDistrict(event: any) {

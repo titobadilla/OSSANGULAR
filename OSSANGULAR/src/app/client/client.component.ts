@@ -21,10 +21,12 @@ export class ClientComponent implements OnInit,AfterViewInit {
   modalRef: BsModalRef;
   @ViewChild('grid') public grid: GridComponent;
   public flag: boolean = false;
+ 
 
   
   principalSection: boolean = true;
   clientsSection: boolean = false;
+  insertSection:boolean=false;
   clientDelete:Client; 
 
   constructor(private clientService: ClientService, 
@@ -77,6 +79,12 @@ this.subscribeForDelete();
         this.getAllClients();
      });
      }
+
+     
+  insert() {
+    this.principalSection = false;
+    this.insertSection = true;
+  }
 
      seeMore(client:Client){       
       this.modalRef = this.modalService.show(DeleteComponent, {
