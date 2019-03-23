@@ -89,7 +89,7 @@
 
                     <div class="form-group">
                       <ejs-multiselect formControlName="employeesMulti" (removing)='select($event)'
-                        (select)='select($event)' id='multiselect-checkbox' [dataSource]='employees' [mode]='box'
+                        (select)='selectEmployee($event)' id='multiselect-checkbox' [dataSource]='employees' [mode]='box'
                         [fields]='employeeWorkOrder' [placeholder]='employeeWatermark' [popupHeight]='popHeight'
                         showDropDownIcon='true' floatLabelType='Auto' [allowFiltering]='true'></ejs-multiselect>
                     </div>

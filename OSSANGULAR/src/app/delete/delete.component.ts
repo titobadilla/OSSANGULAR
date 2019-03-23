@@ -25,7 +25,7 @@ export class DeleteComponent implements OnInit {
     if (this.type === 'seeMore') {
       this.seeMoreSection = true;
     }
-    if (this.type === 'quantityValidate') {
+    else if (this.type === 'quantityValidate') {
       this.workOrderValidateQuantitySection = true;
     }
     else {

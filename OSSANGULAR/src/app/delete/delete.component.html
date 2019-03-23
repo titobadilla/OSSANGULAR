@@ -24,11 +24,11 @@
     <p style="font-size: 18px;">
       <span class="modal_title" style="font-size: 22px;  margin-left: 35%;">Dirección
         <hr></span>
-      Provincia:
+      Provincia:{{data.addressDescription.district.districtId.canton.cantonId.province.name}}
       <br>
-      Cantón:
+      Cantón:{{data.addressDescription.district.districtId.canton.name}}
       <br>
-      Distrito:
+      Distrito:{{data.addressDescription.district.name}}
       <br>
       Dirección: {{data.addressDescription.description}}
       <br>

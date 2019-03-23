@@ -9,9 +9,7 @@
             <e-item text='Nombre de contacto'></e-item>
             <e-item text='Apellidos de contacto'></e-item>
             <e-item text='Nombre de grupo'></e-item>
-            <e-item text='Dirección'></e-item>
-            <e-item text='Teléfono móvil'></e-item>
-            <e-item text='Otro teléfono'></e-item>
+            <e-item text='Ver Más'></e-item>
           </e-items>
         </ejs-toolbar>
         <br />
@@ -34,31 +32,13 @@
                    {{data.group.nameGroup}}
                   </ng-template>
             </e-column>
-            <e-column headerText="Dirección" width='105' textAlign='center'>
-              <p>direccion</p>
+            <e-column headerText="Ver Más" width='105' textAlign='center'>
+                <ng-template #template let-data>
+                    <button mat-button class="btn btn-info glyphicon glyphicon-plus" (click)='seeMore(data)'></button>
+                   </ng-template>
+               
             </e-column>
-  
-            <e-column headerText="Teléfono móvil" width='105' textAlign='center'>
-              <ng-template #template let-data>
-                <div *ngIf="data.telephones[0]!=null && data.telephones[0]!=undefined">
-                  {{data.telephones[0].number}}
-                </div>
-                <div *ngIf="data.telephones[0]===null || data.telephones[0]===undefined">
-                  ---
-                </div>
-              </ng-template>
-            </e-column>
-  
-            <e-column headerText="Otro teléfono" width='100' textAlign='center'>
-              <ng-template #template let-data>
-                <div *ngIf="data.telephones[1]!=null && data.telephones[1]!=undefined">
-                  {{data.telephones[1].number}}
-                </div>
-                <div *ngIf="data.telephones[1]===null || data.telephones[1]===undefined">
-                  ---
-                </div>
-              </ng-template>
-            </e-column>
+             
   
             <e-column headerText="Editar" width='85' textAlign='center'>
               <ng-template #template let-data>
@@ -68,7 +48,7 @@
   
             <e-column headerText="Eliminar" width='115' textAlign='center'>
               <ng-template #template let-data>
-                <button mat-button class="btn btn-danger glyphicon glyphicon-trash" (click)='delete(data)'></button>
+                  <button mat-button class="btn btn-danger glyphicon glyphicon-trash" (click)='openModal(data)'></button>
               </ng-template>
             </e-column>
   
@@ -76,26 +56,7 @@
         </ejs-grid>
       </div>
   
-      <div *ngIf="modalDelete" class="modal fade in" role="dialog" id="gridTools" tabindex="-1"
-        aria-labelledby="gridModalLabel" style="display:block;padding-right: 15px;">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-body">
-              <button type="button" class="close" (click)="hideModal()" aria-label="Close">
-                <span style="color: black;" aria-hidden="true">×</span>
-              </button>
-              <div class="modal-title" id="gridModalLabel">
-                ¿Está seguro que desea eliminar el cliente con nombre: {{clientDelete.name}} ?
-              </div>
-            </div>
-  
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" (click)="hideModal()">Cancelar</button>
-              <button type="button" class="btn btn-primary" (click)="aceptDelete()">Aceptar</button>
-            </div>
-          </div>
-        </div>
-      </div>
+     
     </div>
   </div>
   

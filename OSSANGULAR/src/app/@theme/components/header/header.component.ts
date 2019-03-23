@@ -58,20 +58,21 @@ export class HeaderComponent implements OnInit {
   }
 
 logoutSystem(){
- /* Observable.interval(1000)
+  Observable.interval(1000)
     .takeWhile(() => !this.stopCondition)
     .subscribe(i => { 
        this.logoutPrivateBySystem();
-       console.log(i);
-    })*/
+    })
 
 }
 
 logoutPrivateBySystem(){
   if(this.authService.isAuthenticated() && this.authService.isTokenExpired()){
-    this.token.signOutSystem();    
+    /*this.token.signOutSystem();    
     this.app.ngOnInit();
-    this.stopCondition=true;
+    */
+   this.stopCondition=true;
+    alert('tokenVencido');
   }
 }
   changePassword() {

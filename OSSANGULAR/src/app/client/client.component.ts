@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { Client } from 'src/model/client.model';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { setCulture, removeClass, addClass } from '@syncfusion/ej2-base';
+import { DeleteEmitterService } from '../delete/delete.emitter.service';
+import { DeleteComponent } from '../delete/delete.component';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'client',
@@ -15,18 +18,24 @@ export class ClientComponent implements OnInit,AfterViewInit {
   public clients: Client[];
   clientId: String;
   public pageSettings: Object;
-
+  modalRef: BsModalRef;
   @ViewChild('grid') public grid: GridComponent;
   public flag: boolean = false;
 
   
   principalSection: boolean = true;
   clientsSection: boolean = false;
-  modalDelete = false;
   clientDelete:Client; 
 
-  constructor(private clientService: ClientService) {
+  constructor(private clientService: ClientService, 
+    private modalService: BsModalService, private deleteService: DeleteEmitterService) {
+this.subscribeForDelete();
+  }
 
+  private subscribeForDelete(){
+    this.deleteService.deleteClient$.subscribe(data => {
+      this.aceptDelete();
+    });
   }
 
   public dataBound(): void {
@@ -60,21 +69,36 @@ export class ClientComponent implements OnInit,AfterViewInit {
 
   delete(client:Client) {
     this.clientDelete=client;
-    this.modalDelete = true;
   }
 
-  hideModal() {
-    this.clientDelete=new Client();
-    this.modalDelete = false;
-  }
 
   aceptDelete(){
-    this.clientService.deleteClient(this.clientDelete.id).subscribe(data=>{
-    
+    this.clientService.deleteClient(this.clientDelete.id).subscribe(data=>{    
         this.getAllClients();
      });
-     this.modalDelete = false;
      }
+
+     seeMore(client:Client){       
+      this.modalRef = this.modalService.show(DeleteComponent, {
+        initialState: {
+          title: 'Datos de '+client.name,
+          data: client,
+          type: 'seeMore'
+        }
+      });
+     }
+
+     openModal(client: Client) {
+      this.clientDelete = client;
+  
+      this.modalRef = this.modalService.show(DeleteComponent, {
+        initialState: {
+          title: 'Eliminar Cliente',
+          data: 'el cliente con el nombre: ' + client.name,
+          type: 'client'
+        }
+      });
+    }
 
      
      public onClicked(e: MouseEvent): void {
