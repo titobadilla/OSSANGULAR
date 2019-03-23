@@ -3,6 +3,7 @@ import { WorkOrderDetailService } from '../work-order-detail.service';
 import { WorkOrderDetail } from 'src/model/workorderdetail.model';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
+import { WorkOrderDetailComponent } from '../work-order-detail.component';
 
 @Component({
   selector: 'update-work-order-detail',
@@ -15,7 +16,8 @@ export class UpdateWorkOrderDetailComponent implements OnInit {
   detail: WorkOrderDetail;
   reactForm: FormGroup;
 
-  constructor(private detailService: WorkOrderDetailService) {
+  constructor(private detailService: WorkOrderDetailService,
+    private parent:WorkOrderDetailComponent) {
     this.detail = new WorkOrderDetail();
     this.createReactiveForm();
     this.associateValues();
@@ -33,7 +35,7 @@ export class UpdateWorkOrderDetailComponent implements OnInit {
       (e: Event) => {
         e.preventDefault();
         if (this.reactForm.valid) {
-          this.reactForm.reset();
+          this.editWorkOrderDetail();
         } else {
           // validating whole form
           Object.keys(this.reactForm.controls).forEach(field => {
@@ -55,9 +57,9 @@ export class UpdateWorkOrderDetailComponent implements OnInit {
 
   createReactiveForm() {
     this.reactForm = new FormGroup({
-      'date': new FormControl('', [FormValidators.required]),
-      'checkIn': new FormControl('', [FormValidators.date]),
-      'checkOut': new FormControl('', [FormValidators.date]),
+      'date': new FormControl('', [FormValidators.date]),
+      'checkIn': new FormControl('', [FormValidators.required]),
+      'checkOut': new FormControl('', [FormValidators.required]),
       'description': new FormControl('', [FormValidators.required]),
       'invoiceId': new FormControl('', [FormValidators.required]),
       'managerName': new FormControl('', [FormValidators.required]),
@@ -79,5 +81,19 @@ export class UpdateWorkOrderDetailComponent implements OnInit {
     this.detail.date = date[0];
     this.detail.checkIn = checkIn[0];
     this.detail.checkOut = checkOut[0];
+  }
+
+  editWorkOrderDetail(){
+    this.detailService.updateWorkOrderDetail(this.detail).subscribe(data=>{
+        this.returnView();
+    });
+  }
+
+  returnView() {
+    if (this.parent.fecha != null) {
+      this.parent.list();
+    }
+    this.parent.editSection = false;
+    this.parent.rangeSection = true;
   }
 }

@@ -25,16 +25,8 @@ import { UpdateWorkOrderComponent } from './work-order/update-work-order/update-
 import { InsertEmployeeComponent } from './employee/insert-employee/insert-employee.component';
 import {HttpClientModule} from '@angular/common/http';
 import { ReactiveFormsModule} from '@angular/forms';
-import { InsertEmployeeRoleComponent } from './employee-role/insert-employee-role/insert-employee-role.component';
-import { UpdateEmployeeRoleComponent } from './employee-role/update-employee-role/update-employee-role.component';
-import { InsertGroupClientComponent } from './group-client/insert-group-client/insert-group-client.component';
-import { UpdateGroupClientComponent } from './group-client/update-group-client/update-group-client.component';
 import { InsertWorkOrderDetailComponent } from './work-order-detail/insert-work-order-detail/insert-work-order-detail.component';
 import { UpdateWorkOrderDetailComponent } from './work-order-detail/update-work-order-detail/update-work-order-detail.component';
-import { UpdateInventoryCategoryComponent } from './inventory-category/update-inventory-category/update-inventory-category.component';
-import { InventoryCategory } from 'src/model/inventorycategory.model';
-import { InsertInventoryCategoryComponent } from './inventory-category/insert-inventory-category/insert-inventory-category.component';
-import { SearchWorkOrderDetailComponent } from './work-order-detail/search-work-order-detail/search-work-order-detail.component';
 
 import { InsertClientComponent } from './client/insert-client/insert-client.component';
 import { InventoryOutputComponent } from './inventory-output/inventory-output.component';
@@ -43,6 +35,7 @@ import { DeleteComponent } from './delete/delete.component';
 import { ToolComponent } from './tool/tool.component';
 import { MaterialComponent } from './material/material.component';
 import { InsertInventoryWorkOrderComponent } from './work-order/insert-inventory-work-order/insert-inventory-work-order.component';
+import { SeeWorkOrderDetailComponent } from './work-order-detail/see-work-order-detail/see-work-order-detail.component';
 
 const routes: Routes = [
   {path:"address",component:AddressComponent, canActivate: [AuthGuard]},
@@ -69,7 +62,7 @@ const routes: Routes = [
   {path:'work-order-detail',component:WorkOrderDetailComponent},
   {path:'insert-work-order-detail',component:InsertWorkOrderDetailComponent},
   {path:'update-work-order-detail',component:UpdateWorkOrderDetailComponent},
-  {path:'search-work-order-detail',component:SearchWorkOrderDetailComponent},
+  {path:'see-work-order-detail',component:SeeWorkOrderDetailComponent},
   {path:'insert-client',component:InsertClientComponent},
   {path:'inventory-output',component:InventoryOutputComponent},
   {path:'inventory-output-general',component:InventoryOutputGeneralComponent},

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
@@ -9,31 +9,41 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { DeleteEmitterService } from 'src/app/delete/delete.emitter.service';
 import { Tool } from 'src/model/tool.model';
 import { ToolService } from 'src/app/tool/tool.service';
+import { WorkOrderTool } from 'src/model/workOrderTool.model';
 @Component({
   selector: 'insert-adicional-tool-work-order',
   templateUrl: './insert-adicional-tool-work-order.component.html',
   styleUrls: ['./insert-adicional-tool-work-order.component.css']
 })
-export class InsertAdicionalToolWorkOrderComponent implements OnInit {
+export class InsertAdicionalToolWorkOrderComponent implements OnInit, AfterViewInit {
+ 
+  //initialize number pages
+  ngAfterViewInit(): void {
+    this.grid.pageSettings.pageSize = 5;
+  }
+
+  //basic variables
   reactForm: FormGroup;
   modalRef: BsModalRef;
   public pageSettings: Object;
   @ViewChild('grid') public grid: GridComponent;
-  @ViewChild('dropdown') public listObj: DropDownListComponent;
 
+  //dropdown variables
   tools: Tool[] = new Array();
-  selectedTools: Tool[] = new Array();
+  @ViewChild('dropdown') public listObj: DropDownListComponent;
   public toolWorkOrder: Object = { text: 'name', value: 'id' };
   public toolWatermark: string = 'Seleccione las herramientas*';
-  tool: Tool = new Tool();
+
+  //workOrderTool manage
+  workOrderToolSelected: WorkOrderTool = new WorkOrderTool();
+  selectedTools: WorkOrderTool[] = new Array();
   quantityTool: number = 0;
   newQuantityTool: number = 0;
-  toolSelected: Tool = new Tool();
   addQuantityT: boolean = false;
-  toolDelete: Tool = new Tool();
+  toolDelete: WorkOrderTool = new WorkOrderTool();
 
-  constructor(private serviceTool: ToolService,private modalService: BsModalService,
-     private deleteService: DeleteEmitterService) {
+  constructor(private serviceTool: ToolService, private modalService: BsModalService,
+    private deleteService: DeleteEmitterService) {
     this.createReactiveForm();
   }
 
@@ -41,6 +51,7 @@ export class InsertAdicionalToolWorkOrderComponent implements OnInit {
 
     this.pageSettings = { pageCount: 3 };
     setCulture('es-CR');
+
     this.serviceTool.getAllTool().subscribe(data => {
       this.tools = data;
     })
@@ -59,7 +70,7 @@ export class InsertAdicionalToolWorkOrderComponent implements OnInit {
       (e: Event) => {
         e.preventDefault();
         if (this.quantityToolNew.valid) {
-         
+
         } else {
           // validating whole form
           Object.keys(this.reactForm.controls).forEach(field => {
@@ -82,10 +93,12 @@ export class InsertAdicionalToolWorkOrderComponent implements OnInit {
   get quantityTo() { return this.reactForm.get('quantityTool'); }
   get quantityToolNew() { return this.reactForm.get('newQuantityTool'); }
 
+  //verify the changes in the dropdown
   onChangeDdlTool(value: any) {
     if (value.itemData != undefined) {
-      this.toolSelected = this.findToolById(value.itemData.id);
-      this.quantityTool = this.toolSelected.quantity;
+
+      this.workOrderToolSelected.id.tool = this.findToolById(value.itemData.id);
+      this.quantityTool = this.workOrderToolSelected.id.tool.quantity;
       this.newQuantityTool = this.quantityTool;
 
       this.quantityTo.setValue(this.quantityTool);
@@ -109,17 +122,22 @@ export class InsertAdicionalToolWorkOrderComponent implements OnInit {
     return elementReturn;
   }
 
+  //add workOrderTool Selected in the selected and add into the table
   addSelectedInventory() {
-    if(this.quantityToolNew.value!='null' && this.quantityToolNew.value>0){
-    this.toolSelected.quantity = this.newQuantityTool;
-    this.selectedTools.push(this.toolSelected);
-    this.grid.refresh();
+    if (this.quantityToolNew.value != 'null' && this.quantityToolNew.value > 0) {
 
-    this.tools = this.removeElementAdded(this.tools, this.toolSelected)
-    this.addQuantityT = false;
-    }if(this.quantityToolNew.value<=0){
-       this.openModalValidate(this.toolSelected);
-        this.quantityToolNew.reset();
+      this.workOrderToolSelected.quantity = this.newQuantityTool;
+      this.selectedTools.push(this.workOrderToolSelected);
+      this.grid.refresh();
+
+      this.tools = this.removeElementAddedOfDropdown(this.tools, this.workOrderToolSelected);
+
+      this.addQuantityT = false;
+
+    } if (this.quantityToolNew.value <= 0) {
+
+      this.openModalValidate(this.workOrderToolSelected);
+      this.quantityToolNew.reset();
     }
   }
 
@@ -129,43 +147,53 @@ export class InsertAdicionalToolWorkOrderComponent implements OnInit {
     });
   }
 
-  removeElementAdded(arr, elementSelected) {
+  removeElementAddedOfDropdown(arr, elementSelected) {
     let aux;
     arr.forEach((element, index) => {
-      if (element.id === elementSelected.id) {
+      if (element.id === elementSelected.id.tool.id) {
         aux = this.arrayRemove(arr, index);
       }
     });
     return aux
   }
 
-  openModal(tool: Tool) {
+  removeElementAddedOfTable(arr, elementSelected) {
+    let aux;
+    arr.forEach((element, index) => {
+      if (element.id.tool.id === elementSelected.id.tool.id) {
+        aux = this.arrayRemove(arr, index);
+      }
+    });
+    return aux
+  }
+
+  openModal(tool: WorkOrderTool) {
     this.toolDelete = tool;
 
     this.modalRef = this.modalService.show(DeleteComponent, {
       initialState: {
         title: 'Eliminar la Herramienta de la Orden de Trabajo',
-        data: 'la herramienta con el nombre: ' + tool.name,
+        data: 'la herramienta con el nombre: ' + tool.id.tool.name,
         type: 'toolOfWorkOrder'
       }
     });
   }
 
-  openModalValidate(tool: Tool) {
+  openModalValidate(tool: WorkOrderTool) {
 
     this.modalRef = this.modalService.show(DeleteComponent, {
       initialState: {
         title: 'Alerta!',
-        data: tool.name,
+        data: tool.id.tool.name,
         type: 'quantityValidate'
       }
     });
   }
 
-  deleteOfTable(){
-    this.selectedTools = this.removeElementAdded(this.selectedTools, this.toolDelete)
+  deleteOfTable() {
+    this.selectedTools = this.removeElementAddedOfTable(this.selectedTools, this.toolDelete)
     this.grid.refresh();
-    this.tools.push(this.toolDelete); 
+    this.tools.push(this.toolDelete.id.tool);
     //this.listObj.refresh();
   }
 }

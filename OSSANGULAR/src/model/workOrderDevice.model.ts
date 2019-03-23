@@ -1,4 +1,4 @@
-import { WorkOrderDeviceId } from './workOrderDevideId.model';
+import { WorkOrderDeviceId } from './workOrderdevideId.model';
 
 export class WorkOrderDevice{
 

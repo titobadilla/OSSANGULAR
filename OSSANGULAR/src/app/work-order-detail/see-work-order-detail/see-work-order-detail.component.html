@@ -1,0 +1,104 @@
+<div *ngIf="principal">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
+
+        <div id="panel" class="panel panel-default" style="margin-top:5%;">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6 border-right">
+
+                        <div class="formtitle">
+                            <span>Orden de trabajo</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="font-size:15px;">Nombre del cliente</label>
+                            <br>
+                            <input type="text" class="form-control" [disabled]="true"
+                                [(ngModel)]="workOrder.client.name">
+                        </div>
+
+                        <div class="form-group">
+                            <label style="font-size:15px;">Descripción</label>
+                            <br>
+                            <input type="text" class="form-control" [disabled]="true"
+                                [(ngModel)]="workOrder.description">
+                        </div>
+
+                        <div class="form-group">
+                            <label style="font-size:15px;">Estado de orden</label>
+                            <br>
+                            <input type="text" class="form-control" [disabled]="true"
+                                [(ngModel)]="workOrder.color.state">
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="formtitle">
+                            <span>Detalle de Orden</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="font-size:15px;">Fecha</label>
+                            <br>
+                            <input type="date" class="form-control" [disabled]="true" [(ngModel)]="detail.date">
+                        </div>
+
+                        <div class="form-group">
+                            <label style="font-size:15px;">Hora de llegada</label>
+                            <br>
+                            <input type="time" class="form-control" [disabled]="true" [(ngModel)]="detail.checkIn">
+                        </div>
+
+                        <div class="form-group">
+                            <label style="font-size:15px;">Hora de salida</label>
+                            <br>
+                            <input type="time" class="form-control" [disabled]="true" [(ngModel)]="detail.checkOut">
+                        </div>
+
+                        <div class="form-group">
+                            <label style="font-size:15px;">Detalle</label>
+                            <br>
+                            <textarea class="textarea form-control" type="text" [disabled]="true"
+                                [(ngModel)]="detail.description"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="font-size:15px;">Número de factura</label>
+                            <br>
+                            <input type="text" class="form-control" [disabled]="true" [(ngModel)]="detail.invoiceId">
+                        </div>
+
+                        <div class="form-group">
+                            <label style="font-size:15px;">Persona que recibió</label>
+                            <br>
+                            <input type="text" class="form-control" [disabled]="true" [(ngModel)]="detail.managerName">
+                        </div>
+
+
+                        <div style="width: 225px;margin:0px auto;height: 100px;">
+                            <div style="display: inline-block;">
+                                <button id="validateSubmit" class="samplebtn e-control e-btn e-warning" type="submit"
+                                    style="height:40px;width: 100px;" data-ripple="true"
+                                    (click)="edit()">Editar</button>
+                            </div>
+                            <div style="float: right;">
+                                <button id="validateSubmit" class="samplebtn e-control e-btn e-danger" type="submit"
+                                    style="height:40px;width: 100px;" data-ripple="true"
+                                    (click)="openModal()">Eliminar</button>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf="update">
+    <update-work-order-detail [detailid]="detailid"></update-work-order-detail>
+</div>

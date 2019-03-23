@@ -99,6 +99,10 @@ export class DeleteComponent implements OnInit {
       this.deleteService.setDeleteDeviceOfWorkOrder(true);
       this.modalRef.hide();
     }
+    if (this.type === 'workOrderDetail') {
+      this.deleteService.setDeleteWorkOrderDetail(true);
+      this.modalRef.hide();
+    }
   }
 
   cancelDelete() {

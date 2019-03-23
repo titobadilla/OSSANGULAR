@@ -1,4 +1,4 @@
-import { WorkOrderToolId } from './workOrderToolId.model';
+import { WorkOrderToolId } from './workOrdertoolId.model';
 
 export class WorkOrderTool{
 

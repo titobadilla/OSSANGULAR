@@ -23,6 +23,7 @@
         box-shadow: 0 5px 4px 0 rgba(0, 0, 0, 0.36);
         border-radius: 10px;
         background:#fff;
+        max-height: 21%;
         }
   
     .form-horizontal .form-group {

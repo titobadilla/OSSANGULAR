@@ -1,33 +1,49 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { KitWorkOrder } from 'src/model/kitWorkOrder.model';
-import { WorkOrder } from 'src/model/workorder.model';
-import { Tool } from 'src/model/tool.model';
 import { setCulture } from '@syncfusion/ej2-base';
+import { KitWorkOrderService } from 'src/app/kit-work-order/kit-work-order.service';
+import { SuppliesTool } from 'src/model/suppliestool.model';
+import { SuppliesDevice } from 'src/model/SuppliesDevice.model';
+import { SuppliesMaterial } from 'src/model/suppliesmaterial.model';
+import { KitWorkOrder } from 'src/model/kitWorkOrder.model';
+import { GridComponent } from '@syncfusion/ej2-angular-grids';
 
 @Component({
   selector: 'insert-inventory-work-order',
   templateUrl: './insert-inventory-work-order.component.html',
   styleUrls: ['./insert-inventory-work-order.component.css']
 })
-export class InsertInventoryWorkOrderComponent implements OnInit {
+export class InsertInventoryWorkOrderComponent implements OnInit, AfterViewInit {
+  ngAfterViewInit():void {
+   this.grid.pageSettings.pageSize = 2;
+  }
 
   reactForm: FormGroup;
   //workOrder: WorkOrder = new WorkOrder();
-  public tools: Tool[];
+  public tools: SuppliesTool[];
+  public devices:SuppliesDevice[];
+  public materials:SuppliesMaterial[];
   public pageSettings: Object;
 
+  kitSelected : KitWorkOrder = new KitWorkOrder();
   kitsWorkOrder: KitWorkOrder[];
   public kitWorkOrder: Object = { text: 'name', value: 'id' };
   public kitWatermark: string = 'Seleccione una lista*';
 
-  constructor( ) {     this.createReactiveForm();
+  @ViewChild('grid') public grid: GridComponent;
+
+  constructor(private kitService:KitWorkOrderService) {    
+     this.createReactiveForm();
    // this.associateValues();
   }
 
   ngOnInit() {
     this.pageSettings = { pageCount: 3 };
     setCulture('es-CR');
+
+    this.kitService.getAllKitWorkOrder().subscribe(data=>{
+      this.kitsWorkOrder = data;
+    })
 
     this.initEventSubmit();
   }
@@ -57,4 +73,24 @@ export class InsertInventoryWorkOrderComponent implements OnInit {
   }
 
   get kit() { return this.reactForm.get('kit'); }
+
+  onChangeDdl(value: any) {
+    if (value.itemData != undefined) {
+     this.kitSelected = this.findKitById(value.itemData.id);
+     this.devices = this.kitSelected.listSuppliesDevices;
+     this.tools = this.kitSelected.listSuppliesTools;
+     this.materials = this.kitSelected.listSuppliesMaterials;
+
+    }
+  }
+
+  findKitById(id: number): any {
+    let elementReturn;
+    this.kitsWorkOrder.forEach(element => {
+      if (element.id == id) {
+        elementReturn = element;
+      }
+    });
+    return elementReturn;
+  }
 }

@@ -1,131 +1,88 @@
-<div *ngIf="principal">
-    <div class="col-lg-3"></div>
-    <div class="col-lg-6 control-section">
-        <div class="content-wrapper" style="margin-bottom: 25px;">
+<div *ngIf="rangeSection">
 
-            <div class="row">
-                <div class="col-lg-2"></div>
-                <div id="panel" class="panel panel-default" style="margin-top:5%;">
-                    <div class="panel-body">
-
-                        <div class="col-lg-6 border-right">
-
-                            <div class="formtitle">
-                                <span>Orden de trabajo</span>
-                            </div>
-
-                            <div class="form-group">
-                                <label style="font-size:15px;">Nombre del cliente</label>
-                                <br>
-                                <input type="text" class="form-control" [disabled]="true"
-                                    [(ngModel)]="workOrder.client.name">
-                            </div>
-
-                            <div class="form-group">
-                                <label style="font-size:15px;">Descripción</label>
-                                <br>
-                                <input type="text" class="form-control" [disabled]="true"
-                                    [(ngModel)]="workOrder.description">
-                            </div>
-
-                            <div class="form-group">
-                                <label style="font-size:15px;">Estado de orden</label>
-                                <br>
-                                <input type="text" class="form-control" [disabled]="true"
-                                    [(ngModel)]="workOrder.color.state">
-                            </div>
-
+        <div id="control_wrapper">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <ejs-daterangepicker [(ngModel)]="fecha"></ejs-daterangepicker>
                         </div>
-
-                        <div class="col-lg-6">
-                            <div class="formtitle">
-                                <span>Detalle de Orden</span>
-                            </div>
-
-                            <div class="form-group">
-                                <label style="font-size:15px;">Fecha</label>
-                                <br>
-                                <input type="date" class="form-control" [disabled]="true" [(ngModel)]="detail.date">
-                            </div>
-
-                            <div class="form-group">
-                                <label style="font-size:15px;">Hora de llegada</label>
-                                <br>
-                                <input type="time" class="form-control" [disabled]="true" [(ngModel)]="detail.checkIn">
-                            </div>
-
-                            <div class="form-group">
-                                <label style="font-size:15px;">Hora de salida</label>
-                                <br>
-                                <input type="time" class="form-control" [disabled]="true" [(ngModel)]="detail.checkOut">
-                            </div>
-
-                            <div class="form-group">
-                                <label style="font-size:15px;">Detalle</label>
-                                <br>
-                                <textarea class="textarea form-control" type="text" [disabled]="true"
-                                    [(ngModel)]="detail.description"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label style="font-size:15px;">Número de factura</label>
-                                <br>
-                                <input type="text" class="form-control" [disabled]="true"
-                                    [(ngModel)]="detail.invoiceId">
-                            </div>
-
-                            <div class="form-group">
-                                <label style="font-size:15px;">Persona que recibió</label>
-                                <br>
-                                <input type="text" class="form-control" [disabled]="true"
-                                    [(ngModel)]="detail.managerName">
-                            </div>
-
-
-                            <div style="width: 225px;margin:0px auto;height: 100px;">
-                                <div style="display: inline-block;">
-                                    <button id="validateSubmit" class="samplebtn e-control e-btn e-warning"
-                                        type="submit" style="height:40px;width: 100px;" data-ripple="true"
-                                        (click)="edit()">Editar</button>
+                        <div class="col-sm-3">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <button id="validateSubmit" class="e-control e-btn e-info glyphicon glyphicon-search"
+                                        type="submit" style="margin-left:20px;height:40px;width:40px;" data-ripple="true"
+                                        (click)='list()'></button>
                                 </div>
-                                <div style="float: right;">
-                                    <button id="validateSubmit" class="samplebtn e-control e-btn e-danger" type="submit"
-                                        style="height:40px;width: 100px;" data-ripple="true"
-                                        (click)="delete()">Eliminar</button>
-
+                                <div class="col-sm-3">
+                                    <button class="samplebtn e-control e-btn e-basic glyphicon glyphicon-plus"
+                                        (click)='insert()' style="height:40px;width: 40px;margin-left: 35px;"></button>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
-<div *ngIf="update">
-    <update-work-order-detail [detailid]="detailid"></update-work-order-detail>
-</div>
-
-<div *ngIf="modalDelete" class="modal fade in" role="dialog" id="gridTools" tabindex="-1"
-    aria-labelledby="gridModalLabel" style="display:block;padding-right: 15px;margin-top: 225px;">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" (click)="hideModal()" aria-label="Close">
-                    <span style="color: black;" aria-hidden="true">×</span>
-                </button>
-
-                <div class="modal-body" id="gridModalLabel">
-                    ¿Está seguro que desea eliminar el detalle de orden de la fecha {{detail.date}}?
-                </div>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" (click)="hideModal()">Cancelar</button>
-                <button type="button" class="btn btn-primary" (click)="aceptDelete()">Aceptar</button>
+    
+    
+    
+    
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10">
+                <ejs-toolbar class='e-gridlist' (clicked)="onClicked($event.originalEvent)">
+                    <e-items>
+                        <e-item text='Fecha'></e-item>
+                        <e-item text='Hora de entrada'></e-item>
+                        <e-item text='Hora de salida'></e-item>
+                        <e-item text='Descripción'></e-item>
+                        <e-item text='Número de factura'></e-item>
+                        <e-item text='Persona que recibe'></e-item>
+                    </e-items>
+                </ejs-toolbar>
+                <br />
+                <ejs-grid #grid [dataSource]='data' allowPaging='true' [allowSorting]='true' (dataBound)="dataBound()"
+                    allowTextWrap='true' [pageSettings]='pageSettings'>
+    
+                    <ng-template #toolbarTemplate>
+                        <ejs-toolbar>
+                            <div class="e-dlg-header">Lista de detalles de órdenes</div>
+                        </ejs-toolbar>
+                    </ng-template>
+    
+                    <e-columns>
+                        <e-column field='date' headerText='Fecha' width='100' textAlign='center'></e-column>
+                        <e-column field='checkIn' headerText="Hora de entrada" width='150' textAlign='center'></e-column>
+                        <e-column field='checkOut' headerText="Hora de salida" width='150' textAlign='center'></e-column>
+                        <e-column field='description' headerText="Descripción" width='150' textAlign='center'></e-column>
+                        <e-column field='invoiceId' headerText="Número de factura" width='150' textAlign='center'>
+                        </e-column>
+                        <e-column field='managerName' headerText="Persona que recibe" width='150' textAlign='center'>
+                        </e-column>
+                        <e-column headerText="Editar" width='85' textAlign='center'>
+                            <ng-template #template let-data>
+                                <button mat-button class="btn btn-warning glyphicon glyphicon-pencil"
+                                    (click)='edit(data)'></button>
+                            </ng-template>
+                        </e-column>
+    
+                        <e-column headerText="Eliminar" width='115' textAlign='center'>
+                            <ng-template #template let-data>
+                                <button mat-button class="btn btn-danger glyphicon glyphicon-trash"
+                                    (click)='openModal(data)'></button>
+                            </ng-template>
+                        </e-column>
+                    </e-columns>
+                </ejs-grid>
             </div>
         </div>
     </div>
-</div>
+    
+    <div *ngIf="insertSection">
+        <insert-work-order-detail></insert-work-order-detail>
+    </div>
+    
+    <div *ngIf="editSection">
+        <update-work-order-detail [detailid]="detailid"></update-work-order-detail>
+    </div>

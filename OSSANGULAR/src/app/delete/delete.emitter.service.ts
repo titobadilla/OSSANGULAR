@@ -47,6 +47,9 @@ export class DeleteEmitterService {
   private _messageDeviceDeleteOfWorkOrder = new Subject<boolean>();
   deleteDeviceOfWorkOrder$ = this._messageDeviceDeleteOfWorkOrder.asObservable();
 
+  private _messageWorkOrderDetailDelete= new Subject<boolean>();
+  deleteWorkOrderDetail$ = this._messageWorkOrderDetailDelete.asObservable();
+
   constructor() { }
 
   public setDeleteEmployee(flat: boolean) {
@@ -100,5 +103,9 @@ export class DeleteEmitterService {
 
   public setDeleteToolOfWorkOrder(flat: boolean) {
     this._messageToolDeleteOfWorkOrder.next(flat);
+  }
+
+  public setDeleteWorkOrderDetail(flat:boolean){
+    this._messageWorkOrderDetailDelete.next(flat);
   }
 }

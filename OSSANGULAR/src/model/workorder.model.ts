@@ -4,9 +4,9 @@ import { WorkOrderDetail } from './workorderdetail.model';
 import { WorkOrderType } from './workordertype.model';
 import { Color} from './color.model';
 import { KitWorkOrder } from './kitWorkOrder.model';
-import { WorkOrderDevice } from './workOrderDevice.model';
-import { WorkOrderMaterial } from './workOrderMaterial.model';
-import { WorkOrderTool } from './workOrderTool.model';
+import { WorkOrderDevice } from './workOrderdevice.model';
+import { WorkOrderMaterial } from './workOrdermaterial.model';
+import { WorkOrderTool } from './workOrdertool.model';
 
 export class WorkOrder{
 
