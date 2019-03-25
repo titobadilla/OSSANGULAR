@@ -35,7 +35,7 @@ export class InsertAdicionalToolWorkOrderComponent implements OnInit, AfterViewI
   public toolWatermark: string = 'Seleccione las herramientas*';
 
   //workOrderTool manage
-  workOrderToolSelected: WorkOrderTool = new WorkOrderTool();
+  workOrderToolSelected: WorkOrderTool;
   selectedTools: WorkOrderTool[] = new Array();
   quantityTool: number = 0;
   newQuantityTool: number = 0;
@@ -96,7 +96,7 @@ export class InsertAdicionalToolWorkOrderComponent implements OnInit, AfterViewI
   //verify the changes in the dropdown
   onChangeDdlTool(value: any) {
     if (value.itemData != undefined) {
-
+      this.workOrderToolSelected= new WorkOrderTool();
       this.workOrderToolSelected.id.tool = this.findToolById(value.itemData.id);
       this.quantityTool = this.workOrderToolSelected.id.tool.quantity;
       this.newQuantityTool = this.quantityTool;

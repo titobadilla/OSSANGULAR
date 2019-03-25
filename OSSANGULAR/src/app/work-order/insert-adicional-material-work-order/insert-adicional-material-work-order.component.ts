@@ -33,9 +33,9 @@ export class InsertAdicionalMaterialWorkOrderComponent implements OnInit {
   selectedMaterials: WorkOrderMaterial[] = new Array();
   quantityMaterial: number = 0;
   newQuantityMaterial: number = 0;
-  materialSelected: WorkOrderMaterial = new WorkOrderMaterial();
+  materialSelected: WorkOrderMaterial;
   addQuantityM: boolean = false;
-  materialDelete: WorkOrderMaterial = new WorkOrderMaterial();
+  materialDelete: WorkOrderMaterial;
 
   constructor(private serviceMaterial: MaterialService,private modalService: BsModalService,
      private deleteService: DeleteEmitterService) {
@@ -89,10 +89,13 @@ export class InsertAdicionalMaterialWorkOrderComponent implements OnInit {
 
   onChangeDdlMaterial(value: any) {
     if (value.itemData != undefined) {
+
+      this.materialSelected = new WorkOrderMaterial();
       this.materialSelected.id.material = this.findMaterialById(value.itemData.id);
       this.quantityMaterial = this.materialSelected.id.material.quantity;
       this.newQuantityMaterial = this.quantityMaterial;
 
+      this.quantityMaterialNew.enable();
       this.quantityMat.setValue(this.quantityMaterial);
       this.quantityMaterialNew.setValue(this.quantityMaterial);
       this.quantityMat.disable();
@@ -122,6 +125,7 @@ export class InsertAdicionalMaterialWorkOrderComponent implements OnInit {
 
     this.materials = this.removeElementAdded(this.materials, this.materialSelected.id.material)
     this.addQuantityM = false;
+
     }if(this.quantityMaterialNew.value<=0){
        this.openModalValidate(this.materialSelected);
         this.quantityMaterialNew.reset();
@@ -155,6 +159,7 @@ export class InsertAdicionalMaterialWorkOrderComponent implements OnInit {
   }
 
   openModal(material: WorkOrderMaterial) {
+    this.materialDelete  = new WorkOrderMaterial();
     this.materialDelete = material;
 
     this.modalRef = this.modalService.show(DeleteComponent, {
@@ -181,6 +186,6 @@ export class InsertAdicionalMaterialWorkOrderComponent implements OnInit {
     this.selectedMaterials = this.removeElementAddedOfTable(this.selectedMaterials, this.materialDelete)
     this.grid.refresh();
     this.materials.push(this.materialDelete.id.material); 
-    //this.listObj.refresh();
+    
   }
 }

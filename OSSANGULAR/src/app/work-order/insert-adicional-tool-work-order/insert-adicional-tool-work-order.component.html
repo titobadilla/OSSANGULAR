@@ -8,7 +8,7 @@
     </div>
 
     <div class="form-group">
-      <ejs-dropdownlist (change)='onChangeDdlTool($event)' formControlName="toolsMulti" [dataSource]='tools'
+      <ejs-dropdownlist #dropdown (change)='onChangeDdlTool($event)' formControlName="toolsMulti" [dataSource]='tools'
         [fields]='toolWorkOrder' [placeholder]='toolWatermark' floatLabelType='Auto' id='dropdown'>
       </ejs-dropdownlist>
     </div>

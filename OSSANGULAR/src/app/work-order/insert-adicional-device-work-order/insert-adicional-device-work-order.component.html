@@ -7,7 +7,7 @@
     </div>
 
     <div class="form-group">
-      <ejs-dropdownlist (change)='onChangeDdlDevice($event)' formControlName="devicesMulti" [dataSource]='devices'
+      <ejs-dropdownlist #dropdown (change)='onChangeDdlDevice($event)' formControlName="devicesMulti" [dataSource]='devices'
         [fields]='deviceWorkOrder' [placeholder]='deviceWatermark' floatLabelType='Auto' id='dropdown'>
       </ejs-dropdownlist>
     </div>

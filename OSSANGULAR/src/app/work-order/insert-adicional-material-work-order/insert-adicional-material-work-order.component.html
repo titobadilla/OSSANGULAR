@@ -7,8 +7,8 @@
     </div>
 
     <div class="form-group">
-      <ejs-dropdownlist (change)='onChangeDdlMaterial($event)' formControlName="materialsMulti" [dataSource]='materials'
-        [fields]='materialWorkOrder' [placeholder]='materialWatermark' floatLabelType='Auto' id='dropdown'>
+      <ejs-dropdownlist #dropdown (change)='onChangeDdlMaterial($event)' formControlName="materialsMulti" [dataSource]='materials'
+        [fields]='materialWorkOrder' [placeholder]='materialWatermark' floatLabelType='Auto'>
       </ejs-dropdownlist>
     </div>
     <div class="row" style="margin-top:5%; margin-left: 2%; margin-right: 2%; margin-bottom: 15%;">
@@ -48,7 +48,7 @@
           <e-columns>
             <e-column field='id.material.name' headerText='Nombre' width='50' textAlign='center'></e-column>
             <e-column field='id.material.description' headerText='Descripción' width='60' textAlign='center'></e-column>
-            <e-column field='id.material.quantity' headerText='Cantidad' width='50' textAlign='center'></e-column>
+            <e-column field='quantity' headerText='Cantidad' width='50' textAlign='center'></e-column>
             <e-column field='id.material.delete' headerText="Eliminar" width='50' textAlign='center'>
               <ng-template #template let-data>
                 <button mat-button class="btn btn-danger glyphicon glyphicon-trash" (click)='openModal(data)'></button>

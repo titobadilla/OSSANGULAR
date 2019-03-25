@@ -33,7 +33,7 @@ export class InsertAdicionalDeviceWorkOrderComponent implements OnInit {
   selectedDevices: WorkOrderDevice[] = new Array();
   quantityDevice: number = 0;
   newQuantityDevice: number = 0;
-  deviceSelected: WorkOrderDevice = new WorkOrderDevice();
+  deviceSelected: WorkOrderDevice;
   addQuantityD: boolean = false;
   deviceDelete: WorkOrderDevice = new WorkOrderDevice();
 
@@ -90,6 +90,8 @@ export class InsertAdicionalDeviceWorkOrderComponent implements OnInit {
 
   onChangeDdlDevice(value: any) {
     if (value.itemData != undefined) {
+
+      this.deviceSelected = new WorkOrderDevice();
       this.deviceSelected.id.device = this.findDeviceById(value.itemData.id);
       this.quantityDevice = this.deviceSelected.id.device.quantity;
       this.newQuantityDevice = this.quantityDevice;
