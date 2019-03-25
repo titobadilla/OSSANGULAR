@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, AfterContentInit } from '@angular/core';
 import { WorkOrderService } from './work-order.service';
 import { WorkOrder } from 'src/model/workorder.model';
 import { WorkOrderTypeService } from '../work-order-type/work-order-type.service';
@@ -14,24 +14,23 @@ import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 import { MultiSelectComponent } from '@syncfusion/ej2-angular-dropdowns';
 import { CheckBoxComponent } from '@syncfusion/ej2-angular-buttons';
 import { Timestamp } from 'rxjs/internal/operators/timestamp';
+import 'rxjs/add/observable/interval';
+import 'rxjs/add/operator/takeWhile';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'work-order',
   templateUrl: './work-order.component.html',
   styleUrls: ['./work-order.component.css']
 })
-export class WorkOrderComponent implements OnInit, AfterViewInit {
-  ngAfterViewInit() {
-    setTimeout(this.initEventSubmit, 1);
-    this.createReactiveForm();
-    this.associateValues();
-    //this.initEventSubmit();
-  }
+export class WorkOrderComponent implements OnInit {
+ 
 
   startHourWo: String;
+  stopCondition:boolean=false;
   endHourWo: String;
 
-  reactForm: FormGroup = null;
+  reactForm: FormGroup;
 
   constructor(private workOrderService: WorkOrderService,
     private serviceWorkOrderTypes: WorkOrderTypeService,
@@ -39,9 +38,9 @@ export class WorkOrderComponent implements OnInit, AfterViewInit {
     private serviceEmployee: EmployeeService,
     private serviceWorkOrder: WorkOrderService,
     private serviceColors: ColorService) {
-
-
-   
+      this.createReactiveForm();
+      this.associateValues();
+      this.initStart();   
   }
 
   //multi select
@@ -67,6 +66,7 @@ export class WorkOrderComponent implements OnInit, AfterViewInit {
   public colorWorkOrder: Object = { text: 'state', value: 'id' };
   public colorWatermark: string = 'Seleccione un color*';
   completeWorkOrder: boolean = false;
+
   ngOnInit() {
     this.serviceWorkOrderTypes.getAllWorkOrdersType().subscribe(data => {
       this.workOrdersType = data;
@@ -82,12 +82,13 @@ export class WorkOrderComponent implements OnInit, AfterViewInit {
 
     this.serviceColors.getAllColors().subscribe(data => {
       this.colors = data;
-    })
+    });
+    
   }
 
-  initEventSubmit() {
-    let formId: HTMLElement = <HTMLElement>document.getElementById('formId');
-    document.getElementById('formId').addEventListener(
+  initEventSubmit(formId:any) {
+   
+   formId.addEventListener(
       'submit',
       (e: Event) => {
         e.preventDefault();
@@ -102,6 +103,21 @@ export class WorkOrderComponent implements OnInit, AfterViewInit {
           });
         }
       });
+  }
+
+
+  initStart(){
+    Observable.interval(1000)
+      .takeWhile(() => !this.stopCondition)
+      .subscribe(i => {
+        let formId: HTMLElement = <HTMLElement>document.getElementById('formId'); 
+        if(formId!=undefined){
+          this.initEventSubmit(formId);
+          this.stopCondition=true;
+        }
+         
+      })
+  
   }
 
   associateValues() {
@@ -223,10 +239,10 @@ export class WorkOrderComponent implements OnInit, AfterViewInit {
     { text: 'Agregar Dispositivo Adicional' }];
 
   formatDates() {
-    this.workOrder.startDate = "" + this.workOrder.startDate + "T" + this.startHour.value + "-0600"
-    this.workOrder.endDate = "" + this.workOrder.endDate + "T" + this.endHour.value + "-0600"
-    console.log(this.reactForm.status)
-    console.log(this.workOrder)
+    this.workOrder.startDate = "" + this.workOrder.startDate + "T" + this.startHour.value + "-0600";
+    this.workOrder.endDate = "" + this.workOrder.endDate + "T" + this.endHour.value + "-0600";
+    console.log(this.reactForm.status);
+    console.log(this.workOrder);    
   }
 }
 

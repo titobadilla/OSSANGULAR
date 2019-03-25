@@ -81,7 +81,7 @@ logoutPrivateBySystem(){
 
   logout() {
     this.stopCondition=true;
-    this.token.signOut();    
+    this.token.signOut();        
     this.app.ngOnInit();
   }
 
