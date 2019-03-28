@@ -48,7 +48,7 @@ import { Router } from '@angular/router';
 })
 export class SampleLayoutComponent implements OnDestroy {
 
-  
+
   layout: any = {};
   sidebar: any = {};
 
