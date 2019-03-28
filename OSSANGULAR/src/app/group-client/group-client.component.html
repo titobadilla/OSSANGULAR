@@ -1,83 +1,73 @@
 <div *ngIf="formSection">
-  <div class="row">
-    <div class="col-lg-3"></div>
-    <div class="col-lg-4 control-section">
-      <div class="content-wrapper">
 
-        <div class="container">
-
-          <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
-
-            <div class="row">
-              <div class="formtitle">
-                <span>Buscar Jerarquia</span>
-              </div>
-
-              <div class="col-lg-7 col-md-10 col-sm-8 col-xs-8">
-
-                <div class="form-group">
-                  <ejs-dropdownlist (change)='onChangeDdl($event)' formControlName="client" name="client"
-                    [dataSource]='data' [fields]='fields' [placeholder]='watermark' floatLabelType='Auto'>
-                  </ejs-dropdownlist>
-                  <div *ngIf="clients.errors">
-                    <div *ngIf="clients.errors.errorD && clients.touched" class="e-error">
-                      Debe seleccionar un rol.
-                    </div>
+  <div id="control_wrapper">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="formtitle">
+          <span>Grupos de Clientes</span>
+        </div>
+        <div class="row">
+          <div class="col-sm-8">
+            <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
+              <div class="form-group">
+                <ejs-dropdownlist (change)='onChangeDdl($event)' formControlName="client" name="client"
+                  [dataSource]='data' [fields]='fields' [placeholder]='watermark' floatLabelType='Auto'>
+                </ejs-dropdownlist>
+                <div *ngIf="clients.errors">
+                  <div *ngIf="clients.errors.errorD && clients.touched" class="e-error">
+                    Debe seleccionar un rol.
                   </div>
                 </div>
               </div>
 
-              <div class="col-lg-4 col-md-8 col-sm-8 col-xs-8">
-
+            </form>
+          </div>
+          <div class="col-sm-3">
+            <div class="row">
+              <div class="col-sm-3">
                 <button class="samplebtn e-control e-btn e-warning" (click)='edit()'
                   style="height:30px;width: 40px;margin-left: 5px;margin-top: 25px;"><span
                     class="glyphicon glyphicon-pencil"></span></button>
-
+              </div>
+              <div class="col-sm-3">
                 <button class="samplebtn e-control e-btn e-danger" (click)='openModal()'
                   style="height:30px;width: 40px;margin-left: 5px;margin-top: 25px;"><span
                     class="glyphicon glyphicon-trash"></span></button>
+              </div>
 
+              <div class="col-sm-3">
                 <button class="samplebtn e-control e-btn e-basic" (click)='insert()'
                   style="height:30px;width: 40px;margin-left: 5px;margin-top: 25px;"><span
                     class="glyphicon glyphicon-plus"></span></button>
               </div>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
-
   </div>
 
 
-
-  <div class="row">
-    <div class="col-lg-3"></div>
-    <div class="col-lg-6">
-
-      <ejs-grid #grid [dataSource]='clients' allowPaging='true' [allowSorting]='true' allowTextWrap='true'
-        [pageSettings]='pageSettings'>
-        <ng-template #toolbarTemplate>
-          <ejs-toolbar>
-            <div class="e-dlg-header">Lista de Empleados Asociados</div>
-          </ejs-toolbar>
+  <ejs-grid #grid [dataSource]='clients' allowPaging='true' [allowSorting]='true' allowTextWrap='true'
+    [pageSettings]='pageSettings'>
+    <ng-template #toolbarTemplate>
+      <ejs-toolbar>
+        <div class="e-dlg-header">Lista de Empleados Asociados</div>
+      </ejs-toolbar>
+    </ng-template>
+    <e-columns>
+      <e-column field='id' headerText='Identificación' width='100' textAlign='center'></e-column>
+      <e-column field='name' headerText="Nombre" width='100' textAlign='center'></e-column>
+      <e-column field='contactName' headerText="Nombre de contacto" width='150' textAlign='center'></e-column>
+      <e-column field='contactLastName' headerText="Apellidos de contacto" width='150' textAlign='center'>
+      </e-column>
+      <e-column field='seeMore' headerText="Ver Más" width='70' textAlign='center'>
+        <ng-template #template let-data>
+          <button mat-button class="btn btn-info glyphicon glyphicon-plus" (click)='seeMore(data)'></button>
         </ng-template>
-        <e-columns>
-          <e-column field='id' headerText='Identificación' width='100' textAlign='center'></e-column>
-          <e-column field='name' headerText="Nombre" width='100' textAlign='center'></e-column>
-          <e-column field='contactName' headerText="Nombre de contacto" width='150' textAlign='center'></e-column>
-          <e-column field='contactLastName' headerText="Apellidos de contacto" width='150' textAlign='center'>
-          </e-column>
-          <e-column field='seeMore' headerText="Ver Más" width='70' textAlign='center'>
-            <ng-template #template let-data>
-              <button mat-button class="btn btn-info glyphicon glyphicon-plus" (click)='seeMore(data)'></button>
-            </ng-template>
-          </e-column>
-        </e-columns>
-      </ejs-grid>
-    </div>
-
-  </div>
+      </e-column>
+    </e-columns>
+  </ejs-grid>
 </div>
 
 <div *ngIf="updateSection">

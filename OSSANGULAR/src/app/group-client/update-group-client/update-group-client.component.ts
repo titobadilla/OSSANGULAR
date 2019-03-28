@@ -35,7 +35,7 @@ export class UpdateGroupClientComponent implements OnInit {
   reactForm: FormGroup;
   group: GroupClient = new GroupClient();
 
-  constructor(private groupClientService: GroupClientService, private clientService: ClientService, private parent:GroupClientComponent) {
+  constructor(private groupClientService: GroupClientService, private clientService: ClientService, private parent: GroupClientComponent) {
     this.createReactiveForm();
     this.associateValues();
   }
@@ -65,18 +65,18 @@ export class UpdateGroupClientComponent implements OnInit {
 
   ngOnInit() {
     this.initEventSubmit();
-   // this.clientService.getClientsWithoutGroup().subscribe(data => {
-   //  this.clients = data;
-   // });
+    // this.clientService.getClientsWithoutGroup().subscribe(data => {
+    //  this.clients = data;
+    // });
 
-    this.groupClientService.getByIdGroupClient(this.groupid).subscribe(data=>{
-      this.group= data;
+    this.groupClientService.getByIdGroupClient(this.groupid).subscribe(data => {
+      this.group = data;
       this.setValuesMultiples();
     })
 
   }
 
-  setValuesMultiples(){
+  setValuesMultiples() {
     this.selectedClients = this.group.clients;
     this.clientsMulti.setValue(this.group.clients);
   }
@@ -135,6 +135,7 @@ export class UpdateGroupClientComponent implements OnInit {
       (e: Event) => {
         e.preventDefault();
         if (this.reactForm.valid) {
+          this.updateGroup();
         } else {
           Object.keys(this.reactForm.controls).forEach(field => {
             const control = this.reactForm.get(field);
@@ -155,11 +156,11 @@ export class UpdateGroupClientComponent implements OnInit {
   get phone2() { return this.reactForm.get('phone2'); }
 
   public updateGroup() {
-   /*/ this.groupClientService.updateGroupClient(this.group).subscribe(data => {
-      this.reactForm.reset()
-    }
-    );/*/
-      console.log(this.group)
+    /*/ this.groupClientService.updateGroupClient(this.group).subscribe(data => {
+       this.reactForm.reset()
+     }
+     );/*/
+    console.log(this.group)
   }
   returnView() {
     this.parent.getAllGroups();
