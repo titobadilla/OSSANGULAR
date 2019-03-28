@@ -38,6 +38,24 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'nb-star',
     children: [
       {
+        title: 'Orden de trabajo',
+        link: '/work-order',
+      },
+      {
+        title: 'Detalle de orden',
+        link: '/work-order-detail',
+      },
+      {
+        title: 'Tipo de orden',
+        link: '/work-order-type',
+      }    
+    ],
+  },
+  {
+    title: 'Inventario',
+    icon: 'nb-star',
+    children: [
+      {
         title: 'Lista predefinidas',
         link: '/',
       },
