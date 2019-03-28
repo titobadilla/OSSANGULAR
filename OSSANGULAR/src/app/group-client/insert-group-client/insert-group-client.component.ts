@@ -139,6 +139,7 @@ export class InsertGroupClientComponent implements OnInit {
       (e: Event) => {
         e.preventDefault();
         if (this.reactForm.valid) {
+          this.insertGroup();
         } else {
           // validating whole form
           Object.keys(this.reactForm.controls).forEach(field => {

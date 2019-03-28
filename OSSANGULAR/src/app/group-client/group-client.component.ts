@@ -146,12 +146,14 @@ export class GroupClientComponent implements OnInit, AfterViewInit {
 
   openModal() {
 
-    this.modalRef = this.modalService.show(DeleteComponent, {
-      initialState: {
-        title: 'Eliminar Grupo',
-        data: 'el grupo con el nombre: ' + this.group.nameGroup,
-        type: 'groupClient'
-      }
-    });
+    if (this.group.nameGroup != undefined) {
+      this.modalRef = this.modalService.show(DeleteComponent, {
+        initialState: {
+          title: 'Eliminar Grupo',
+          data: 'el grupo con el nombre: ' + this.group.nameGroup,
+          type: 'groupClient'
+        }
+      });
+    }
   }
 }
