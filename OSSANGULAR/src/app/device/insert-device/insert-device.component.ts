@@ -11,6 +11,7 @@ import { MeasurementUnitService } from 'src/app/measurement-unit/measurement-uni
 import { DeviceStateService } from 'src/app/device-state/device-state.service';
 import { ModelService } from 'src/app/model/model.service';
 import { DeviceState } from 'src/model/devicestate.model';
+import { DeviceComponent } from '../device.component';
 
 @Component({
   selector: 'insert-device',
@@ -39,10 +40,12 @@ export class InsertDeviceComponent implements OnInit {
   public measurementUnitDevice: Object = { text: 'name', value: 'id' };
   public measurementUnitWatermark: string = 'Seleccione una unidad de medida*';
 
-  constructor(private deviceService: DeviceService, private categoryService: InventoryCategoryService,
+  constructor(private deviceService: DeviceService, 
+    private categoryService: InventoryCategoryService,
     private measurementUnitService: MeasurementUnitService,
     private deviceStateService: DeviceStateService,
-    private modelService: ModelService) {
+    private modelService: ModelService,
+    private parent: DeviceComponent) {
     this.createReactiveForm();
     this.associateValues();
   }
@@ -55,7 +58,7 @@ export class InsertDeviceComponent implements OnInit {
       (e: Event) => {
         e.preventDefault();
         if (this.reactForm.valid) {
-          this.reactForm.reset();
+          this.createDevice();
         } else {
           // validating whole form
           Object.keys(this.reactForm.controls).forEach(field => {
@@ -116,17 +119,17 @@ export class InsertDeviceComponent implements OnInit {
   get name() { return this.reactForm.get('name'); }
   get description() { return this.reactForm.get('description'); }
   get manufactureModel() { return this.reactForm.get('manufactureModel'); }
-  get model() { 
-  //  console.log("model: "+this.reactForm.get('model').value)
-    return this.reactForm.get('model'); }
+  get model() { return this.reactForm.get('model'); }
   get category() { return this.reactForm.get('category'); }
   get measurementUnit() { return this.reactForm.get('measurementUnit'); }
   get deviceState() { return this.reactForm.get('deviceState'); }
 
 
   private createDevice() {
-    console.log(this.device.model.id)
-    this.deviceService.insertDevice(this.device).subscribe();
+    this.deviceService.insertDevice(this.device).subscribe(data=>{
+      this.returnView();
+    });
+    
   }
 
   valueRequired(control: FormControl) {
@@ -140,5 +143,11 @@ export class InsertDeviceComponent implements OnInit {
       }
     }
     return null;
+  }
+
+  returnView() {
+    this.parent.insertSection = false;
+    this.parent.getAllDevices();
+    this.parent.principal = true;
   }
 }

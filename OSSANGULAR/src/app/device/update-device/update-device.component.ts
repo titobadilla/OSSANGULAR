@@ -11,6 +11,7 @@ import { ModelService } from 'src/app/model/model.service';
 import { MeasurementUnitService } from 'src/app/measurement-unit/measurement-unit.service';
 import { InventoryCategoryService } from 'src/app/inventory-category/inventory-category.service';
 import { DeviceStateService } from 'src/app/device-state/device-state.service';
+import { DeviceComponent } from '../device.component';
 
 @Component({
   selector: 'update-device',
@@ -52,7 +53,8 @@ export class UpdateDeviceComponent implements OnInit, AfterViewInit {
     private modelService: ModelService,
     private measurementUnitService: MeasurementUnitService,
     private categoryService: InventoryCategoryService,
-    private deviceStateService: DeviceStateService
+    private deviceStateService: DeviceStateService,
+    private parent: DeviceComponent
   ) {
     this.createReactiveForm();
     this.associateValues();
@@ -102,7 +104,7 @@ export class UpdateDeviceComponent implements OnInit, AfterViewInit {
       (e: Event) => {
         e.preventDefault();
         if (this.reactForm.valid) {
-          this.reactForm.reset();
+          this.editDevice();
 
         } else {
           // validating whole form
@@ -195,7 +197,10 @@ export class UpdateDeviceComponent implements OnInit, AfterViewInit {
   }
 
   public editDevice() {
-    this.deviceService.updateDevice(this.device).subscribe();
+    this.deviceService.updateDevice(this.device).subscribe(data=>{
+      this.returnView();
+    });
+    
   }
 
   valueRequired(control: FormControl) {
@@ -240,5 +245,12 @@ export class UpdateDeviceComponent implements OnInit, AfterViewInit {
     this.deviceState.setValidators(this.valueRequired);
     this.stateID = this.device.deviceState.id;
 
+  }
+
+
+  returnView() {
+    this.parent.getAllDevices();
+    this.parent.editSection = false;
+    this.parent.principal = true;
   }
 }

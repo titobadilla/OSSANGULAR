@@ -1,10 +1,11 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DeviceService } from './device.service';
 import { Device } from 'src/model/device.model';
-import { UpdateDeviceComponent } from './update-device/update-device.component';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { setCulture, removeClass, addClass } from '@syncfusion/ej2-base';
-
+import { DeleteComponent } from '../delete/delete.component';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { DeleteEmitterService } from '../delete/delete.emitter.service';
 
 @Component({
   selector: 'device',
@@ -13,7 +14,7 @@ import { setCulture, removeClass, addClass } from '@syncfusion/ej2-base';
 })
 export class DeviceComponent implements OnInit {
 
-  constructor(private deviceService:DeviceService) { }
+  constructor(private deviceService: DeviceService, private modalService: BsModalService, private deleteService: DeleteEmitterService) { }
 
   ngAfterViewInit(): void {
     this.grid.pageSettings.pageSize = 5;
@@ -21,16 +22,15 @@ export class DeviceComponent implements OnInit {
   public flag: boolean = false;
   public dataBound(): void {
     this.flag = true;
-}
+  }
+  modalRef: BsModalRef;
   public data: Device[];
   public pageSettings: Object;
-  @ViewChild('updateDevice') childOne: UpdateDeviceComponent;
   @ViewChild('grid') public grid: GridComponent;
 
   deviceid: number;
   principal: boolean = true;
   editSection: boolean = false;
-  modalDelete = false;
   insertSection = false;
   deviceDelete: Device;
 
@@ -38,12 +38,16 @@ export class DeviceComponent implements OnInit {
     this.getAllDevices();
     this.pageSettings = { pageCount: 3 };
     setCulture('es-CR');
+
+    this.deleteService.deleteDevice$.subscribe(data => {
+      this.acceptDelete();
+    });
   }
 
 
   getAllDevices() {
-    this.deviceService.getAllDevice().subscribe(data=>{
-      this.data= data;
+    this.deviceService.getAllDevice().subscribe(data => {
+      this.data = data;
     })
   }
 
@@ -53,21 +57,10 @@ export class DeviceComponent implements OnInit {
     this.editSection = true;
   }
 
-  delete(device:Device) {
-    this.deviceDelete = device;
-    this.modalDelete = true;
-  }
-
-  hideModal() {
-    this.deviceDelete = new Device();
-    this.modalDelete = false;
-  }
-
-  aceptDelete() {
-    this.deviceService.deleteDevice(this.deviceDelete.id).subscribe(data=>{
+  acceptDelete() {
+    this.deviceService.deleteDevice(this.deviceDelete.id).subscribe(data => {
       this.getAllDevices();
     })
-    this.modalDelete = false;
   }
 
   insert() {
@@ -82,7 +75,7 @@ export class DeviceComponent implements OnInit {
 
 
     if (!element.classList.contains('e-tbar-btn-text') && !element.classList.contains('e-tbar-btn')) {
-        return;
+      return;
     }
 
     element = <HTMLElement>(element.tagName === 'BUTTON' ? element.firstElementChild : element);
@@ -93,10 +86,22 @@ export class DeviceComponent implements OnInit {
 
 
     if (hidden) {
-        this.grid.showColumns(element.innerHTML);
+      this.grid.showColumns(element.innerHTML);
     } else {
-        this.grid.hideColumns(element.innerHTML);
+      this.grid.hideColumns(element.innerHTML);
     }
-}
+  }
+
+  openModal(device: Device) {
+    this.deviceDelete = device;
+
+    this.modalRef = this.modalService.show(DeleteComponent, {
+      initialState: {
+        title: 'Eliminar el Dispositivo de Inventario',
+        data: 'el dispositivo con el nombre: ' + device.name,
+        type: 'device'
+      }
+    });
+  }
 }
 
