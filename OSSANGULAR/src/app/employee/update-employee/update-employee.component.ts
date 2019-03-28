@@ -18,9 +18,6 @@ export class UpdateEmployeeComponent implements OnInit {
 
   @Input() employeeId: String;
 
-  @ViewChild('ddlRole')
-  public ddlRole: DropDownListComponent;
-
   public data: EmployeeRole[] = new Array();
   public value: number;
 
@@ -32,7 +29,8 @@ export class UpdateEmployeeComponent implements OnInit {
   reactForm: FormGroup;
   employee: Employee = new Employee();
 
-  constructor(private employeeService: EmployeeService, private employeeRoleService: EmployeeRoleService,
+  constructor(private employeeService: EmployeeService,
+    private employeeRoleService: EmployeeRoleService,
     private parent: EmployeeComponent) {
     this.createReactiveForm();
   }
@@ -186,15 +184,15 @@ export class UpdateEmployeeComponent implements OnInit {
       this.employee.telephones[1].number = '';
     }
 
-    if(this.employee.telephones[1]===undefined && this.home.value!=""){      
-        var telephoneHome=new TelephoneEmployee();      
-        telephoneHome.type="Casa";
-        telephoneHome.number=this.home.value;
-       this.employee.telephones.push(telephoneHome);  
-    }else if(this.home.value===""&& this.employee.telephones[1]!=undefined){
-      this.employee.telephones[1].number='';
-    } 
-    
+    if (this.employee.telephones[1] === undefined && this.home.value != "") {
+      var telephoneHome = new TelephoneEmployee();
+      telephoneHome.type = "Casa";
+      telephoneHome.number = this.home.value;
+      this.employee.telephones.push(telephoneHome);
+    } else if (this.home.value === "" && this.employee.telephones[1] != undefined) {
+      this.employee.telephones[1].number = '';
+    }
+
 
     this.employeeService.updateEmployee(this.employee).subscribe(data => {
       this.returnView();

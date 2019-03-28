@@ -134,7 +134,7 @@ export class InsertEmployeeComponent implements OnInit {
     }
 
     this.employeeService.insertEmployee(this.employee).subscribe(data => {
-      this.reactForm.reset;
+      this.returnView();
     });
   }
 
