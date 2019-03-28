@@ -6,7 +6,6 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { Client } from 'src/model/client.model';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 import { TelephoneClient } from 'src/model/telephoneclient.model';
-import { Router } from '@angular/router';
 import { ClientService } from '../client.service';
 import { ClientComponent } from '../client.component';
 import { ProvinceService } from '../province.service';
@@ -29,7 +28,7 @@ export class UpdateClientComponent implements OnInit {
   public cantonDdl: DropDownListComponent;
   @ViewChild('districtDdl')
   public districtDdl: DropDownListComponent;
-  
+
   public dataGroups: GroupClient[] = new Array();
   public dataProvinces: Province[] = new Array();
   public dataCantons: { [key: string]: Object }[] = new Array();
@@ -38,7 +37,7 @@ export class UpdateClientComponent implements OnInit {
   public valueProvince: any;
   public valueCanton: any;
   public valueDistrict: any;
-  
+
   public fields: Object = { text: 'nameGroup', value: 'idGroup' };
   public watermark: string = 'Seleccione un grupo*';
   public watermarkProvinces: string = 'Seleccione una provincia*';
@@ -48,33 +47,32 @@ export class UpdateClientComponent implements OnInit {
   public fieldsDistricts: Object = { text: 'name', value: 'districtId.id' };
   public watermarkDistricts: string = 'Seleccione un distrito*';
   public height: string = '220px';
-  viewTelephones:boolean=false;
-  
+  viewTelephones: boolean = false;
 
-reactForm: FormGroup;
-client:Client=new Client();
 
-constructor(private router: Router,private clientService: ClientService, private groupClientService: GroupClientService,
+  reactForm: FormGroup;
+  client: Client = new Client();
+
+  constructor(private clientService: ClientService, private groupClientService: GroupClientService,
     private provinceService: ProvinceService, private cantonService: CantonService, private districtService: DistrictService,
-    private fb: FormBuilder,private parent: ClientComponent) {    
+    private fb: FormBuilder, private parent: ClientComponent) {
 
-  this.createReactiveForm();
-  
+    this.createReactiveForm();
 
   }
 
   activeCanton(event: any) {
     if (event.itemData != undefined) {
       this.districtDdl.enabled = false;
-      this.getCantons(event.itemData.id);      
-      this.client.addressDescription.district.districtId.id=undefined;
+      this.getCantons(event.itemData.id);
+      this.client.addressDescription.district.districtId.id = undefined;
       this.district.setValue(undefined);
     }
   }
 
   activeDistrict(event: any) {
     if (event.itemData != undefined) {
-      this.getDistricts(event.itemData.cantonId.id,event.itemData.cantonId.province.id);     
+      this.getDistricts(event.itemData.cantonId.id, event.itemData.cantonId.province.id);
     }
   }
 
@@ -93,11 +91,11 @@ constructor(private router: Router,private clientService: ClientService, private
     });
   }
 
-  getDistricts(idCanton:String,idProvince:String) {
-    this.districtService.getAllDistrictsByProvinceAndCanton(idProvince,idCanton).subscribe(data => {
+  getDistricts(idCanton: String, idProvince: String) {
+    this.districtService.getAllDistrictsByProvinceAndCanton(idProvince, idCanton).subscribe(data => {
       this.dataDistricts = Object.assign(data);
       this.districtDdl.dataBind();
-      this.districtDdl.enabled = true;      
+      this.districtDdl.enabled = true;
     });
   }
 
@@ -106,24 +104,24 @@ constructor(private router: Router,private clientService: ClientService, private
       this.dataGroups = data
       this.loadClientInReactiveFormWithValidation();
     });
-  }  
-  
+  }
 
-  loadClient(){
+
+  loadClient() {
     this.clientService.getByIdClient(this.clientId).subscribe(
       data => {
-        this.client = data;        
+        this.client = data;
         this.getGroupsClients();
         this.getProvinces();
         this.getCantons(this.client.addressDescription.district.districtId.canton.cantonId.province.id);
         this.getDistricts(this.client.addressDescription.district.districtId.canton.cantonId.id,
-          this.client.addressDescription.district.districtId.canton.cantonId.province.id);         
-              
-              }
+          this.client.addressDescription.district.districtId.canton.cantonId.province.id);
+
+      }
     );
   }
 
- 
+
   createReactiveForm() {
     this.reactForm = new FormGroup({
       'id': new FormControl(),
@@ -153,7 +151,7 @@ constructor(private router: Router,private clientService: ClientService, private
     return null;
   }
 
-  loadClientInReactiveFormWithValidation(){
+  loadClientInReactiveFormWithValidation() {
     this.id.setValue(this.client.id);
     this.id.setValidators(FormValidators.required);
     this.id.disable();
@@ -169,73 +167,69 @@ constructor(private router: Router,private clientService: ClientService, private
 
     this.groupClient.setValue(this.client.group.nameGroup);
     this.groupClient.setValidators(this.dropDownListRequired);
-    this.valueGroup=this.client.group.idGroup;    
+    this.valueGroup = this.client.group.idGroup;
 
     this.province.setValue(this.client.addressDescription.district.districtId.canton.cantonId.province.name);
     this.province.setValidators(this.dropDownListRequired);
-    this.valueProvince=this.client.addressDescription.district.districtId.canton.cantonId.province.id;
+    this.valueProvince = this.client.addressDescription.district.districtId.canton.cantonId.province.id;
 
     this.canton.setValue(this.client.addressDescription.district.districtId.canton.name);
     this.canton.setValidators(this.dropDownListRequired);
-    this.valueCanton=this.client.addressDescription.district.districtId.canton.cantonId.id;
+    this.valueCanton = this.client.addressDescription.district.districtId.canton.cantonId.id;
 
     this.district.setValue(this.client.addressDescription.district.name);
     this.district.setValidators(this.dropDownListRequired);
-    this.valueDistrict=this.client.addressDescription.district.districtId.id;
+    this.valueDistrict = this.client.addressDescription.district.districtId.id;
 
     this.addressDescription.setValue(this.client.addressDescription.description);
     this.addressDescription.setValidators(FormValidators.required);
 
-    this.mobile.setValue(this.client.telephones[0]!=undefined?this.client.telephones[0].number:"");
-    this.mobile.setValidators([FormValidators.required,this.phoneLength]);
+    this.mobile.setValue(this.client.telephones[0] != undefined ? this.client.telephones[0].number : "");
+    this.mobile.setValidators([FormValidators.required, this.phoneLength]);
 
-    this.home.setValue(this.client.telephones[1]!=undefined?this.client.telephones[1].number:"");
+    this.home.setValue(this.client.telephones[1] != undefined ? this.client.telephones[1].number : "");
     this.home.setValidators([this.phoneLength]);
   }
 
-  button(){
-    console.log(this.client);
+  onChangeDdlGroup(value: any) {
+    if (value.itemData != undefined) {
+      this.client.group = value.itemData;
+    }
+  }
+
+  onChangeDdlProvince(value: any) {
+    if (value.itemData != undefined) {
+      this.client.addressDescription.district.districtId.canton.cantonId.province = value.itemData;
+    }
+    this.activeCanton(value);
+  }
+
+  onChangeDdlCanton(value: any) {
+    if (value.itemData != undefined) {
+      this.client.addressDescription.district.districtId.canton = value.itemData;
+    }
+    this.activeDistrict(value);
+  }
+
+  onChangeDdlDistrict(value: any) {
+    if (value.itemData != undefined) {
+      this.client.addressDescription.district = value.itemData;
+    }
   }
 
 
-  onChangeDdlGroup(value:any){
-    if(value.itemData!=undefined){     
-    this.client.group= value.itemData;
-     }
-  }
-
-  onChangeDdlProvince(value:any){
-    if(value.itemData!=undefined){     
-    this.client.addressDescription.district.districtId.canton.cantonId.province= value.itemData;
-     }
-     this.activeCanton(value);
-  }
-
-  onChangeDdlCanton(value:any){
-    if(value.itemData!=undefined){     
-    this.client.addressDescription.district.districtId.canton=value.itemData;
-     }
-     this.activeDistrict(value);
-  }
-
-  onChangeDdlDistrict(value:any){
-    if(value.itemData!=undefined){     
-    this.client.addressDescription.district=value.itemData;
-     }
-  }
-
-  
-  phoneLength(control: FormControl) {   
-    let value = control.value; 
-    if(value!=null){
-    if (value.length<8 && value.length>=1|| value.length>8) {  
+  phoneLength(control: FormControl) {
+    let value = control.value;
+    if (value != null) {
+      if (value.length < 8 && value.length >= 1 || value.length > 8) {
         return {
           phoneError: {
             parsed: value
           }
         }
-   
-    }}
+
+      }
+    }
     return null;
   }
 
@@ -243,11 +237,11 @@ constructor(private router: Router,private clientService: ClientService, private
 
 
   ngOnInit() {
-    this.loadClient();    
+    this.loadClient();
     this.initEventSubmit();
   }
 
-  initEventSubmit(){
+  initEventSubmit() {
     let formId: HTMLElement = <HTMLElement>document.getElementById('formId');
     document.getElementById('formId').addEventListener(
       'submit',
@@ -280,31 +274,31 @@ constructor(private router: Router,private clientService: ClientService, private
 
   get formValid() { return this.reactForm.valid }
 
-    public editClient() {   
+  public editClient() {
 
-    if(this.client.telephones[1]===undefined && this.home.value!=""){      
-        var telephoneHome=new TelephoneClient();      
-        telephoneHome.type="Casa";
-        telephoneHome.number=this.home.value;
-       this.client.telephones.push(telephoneHome);  
-    }else if(this.home.value==="" && this.client.telephones[1]!=undefined){
-      this.client.telephones[1].number='';
-    } 
-    
-    this.clientService.updateClient(this.client).subscribe(data=>{
+    if (this.client.telephones[1] === undefined && this.home.value != "") {
+      var telephoneHome = new TelephoneClient();
+      telephoneHome.type = "Casa";
+      telephoneHome.number = this.home.value;
+      this.client.telephones.push(telephoneHome);
+    } else if (this.home.value === "" && this.client.telephones[1] != undefined) {
+      this.client.telephones[1].number = '';
+    }
+
+    this.clientService.updateClient(this.client).subscribe(data => {
       this.returnView();
     });
 
   }
 
-  returnView(){
+  returnView() {
     this.parent.getAllClients();
-    this.parent.clientsSection=false;
-    this.parent.principalSection=true;
+    this.parent.clientsSection = false;
+    this.parent.principalSection = true;
   }
 
-  viewTelephonesHtml(){
-    this.viewTelephones=true;
+  viewTelephonesHtml() {
+    this.viewTelephones = true;
   }
 
 }

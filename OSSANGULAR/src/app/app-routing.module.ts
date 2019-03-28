@@ -63,6 +63,7 @@ const routes: Routes = [
   {path:'insert-work-order-detail',component:InsertWorkOrderDetailComponent},
   {path:'update-work-order-detail',component:UpdateWorkOrderDetailComponent},
   {path:'see-work-order-detail',component:SeeWorkOrderDetailComponent},
+  {path:'work-order-type',component:WorkOrderTypeComponent},
   {path:'insert-client',component:InsertClientComponent},
   {path:'inventory-output',component:InventoryOutputComponent},
   {path:'inventory-output-general',component:InventoryOutputGeneralComponent},

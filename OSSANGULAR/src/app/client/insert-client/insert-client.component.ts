@@ -3,13 +3,10 @@ import { Client } from 'src/model/client.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 import { TelephoneClient } from 'src/model/telephoneclient.model';
-import { Router } from '@angular/router';
 import { GroupClientService } from 'src/app/group-client/group-client.service';
 import { ClientService } from '../client.service';
 import { GroupClient } from 'src/model/groupclient.model';
 import { Province } from 'src/model/province.model';
-import { Canton } from 'src/model/canton.model';
-import { District } from 'src/model/district.model';
 import { ProvinceService } from '../province.service';
 import { CantonService } from '../canton.service';
 import { DistrictService } from '../district.service';
@@ -45,9 +42,9 @@ export class InsertClientComponent implements OnInit {
   @ViewChild('districtDdl')
   public districtDdl: DropDownListComponent;
 
-  constructor(private router: Router, private clientService: ClientService, private groupClientService: GroupClientService,
+  constructor(private clientService: ClientService, private groupClientService: GroupClientService,
     private provinceService: ProvinceService, private cantonService: CantonService, private districtService: DistrictService
-    ,private parent: ClientComponent) {
+    , private parent: ClientComponent) {
     this.client = new Client();
     this.createReactiveForm();
     this.associateValues();
@@ -62,21 +59,21 @@ export class InsertClientComponent implements OnInit {
   activeCanton(event: any) {
     if (event.itemData != undefined) {
       this.districtDdl.enabled = false;
-      this.getCantons(event.itemData.id);      
-      this.client.addressDescription.district.districtId.id=undefined;
+      this.getCantons(event.itemData.id);
+      this.client.addressDescription.district.districtId.id = undefined;
       this.district.setValue(undefined);
     }
   }
 
-  returnView(){
+  returnView() {
     this.parent.getAllClients();
-    this.parent.insertSection=false;
-    this.parent.principalSection=true;
+    this.parent.insertSection = false;
+    this.parent.principalSection = true;
   }
 
   activeDistrict(event: any) {
     if (event.itemData != undefined) {
-      this.getDistricts(event.itemData.cantonId.id,event.itemData.cantonId.province.id);     
+      this.getDistricts(event.itemData.cantonId.id, event.itemData.cantonId.province.id);
     }
   }
 
@@ -95,11 +92,11 @@ export class InsertClientComponent implements OnInit {
     });
   }
 
-  getDistricts(idCanton:String,idProvince:String) {
-    this.districtService.getAllDistrictsByProvinceAndCanton(idProvince,idCanton).subscribe(data => {
+  getDistricts(idCanton: String, idProvince: String) {
+    this.districtService.getAllDistrictsByProvinceAndCanton(idProvince, idCanton).subscribe(data => {
       this.dataDistricts = Object.assign(data);
       this.districtDdl.dataBind();
-      this.districtDdl.enabled = true;      
+      this.districtDdl.enabled = true;
     });
   }
 
@@ -148,7 +145,7 @@ export class InsertClientComponent implements OnInit {
   get province() { return this.reactForm.get('province') }
   get canton() { return this.reactForm.get('canton') }
   get district() { return this.reactForm.get('district') }
-  
+
 
 
 
@@ -216,8 +213,5 @@ export class InsertClientComponent implements OnInit {
     this.clientService.insertClient(this.client).subscribe(data => {
       this.reactForm.reset();
     });
-
-
   }
-
 }

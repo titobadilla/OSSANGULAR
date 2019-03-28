@@ -65,7 +65,6 @@ import { AuthGuard } from './login/guards/auth.guard';
 import { JwtHelper } from './login/helper/jwt-helper';
 import { TokenStorage } from './login/helper/token-storage';
 import { Interceptor } from './login/interceptor/app.interceptor';
-import { ColorComponent } from './color/color.component';
 import { UpdateWorkOrderComponent } from './work-order/update-work-order/update-work-order.component';
 import { InsertEmployeeComponent } from './employee/insert-employee/insert-employee.component';
 import { InsertEmployeeRoleComponent } from './employee-role/insert-employee-role/insert-employee-role.component';
@@ -109,7 +108,7 @@ import { UpdateModelComponent } from './model/update-model/update-model.componen
 import { InsertMaterialComponent } from './material/insert-material/insert-material.component';
 import { UpdateMaterialComponent } from './material/update-material/update-material.component';
 import { InsertInventoryWorkOrderComponent } from './work-order/insert-inventory-work-order/insert-inventory-work-order.component';
-
+import { InsertWorkOrderTypeComponent} from './work-order-type/insert-work-order-type/insert-work-order-type.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -123,6 +122,7 @@ import { InsertAdicionalToolWorkOrderComponent } from './work-order/insert-adici
 import { InsertAdicionalDeviceWorkOrderComponent } from './work-order/insert-adicional-device-work-order/insert-adicional-device-work-order.component';
 import { KitWorkOrderComponent } from './kit-work-order/kit-work-order.component';
 import { SeeWorkOrderDetailComponent } from './work-order-detail/see-work-order-detail/see-work-order-detail.component';
+import { UpdateWorkOrderTypeComponent } from './work-order-type/update-work-order-type/update-work-order-type.component';
 
 
 declare var require: any;
@@ -158,7 +158,6 @@ loadCldr(
     MenuComponent,
     LoginComponent,
     CalendarComponent,
-    ColorComponent,
     UpdateWorkOrderComponent,
     InsertEmployeeComponent,
     InsertEmployeeRoleComponent,
@@ -198,7 +197,9 @@ loadCldr(
     InsertAdicionalToolWorkOrderComponent,
     InsertAdicionalDeviceWorkOrderComponent,
     KitWorkOrderComponent,
-    SeeWorkOrderDetailComponent
+    SeeWorkOrderDetailComponent,
+    InsertWorkOrderTypeComponent,
+    UpdateWorkOrderTypeComponent
 
   ],
   imports: [
