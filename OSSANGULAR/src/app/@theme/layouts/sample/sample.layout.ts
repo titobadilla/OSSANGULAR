@@ -11,6 +11,7 @@ import {
 
 import { StateService } from '../../../@core/utils';
 import { Router } from '@angular/router';
+import { EventEmitterLogoutService } from 'src/app/login/event-emitter-logout.service';
 
 // TODO: move layouts into the framework
 @Component({
@@ -28,8 +29,15 @@ import { Router } from '@angular/router';
                    [end]="sidebar.id === 'end'">
         <nb-sidebar-header *ngIf="currentTheme !== 'corporate'">
           <a (click)='goCalendar()' class="btn btn-success main-btn">
-            <i class="ion ion-calendar"></i> <span> Calendario</span>
+            <i class="ion ion-calendar"></i> <span> Calendario</span>           
           </a>
+          <div *ngIf='flag'>
+          <br><br>          
+          <a (click)='logout()' class="btn btn-warning">
+            <i class="ion ion-play"></i> <span> Cerrar Sesión</span>
+          </a>
+          </div>
+          
         </nb-sidebar-header>
         <ng-content select="nb-menu"></ng-content>
       </nb-sidebar>
@@ -53,15 +61,20 @@ export class SampleLayoutComponent implements OnDestroy {
   sidebar: any = {};
 
   private alive = true;
+  flag:boolean=false;
 
   currentTheme: string;
+
+  
 
   constructor(protected stateService: StateService,
               protected menuService: NbMenuService,
               protected themeService: NbThemeService,
               protected bpService: NbMediaBreakpointsService,
               protected sidebarService: NbSidebarService,
-              private router: Router) {
+              private router: Router,
+              private emitter:EventEmitterLogoutService) {
+                                
     this.stateService.onLayoutState()
       .pipe(takeWhile(() => this.alive))
       .subscribe((layout: string) => this.layout = layout);
@@ -81,8 +94,9 @@ export class SampleLayoutComponent implements OnDestroy {
       )
       .subscribe(([item, [bpFrom, bpTo]]: [any, [NbMediaBreakpoint, NbMediaBreakpoint]]) => {
 
-        if (bpTo.width <= isBp.width) {
+        if (bpTo.width <= isBp.width) {          
           this.sidebarService.collapse('menu-sidebar');
+          
         }
       });
 
@@ -91,6 +105,10 @@ export class SampleLayoutComponent implements OnDestroy {
       .subscribe(theme => {
         this.currentTheme = theme.name;
     });
+  }
+
+  logout(){
+    this.emitter.setLogout(true);
   }
 
   goCalendar(){

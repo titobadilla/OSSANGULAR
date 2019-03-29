@@ -13,8 +13,16 @@ export class EventEmitterLogoutService {
 
   private _sessionClosedByExpiration = new Subject<boolean>();
   _sessionClosedByExpiration$ = this._message1.asObservable();
+
+  private _logoutByCellForm = new Subject<boolean>();
+  _logoutByCellForm$ = this._logoutByCellForm.asObservable();
   
   constructor() { }
+
+  public setLogout(flat:boolean){
+    this._logoutByCellForm.next(flat);
+    
+  }
 
   public setSessionClosedByUser(flat:boolean){
     this._message1.next(flat);

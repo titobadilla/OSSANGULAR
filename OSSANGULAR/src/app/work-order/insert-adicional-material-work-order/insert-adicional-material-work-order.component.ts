@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
@@ -10,12 +10,18 @@ import { DeleteComponent } from 'src/app/delete/delete.component';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { DeleteEmitterService } from 'src/app/delete/delete.emitter.service';
 import { WorkOrderMaterial } from 'src/model/workOrdermaterial.model';
+import 'rxjs/add/observable/interval';
+import 'rxjs/add/operator/takeWhile';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'insert-adicional-material-work-order',
   templateUrl: './insert-adicional-material-work-order.component.html',
   styleUrls: ['./insert-adicional-material-work-order.component.css']
 })
 export class InsertAdicionalMaterialWorkOrderComponent implements OnInit {
+
+  flag: boolean = true;
+  flag2: boolean = false;
 
   //basic variables
   reactForm: FormGroup;
@@ -37,18 +43,22 @@ export class InsertAdicionalMaterialWorkOrderComponent implements OnInit {
   addQuantityM: boolean = false;
   materialDelete: WorkOrderMaterial;
 
-  constructor(private serviceMaterial: MaterialService,private modalService: BsModalService,
-     private deleteService: DeleteEmitterService) {
+  constructor(private serviceMaterial: MaterialService, private modalService: BsModalService,
+    private deleteService: DeleteEmitterService) {
     this.createReactiveForm();
+  }
+
+  getMaterials() {
+    this.serviceMaterial.getAllMaterial().subscribe(data => {
+      this.materials = data;
+    })
   }
 
   ngOnInit() {
 
     this.pageSettings = { pageCount: 3 };
     setCulture('es-CR');
-    this.serviceMaterial.getAllMaterial().subscribe(data => {
-      this.materials = data;
-    })
+    this.getMaterials();
 
     this.initEventSubmit();
 
@@ -64,7 +74,7 @@ export class InsertAdicionalMaterialWorkOrderComponent implements OnInit {
       (e: Event) => {
         e.preventDefault();
         if (this.quantityMaterialNew.valid) {
-         
+
         } else {
           // validating whole form
           Object.keys(this.reactForm.controls).forEach(field => {
@@ -118,17 +128,17 @@ export class InsertAdicionalMaterialWorkOrderComponent implements OnInit {
   }
 
   addSelectedInventory() {
-    if(this.quantityMaterialNew.value!='null' && this.quantityMaterialNew.value>0){
-    this.materialSelected.quantity = this.newQuantityMaterial;
-    this.selectedMaterials.push(this.materialSelected);
-    this.grid.refresh();
+    if (this.quantityMaterialNew.value != 'null' && this.quantityMaterialNew.value > 0) {
+      this.materialSelected.quantity = this.newQuantityMaterial;
+      this.selectedMaterials.push(this.materialSelected);
+      this.grid.refresh();
 
-    this.materials = this.removeElementAdded(this.materials, this.materialSelected.id.material)
-    this.addQuantityM = false;
+      this.materials = this.removeElementAdded(this.materials, this.materialSelected.id.material)
+      this.addQuantityM = false;
 
-    }if(this.quantityMaterialNew.value<=0){
-       this.openModalValidate(this.materialSelected);
-        this.quantityMaterialNew.reset();
+    } if (this.quantityMaterialNew.value <= 0) {
+      this.openModalValidate(this.materialSelected);
+      this.quantityMaterialNew.reset();
     }
   }
 
@@ -159,7 +169,7 @@ export class InsertAdicionalMaterialWorkOrderComponent implements OnInit {
   }
 
   openModal(material: WorkOrderMaterial) {
-    this.materialDelete  = new WorkOrderMaterial();
+    this.materialDelete = new WorkOrderMaterial();
     this.materialDelete = material;
 
     this.modalRef = this.modalService.show(DeleteComponent, {
@@ -182,10 +192,30 @@ export class InsertAdicionalMaterialWorkOrderComponent implements OnInit {
     });
   }
 
-  deleteOfTable(){
+  update() {
+    this.flag = true;
+  }
+  deleteOfTable() {
+    this.flag = false;
     this.selectedMaterials = this.removeElementAddedOfTable(this.selectedMaterials, this.materialDelete)
     this.grid.refresh();
-    this.materials.push(this.materialDelete.id.material); 
-    
+    this.materials.push(this.materialDelete.id.material);
+    this.listObj.dataBind();
+    this.listObj.refresh();
+    this.noHide();
+
   }
+
+  noHide() {
+    var cont = 0;
+    Observable.interval(0.0001)
+      .takeWhile(() => cont === 0)
+      .subscribe(i => {
+        cont++;
+        this.update();
+      })
+
+  }
+
+
 }

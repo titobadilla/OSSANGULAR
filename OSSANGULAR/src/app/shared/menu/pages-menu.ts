@@ -2,8 +2,8 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
-    title: 'MENU OSS TVO',
-    group: true,
+    title: '',
+    group: true    
   },
   {
     title: 'Cliente',

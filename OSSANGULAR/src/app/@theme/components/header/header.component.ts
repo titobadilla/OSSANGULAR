@@ -16,6 +16,7 @@ import { EventEmitterLogoutService } from 'src/app/login/event-emitter-logout.se
 import 'rxjs/add/observable/interval';
 import 'rxjs/add/operator/takeWhile';
 import { Observable } from 'rxjs';
+import { SampleLayoutComponent } from '../../layouts';
 
 @Component({
   selector: 'ngx-header',
@@ -39,12 +40,17 @@ export class HeaderComponent implements OnInit {
     private layoutService: LayoutService,
     private router: Router,
     private token: TokenStorage,
-    private app: AppComponent) {
+    private app: AppComponent,
+    private emitter:EventEmitterLogoutService,
+    private sample:SampleLayoutComponent) {
 
   }
 
   ngOnInit() {
     this.user = this.authService.getTokenUser();
+    this.emitter._logoutByCellForm$.subscribe(data=>{
+      this.logout();
+    });
     this.menuService.onItemClick()
       .pipe(filter(({ tag }) => tag === this.tag))
       .subscribe(bag => {
@@ -90,6 +96,11 @@ logoutPrivateBySystem(){
   toggleSidebar(): boolean {
     this.sidebarService.toggle(true, 'menu-sidebar');
     this.layoutService.changeLayoutSize();
+    if(window.innerWidth<=667){
+      this.sample.flag=true;
+     }else{
+      this.sample.flag=false;
+     }
 
     return false;
   }

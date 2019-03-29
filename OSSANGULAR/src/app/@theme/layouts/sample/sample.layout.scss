@@ -83,6 +83,17 @@
 
     background: transparent;
 
+    .oculto{
+      @include media-breakpoint-down(lg) {
+        span {
+          display: none;
+        }
+      }
+
+      
+
+    }
+
     .main-btn {
       padding: 0.75rem 2.5rem;
       margin-top: -2rem;
@@ -161,7 +172,7 @@
 
     nb-sidebar.menu-sidebar {
 
-      margin-top: 0;
+      margin-top: 3%;
 
       /deep/ .main-container {
         height: calc(#{nb-theme(sidebar-height)} - #{nb-theme(header-height)}) !important;
@@ -174,9 +185,7 @@
       }
     }
 
-    .main-btn {
-      display: none;
-    }
+  
   }
   .btn.btn-success {
     
