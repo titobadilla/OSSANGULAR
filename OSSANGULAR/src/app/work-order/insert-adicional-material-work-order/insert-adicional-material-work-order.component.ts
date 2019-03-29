@@ -203,7 +203,6 @@ export class InsertAdicionalMaterialWorkOrderComponent implements OnInit {
     this.listObj.dataBind();
     this.listObj.refresh();
     this.noHide();
-
   }
 
   noHide() {

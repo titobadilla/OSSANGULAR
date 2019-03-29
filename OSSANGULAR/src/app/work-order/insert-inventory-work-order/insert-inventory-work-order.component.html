@@ -16,7 +16,7 @@
 
       <div class="col-lg-6">
 
-        <ejs-grid #grid [dataSource]='tools' allowPaging='true' [allowSorting]='true' allowTextWrap='true'
+        <ejs-grid #gridTool [dataSource]='tools' allowPaging='true' [allowSorting]='true' allowTextWrap='true'
           [pageSettings]='pageSettings'>
           <ng-template #toolbarTemplate>
             <ejs-toolbar>
@@ -34,7 +34,7 @@
 
       <div class="col-lg-6">
 
-        <ejs-grid #grid [dataSource]='devices' allowPaging='true' [allowSorting]='true' allowTextWrap='true'
+        <ejs-grid #gridDevice [dataSource]='devices' allowPaging='true' [allowSorting]='true' allowTextWrap='true'
           [pageSettings]='pageSettings'>
           <ng-template #toolbarTemplate>
             <ejs-toolbar>
@@ -53,7 +53,7 @@
     <div class="row" style="margin-top:3%; margin-right: 2%; margin-bottom: 4%;">
       <div class="col-lg-3"></div>
       <div class="col-lg-6">
-        <ejs-grid #grid [dataSource]='materials' allowPaging='true' [allowSorting]='true' allowTextWrap='true'
+        <ejs-grid #gridMaterial [dataSource]='materials' allowPaging='true' [allowSorting]='true' allowTextWrap='true'
           [pageSettings]='pageSettings'>
           <ng-template #toolbarTemplate>
             <ejs-toolbar>

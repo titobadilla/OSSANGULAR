@@ -14,8 +14,11 @@ import { GridComponent } from '@syncfusion/ej2-angular-grids';
   styleUrls: ['./insert-inventory-work-order.component.css']
 })
 export class InsertInventoryWorkOrderComponent implements OnInit, AfterViewInit {
+
   ngAfterViewInit():void {
-   this.grid.pageSettings.pageSize = 2;
+   this.gridDevice.pageSettings.pageSize = 2;
+   this.gridMaterial.pageSettings.pageSize = 2;
+   this.gridTool.pageSettings.pageSize = 2;
   }
 
   reactForm: FormGroup;
@@ -30,7 +33,10 @@ export class InsertInventoryWorkOrderComponent implements OnInit, AfterViewInit 
   public kitWorkOrder: Object = { text: 'name', value: 'id' };
   public kitWatermark: string = 'Seleccione una lista*';
 
-  @ViewChild('grid') public grid: GridComponent;
+  @ViewChild('gridDevice') public gridDevice: GridComponent;
+  @ViewChild('gridMaterial') public gridMaterial: GridComponent;
+  @ViewChild('gridTool') public gridTool: GridComponent;
+
 
   constructor(private kitService:KitWorkOrderService) {    
      this.createReactiveForm();
