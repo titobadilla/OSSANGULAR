@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, AfterViewInit } from '@angular/core';
 import { GroupClientService } from '../group-client.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Client } from 'src/model/client.model';
@@ -14,13 +14,14 @@ import { GroupClientComponent } from '../group-client.component';
   templateUrl: './update-group-client.component.html',
   styleUrls: ['./update-group-client.component.css']
 })
-export class UpdateGroupClientComponent implements OnInit {
+export class UpdateGroupClientComponent implements OnInit,AfterViewInit {
+  ngAfterViewInit(): void {
+ 
+  }
 
   @Input() groupid: number;
 
-  //multiple dropdown
-  @ViewChild('checkbox') public mulObj: MultiSelectComponent;
-  @ViewChild('selectall') public checkboxObj: CheckBoxComponent;
+  @ViewChild('selectObj') public selectObj: MultiSelectComponent;
 
   public fields: Object = { text: 'name', value: 'id' };
   public watermarkMultiple: string = 'Seleccione los clientes*';
@@ -29,6 +30,7 @@ export class UpdateGroupClientComponent implements OnInit {
   public filterPlaceholder: string;
   public box: string = 'Box';
   public popHeight: string = '350px';
+  cont=0;
 
   //necessary global variables
   public watermark: string = 'Seleccione el cabecilla*';
@@ -37,16 +39,16 @@ export class UpdateGroupClientComponent implements OnInit {
 
   constructor(private groupClientService: GroupClientService, private clientService: ClientService, private parent: GroupClientComponent) {
     this.createReactiveForm();
-    this.associateValues();
+
   }
 
   select(value: any) {
     let action = value.name;
     let client = value.itemData as Client;
     let aux;
+    console.log(this.cont++);
     if (action === 'select') {
       this.selectedClients.push(client);
-      console.log(this.selectedClients);
     } else if (action = 'removing') {
       this.selectedClients.forEach((element, index) => {
         if (element.id === client.id) {
@@ -65,42 +67,60 @@ export class UpdateGroupClientComponent implements OnInit {
 
   ngOnInit() {
     this.initEventSubmit();
-    // this.clientService.getClientsWithoutGroup().subscribe(data => {
-    //  this.clients = data;
-    // });
+     this.clientService.getClientsWithoutGroup().subscribe(data => {
+      this.clients = data;
+      this.loadGroup();
+     });
 
+
+  }
+
+  loadGroup(){    
     this.groupClientService.getByIdGroupClient(this.groupid).subscribe(data => {
       this.group = data;
-      this.setValuesMultiples();
+      this.loadGroupClientInReactiveFormWithValidation();      
     })
 
   }
 
-  setValuesMultiples() {
-    this.selectedClients = this.group.clients;
-    this.clientsMulti.setValue(this.group.clients);
-  }
-
-  associateValues() {
-    this.group.nameGroup = this.nameGroup.value
-    this.group.contactName = this.contactName.value
-    this.group.contactLastName = this.contactLastName.value
-    this.group.email = this.email.value
-    this.group.phone1 = this.phone1.value
-    this.group.phone2 = this.phone2.value
-    this.group.clients = this.selectedClients;
-  }
+  
 
   createReactiveForm() {
     this.reactForm = new FormGroup({
-      'nameGroup': new FormControl('', [FormValidators.required]),
-      'contactName': new FormControl('', [FormValidators.required]),
-      'contactLastName': new FormControl('', [FormValidators.required]),
-      'clientsMulti': new FormControl('', [this.clientRequired]),
-      'email': new FormControl('', [FormValidators.email]),
-      'phone1': new FormControl('', [FormValidators.required, this.phoneLength]),
-      'phone2': new FormControl('', [FormValidators.required, this.phoneLength]),
+      'nameGroup': new FormControl(),
+      'contactName': new FormControl(),
+      'contactLastName': new FormControl(),
+      'clientsMulti': new FormControl(),
+      'email': new FormControl(),
+      'phone1': new FormControl(),
+      'phone2': new FormControl(),
     });
+  }
+
+  
+  loadGroupClientInReactiveFormWithValidation() {
+
+    this.nameGroup.setValue(this.group.nameGroup);
+    this.nameGroup.setValidators(FormValidators.required);
+    
+    this.contactName.setValue(this.group.contactName);
+    this.contactName.setValidators(FormValidators.required);
+
+    this.contactLastName.setValue(this.group.contactLastName);
+    this.contactLastName.setValidators(FormValidators.required);
+
+    this.loadClientInDdl();    
+    this.clientsMulti.setValidators(this.clientRequired);
+
+    this.email.setValue(this.group.email);
+    this.email.setValidators(FormValidators.email);
+
+    this.phone1.setValue(this.group.phone1);
+    this.phone1.setValidators([FormValidators.required, this.phoneLength]);
+
+    this.phone2.setValue(this.group.phone2);
+
+
   }
 
   clientRequired(control: FormControl) {
@@ -114,6 +134,21 @@ export class UpdateGroupClientComponent implements OnInit {
     }
     return null;
   }
+
+  loadClientInDdl(){
+    let array=new Array();
+    //this.selectObj.selectAll(true);
+
+
+    this.group.clients.forEach(e=>{
+     array.push(e.id);
+     this.clients.push(e);
+     this.selectedClients.push(e);
+    });
+    this.selectObj.refresh();
+    this.selectObj.value=array;
+  }
+
   phoneLength(control: FormControl) {
     let value = control.value;
     if (value != null) {
@@ -150,7 +185,7 @@ export class UpdateGroupClientComponent implements OnInit {
   get clientsSelected() { return this.reactForm.get('clientsMulti'); }
   get contactName() { return this.reactForm.get('contactName'); }
   get contactLastName() { return this.reactForm.get('contactLastName'); }
-  get clientsMulti() { return this.reactForm.get('clients'); }
+  get clientsMulti() { return this.reactForm.get('clientsMulti'); }
   get email() { return this.reactForm.get('email'); }
   get phone1() { return this.reactForm.get('phone1'); }
   get phone2() { return this.reactForm.get('phone2'); }

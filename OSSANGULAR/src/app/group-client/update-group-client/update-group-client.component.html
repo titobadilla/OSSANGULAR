@@ -100,10 +100,15 @@
                     </div>
 
                     <div class="form-group">
-                        <ejs-multiselect formControlName="clientsMulti" (removing)='select($event)'
-                            (select)='select($event)' id='multiselect-checkbox' [dataSource]='clients' [mode]='box'
+                        <ejs-multiselect #selectObj formControlName="clientsMulti" (removing)='select($event)'
+                            (select)='select($event)' name="clientsMulti" [dataSource]='clients' [mode]='box'
                             [fields]='fields' [placeholder]='watermarkMultiple' [popupHeight]='popHeight'
                             showDropDownIcon='true' floatLabelType='Auto' [allowFiltering]='true'></ejs-multiselect>
+                            <div *ngIf="clientsMulti.errors">
+                                    <div *ngIf="clientsMulti.errors.errorD && clientsMulti.touched" class="e-error">
+                                      Debe seleccionar al menos un cliente.
+                                    </div>
+                                  </div>
 
                     </div>
                 </div>

@@ -4,6 +4,7 @@ import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 import { EmployeeRole } from 'src/model/employeerole.model';
 import { EmployeeRoleService } from '../employee-role.service';
 import { EmployeeRoleComponent } from '../employee-role.component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'insert-employee-role',
@@ -62,8 +63,13 @@ export class InsertEmployeeRoleComponent implements OnInit {
   }
 
   returnView() {
-    this.parent.getAllRoles();
+    this.parent.data=null;
     this.parent.insertSection = false;
-    this.parent.principal = true;
+    this.parent.principal = true;   
+    this.parent.getAllRoles();
+   
   }
+
+  
+
 }

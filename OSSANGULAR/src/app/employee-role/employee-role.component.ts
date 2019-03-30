@@ -6,6 +6,7 @@ import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { DeleteComponent } from '../delete/delete.component';
 import { DeleteEmitterService } from '../delete/delete.emitter.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'employee-role',
@@ -15,7 +16,18 @@ import { DeleteEmitterService } from '../delete/delete.emitter.service';
 export class EmployeeRoleComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
-    this.grid.pageSettings.pageSize = 5;
+   this.pagination();
+  }
+
+  reloadPagination() {
+    Observable.interval(0.0001)
+      .takeWhile(() => this.grid===undefined)
+      .subscribe(i => {
+        if(this.grid!=undefined){
+        this.pagination();
+      }
+      })
+
   }
 
   public data: EmployeeRole[];
@@ -25,6 +37,7 @@ export class EmployeeRoleComponent implements OnInit, AfterViewInit {
 
   constructor(private serviceRole: EmployeeRoleService,
     private modalService: BsModalService, private deleteService: DeleteEmitterService) {
+      
   }
 
   roleid: number;
@@ -40,12 +53,17 @@ export class EmployeeRoleComponent implements OnInit, AfterViewInit {
     this.deleteService.deleteEmployeeRole$.subscribe(data => {
       this.aceptDelete();
     });
+    
+  }
+
+  pagination(){
+     this.grid.pageSettings.pageSize = 5;
   }
 
 
-  getAllRoles() {
-    this.serviceRole.getAllRoles().subscribe((data: EmployeeRole[]) => {
-      this.grid.pageSettings.pageSize = 5;
+  getAllRoles() {    
+    this.serviceRole.getAllRoles().subscribe((data: EmployeeRole[]) => {        
+      this.grid.pageSettings.pageSize = 5;  
       this.data = data;
     });
   }
