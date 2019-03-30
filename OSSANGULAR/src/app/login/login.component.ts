@@ -81,6 +81,7 @@ export class LoginComponent implements OnInit {
       data => {
         this.token.saveToken(data.token);
         this.loading = false;
+        this.app.loadMenu();
         this.app.login = true;
         this.app.detectChanges();
         this.router.navigate(['/']);

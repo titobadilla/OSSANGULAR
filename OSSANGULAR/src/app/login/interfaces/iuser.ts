@@ -3,14 +3,14 @@ import { Iauthority } from "./iauthority";
 export class Iuser {
   sub: string;
   //scopes: Iauthority;
-  rol:string;
+  role:string;
   iss: string;
   iat: number;
   exp: number;
 
-  public constructor(sub?: string, rol?:string, iss?: string, iat?: number, exp?: number) {
+  public constructor(sub?: string, role?:string, iss?: string, iat?: number, exp?: number) {
     this.sub = sub;
-    this.rol=rol;
+    this.role=role;
     this.iss = iss;
     this.iat = iat;
     this.exp = exp;
@@ -25,12 +25,12 @@ export class Iuser {
     this.sub=sub;
   }
 
-  public getRol():string{
-    return this.rol;
+  public getRole():string{
+    return this.role;
   }
 
-  public setScopes(rol:string):void{
-    this.rol=rol;
+  public setScopes(role:string):void{
+    this.role=role;
   }
 
   public getIat():number{

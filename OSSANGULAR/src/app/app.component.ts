@@ -4,6 +4,7 @@ import { EventEmitterLogoutService } from './login/event-emitter-logout.service'
 import { Router } from '@angular/router';
 import { AuthService } from './login/auth.service';
 import { MENU_ITEMS } from './shared/menu/pages-menu';
+import { MENU_ITEMS_TECHNICAL } from './shared/menu/pages-menu';
 import { LoginComponent } from './login/login.component';
 
 @Component({
@@ -13,16 +14,15 @@ import { LoginComponent } from './login/login.component';
 })
 export class AppComponent implements OnInit {
 
-  menu = MENU_ITEMS;
+  menu;
   login: boolean;
 
   messageSesionClosedByUser: boolean = false;
   messageSesionClosedBySystem: boolean = false;
 
 
-  ngOnInit() {
-    this.login = this.validate();
-    
+  ngOnInit() {    
+    this.login = this.validate();  
   }
 
 
@@ -38,12 +38,16 @@ export class AppComponent implements OnInit {
 
   
   detectChanges() {
-    this.cdref.detectChanges();
+    this.cdref.detectChanges(); 
   }
 
+  loadMenu(){
+    this.menu=this.authService.decode().role==='ROLE_ADMIN'?MENU_ITEMS:MENU_ITEMS_TECHNICAL; 
+  }
 
-  validate() {
-    if (this.authService.isAuthenticated() && !this.authService.isTokenExpired()) {
+  validate() { 
+    if (this.authService.isAuthenticated() && !this.authService.isTokenExpired()) {     
+      this.loadMenu();   
       return true;
     }
     return false;

@@ -25,34 +25,34 @@ import { InventoryOutputComponent } from './inventory-output/inventory-output.co
 import { InventoryOutputGeneralComponent } from './inventory-output/inventory-output-general/inventory-output-general.component';
 import { ToolComponent } from './tool/tool.component';
 import { MaterialComponent } from './material/material.component';
+import { RoleGuard } from './login/guards/role-guard.service';
 
 const routes: Routes = [
-  {path:"address",component:AddressComponent, canActivate: [AuthGuard]},
-  {path: "device",component:DeviceComponent, canActivate: [AuthGuard]},
-  {path:"address-description",component:AddressDescriptionComponent, canActivate: [AuthGuard]},
-  {path:"brand",component:BrandComponent, canActivate: [AuthGuard]},
-  {path:"client",component:ClientComponent, canActivate: [AuthGuard]},
-  {path:"device-state",component:DeviceStateComponent, canActivate: [AuthGuard]},
-  {path:"employee",component:EmployeeComponent, canActivate: [AuthGuard]},
-  {path:"employee-role",component:EmployeeRoleComponent, canActivate: [AuthGuard]},
-  {path:"group-client",component:GroupClientComponent, canActivate: [AuthGuard]},
-  {path:"inventory-category",component:InventoryCategoryComponent, canActivate: [AuthGuard]},
-  {path:"measurement-unit",component:MeasurementUnitComponent, canActivate: [AuthGuard]},
-  {path:"model",component:ModelComponent, canActivate: [AuthGuard]},
-  {path:"telephone-client",component:TelephoneClientComponent, canActivate: [AuthGuard]},
-  {path:"telephone-employee",component:TelephoneEmployeeComponent, canActivate: [AuthGuard]},
-  {path:"work-order",component:WorkOrderComponent},
-  {path:"work-order-detail",component:WorkOrderDetailComponent, canActivate: [AuthGuard]},
-  {path:"work-order-type",component:WorkOrderTypeComponent, canActivate: [AuthGuard]},
-  {path:"calendar",component:CalendarComponent, canActivate: [AuthGuard]},
-  {path:'work-order-detail',component:WorkOrderDetailComponent},
-  {path:'work-order-type',component:WorkOrderTypeComponent},
-  {path:'inventory-output',component:InventoryOutputComponent},
-  {path:'inventory-output-general',component:InventoryOutputGeneralComponent},
-  {path:'tool',component:ToolComponent},
-  {path:'brand',component:BrandComponent},
-  {path:'device-state',component:DeviceStateComponent},
-  {path:'material',component:MaterialComponent}
+  {path:"address",component:AddressComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path: "device",component:DeviceComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:"address-description",component:AddressDescriptionComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:"brand",component:BrandComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:"client",component:ClientComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:"device-state",component:DeviceStateComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:"employee",component:EmployeeComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:"employee-role",component:EmployeeRoleComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:"group-client",component:GroupClientComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:"inventory-category",component:InventoryCategoryComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:"measurement-unit",component:MeasurementUnitComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:"model",component:ModelComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:"telephone-client",component:TelephoneClientComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:"telephone-employee",component:TelephoneEmployeeComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:"work-order",component:WorkOrderComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:"work-order-detail",component:WorkOrderDetailComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN','ROLE_TECNICO']}},
+  {path:"work-order-type",component:WorkOrderTypeComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:"calendar",component:CalendarComponent, canActivate: [AuthGuard,RoleGuard],data: {role: ['ROLE_ADMIN','ROLE_TECNICO']}},
+  {path:'work-order-type',component:WorkOrderTypeComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:'inventory-output',component:InventoryOutputComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:'inventory-output-general',component:InventoryOutputGeneralComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:'tool',component:ToolComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:'brand',component:BrandComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:'device-state',component:DeviceStateComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:'material',component:MaterialComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}}
 ];
 
 @NgModule({

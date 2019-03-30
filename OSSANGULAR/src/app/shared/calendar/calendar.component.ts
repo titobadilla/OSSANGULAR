@@ -9,6 +9,7 @@ import {Router} from "@angular/router"
 import { WorkOrderService } from 'src/app/work-order/work-order.service';
 import { WorkOrder } from 'src/model/workorder.model';
 import { Color } from 'src/model/color.model';
+import { AuthService } from 'src/app/login/auth.service';
 
 @Component({
   selector: 'app-calendar',
@@ -37,7 +38,7 @@ export class CalendarComponent  implements OnInit,AfterViewInit{
   public flagDoubleClick:boolean=false;
   public flagKeyDown:boolean=false;
 
-    public constructor(private router: Router,private workOrderService:WorkOrderService ){
+    public constructor(private router: Router,private workOrderService:WorkOrderService,private authService: AuthService ){
      
         this.addEventsNews();  
         
@@ -53,7 +54,11 @@ ngOnInit(){
   
     this. loadDataInit();
     this.scheduleObj.startHour = this.instance.formatDate(this.startdate, { skeleton: 'Hm' });
-    this.scheduleObj.endHour = this.instance.formatDate(this.enddate, { skeleton: 'Hm' });  
+    this.scheduleObj.endHour = this.instance.formatDate(this.enddate, { skeleton: 'Hm' }); 
+    console.log(this.authService.decode().role); 
+    this.scheduleObj.readonly=this.authService.decode().role==='ROLE_ADMIN'?false:true;
+
+    
 }
 
 onCellClick(arg: EventRenderedArgs){

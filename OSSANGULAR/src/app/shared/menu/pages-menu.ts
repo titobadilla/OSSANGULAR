@@ -123,3 +123,23 @@ export const MENU_ITEMS: NbMenuItem[] = [
   }*/
  
 ];
+
+
+export const MENU_ITEMS_TECHNICAL: NbMenuItem[] = [
+  {
+    title: '',
+    group: true    
+  },
+  {
+    title: 'Orden de trabajo',
+    icon: 'nb-star',
+    link: '/work-order-detail'    
+  },
+  {
+    title: 'Cambiar clave',
+    icon: 'nb-star',
+    link: '/'    
+  }
+ 
+];
+

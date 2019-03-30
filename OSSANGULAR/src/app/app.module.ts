@@ -123,6 +123,7 @@ import { InsertAdicionalDeviceWorkOrderComponent } from './work-order/insert-adi
 import { KitWorkOrderComponent } from './kit-work-order/kit-work-order.component';
 import { SeeWorkOrderDetailComponent } from './work-order-detail/see-work-order-detail/see-work-order-detail.component';
 import { UpdateWorkOrderTypeComponent } from './work-order-type/update-work-order-type/update-work-order-type.component';
+import { RoleGuard } from './login/guards/role-guard.service';
 
 
 declare var require: any;
@@ -257,7 +258,7 @@ loadCldr(
     WorkOrderService,
     WorkOrderDetailService,
     WorkOrderTypeService,
-    AuthService, AuthGuard, JwtHelper, TokenStorage, {
+    AuthService, AuthGuard, RoleGuard,JwtHelper, TokenStorage, {
       provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
       multi: true

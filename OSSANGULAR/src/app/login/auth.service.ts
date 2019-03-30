@@ -43,6 +43,10 @@ export class AuthService {
     return this.jwtHelper.getUserToken().sub;
 }
 
+public decode(){
+  return this.jwtHelper.decodeToken();
+}
+
   public authentication(username: string, password: string): Observable<any> {
 
     this.credentials.username=username;
