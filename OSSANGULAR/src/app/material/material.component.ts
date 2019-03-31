@@ -8,7 +8,7 @@ import { MaterialService } from './material.service';
 import { Material } from 'src/model/material.model';
 
 @Component({
-  selector: 'app-material',
+  selector: 'material',
   templateUrl: './material.component.html',
   styleUrls: ['./material.component.css']
 })
