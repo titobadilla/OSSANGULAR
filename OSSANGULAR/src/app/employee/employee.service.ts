@@ -37,6 +37,10 @@ export class EmployeeService {
     return this.http.put<any>(this.URLAPI+'employee/update-password', changePassword);
   }
 
+  public updatePasswordAdminEmployee(changePassword:ChangePassword):Observable<any>{
+    return this.http.put<any>(this.URLAPI+'employee/update-password-admin', changePassword);
+  }
+
   public deleteEmployee(id:String):Observable<Employee>{
     return this.http.delete<Employee>(this.URLAPI+'employee/' + id);
   }
