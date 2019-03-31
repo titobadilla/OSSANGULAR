@@ -1,12 +1,14 @@
-<div class="col-lg-3"></div>
-<div class="col-lg-6 control-section">
-  <div class="content-wrapper" style="margin-bottom: 25px; height: 600px;">
+<div class="col-lg-2"></div>
+<div class="col-lg-8 control-section">
+  <div class="content-wrapper" style="margin-bottom: 25px;">
 
     <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
       <div class="formtitle">
         <span>Material</span>
       </div>
+
       <div class="row">
+
         <div class="col-lg-6">
 
           <div class="form-group">
@@ -22,7 +24,7 @@
             </div>
           </div>
 
-          <div class="form-group" style="margin-top:10%;">
+          <div class="form-group">
             <div class="e-float-input">
               <input id="description" type="text" formControlName="description" [(ngModel)]="material.description">
               <span class="e-float-line"></span>
@@ -78,16 +80,15 @@
         </div>
       </div>
 
-      <div class="row">
-        <div style="width: 325px;margin:0px auto;height: 100px; padding-top: 25px;">
-          <div style="display: inline-block;">
-            <button id="validateSubmit" class="samplebtn e-control e-btn e-info" type="submit"
-              style="height:40px;width: 150px;" data-ripple="true">Agregar</button>
-          </div>
-          <div style="float: right;">
-            <button class="samplebtn e-control e-btn" type="button" (click)='returnView()'
-              style="height:40px;width: 165px;">Cancelar</button>
-          </div>
+      <div class="row" style="margin-left: 5px; margin-right: 5px;">
+        <div style="width: 300px;margin:0px auto;height: 100px;padding-top: 25px;">
+
+          <button id="validateSubmit" class="samplebtn e-control e-btn e-info" type="submit"
+            style="height:40px;width: 146px;" data-ripple="true">Agregar</button>
+
+          <button class="samplebtn e-control e-btn" type="button" (click)='returnView()'
+            style="height:40px;width: 146px; margin-left: 5px;">Cancelar</button>
+
         </div>
       </div>
     </form>
