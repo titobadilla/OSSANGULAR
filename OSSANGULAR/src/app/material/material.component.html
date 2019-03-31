@@ -14,18 +14,18 @@
         </ejs-toolbar>
       </ng-template>
       <e-columns>
-        <e-column field='name' headerText='Nombre' width='50' textAlign='center'></e-column>
-        <e-column field='quantity' headerText='Cantidad' width='50' textAlign='center'></e-column>
-        <e-column field='description' headerText='Descripción' width='50' textAlign='center'></e-column>
-        <e-column field='model.name' headerText='Modelo' width='50' textAlign='center'></e-column>
-        <e-column field='inventoryCategory.name' headerText='Categoría' width='50' textAlign='center'></e-column>
-        <e-column field='measurementUnit.name' headerText='Unidad de Medida' width='50' textAlign='center'></e-column>
-        <e-column field='edit' headerText="Editar" width='50' textAlign='center'>
+        <e-column field='name' headerText='Nombre' width='105' textAlign='center'></e-column>
+        <e-column field='quantity' headerText='Cantidad' width='105' textAlign='center'></e-column>
+        <e-column field='description' headerText='Descripción' width='150' textAlign='center'></e-column>
+        <e-column field='model.name' headerText='Modelo' width='100' textAlign='center'></e-column>
+        <e-column field='inventoryCategory.name' headerText='Categoría' width='150' textAlign='center'></e-column>
+        <e-column field='measurementUnit.name' headerText='Unidad de Medida' width='150' textAlign='center'></e-column>
+        <e-column field='edit' headerText="Editar" width='100' textAlign='center'>
           <ng-template #template let-data>
             <button mat-button class="btn btn-warning glyphicon glyphicon-pencil" (click)='edit(data)'></button>
           </ng-template>
         </e-column>
-        <e-column field='delete' headerText="Eliminar" width='50' textAlign='center'>
+        <e-column field='delete' headerText="Eliminar" width='105' textAlign='center'>
           <ng-template #template let-data>
             <button mat-button class="btn btn-danger glyphicon glyphicon-trash" (click)='openModal(data)'></button>
           </ng-template>
