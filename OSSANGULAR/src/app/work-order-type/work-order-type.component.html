@@ -1,9 +1,10 @@
 <div *ngIf="principal">
-  <div class="col-lg-3 col-md-3 col-sm-1 col-xs-1"></div>
-  <div class="col-lg-6 col-md-6 col-sm-10 col-xs-10">
-    <div class="control-section">
+  <div class="control-section">
 
-      <button class="but_insert" (click)="insert()">Agregar nuevo</button>
+    <div class="row">
+      <div class="col-lg-10 col-md-5 col-sm-5 col-xs-5"></div>
+      <button class="button button2" (click)="insert()" style="margin-left: 15px;">Agregar nuevo</button>
+    </div>
 
       <ejs-grid #grid [dataSource]='data' allowPaging='true' [allowSorting]='true' allowTextWrap='true'
         [pageSettings]='pageSettings'>
@@ -13,7 +14,7 @@
           </ejs-toolbar>
         </ng-template>
         <e-columns>
-          <e-column field='name' headerText='Nombre de categoría' width='50' textAlign='center'></e-column>
+          <e-column field='name' headerText='Nombre' width='50' textAlign='center'></e-column>
           <e-column field='edit' headerText="Editar" width='50' textAlign='center'>
             <ng-template #template let-data>
               <button mat-button class="btn btn-warning glyphicon glyphicon-pencil" (click)='edit(data)'></button>
@@ -28,7 +29,6 @@
       </ejs-grid>
     </div>
   </div>
-</div>
 
 <div *ngIf="editSection">
   <update-work-order-type [typeId]="typeId"></update-work-order-type>
