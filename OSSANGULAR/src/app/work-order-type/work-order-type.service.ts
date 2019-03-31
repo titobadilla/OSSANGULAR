@@ -18,20 +18,20 @@ export class WorkOrderTypeService {
   }
 
   public insertWorkOrderType(type: WorkOrderType): Observable<WorkOrderType> {
-    return this.http.post<WorkOrderType>(this.URLAPI + 'workOrderType/', type);
+    return this.http.post<WorkOrderType>(this.URLAPI + 'workordertype/', type);
   }
 
   public getByIdWorkOrderType(typeID: number): Observable<WorkOrderType> {
-    return this.http.get<WorkOrderType>(this.URLAPI + 'workOrderType/' + typeID);
+    return this.http.get<WorkOrderType>(this.URLAPI + 'workordertype/' + typeID);
   }
 
   public updateWorkOrderType(type: WorkOrderType): Observable<WorkOrderType> {
-    return this.http.put<WorkOrderType>(this.URLAPI + 'workOrderType/', type);
+    return this.http.put<WorkOrderType>(this.URLAPI + 'workordertype/', type);
   }
 
 
   public deleteWorkOrderType(typeID: number): Observable<WorkOrderType> {
-    return this.http.delete<WorkOrderType>(this.URLAPI + 'workOrderType/' + typeID);
+    return this.http.delete<WorkOrderType>(this.URLAPI + 'workordertype/' + typeID);
   }
 
 }

@@ -37,7 +37,7 @@ export class WorkOrderTypeComponent implements OnInit {
     this.pageSettings = { pageCount: 3 };
     setCulture('es-CR');
 
-    this.deleteService.deleteInventoryCategory$.subscribe(data => {
+    this.deleteService.deleteWorkOrderType$.subscribe(data => {
       this.aceptDelete();
     });
   }
@@ -72,7 +72,7 @@ export class WorkOrderTypeComponent implements OnInit {
       initialState: {
         title: 'Eliminar el tipo de orden',
         data: 'el tipo con el nombre: ' + workOrderType.name,
-        type: 'workOrderType'
+        type: 'type'
       }
     });
   }
