@@ -7,13 +7,15 @@ export class Iuser {
   iss: string;
   iat: number;
   exp: number;
+  idEmployee:string;
 
-  public constructor(sub?: string, role?:string, iss?: string, iat?: number, exp?: number) {
+  public constructor(sub?: string, role?:string, iss?: string, iat?: number, exp?: number,idEmployee?:string) {
     this.sub = sub;
     this.role=role;
     this.iss = iss;
     this.iat = iat;
     this.exp = exp;
+    this.idEmployee=idEmployee;
 
   }
 
@@ -49,6 +51,13 @@ export class Iuser {
     this.exp=exp;
   }
 
+ public getIdEmployee():string{
+    return this.idEmployee;
+  }
+
+  public setIdEmployee(id:string):void{
+    this.idEmployee=id;
+  }
 
 }
 

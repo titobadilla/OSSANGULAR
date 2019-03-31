@@ -124,6 +124,8 @@ import { KitWorkOrderComponent } from './kit-work-order/kit-work-order.component
 import { SeeWorkOrderDetailComponent } from './work-order-detail/see-work-order-detail/see-work-order-detail.component';
 import { UpdateWorkOrderTypeComponent } from './work-order-type/update-work-order-type/update-work-order-type.component';
 import { RoleGuard } from './login/guards/role-guard.service';
+import { ChangePasswordAdminComponent } from './change-password-admin/change-password-admin.component';
+import { ChangePasswordTechnicalComponent } from './change-password-technical/change-password-technical.component';
 
 
 declare var require: any;
@@ -200,7 +202,9 @@ loadCldr(
     KitWorkOrderComponent,
     SeeWorkOrderDetailComponent,
     InsertWorkOrderTypeComponent,
-    UpdateWorkOrderTypeComponent
+    UpdateWorkOrderTypeComponent,
+    ChangePasswordAdminComponent,
+    ChangePasswordTechnicalComponent
 
   ],
   imports: [

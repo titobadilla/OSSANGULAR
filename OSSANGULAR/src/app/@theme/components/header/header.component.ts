@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
   tag = 'my-context-menu';
   stopCondition:boolean=false;
 
-  userMenu = [{ title: 'Cambiar Contraseña', data: { id: 'changePassword' } }, { title: 'Cerrar Sesión', data: { id: 'logout' } }];
+  userMenu = [{ title: 'Cerrar Sesión', data: { id: 'logout' } }];
 
   constructor(private sidebarService: NbSidebarService,
     private menuService: NbMenuService,
@@ -56,8 +56,6 @@ export class HeaderComponent implements OnInit {
       .subscribe(bag => {
         if (bag.item.data.id === 'logout') {
           this.logout();
-        } else if (bag.item.data.id === 'changePassword') {
-          this.changePassword();
         }
       });
       this.logoutSystem();
@@ -81,9 +79,6 @@ logoutPrivateBySystem(){
     alert('tokenVencido');
   }
 }
-  changePassword() {
-
-  }
 
   logout() {
     this.stopCondition=true;

@@ -26,6 +26,8 @@ import { InventoryOutputGeneralComponent } from './inventory-output/inventory-ou
 import { ToolComponent } from './tool/tool.component';
 import { MaterialComponent } from './material/material.component';
 import { RoleGuard } from './login/guards/role-guard.service';
+import { ChangePasswordAdminComponent } from './change-password-admin/change-password-admin.component';
+import { ChangePasswordTechnicalComponent } from './change-password-technical/change-password-technical.component';
 
 const routes: Routes = [
   {path:"address",component:AddressComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
@@ -52,7 +54,8 @@ const routes: Routes = [
   {path:'tool',component:ToolComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path:'brand',component:BrandComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path:'device-state',component:DeviceStateComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
-  {path:'material',component:MaterialComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}}
+  {path:'material',component:MaterialComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:'change-password',component:ChangePasswordTechnicalComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_TECNICO','ROLE_ADMIN']}}
 ];
 
 @NgModule({

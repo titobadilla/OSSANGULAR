@@ -16,6 +16,11 @@ export class TokenStorage {
     this.emitterService.setSessionClosedByUser(true);
   }
 
+  
+public decode(){
+  return this.jwt.decodeToken();
+}
+
   signOutSystem() {
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.clear();
