@@ -8,6 +8,7 @@ import {
   NbSidebarService,
   NbThemeService,
 } from '@nebular/theme';
+import { Observable } from 'rxjs';
 
 import { StateService } from '../../../@core/utils';
 import { Router } from '@angular/router';
@@ -56,7 +57,25 @@ import { EventEmitterLogoutService } from 'src/app/login/event-emitter-logout.se
 })
 export class SampleLayoutComponent implements OnDestroy {
 
+  deleteElement(){
+    var spaceWhite=document.getElementsByClassName('menu-title')[0];
+    spaceWhite.className='';  
+  }
+  
+  deleteThread(){
+    Observable.interval(1)
+      .takeWhile(() => !this.stopCondition)
+      .subscribe(i => {
+         if(document.getElementsByClassName('menu-title')[0]!=undefined){
 
+            this.deleteElement();
+            this.stopCondition=true;
+         }
+      })
+  
+  }
+
+  stopCondition:boolean;
   layout: any = {};
   sidebar: any = {};
 
@@ -74,6 +93,7 @@ export class SampleLayoutComponent implements OnDestroy {
               protected sidebarService: NbSidebarService,
               private router: Router,
               private emitter:EventEmitterLogoutService) {
+                this.deleteThread();
                                 
     this.stateService.onLayoutState()
       .pipe(takeWhile(() => this.alive))

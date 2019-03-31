@@ -6,6 +6,7 @@ import { AuthService } from './login/auth.service';
 import { MENU_ITEMS } from './shared/menu/pages-menu';
 import { MENU_ITEMS_TECHNICAL } from './shared/menu/pages-menu';
 import { LoginComponent } from './login/login.component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,8 @@ import { LoginComponent } from './login/login.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  
+
 
   menu;
   login: boolean;
@@ -23,7 +26,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {    
     this.login = this.validate();  
+  
   }
+
+ 
 
 
   constructor(private token: TokenStorage, private router: Router, private emitterService: EventEmitterLogoutService,
@@ -42,6 +48,7 @@ export class AppComponent implements OnInit {
   }
 
   loadMenu(){
+  
     this.menu=this.authService.decode().role==='ROLE_ADMIN'?MENU_ITEMS:MENU_ITEMS_TECHNICAL; 
   }
 
