@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
 import { Employee } from 'src/model/employee.model';
 import { Observable } from 'rxjs';
+import { ChangePassword } from 'src/model/changePassword.model';
 
 
 @Injectable({
@@ -30,6 +31,10 @@ export class EmployeeService {
   
   public updateEmployee(employee:Employee):Observable<Employee>{
     return this.http.put<Employee>(this.URLAPI+'employee/', employee);
+  }
+
+  public updatePasswordEmployee(changePassword:ChangePassword):Observable<any>{
+    return this.http.put<any>(this.URLAPI+'employee/update-password', changePassword);
   }
 
   public deleteEmployee(id:String):Observable<Employee>{

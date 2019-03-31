@@ -44,7 +44,7 @@ export class AuthService {
 }
 
 public decode(){
-  return this.jwtHelper.decodeToken();
+  return this.token.decode();
 }
 
   public authentication(username: string, password: string): Observable<any> {

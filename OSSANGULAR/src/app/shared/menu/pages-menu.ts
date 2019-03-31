@@ -138,7 +138,7 @@ export const MENU_ITEMS_TECHNICAL: NbMenuItem[] = [
   {
     title: 'Cambiar clave',
     icon: 'nb-star',
-    link: '/'    
+    link: '/change-password'    
   }
  
 ];
