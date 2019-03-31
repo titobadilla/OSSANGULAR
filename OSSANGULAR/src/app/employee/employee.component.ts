@@ -20,6 +20,7 @@ export class EmployeeComponent implements OnInit, AfterViewInit {
     this.grid.pageSettings.pageSize = 5;
   }
 
+  employeeChangePassword:Employee;
   public employees: Employee[];
   employeeId: String;
   public pageSettings: Object;
@@ -31,6 +32,7 @@ export class EmployeeComponent implements OnInit, AfterViewInit {
   insertSection: boolean = false;
   employeesSection: boolean = false;
   employeeDelete: Employee;
+  changePasswordSection:boolean=false;
 
   public dataBound(): void {
     this.flag = true;
@@ -66,6 +68,12 @@ export class EmployeeComponent implements OnInit, AfterViewInit {
   insert() {
     this.principalSection = false;
     this.insertSection = true;
+  }
+
+  changePassword(employee:Employee) {
+    this.employeeChangePassword=employee;
+    this.principalSection = false;
+    this.changePasswordSection = true;
   }
 
   aceptDelete() {

@@ -6,6 +6,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     group: true    
   },
   {
+    title: 'Cambiar mi clave',
+    icon: 'nb-star',
+    link: '/change-password'    
+  }, 
+  {
     title: 'Cliente',
     icon: 'nb-star',
     children: [

@@ -57,6 +57,12 @@
           </ng-template>
         </e-column>
 
+        <e-column headerText="Cambiar clave" width='115' textAlign='center'>
+            <ng-template #template let-data>
+              <button mat-button class="btn btn-info glyphicon glyphicon-link" (click)='changePassword(data)'></button>
+            </ng-template>
+          </e-column>
+
         <e-column headerText="Editar" width='85' textAlign='center'>
           <ng-template #template let-data>
             <button mat-button class="btn btn-warning glyphicon glyphicon-pencil" (click)='edit(data)'></button>
@@ -73,6 +79,10 @@
     </ejs-grid>
   </div>
 </div>
+
+<div *ngIf="changePasswordSection">
+    <change-password-admin [employee]="employeeChangePassword"></change-password-admin>
+  </div>
 
 <div *ngIf="employeesSection">
   <update-employee [employeeId]="employeeId"></update-employee>
