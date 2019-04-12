@@ -5,8 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from './login/auth.service';
 import { MENU_ITEMS } from './shared/menu/pages-menu';
 import { MENU_ITEMS_TECHNICAL } from './shared/menu/pages-menu';
-import { LoginComponent } from './login/login.component';
-import { Observable } from 'rxjs';
+import { JwtHelper } from './login/helper/jwt-helper';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +13,9 @@ import { Observable } from 'rxjs';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  
+  classNotification='notify bar-top do-show';
+  typeNotification:string;
+  messageNotification:string;
 
 
   menu;
@@ -36,8 +37,12 @@ export class AppComponent implements OnInit {
     private cdref: ChangeDetectorRef, private authService: AuthService) {
      
 
-    emitterService.messageSesionClosedByUser$.subscribe(data => { this.messageSesionClosedByUser = data });
-    emitterService.messageSesionClosedBySystem$.subscribe(data => { this.messageSesionClosedBySystem = data });
+    emitterService.messageSesionClosedByUser$.subscribe(data => { this.messageSesionClosedByUser = data,
+    this.messageNotification='Se ha cerrado sesión correctamente.',
+    this.typeNotification='success' });
+    emitterService.messageSesionClosedBySystem$.subscribe(data => { this.messageSesionClosedBySystem = data,
+      this.messageNotification='Se ha cerrado sesión por inactividad en la pagina.' ,
+      this.typeNotification='warning'});
 
 
   }
@@ -47,6 +52,7 @@ export class AppComponent implements OnInit {
     this.cdref.detectChanges(); 
   }
 
+  
   loadMenu(){
   
     this.menu=this.authService.decode().role==='ROLE_ADMIN'?MENU_ITEMS:MENU_ITEMS_TECHNICAL; 

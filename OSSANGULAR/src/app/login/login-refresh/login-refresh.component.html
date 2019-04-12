@@ -1,0 +1,40 @@
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+      <!-- Tabs Titles -->
+      <h2 class="active"> Refrescar Inicio de Sesión </h2>
+
+      <!-- Icon -->
+      <div class="fadeIn first">
+          <img src="assets/images/perfilIcon.jpg" id="icon" alt="User Icon" />
+      </div>
+
+      <!-- Login Form -->
+      <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
+          <input type="text" id="login" class="fadeIn second" disabled='true' name="login" placeholder="Usuario" formControlName="username">
+          <input type="password" id="password" class="fadeIn third" name="login" placeholder="Contraseña" formControlName="password">
+          <div *ngIf="password.errors">
+              <div *ngIf="password.errors.required && password.touched" class="e-error">
+                  La contraseña es obligatoria.
+              </div>
+          </div>
+          <div>
+
+              <input id="validateSubmit" class="fadeIn fourth" type="submit"  value="Refrescar Sesión">
+              <input class="fadeIn fourth" type="button" (click)='onLogout()' value="Cerrar Sesión">
+
+              <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+              <div *ngIf="errorSesion" class="e-error" style="font-weight:1000">
+                     El usuario y/o la contraseña son incorrectos.
+                  </div>
+          </div>
+
+      </form>
+
+      <!-- Remind Passowrd -->
+      <div id="formFooter">
+          <a class="underlineHover" >OSS TVO</a>
+      </div>
+
+  </div>
+</div>

@@ -4,6 +4,9 @@
   <div class="logo-containter">
     <a (click)="toggleSidebar()" href="#" class="navigation"><i class="nb-menu"></i></a>
     <div class="logo" (click)="goToHome()">OSS-<span>TVO</span></div>
+    <div *ngIf='stopCondition'>      
+  <modal-sesion-refresh [usernameInput]='nameUser'></modal-sesion-refresh>
+    </div>
   </div>
 </div>
 
@@ -17,4 +20,5 @@
     </nb-action>
    
   </nb-actions>
+
 </div>

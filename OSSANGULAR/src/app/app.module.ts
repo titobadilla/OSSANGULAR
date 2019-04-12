@@ -126,6 +126,9 @@ import { UpdateWorkOrderTypeComponent } from './work-order-type/update-work-orde
 import { RoleGuard } from './login/guards/role-guard.service';
 import { ChangePasswordAdminComponent } from './change-password-admin/change-password-admin.component';
 import { ChangePasswordTechnicalComponent } from './change-password-technical/change-password-technical.component';
+import { NotificationComponent } from './notification/notification.component';
+import { LoginRefreshComponent } from './login/login-refresh/login-refresh.component';
+import { ModalSesionRefreshComponent } from './@theme/components/header/modal-sesion-refresh/modal-sesion-refresh.component';
 
 
 declare var require: any;
@@ -204,8 +207,8 @@ loadCldr(
     InsertWorkOrderTypeComponent,
     UpdateWorkOrderTypeComponent,
     ChangePasswordAdminComponent,
-    ChangePasswordTechnicalComponent
-
+    ChangePasswordTechnicalComponent,
+    NotificationComponent
   ],
   imports: [
 

@@ -1,16 +1,12 @@
 import { Component, Input, OnInit, AfterContentInit } from '@angular/core';
 
 import { NbMenuService, NbSidebarService, NbMenuItem } from '@nebular/theme';
-import { UserService } from '../../../@core/data/users.service';
 import { AnalyticsService } from '../../../@core/utils';
 import { LayoutService } from '../../../@core/utils';
 import { Route, Router } from '@angular/router';
 import { TokenStorage } from 'src/app/login/helper/token-storage';
-import { LoginComponent } from 'src/app/login/login.component';
 import { AuthService } from 'src/app/login/auth.service';
 import { filter, map } from 'rxjs/operators';
-import { NbMenuBag } from '@nebular/theme/components/menu/menu.service';
-import { NbLogoutComponent } from '@nebular/auth';
 import { AppComponent } from 'src/app/app.component';
 import { EventEmitterLogoutService } from 'src/app/login/event-emitter-logout.service';
 import 'rxjs/add/observable/interval';
@@ -30,6 +26,9 @@ export class HeaderComponent implements OnInit {
   user: any;
   tag = 'my-context-menu';
   stopCondition:boolean=false;
+  nameUser:String;
+  time:any;
+  dateToken:Date;
 
   userMenu = [{ title: 'Cerrar Sesión', data: { id: 'logout' } }];
 
@@ -43,10 +42,11 @@ export class HeaderComponent implements OnInit {
     private app: AppComponent,
     private emitter:EventEmitterLogoutService,
     private sample:SampleLayoutComponent) {
-
+      
   }
 
   ngOnInit() {
+    this.dateToken=new Date(this.authService.getTokenExpirationDate());
     this.user = this.authService.getTokenUser();
     this.emitter._logoutByCellForm$.subscribe(data=>{
       this.logout();
@@ -62,21 +62,29 @@ export class HeaderComponent implements OnInit {
   }
 
 logoutSystem(){
+  this.dateToken=new Date(this.authService.getTokenExpirationDate());
+    let date5MinutesLess=new Date(this.dateToken);
+    date5MinutesLess.setMinutes(this.dateToken.getMinutes()-5);
+    console.log(date5MinutesLess);
+    
   Observable.interval(1000)
     .takeWhile(() => !this.stopCondition)
     .subscribe(i => { 
-       this.logoutPrivateBySystem();
+       this.logoutPrivateBySystem(date5MinutesLess);
     })
 
 }
 
-logoutPrivateBySystem(){
-  if(this.authService.isAuthenticated() && this.authService.isTokenExpired()){
-    /*this.token.signOutSystem();    
-    this.app.ngOnInit();
-    */
-   this.stopCondition=true;
-    alert('tokenVencido');
+logoutPrivateBySystem(date5MinutesLess:Date){
+  if(this.authService.isAuthenticated()){  
+    this.nameUser=this.authService.getTokenUser();
+    let dateNow=new Date();   
+
+    if(dateNow.valueOf() > date5MinutesLess.valueOf() ){
+      console.log(this.dateToken.getTime() - dateNow.getTime());
+      this.stopCondition=true;
+    }
+   
   }
 }
 

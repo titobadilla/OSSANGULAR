@@ -16,12 +16,19 @@ export class EventEmitterLogoutService {
 
   private _logoutByCellForm = new Subject<boolean>();
   _logoutByCellForm$ = this._logoutByCellForm.asObservable();
+
+  private _refreshToken= new Subject<boolean>();
+  _messageRefreshToken$ = this._refreshToken.asObservable();
   
   constructor() { }
 
   public setLogout(flat:boolean){
     this._logoutByCellForm.next(flat);
     
+  }
+
+  public setRefreshToken(flag:boolean){
+    this._refreshToken.next(flag);
   }
 
   public setSessionClosedByUser(flat:boolean){

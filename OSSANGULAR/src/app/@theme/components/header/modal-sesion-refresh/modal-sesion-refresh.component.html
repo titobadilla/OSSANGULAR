@@ -1,0 +1,19 @@
+<button type="button" class="btn btn-danger" (click)="openModal(template)">Sesión vence en {{timeNow}}</button>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Su sesión está a punto de expirar</h4>
+  </div>
+  <div class="modal-body">
+    <h4>¿Desea renovar su sesión?</h4>
+    <br>
+    <button type="button" class="btn btn-success" (click)="openModalSesion(template2)" style="margin-right: 10%" tooltip="Aceptar">Aceptar</button>
+    <button type="button" class="btn btn-warning" (click)="modalRef.hide()" tooltip="Cancelar">Cancelar</button>
+   
+  </div>
+</ng-template>
+
+<ng-template #template2>
+  <login-refresh [userInput]='usernameInput' (flagLogout)='logout()'>
+  </login-refresh>
+  </ng-template>

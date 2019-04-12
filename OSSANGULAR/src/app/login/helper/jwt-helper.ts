@@ -137,7 +137,7 @@ export class JwtHelper {
   
       let date = new Date(0); // The 0 here is the key, which sets the date to the epoch
       date.setUTCSeconds(decoded.exp);
-  
+      //console.log(date);
       return date;
     }
   
