@@ -3,13 +3,12 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { WorkOrderService } from 'src/app/work-order/work-order.service';
 import { WorkOrder } from 'src/model/workorder.model';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Material } from 'src/model/material.model';
-import { MaterialService } from 'src/app/material/material.service';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
-import { Device } from 'src/model/device.model';
-import { Tool } from 'src/model/tool.model';
-import { DeviceService } from 'src/app/device/device.service';
-import { ToolService } from 'src/app/tool/tool.service';
+import { WorkOrderMaterial } from 'src/model/workOrdermaterial.model';
+import { WorkOrderDevice } from 'src/model/workOrderdevice.model';
+import { WorkOrderTool } from 'src/model/workOrdertool.model';
+import { InventoryOutputService } from '../inventory-output.service';
+
 @Component({
   selector: 'inventory-output-specific',
   templateUrl: './inventory-output-specific.component.html',
@@ -22,83 +21,92 @@ export class InventoryOutputSpecificComponent implements OnInit, AfterViewInit {
   data;
 
   workOrder: WorkOrder = new WorkOrder();
-  material: Material = new Material();
-  device: Device = new Device();
-  tool: Tool = new Tool();
+  workOrdermaterial: WorkOrderMaterial = new WorkOrderMaterial();
+  workOrderdevice: WorkOrderDevice = new WorkOrderDevice();
+  workOrdertool: WorkOrderTool = new WorkOrderTool();
+  elementSelected: String;
 
   //booleans for control in html
-  modalSection: boolean = false;
-  buttonSection1: boolean = true;
-  buttonSection2: boolean = false;
+  modalSection: boolean = true;
   quantitySection: boolean = false;
   updateSection: boolean = false;
+  errorSection: boolean = false;
+  errorSectionTwo: boolean = false;
 
   //variables for control of dropdown
   elements: any;
   value: String;
-  public fields: Object = { text: 'name', value: 'id' };
+
+  //error de fields
+  //public fields: Object = { text: 'id.device.name', value: 'id' };
+  public fields: Object = { text: 'id.device.name', value: 'id.device.id' };
+
+
+
   public watermark: string = 'Seleccione un elemento*';
   reactForm: FormGroup;
 
   //global variables for component
-  newQuantity: number = 0;
-  descriptionElement: String;
-  quantityElement: number;
+  //newQuantity: number = 0;
 
   ngAfterViewInit(): void {
-    this.workOrderService.getByIdWorkOrder(this.data).subscribe(data=>{
-    this.workOrder= data;
-    this.modalSection = true;
-    this.updateSection = true;
+    this.element.disable();
+    this.workOrderService.getByIdWorkOrder(this.data).subscribe(data => {
+      this.workOrder = data;
+      if (this.workOrder.listWorkOrderDevices.length == 0 && this.workOrder.listWorkOrderMaterials.length == 0 && this.workOrder.listWorkOrderTools.length == 0) {
+        this.errorSectionTwo = true;
+      }
+    })
 
-     })
+
   }
   constructor(public modalRef: BsModalRef,
     private workOrderService: WorkOrderService,
-    private materialService: MaterialService,
-    private deviceService: DeviceService,
-    private toolService: ToolService) {
+    private inventoryOutputService: InventoryOutputService) {
     this.createReactiveForm();
   }
 
   ngOnInit() {
   }
 
-
   movebuttonsMaterial() {
-    this.value = 'material';
-    this.quantitySection = false;
-    this.materialService.getAllMaterial().subscribe(data => {
-      this.elements = data;
-    })
 
-    this.material.id = this.element.value; //associate values
-    this.material.quantity = this.quantityNew.value;
+    if (this.workOrder.listWorkOrderMaterials.length == 0) {
+      this.errorSection = true;
+    } else {
+      this.errorSection = false;
+      this.value = 'material';
+      this.quantitySection = false;
+      this.element.enable();
 
-    if (this.buttonSection1) {
-      this.buttonSection1 = false;
-      this.buttonSection2 = true;
+      //fill the list with materials of work order
+      this.elements = this.workOrder.listWorkOrderMaterials
+
+      this.workOrdermaterial.id.material.id = this.element.value; //associate values
+      this.workOrdermaterial.quantity = this.quantityNew.value;
       this.updateSection = true;
       if (this.updateSection) {
         this.initEventSubmit();
       }
+
     }
   }
 
-
   movebuttonsDevice() {
-    this.value = 'device';
-    this.quantitySection = false;
-    this.deviceService.getAllDevice().subscribe(data => {
-      this.elements = data;
-    })
 
-    this.device.id = this.element.value
-    this.device.quantity = this.quantityNew.value
+    if (this.workOrder.listWorkOrderDevices.length == 0) {
+      this.errorSection = true;
+    } else {
+      this.errorSection = false;
+      this.value = 'device';
+      this.quantitySection = false;
+      this.element.enable();
 
-    if( this.buttonSection1){
-      this.buttonSection1 = false;
-      this.buttonSection2 = true;
+      //fill the list with devices of work order
+      this.elements = this.workOrder.listWorkOrderDevices
+
+      this.workOrderdevice.id.device.id = this.element.value
+      this.workOrderdevice.quantity = this.quantityNew.value
       this.updateSection = true;
       if (this.updateSection) {
         this.initEventSubmit();
@@ -107,18 +115,21 @@ export class InventoryOutputSpecificComponent implements OnInit, AfterViewInit {
   }
 
   movebuttonsTool() {
-    this.value = 'tool';
-    this.quantitySection = false;
-    this.toolService.getAllTool().subscribe(data => {
-      this.elements = data;
-    })
+    if (this.workOrder.listWorkOrderTools.length == 0) {
 
-    this.tool.id = this.element.value
-    this.tool.quantity = this.quantityNew.value
+      /************************ *que solo sea true por unos segundos/*/
+      this.errorSection = true;
+    } else {
+      this.errorSection = false;
+      this.value = 'tool';
+      this.quantitySection = false;
+      this.element.enable();
 
-    if( this.buttonSection1){
-      this.buttonSection1 = false;
-      this.buttonSection2 = true;
+      //fill the list with devices of work order
+      this.elements = this.workOrder.listWorkOrderTools
+
+      this.workOrdertool.id.tool.id = this.element.value
+      this.workOrdertool.quantity = this.quantityNew.value
       this.updateSection = true;
       if (this.updateSection) {
         this.initEventSubmit();
@@ -128,10 +139,10 @@ export class InventoryOutputSpecificComponent implements OnInit, AfterViewInit {
 
   createReactiveForm() {
     this.reactForm = new FormGroup({
-      'element': new FormControl('', [this.elementRequired]),
-      'newQuantity': new FormControl('', [FormValidators.required]),
-      'description': new FormControl('', [FormValidators.required]),
-      'quantity': new FormControl('', [FormValidators.required])
+      'element': new FormControl('', []),
+      'quantityNew': new FormControl('', [FormValidators.required]),
+      'description': new FormControl('', []),
+      'quantity': new FormControl('', [])
     });
   }
 
@@ -153,53 +164,94 @@ export class InventoryOutputSpecificComponent implements OnInit, AfterViewInit {
       'submit',
       (e: Event) => {
         e.preventDefault();
-        if (this.reactForm.valid) {
-        } else {
-          // validating whole form
-          Object.keys(this.reactForm.controls).forEach(field => {
-            const control = this.reactForm.get(field);
-            control.markAsTouched({ onlySelf: true });
-          });
+
+        if (this.value === 'material') {
+          // this.inventoryOutputService.updateQuantityMaterial(this.workOrdermaterial.id.material);
         }
+        if (this.value === 'tool') {
+          // this.inventoryOutputService.updateQuantityTool(this.workOrdertool.id.tool);
+        }
+        if (this.value === 'device') {
+          this.workOrderdevice.quantity = this.quantityNew.value;
+          console.log(this.workOrderdevice.quantity)
+
+          //no lo manda al api
+          this.inventoryOutputService.updateQuantityDevice(this.workOrderdevice.id.device);
+        }
+
+        // validating whole form
+        Object.keys(this.reactForm.controls).forEach(field => {
+          const control = this.reactForm.get(field);
+          control.markAsTouched({ onlySelf: true });
+        });
       });
   }
+
   get element() { return this.reactForm.get('element'); }
-  get quantityNew() { return this.reactForm.get('newQuantity') }
+  get quantityNew() { return this.reactForm.get('quantityNew') }
   get description() { return this.reactForm.get('description') }
   get quantity() { return this.reactForm.get('quantity') }
 
   onChangeDdl(value: any) {
     if (value.itemData != undefined) {
       if (this.value === 'material') {
-
-        this.material = this.findElementByIdGroup(value.itemData.id);
+        this.workOrdermaterial = this.findMaterialById(value.itemData.id.material.id);
         this.quantitySection = true;
-        this.descriptionElement = this.material.description
-        this.quantityElement = this.material.quantity
-        this.newQuantity = this.material.quantity
+        this.description.setValue(this.workOrdermaterial.id.material.description)
+        this.description.disable()
+        this.quantity.setValue(this.workOrdermaterial.id.material.quantity)
+        this.quantity.disable()
+        this.quantityNew.setValue(this.workOrdermaterial.quantity)
+        this.quantityNew.setValidators(FormValidators.required);
 
       }
       if (this.value === 'device') {
-        this.device = this.findElementByIdGroup(value.itemData.id);
+        this.workOrderdevice = this.findDeviceById(value.itemData.id.device.id);
         this.quantitySection = true;
-        this.descriptionElement = this.device.description
-        this.quantityElement = this.device.quantity
-        this.newQuantity = this.device.quantity
+        this.description.setValue(this.workOrderdevice.id.device.description);
+        this.description.disable()
+        this.quantity.setValue(this.workOrderdevice.id.device.quantity)
+        this.quantity.disable();
+        this.quantityNew.setValue(this.workOrderdevice.quantity)
+        this.quantityNew.setValidators(FormValidators.required);
       }
       if (this.value === 'tool') {
-        this.tool = this.findElementByIdGroup(value.itemData.id);
+        this.workOrdertool = this.findToolById(value.itemData.id.tool.id);
         this.quantitySection = true;
-        this.descriptionElement = this.tool.description
-        this.quantityElement = this.tool.quantity
-        this.newQuantity = this.tool.quantity
+        this.description.setValue(this.workOrdertool.id.tool.description)
+        this.description.disable()
+        this.quantity.setValue(this.workOrdertool.id.tool.quantity)
+        this.quantity.disable();
+        this.quantityNew.setValue(this.workOrdertool.quantity)
+        this.quantityNew.setValidators(FormValidators.required);
       }
     }
   }
 
-  findElementByIdGroup(id: number): any {
+  findDeviceById(id: number): any {
     let elementReturn;
     this.elements.forEach(element => {
-      if (element.id == id) {
+      if (element.id.device.id == id) {
+        elementReturn = element;
+      }
+    });
+    return elementReturn;
+  }
+
+  findToolById(id: number): any {
+    let elementReturn;
+    this.elements.forEach(element => {
+      if (element.id.tool.id == id) {
+        elementReturn = element;
+      }
+    });
+    return elementReturn;
+  }
+
+  findMaterialById(id: number): any {
+    let elementReturn;
+    this.elements.forEach(element => {
+      if (element.id.material.id == id) {
         elementReturn = element;
       }
     });
