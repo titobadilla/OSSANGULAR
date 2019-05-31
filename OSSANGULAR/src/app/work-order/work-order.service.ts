@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
 
-import { WorkOrder } from 'src/model/workorder.model';
+import { WorkOrder } from 'src/model/workOrder.model';
 import { Observable } from 'rxjs';
 
 @Injectable({

@@ -9,7 +9,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { DeleteEmitterService } from 'src/app/delete/delete.emitter.service';
 import { Tool } from 'src/model/tool.model';
 import { ToolService } from 'src/app/tool/tool.service';
-import { WorkOrderTool } from 'src/model/workOrderTool.model';
+import { WorkOrderTool } from 'src/model/workOrdertool.model';
 @Component({
   selector: 'insert-adicional-tool-work-order',
   templateUrl: './insert-adicional-tool-work-order.component.html',

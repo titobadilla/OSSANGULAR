@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { WorkOrderDetail } from 'src/model/workorderdetail.model';
-import { WorkOrder } from 'src/model/workorder.model';
+import { WorkOrderDetail } from 'src/model/workOrderDetail.model';
+import { WorkOrder } from 'src/model/workOrder.model';
 import { WorkOrderService } from 'src/app/work-order/work-order.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { WorkOrderDetailService } from '../work-order-detail.service';

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { WorkOrderDetail } from 'src/model/workorderdetail.model';
+import { WorkOrderDetail } from 'src/model/workOrderDetail.model';
 import { setCulture, removeClass, addClass } from '@syncfusion/ej2-base';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { DeleteComponent } from 'src/app/delete/delete.component';

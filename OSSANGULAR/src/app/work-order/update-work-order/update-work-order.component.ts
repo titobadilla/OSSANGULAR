@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WorkOrderService } from '../work-order.service';
-import { WorkOrder } from 'src/model/workorder.model';
+import { WorkOrder } from 'src/model/workOrder.model';
 import { Client } from 'src/model/client.model';
 import { Employee } from 'src/model/employee.model';
 import { WorkOrderType } from 'src/model/workordertype.model';

@@ -3,8 +3,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { setCulture } from '@syncfusion/ej2-base';
 import { KitWorkOrderService } from 'src/app/kit-work-order/kit-work-order.service';
 import { SuppliesTool } from 'src/model/suppliestool.model';
-import { SuppliesDevice } from 'src/model/SuppliesDevice.model';
-import { SuppliesMaterial } from 'src/model/suppliesmaterial.model';
+import { SuppliesDevice } from 'src/model/suppliesDevice.model';
+import { SuppliesMaterial } from 'src/model/suppliesMaterial.model';
 import { KitWorkOrder } from 'src/model/kitWorkOrder.model';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
 

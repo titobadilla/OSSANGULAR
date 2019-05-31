@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
-import { WorkOrderDetail } from 'src/model/workorderdetail.model';
+import { WorkOrderDetail } from 'src/model/workOrderDetail.model';
 import { Observable } from 'rxjs';
 
 @Injectable({

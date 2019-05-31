@@ -7,7 +7,7 @@ import {
 import {Router} from "@angular/router"
 
 import { WorkOrderService } from 'src/app/work-order/work-order.service';
-import { WorkOrder } from 'src/model/workorder.model';
+import { WorkOrder } from 'src/model/workOrder.model';
 import { Color } from 'src/model/color.model';
 import { AuthService } from 'src/app/login/auth.service';
 

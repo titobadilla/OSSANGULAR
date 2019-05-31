@@ -1,6 +1,6 @@
 import { Client } from './client.model';
 import { Employee } from './employee.model';
-import { WorkOrderDetail } from './workorderdetail.model';
+import { WorkOrderDetail } from './workOrderDetail.model';
 import { WorkOrderType } from './workordertype.model';
 import { Color} from './color.model';
 import { KitWorkOrder } from './kitWorkOrder.model';

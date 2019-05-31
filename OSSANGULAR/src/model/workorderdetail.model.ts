@@ -1,4 +1,4 @@
-import { WorkOrder } from './workorder.model';
+import { WorkOrder } from './workOrder.model';
 
 export class WorkOrderDetail{
 

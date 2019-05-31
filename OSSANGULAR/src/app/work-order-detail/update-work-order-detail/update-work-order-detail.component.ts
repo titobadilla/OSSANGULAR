@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { WorkOrderDetailService } from '../work-order-detail.service';
-import { WorkOrderDetail } from 'src/model/workorderdetail.model';
+import { WorkOrderDetail } from 'src/model/workOrderDetail.model';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 import { WorkOrderDetailComponent } from '../work-order-detail.component';

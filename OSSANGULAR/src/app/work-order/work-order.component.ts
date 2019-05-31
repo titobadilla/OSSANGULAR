@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit, AfterContentInit } from '@angular/core';
 import { WorkOrderService } from './work-order.service';
-import { WorkOrder } from 'src/model/workorder.model';
+import { WorkOrder } from 'src/model/workOrder.model';
 import { WorkOrderTypeService } from '../work-order-type/work-order-type.service';
 import { ClientService } from '../client/client.service';
 import { EmployeeService } from '../employee/employee.service';

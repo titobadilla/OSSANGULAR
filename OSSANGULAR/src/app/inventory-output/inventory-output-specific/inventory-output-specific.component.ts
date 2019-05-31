@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { WorkOrderService } from 'src/app/work-order/work-order.service';
-import { WorkOrder } from 'src/model/workorder.model';
+import { WorkOrder } from 'src/model/workOrder.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 import { WorkOrderMaterial } from 'src/model/workOrdermaterial.model';
