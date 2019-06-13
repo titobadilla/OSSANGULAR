@@ -17,6 +17,10 @@ import { Timestamp } from 'rxjs/internal/operators/timestamp';
 import 'rxjs/add/observable/interval';
 import 'rxjs/add/operator/takeWhile';
 import { Observable } from 'rxjs';
+import { InsertAdicionalToolWorkOrderComponent } from './insert-adicional-tool-work-order/insert-adicional-tool-work-order.component';
+import { InsertAdicionalMaterialWorkOrderComponent } from './insert-adicional-material-work-order/insert-adicional-material-work-order.component';
+import { InsertInventoryWorkOrderComponent } from './insert-inventory-work-order/insert-inventory-work-order.component';
+import { InsertAdicionalDeviceWorkOrderComponent } from './insert-adicional-device-work-order/insert-adicional-device-work-order.component';
 
 @Component({
   selector: 'work-order',
@@ -29,15 +33,25 @@ export class WorkOrderComponent implements OnInit {
   startHourWo: String;
   stopCondition:boolean=false;
   endHourWo: String;
+  classNotification='notify top-left do-show';
+  typeNotification:string="warning";
+  messageNotification:string="Necesita tener al menos una lista predefinada o algún artículo de inventario asociado.";
 
   reactForm: FormGroup;
+  @ViewChild(InsertAdicionalToolWorkOrderComponent) insertAditionalToolWorkOrder;
+  @ViewChild(InsertAdicionalMaterialWorkOrderComponent) insertAditionalMaterialWorkOrder;
+  @ViewChild(InsertAdicionalDeviceWorkOrderComponent) insertAditionalDeviceWorkOrder;
+  @ViewChild(InsertInventoryWorkOrderComponent) insertInventoryWorkOrder;
+  flagWarning:boolean=false;
+
 
   constructor(private workOrderService: WorkOrderService,
     private serviceWorkOrderTypes: WorkOrderTypeService,
     private serviceClient: ClientService,
     private serviceEmployee: EmployeeService,
     private serviceWorkOrder: WorkOrderService,
-    private serviceColors: ColorService) {
+    private serviceColors: ColorService
+    ) {
       this.createReactiveForm();
       this.associateValues();
       this.initStart();   
@@ -93,8 +107,9 @@ export class WorkOrderComponent implements OnInit {
       (e: Event) => {
         e.preventDefault();
         if (this.reactForm.valid) {
-          console.log('prueba')
-          this.completeWorkOrder = true;
+      
+          //this.completeWorkOrder = true;
+          this.validateCompleteWorkOrder();
         } else {
           // validating whole form
           Object.keys(this.reactForm.controls).forEach(field => {
@@ -104,6 +119,37 @@ export class WorkOrderComponent implements OnInit {
         }
       });
   }
+
+ private validateCompleteWorkOrder(){
+   
+    if((this.insertAditionalDeviceWorkOrder!=undefined && this.insertAditionalDeviceWorkOrder.selectedDevices.length>0) ||
+      (this.insertAditionalMaterialWorkOrder!=undefined && this.insertAditionalMaterialWorkOrder.selectedMaterials.length>0) ||
+      (this.insertAditionalToolWorkOrder!=undefined && this.insertAditionalToolWorkOrder.selectedTools.length>0) || 
+      (this.insertInventoryWorkOrder!=undefined && this.insertInventoryWorkOrder.kitSelected.id>0)){
+
+        this.workOrder.kitWorkOrder=this.insertInventoryWorkOrder!=undefined?this.insertInventoryWorkOrder.kitSelected:null;
+        this.workOrder.listWorkOrderDevices=this.insertAditionalDeviceWorkOrder!=undefined?this.insertAditionalDeviceWorkOrder.selectedDevices:null;
+        this.workOrder.listWorkOrderMaterials=this.insertAditionalMaterialWorkOrder!=undefined?this.insertAditionalMaterialWorkOrder.selectedMaterials:null;
+        this.workOrder.listWorkOrderTools=this.insertAditionalToolWorkOrder!=undefined?this.insertAditionalToolWorkOrder.selectedTools:null;
+        this.createWorkOrder();
+      }
+      else{
+        this.initTimeWarning();       
+      }
+
+ }
+
+ initTimeWarning(){
+   this.flagWarning=true;
+  Observable.interval(1000)
+    .takeWhile(() => this.flagWarning)
+    .subscribe(i => {
+      if(i==4){
+        this.flagWarning=false;
+      }       
+    })
+
+}
 
 
   initStart(){
@@ -172,15 +218,19 @@ export class WorkOrderComponent implements OnInit {
 
     // this.addInventoryToWorkOrder();
 
-    let i = 0;
-    for (i = 0; i < this.selectedEmployees.length; i++) {
+    /*let i = 0;
+    let size=this.selectedEmployees.length;
+    console.log(size);
+    for (i = 0; i < size; i++) {
       let employee: Employee = new Employee();
       employee.id = this.selectedEmployees[i].id;
       this.workOrder.employees.push(employee);
-    }
+    }*/
+    console.log(this.workOrder);
     this.serviceWorkOrder.insertWorkOrder(this.workOrder).subscribe();
-    this.workOrder = new WorkOrder();
-    this.selectedEmployees = [];
+    //this.workOrder = new WorkOrder();
+    //this.selectedEmployees = [];
+
   }
 
   /*/addInventoryToWorkOrder() {
@@ -239,10 +289,10 @@ export class WorkOrderComponent implements OnInit {
     { text: 'Agregar Dispositivo Adicional' }];
 
   formatDates() {
-    this.workOrder.startDate = "" + this.workOrder.startDate + "T" + this.startHour.value + "-0600";
-    this.workOrder.endDate = "" + this.workOrder.endDate + "T" + this.endHour.value + "-0600";
-    console.log(this.reactForm.status);
-    console.log(this.workOrder);    
+    this.workOrder.startDate = this.workOrder.startDate + "T" + this.startHour.value + "-0600";
+    this.workOrder.endDate = this.workOrder.endDate + "T" + this.endHour.value + "-0600";
+    //console.log(this.reactForm.status);
+    //console.log(this.workOrder);    
   }
 }
 

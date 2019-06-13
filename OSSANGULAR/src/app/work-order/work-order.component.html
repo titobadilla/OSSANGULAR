@@ -1,8 +1,6 @@
 <div class="col-lg-1"></div>
-<div class="e-tab-section">
-
+<div class="e-tab-section"> 
   <div class="col-lg-10 content-wrapper control-section">
-    <button class="but_insert">Crear Orden</button>
     <div class="e-sample-resize-container">
 
       <ejs-tab id="tab_adaptive" #adaptiveTab heightAdjustMode='None' height='900px'>
@@ -13,8 +11,16 @@
               <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
 
                 <div class="formtitle">
-                  <span>Orden de Trabajo</span>
+                  <span>Orden de Trabajo</span>                 
                 </div>
+                <div *ngIf="flagWarning">
+                  <div class="table-responsive">
+                      <notification [class]='classNotification' [type]='typeNotification' [message]='messageNotification'>
+                        </notification>         
+                        
+                  </div>
+                  
+                </div> 
 
                 <div class="row">
                   <div class="col-lg-6">
@@ -128,7 +134,7 @@
                   <div style="width: 325px;margin:0px auto;height: 100px; padding-top: 25px;">
                     <div style="display: inline-block;">
                       <button id="validateSubmit" class="samplebtn e-control e-btn e-info" type="submit"
-                        (click)='formatDates()' style="height:40px;width: 150px;" data-ripple="true">Agregar</button>
+                        (click)='formatDates()' style="height:40px;width: 150px;" data-ripple="true">Crear orden de trabajo</button>
                     </div>
                   </div>
                 </div>

@@ -1,6 +1,6 @@
 import { SuppliesDevice } from './suppliesDevice.model';
 import { SuppliesMaterial } from './suppliesMaterial.model';
-import { SuppliesTool } from './suppliestool.model';
+import { SuppliesTool } from './suppliesTool.model';
 
 export class KitWorkOrder{
 
