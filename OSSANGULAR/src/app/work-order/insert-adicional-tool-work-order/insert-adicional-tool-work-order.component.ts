@@ -40,7 +40,8 @@ export class InsertAdicionalToolWorkOrderComponent implements OnInit, AfterViewI
   quantityTool: number = 0;
   newQuantityTool: number = 0;
   addQuantityT: boolean = false;
-  toolDelete: WorkOrderTool = new WorkOrderTool();
+  toolDelete: WorkOrderTool = new WorkOrderTool();  
+  dataTool:WorkOrderTool[];
 
   constructor(private serviceTool: ToolService, private modalService: BsModalService,
     private deleteService: DeleteEmitterService) {
@@ -53,7 +54,8 @@ export class InsertAdicionalToolWorkOrderComponent implements OnInit, AfterViewI
     setCulture('es-CR');
 
     this.serviceTool.getAllTool().subscribe(data => {
-      this.tools = data;
+      this.tools = data;      
+      this.databaseChargedData();
     })
 
     this.initEventSubmit();
@@ -121,6 +123,23 @@ export class InsertAdicionalToolWorkOrderComponent implements OnInit, AfterViewI
     });
     return elementReturn;
   }
+
+  databaseChargedData(){
+    if(this.dataTool!=undefined){
+    this.dataTool.forEach(element => {
+      this.workOrderToolSelected=element;   
+      this.addFromDatabase();
+    });
+  }
+  }  
+
+  addFromDatabase() {  
+    this.selectedTools.push(this.workOrderToolSelected);
+    this.grid.refresh();
+    this.tools = this.removeElementAddedOfDropdown(this.tools, this.workOrderToolSelected);
+    this.addQuantityT = false;
+}
+
 
   //add workOrderTool Selected in the selected and add into the table
   addSelectedInventory() {

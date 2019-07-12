@@ -28,6 +28,7 @@ import { MaterialComponent } from './material/material.component';
 import { RoleGuard } from './login/guards/role-guard.service';
 import { ChangePasswordAdminComponent } from './change-password-admin/change-password-admin.component';
 import { ChangePasswordTechnicalComponent } from './change-password-technical/change-password-technical.component';
+import { UpdateWorkOrderComponent } from './work-order/update-work-order/update-work-order.component';
 
 const routes: Routes = [
   {path:"address",component:AddressComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
@@ -45,6 +46,7 @@ const routes: Routes = [
   {path:"telephone-client",component:TelephoneClientComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path:"telephone-employee",component:TelephoneEmployeeComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path:"work-order",component:WorkOrderComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:"update-work-order",component:UpdateWorkOrderComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path:"work-order-detail",component:WorkOrderDetailComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN','ROLE_TECNICO']}},
   {path:"work-order-type",component:WorkOrderTypeComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path:"calendar",component:CalendarComponent, canActivate: [AuthGuard,RoleGuard],data: {role: ['ROLE_ADMIN','ROLE_TECNICO']}},

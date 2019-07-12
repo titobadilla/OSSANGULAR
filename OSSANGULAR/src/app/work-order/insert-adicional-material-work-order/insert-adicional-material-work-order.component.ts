@@ -42,6 +42,7 @@ export class InsertAdicionalMaterialWorkOrderComponent implements OnInit {
   materialSelected: WorkOrderMaterial;
   addQuantityM: boolean = false;
   materialDelete: WorkOrderMaterial;
+  dataMaterial:WorkOrderMaterial[];
 
   constructor(private serviceMaterial: MaterialService, private modalService: BsModalService,
     private deleteService: DeleteEmitterService) {
@@ -51,6 +52,7 @@ export class InsertAdicionalMaterialWorkOrderComponent implements OnInit {
   getMaterials() {
     this.serviceMaterial.getAllMaterial().subscribe(data => {
       this.materials = data;
+      this.databaseChargedData();
     })
   }
 
@@ -126,6 +128,26 @@ export class InsertAdicionalMaterialWorkOrderComponent implements OnInit {
     });
     return elementReturn;
   }
+
+  databaseChargedData(){
+    
+    if(this.dataMaterial!=undefined){
+    this.dataMaterial.forEach(element => {
+      this.materialSelected=element;   
+      this.addFromDatabase();
+    });
+  }
+  }
+
+  
+
+  addFromDatabase() {       
+    this.selectedMaterials.push(this.materialSelected);
+    this.grid.refresh();
+    this.materials = this.removeElementAdded(this.materials, this.materialSelected.id.material)
+    this.addQuantityM = false;
+}
+
 
   addSelectedInventory() {
     if (this.quantityMaterialNew.value != 'null' && this.quantityMaterialNew.value > 0) {

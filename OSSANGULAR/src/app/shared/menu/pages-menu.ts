@@ -38,7 +38,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Orden de trabajo',
     icon: 'nb-star',
-    children: [
+    children: [      
       {
         title: 'Orden de trabajo',
         link: '/work-order',

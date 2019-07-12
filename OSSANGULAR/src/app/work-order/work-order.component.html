@@ -96,7 +96,7 @@
                   <div class="col-lg-6">
 
                     <div class="form-group">
-                      <ejs-multiselect formControlName="employeesMulti" (removing)='select($event)'
+                      <ejs-multiselect formControlName="employeesMulti" (removing)='selectEmployee($event)'
                         (select)='selectEmployee($event)' id='multiselect-checkbox' [dataSource]='employees'
                         [mode]='box' [fields]='employeeWorkOrder' [placeholder]='employeeWatermark'
                         [popupHeight]='popHeight' showDropDownIcon='true' floatLabelType='Auto' [allowFiltering]='true'>
@@ -134,7 +134,7 @@
                   <div style="width: 325px;margin:0px auto;height: 100px; padding-top: 25px;">
                     <div style="display: inline-block;">
                       <button id="validateSubmit" class="samplebtn e-control e-btn e-info" type="submit"
-                        (click)='formatDates()' style="height:40px;width: 150px;" data-ripple="true">Crear orden de trabajo</button>
+                        (click)='formatDates()' style="height:40px;width: 200px;" data-ripple="true">Crear orden de trabajo</button>
                     </div>
                   </div>
                 </div>

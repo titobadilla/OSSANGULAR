@@ -36,6 +36,7 @@ export class InsertAdicionalDeviceWorkOrderComponent implements OnInit {
   deviceSelected: WorkOrderDevice;
   addQuantityD: boolean = false;
   deviceDelete: WorkOrderDevice = new WorkOrderDevice();
+  dataDevice:WorkOrderDevice[];
 
   constructor(private serviceDevice: DeviceService, 
     private modalService: BsModalService,
@@ -49,6 +50,7 @@ export class InsertAdicionalDeviceWorkOrderComponent implements OnInit {
     setCulture('es-CR');
     this.serviceDevice.getAllDevice().subscribe(data => {
       this.devices = data;
+      this.databaseChargedData();
     })
 
     this.initEventSubmit();
@@ -57,6 +59,8 @@ export class InsertAdicionalDeviceWorkOrderComponent implements OnInit {
       this.deleteOfTable();
     });
   }
+
+  
 
   initEventSubmit() {
     let formId: HTMLElement = <HTMLElement>document.getElementById('formId');
@@ -115,6 +119,22 @@ export class InsertAdicionalDeviceWorkOrderComponent implements OnInit {
       }
     });
     return elementReturn;
+  }
+
+  databaseChargedData(){
+    if(this.dataDevice!=undefined){
+  this.dataDevice.forEach(element => {
+    this.deviceSelected=element;   
+    this.addFromDatabase();
+  });}
+
+  }
+
+  addFromDatabase() {       
+      this.selectedDevices.push(this.deviceSelected);
+      this.grid.refresh();
+      this.devices = this.removeElementAdded(this.devices, this.deviceSelected.id.device)
+      this.addQuantityD = false;
   }
 
   addSelectedInventory() {

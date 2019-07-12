@@ -37,6 +37,7 @@ export class CalendarComponent  implements OnInit,AfterViewInit{
   public enddate: Date = new Date(2000, 0, 1, 21);
   public flagDoubleClick:boolean=false;
   public flagKeyDown:boolean=false;
+  public quickInfo:any;
 
     public constructor(private router: Router,private workOrderService:WorkOrderService,private authService: AuthService ){
      
@@ -57,6 +58,8 @@ ngOnInit(){
     this.scheduleObj.endHour = this.instance.formatDate(this.enddate, { skeleton: 'Hm' }); 
     console.log(this.authService.decode().role); 
     this.scheduleObj.readonly=this.authService.decode().role==='ROLE_ADMIN'?false:true;
+    this.scheduleObj.quickInfoTemplates.footer="<div class='e-popup-footer'></div>";
+    
 
     
 }
@@ -90,17 +93,22 @@ onCellClick(arg: EventRenderedArgs){
     }
    
     onCellDoubleClick(): void {
-       
+      
         this.flagDoubleClick=true; 
     }
 
 
     onPopupOpen(arg: EventRenderedArgs){
 
-      
+      if((arg.type==='Editor' && !this.flagDoubleClick)){
+          this.router.navigate(['/update-work-order'],{queryParams: {IdWO: arg.data.id}});
+          this.flagKeyDown=false;
+          return arg.cancel=true;
+      }
 
-      if((arg.type==='Editor' && !this.flagDoubleClick) || arg.type==='DeleteAlert' || this.flagKeyDown ){
+      else if( arg.type==='DeleteAlert' || this.flagKeyDown ){
          this.flagKeyDown=false;
+        
             return arg.cancel=true;
         }else{
             this.flagDoubleClick=false;
@@ -208,7 +216,7 @@ onCellClick(arg: EventRenderedArgs){
     this.loadWeekData(dateStartString,dateEndString);
   }
 
-  onComplete(args: ActionEventArgs): void{
+  onComplete(args: ActionEventArgs): void{  
 
       //si se cambió de fecha(mandar a recargar datos)
       if(args.requestType==='viewNavigate' || args.requestType==='dateNavigate'){

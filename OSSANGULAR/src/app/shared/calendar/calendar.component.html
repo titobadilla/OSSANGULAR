@@ -2,6 +2,15 @@
   <ejs-schedule #scheduleObj width='100%' locale='es-CR' height='550px'   [selectedDate]="selectedDate" (eventRendered)="onEventRendered($event)"
       [eventSettings]="eventSettings" (keydown)='onKeyDown($event)' (actionBegin)="onActionBegin($event)" (popupOpen)="onPopupOpen($event)" 
       (cellClick)="onCellClick($event)" [showQuickInfo]="showQuickInfo" (actionComplete)="onComplete($event)" (cellDoubleClick)="onCellDoubleClick()">
+     
+      <ng-template #footerTemplate>
+        </ng-template>
+
+
+  
+<script id="footerTemplate" type="text/x-template">
+<div></div>
+</script>
       <e-views>
           <e-view  option='Day' [interval]="dayInterval"></e-view>
           <e-view  option='Week' [interval]="weekInterval"></e-view>
@@ -11,9 +20,10 @@
         
       <ng-template #editorTemplate>
       </ng-template>      
-
-    
+      
+        
   </ejs-schedule>
 </div>
+
 
 

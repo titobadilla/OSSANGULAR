@@ -7,6 +7,7 @@ import { SuppliesDevice } from 'src/model/suppliesDevice.model';
 import { SuppliesMaterial } from 'src/model/suppliesMaterial.model';
 import { KitWorkOrder } from 'src/model/kitWorkOrder.model';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
+import { DropDownListComponent } from '@syncfusion/ej2-angular-dropdowns';
 
 @Component({
   selector: 'insert-inventory-work-order',
@@ -35,8 +36,10 @@ export class InsertInventoryWorkOrderComponent implements OnInit, AfterViewInit 
 
   @ViewChild('gridDevice') public gridDevice: GridComponent;
   @ViewChild('gridMaterial') public gridMaterial: GridComponent;
-  @ViewChild('gridTool') public gridTool: GridComponent;
+  @ViewChild('gridTool') public gridTool: GridComponent;  
+ @ViewChild('ejsKit') public ejsKit: DropDownListComponent; 
 
+  public idUpdate:number=0;
 
   constructor(private kitService:KitWorkOrderService) {    
      this.createReactiveForm();
@@ -49,6 +52,11 @@ export class InsertInventoryWorkOrderComponent implements OnInit, AfterViewInit 
 
     this.kitService.getAllKitWorkOrder().subscribe(data=>{
       this.kitsWorkOrder = data;
+      if(this.idUpdate!=0){
+        this.kitSelectedUpdate(this.idUpdate);
+        this.ejsKit.value=this.kitSelected.id;       
+      }
+
     })
 
     this.initEventSubmit();
@@ -76,6 +84,13 @@ export class InsertInventoryWorkOrderComponent implements OnInit, AfterViewInit 
     this.reactForm = new FormGroup({
       'kit': new FormControl('', []),
     });
+  }
+
+  kitSelectedUpdate(id){
+    this.kitSelected = this.findKitById(id);
+    this.devices = this.kitSelected.listSuppliesDevices;
+    this.tools = this.kitSelected.listSuppliesTools;
+    this.materials = this.kitSelected.listSuppliesMaterials;
   }
 
   get kit() { return this.reactForm.get('kit'); }
