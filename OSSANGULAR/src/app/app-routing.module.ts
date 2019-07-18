@@ -29,6 +29,7 @@ import { ChangePasswordAdminComponent } from './change-password-admin/change-pas
 import { ChangePasswordTechnicalComponent } from './change-password-technical/change-password-technical.component';
 import { UpdateWorkOrderComponent } from './work-order/update-work-order/update-work-order.component';
 import {KitWorkOrderComponent} from './kit-work-order/kit-work-order.component';
+import { InsertKitWorkOrderComponent } from './kit-work-order/insert-kit-work-order/insert-kit-work-order.component';
 
 const routes: Routes = [
   {path:"address",component:AddressComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
@@ -57,7 +58,8 @@ const routes: Routes = [
   {path:'device-state',component:DeviceStateComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path:'material',component:MaterialComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path:'change-password',component:ChangePasswordTechnicalComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_TECNICO','ROLE_ADMIN']}},
-  {path:'kit',component:KitWorkOrderComponent, canActivate : [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}}
+  {path:'kit',component:KitWorkOrderComponent, canActivate : [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:'insert-kit',component:InsertKitWorkOrderComponent, canActivate : [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
 ];
 
 @NgModule({

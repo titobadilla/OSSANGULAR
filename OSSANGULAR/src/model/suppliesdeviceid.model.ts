@@ -1,8 +1,8 @@
 import { KitWorkOrder } from './kitWorkOrder.model';
-import { Material } from './material.model';
+import { Device } from './device.model';
 
-export class SuppliesMaterialId{
+export class SuppliesDeviceId{
 
     kitWorkOrder:KitWorkOrder = new KitWorkOrder();
-    material: Material = new Material();
+    device: Device = new Device();
 }

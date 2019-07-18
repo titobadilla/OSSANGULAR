@@ -127,6 +127,9 @@ import { ChangePasswordTechnicalComponent } from './change-password-technical/ch
 import { NotificationComponent } from './notification/notification.component';
 import { LoginRefreshComponent } from './login/login-refresh/login-refresh.component';
 import { ModalSesionRefreshComponent } from './@theme/components/header/modal-sesion-refresh/modal-sesion-refresh.component';
+import { InsertKitWorkOrderComponent } from './kit-work-order/insert-kit-work-order/insert-kit-work-order.component';
+import { UpdateKitWorkOrderComponent } from './kit-work-order/update-kit-work-order/update-kit-work-order.component';
+import { SuppliesService } from './kit-work-order/insert-kit-work-order/supplies.service';
 
 
 declare var require: any;
@@ -204,7 +207,9 @@ loadCldr(
     UpdateWorkOrderTypeComponent,
     ChangePasswordAdminComponent,
     ChangePasswordTechnicalComponent,
-    NotificationComponent
+    NotificationComponent,
+    InsertKitWorkOrderComponent,
+    UpdateKitWorkOrderComponent
   ],
   imports: [
 
@@ -261,6 +266,7 @@ loadCldr(
     WorkOrderService,
     WorkOrderDetailService,
     WorkOrderTypeService,
+    SuppliesService,
     AuthService, AuthGuard, RoleGuard,JwtHelper, TokenStorage, {
       provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,

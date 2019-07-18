@@ -1,5 +1,6 @@
-export class SuppliesDevice{
+import { SuppliesDeviceId } from './suppliesdeviceid.model';
 
-    id: SuppliesDevice = new SuppliesDevice();
-    quantity: number;
+export class SuppliesDevice{
+    id: SuppliesDeviceId = new SuppliesDeviceId();
+    quantity:number;
 }
