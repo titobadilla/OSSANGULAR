@@ -1,6 +1,6 @@
 <div class="row">
-  <div class="col-lg-4"></div>
-  <div class="col-lg-5 control-section">
+  <div class="col-lg-3"></div>
+  <div class="col-lg-6 control-section">
     <div class="content-wrapper">
       <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
 
@@ -9,7 +9,7 @@
         </div>
         <div class="row">
           <div class="col-lg-1"></div>
-          <div class="col-lg-4 border-right">
+          <div class="col-lg-5 border-right">
 
             <button type="button" class="but_insert" (click)="movebuttonsMaterial()"
               style="margin-top:20px;">Materiales</button>
@@ -34,29 +34,17 @@
             <div *ngIf="quantitySection">
               <div class="form-group" style="margin-left:25%;">
                 <div class="e-float-input">
-                  <input id="description" type="text" formControlName="description" [(ngModel)]="descriptionElement">
-                  <span class="e-float-line"></span>
-                  <label for="description" class="e-float-text" style="font-size:15px;">Nombre:
+                  <label for="description" class="input-disabled" style="font-size:15px;">Nombre:
                   </label>
-                </div>
-                <div *ngIf="description.errors">
-                  <div *ngIf="description.errors.required && description.touched" class="e-error">
-                    Debe rellenar este campo.
-                  </div>
+                  <input id="description" class="form-control" type="text" formControlName="description">
                 </div>
               </div>
 
               <div class="form-group" style="margin-left:25%;">
                 <div class="e-float-input">
-                  <input id="quantity" type="text" formControlName="quantity" [(ngModel)]="quantityElement">
-                  <span class="e-float-line"></span>
-                  <label for="quantity" class="e-float-text" style="font-size:15px;">Cantidad Actual
+                  <label for="quantity" class="input-disabled" style="font-size:15px;">Cantidad Actual
                   </label>
-                </div>
-                <div *ngIf="quantity.errors">
-                  <div *ngIf="quantity.errors.required && quantity.touched" class="e-error">
-                    Debe rellenar este campo.
-                  </div>
+                  <input id="quantity" type="text" class="form-control" formControlName="quantity">
                 </div>
               </div>
 
@@ -74,8 +62,8 @@
                 </div>
               </div>
 
-              <button type="button" class="btn btn-warning" (click)="updateQuantity()"
-                style="margin-left:25%;">Actualizar</button>
+              <button id="validateSubmit" class="samplebtn e-control e-btn e-info" type="submit" (click)="updateQuantity()"
+                style="height:40px;width: 146px;" data-ripple="true">Actualizar</button>
             </div>
           </div>
         </div>

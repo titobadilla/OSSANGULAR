@@ -32,11 +32,12 @@ export class InventoryOutputGeneralComponent implements OnInit, AfterViewInit {
 
   //global variables for component
   newQuantity: number = 0;
-  descriptionElement: String;
-  quantityElement: number;
 
   //boolean
   quantitySection: boolean = false;
+  materialSelected: boolean = false;
+  toolSelected: boolean = false;
+  deviceSelected: boolean = false;
 
   constructor(private materialService: MaterialService,
     private deviceService: DeviceService,
@@ -56,8 +57,8 @@ export class InventoryOutputGeneralComponent implements OnInit, AfterViewInit {
     this.reactForm = new FormGroup({
       'element': new FormControl('', [this.elementRequired]),
       'newQuantity': new FormControl('', [FormValidators.required]),
-      'description': new FormControl('', [FormValidators.required]),
-      'quantity': new FormControl('', [FormValidators.required])
+      'description': new FormControl('', ),
+      'quantity': new FormControl('',)
     });
   }
 
@@ -81,6 +82,7 @@ export class InventoryOutputGeneralComponent implements OnInit, AfterViewInit {
       (e: Event) => {
         e.preventDefault();
         if (this.reactForm.valid) {
+         this.updateQuantity();
         } else {
           // validating whole form
           Object.keys(this.reactForm.controls).forEach(field => {
@@ -142,32 +144,60 @@ export class InventoryOutputGeneralComponent implements OnInit, AfterViewInit {
   onChangeDdl(value: any) {
     if (value.itemData != undefined) {
       if (this.value === 'material') {
-
+        this.materialSelected = true;
+        this.toolSelected = false;
+        this.deviceSelected = false;
         this.material = this.findElementByIdGroup(value.itemData.id);
         this.quantitySection = true;
-        this.descriptionElement = this.material.description
-        this.quantityElement = this.material.quantity
         this.newQuantity = this.material.quantity
+        this.description.setValue(this.material.description)
+        this.description.disable()
+        this.quantity.setValue(this.material.quantity)
+        this.quantity.disable()
 
       }
       if (this.value === 'device') {
+        this.deviceSelected = true;
+        this.materialSelected = false;
+        this.toolSelected = false;
+
         this.device = this.findElementByIdGroup(value.itemData.id);
         this.quantitySection = true;
-        this.descriptionElement = this.device.description
-        this.quantityElement = this.device.quantity
+        this.description.setValue(this.device.description)
+        this.description.disable()
+        this.quantity.setValue(this.device.quantity)
+        this.quantity.disable()
         this.newQuantity = this.device.quantity
       }
       if (this.value === 'tool') {
+        this.toolSelected = true;
+        this.deviceSelected = false;
+        this.materialSelected = false;
+
         this.tool = this.findElementByIdGroup(value.itemData.id);
         this.quantitySection = true;
-        this.descriptionElement = this.tool.description
-        this.quantityElement = this.tool.quantity
+        this.description.setValue(this.tool.description)
+        this.description.disable()
+        this.quantity.setValue(this.tool.quantity)
+        this.quantity.disable()
         this.newQuantity = this.tool.quantity
       }
     }
   }
 
 
+  updateQuantity() {
+    if (this.toolSelected == true) {
+      this.tool.quantity = this.quantityNew.value
+      this.toolService.updateQuantityTool(this.tool).subscribe();
+    } else if (this.materialSelected == true) {
+      this.material.quantity  = this.quantityNew.value
+      this.materialService.updateQuantityOfMaterial(this.material).subscribe();
+    } else if (this.deviceSelected == true) {
+      this.device.quantity  = this.quantityNew.value
+      this.deviceService.updateQuantityDevice(this.device).subscribe();
+    }
+  }
 
 
 }

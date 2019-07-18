@@ -21,8 +21,7 @@ import { CalendarComponent } from './shared/calendar/calendar.component';
 import { AuthGuard } from './login/guards/auth.guard';
 import {HttpClientModule} from '@angular/common/http';
 import { ReactiveFormsModule} from '@angular/forms';
-import { InventoryOutputComponent } from './inventory-output/inventory-output.component';
-import { InventoryOutputGeneralComponent } from './inventory-output/inventory-output-general/inventory-output-general.component';
+import { InventoryOutputGeneralComponent } from './inventory-output-general/inventory-output-general.component';
 import { ToolComponent } from './tool/tool.component';
 import { MaterialComponent } from './material/material.component';
 import { RoleGuard } from './login/guards/role-guard.service';
@@ -51,7 +50,6 @@ const routes: Routes = [
   {path:"work-order-type",component:WorkOrderTypeComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path:"calendar",component:CalendarComponent, canActivate: [AuthGuard,RoleGuard],data: {role: ['ROLE_ADMIN','ROLE_TECNICO']}},
   {path:'work-order-type',component:WorkOrderTypeComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
-  {path:'inventory-output',component:InventoryOutputComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path:'inventory-output-general',component:InventoryOutputGeneralComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path:'tool',component:ToolComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path:'brand',component:BrandComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},

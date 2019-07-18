@@ -94,9 +94,7 @@ import { UpdateDeviceComponent } from './device/update-device/update-device.comp
 import { MenuPrincipalComponent } from './menu-principal/menu-principal.component';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { InventoryOutputComponent } from './inventory-output/inventory-output.component';
-import { InventoryOutputSpecificComponent } from './inventory-output/inventory-output-specific/inventory-output-specific.component';
-import { InventoryOutputGeneralComponent } from './inventory-output/inventory-output-general/inventory-output-general.component';
+import { InventoryOutputGeneralComponent } from './inventory-output-general/inventory-output-general.component';
 import { MaterialComponent } from './material/material.component';
 import { DeleteComponent } from './delete/delete.component';
 import { InsertDeviceStateComponent } from './device-state/insert-device-state/insert-device-state.component';

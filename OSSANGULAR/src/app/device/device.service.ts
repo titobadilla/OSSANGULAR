@@ -33,4 +33,7 @@ export class DeviceService {
   public deleteDevice(device:number):Observable<Device>{
     return this.http.delete<Device>(this.URLAPI+'device/'+device);
   }
+  public updateQuantityDevice(device:Device): Observable<Device>{
+    return this.http.put<Device>(this.URLAPI+'device/updateQuantity/',device);
+  }
 }
