@@ -183,8 +183,6 @@ loadCldr(
     InsertDeviceComponent,
     UpdateDeviceComponent,
     MenuPrincipalComponent,
-    InventoryOutputSpecificComponent,
-    InventoryOutputComponent,
     InventoryOutputGeneralComponent,
     MaterialComponent,
     DeleteComponent,
@@ -268,6 +266,6 @@ loadCldr(
       useClass: Interceptor,
       multi: true
     }],
-  bootstrap: [AppComponent],entryComponents:[InventoryOutputSpecificComponent,DeleteComponent]
+  bootstrap: [AppComponent],entryComponents:[DeleteComponent]
 })
 export class AppModule { }
