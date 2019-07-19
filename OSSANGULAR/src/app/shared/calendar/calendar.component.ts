@@ -10,6 +10,7 @@ import { WorkOrderService } from 'src/app/work-order/work-order.service';
 import { WorkOrder } from 'src/model/workOrder.model';
 import { Color } from 'src/model/color.model';
 import { AuthService } from 'src/app/login/auth.service';
+import { Employee } from 'src/model/employee.model';
 
 @Component({
   selector: 'app-calendar',
@@ -22,6 +23,8 @@ export class CalendarComponent  implements OnInit,AfterViewInit{
     }
    
   public data:WorkOrder[];
+  public val:Number;
+  public employeeDetail:Employee[];
   public selectedDate: Date = new Date();
   public eventSettings: EventSettingsModel ;
   public isSelected: Boolean = true;
@@ -56,16 +59,19 @@ ngOnInit(){
     this. loadDataInit();
     this.scheduleObj.startHour = this.instance.formatDate(this.startdate, { skeleton: 'Hm' });
     this.scheduleObj.endHour = this.instance.formatDate(this.enddate, { skeleton: 'Hm' }); 
-    console.log(this.authService.decode().role); 
-    this.scheduleObj.readonly=this.authService.decode().role==='ROLE_ADMIN'?false:true;
+    this.scheduleObj.readonly=this.authService.decode().role==='ROLE_ADMIN'?false:true;  
+
     this.scheduleObj.quickInfoTemplates.footer="<div class='e-popup-footer'></div>";
-    
 
     
 }
 
-onCellClick(arg: EventRenderedArgs){
+detailEmployee(){
+    console.log(this.employeeDetail[0]);
+}
 
+
+onCellClick(arg: EventRenderedArgs){
     return arg.cancel=true;
 }
 
@@ -86,7 +92,7 @@ onCellClick(arg: EventRenderedArgs){
         this.eventSettings={ dataSource: this.data ,enableTooltip:true, fields: {
             subject: { title: 'Nombre del cliente', name: 'nameClientOptional', default: 'Nombre' },
             location: { title: 'Ubicación del trabajo', name: 'locationClientOptional', default: 'Descripción' },
-            description: { title: 'Descripción del trabajo', name: 'description' },
+            description: { title: 'Descripción del trabajo', name: 'description'},
             startTime: { title: 'De', name: 'startDate' },
             endTime: { title: 'Hasta', name: 'endDate' }
         }};
@@ -98,9 +104,40 @@ onCellClick(arg: EventRenderedArgs){
     }
 
 
+
     onPopupOpen(arg: EventRenderedArgs){
 
-      if((arg.type==='Editor' && !this.flagDoubleClick)){
+       /* if(arg.type==='QuickInfo'){
+            var dat=arg.data;     
+           var button = document.createElement("input");
+       
+           button.type = "button";
+           button.value = "Detalles de empleados";
+           button.className="btn btn-info";   
+           
+           button.addEventListener('click', (e: any) => {
+            this.employeeDetail= <Employee[]>dat.employees;
+            this.detailEmployee();
+        });
+           arg.element.firstChild.childNodes[2].appendChild(button);
+
+        }*/
+        if(arg.type==='QuickInfo'){
+            var dat=arg.data;    
+            this.employeeDetail= <Employee[]>dat.employees; 
+            this.employeeDetail.forEach(element => {
+                var br= document.createElement("br");
+         var button = document.createElement("input");
+       
+           button.type = "button";
+           button.disabled=true;
+           button.value = element.name+" "+element.lastName;
+           button.className="btn btn-warning";  
+           button.style.margin="1%";
+           arg.element.firstChild.appendChild(button);            
+            });
+        }
+      else if((arg.type==='Editor' && !this.flagDoubleClick)){
           this.router.navigate(['/update-work-order'],{queryParams: {IdWO: arg.data.id}});
           this.flagKeyDown=false;
           return arg.cancel=true;
@@ -133,6 +170,7 @@ onCellClick(arg: EventRenderedArgs){
           args.element.style.backgroundColor = categoryColor;
       }
   }
+  
 
 
   onNavigating(args: EventRenderedArgs){
