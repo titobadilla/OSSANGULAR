@@ -24,21 +24,23 @@ export class InsertKitWorkOrderComponent implements OnInit {
   reactForm: FormGroup;
   kit: KitWorkOrder = new KitWorkOrder();
   kitCreated: KitWorkOrder = new KitWorkOrder();
-  //multi select
-  @ViewChild('checkbox') public mulObj: MultiSelectComponent;
+  bandera: boolean = false;
+  detail: boolean = false;
+  implements: boolean = false;
+  add: boolean = true;
+  selectedSuppliesDevice: SuppliesDevice[];
+  selectedSuppliesTool: SuppliesTool[];
+  selectedSuppliesMaterial: SuppliesMaterial[];
 
   materials: Material[];
-  selectedMaterials: SuppliesMaterial[] = new Array();
   public material: Object = { text: 'name', value: 'id' };
   public materialWatermark: string = 'Seleccione los materiales*';
 
   devices: Device[];
-  selectedDevices: SuppliesDevice[] = new Array();
   public device: Object = { text: 'name', value: 'id' };
   public deviceWatermark: string = 'Seleccione los dispositivos*';
 
   tools: Tool[];
-  selectedTools: SuppliesTool[] = new Array();
   public tool: Object = { text: 'name', value: 'id' };
   public toolWatermark: string = 'Seleccione las herramientas*';
 
@@ -92,6 +94,9 @@ export class InsertKitWorkOrderComponent implements OnInit {
       'devicesMulti': new FormControl('', []),
       'materialsMulti': new FormControl('', []),
       'toolsMulti': new FormControl('', []),
+      'deviceQuantity': new FormControl('', [FormValidators.required]),
+      'toolQuantity': new FormControl('', [FormValidators.required]),
+      'materialQuantity': new FormControl('', [FormValidators.required])
     });
   }
 
@@ -99,108 +104,71 @@ export class InsertKitWorkOrderComponent implements OnInit {
   get devicesMulti() { return this.reactForm.get('devicesMulti'); }
   get materialsMulti() { return this.reactForm.get('materialsMulti'); }
   get toolsMulti() { return this.reactForm.get('toolsMulti'); }
+  get deviceQuantity() { return this.reactForm.get('deviceQuantity'); }
+  get materialQuantity() { return this.reactForm.get('materialQuantity'); }
+  get toolQuantity() { return this.reactForm.get('toolQuantity'); }
 
-  createKit() {
-    this.kitService.insertKitWorkOrder(this.kit).subscribe(data => {
-      this.kitCreated = data;
-    })
-  }
-
-  selectMaterial(value: any) {
-    let action = value.name;
-    let material = value.itemData as Material;
-    let aux;
-    let suppliesMaterial: SuppliesMaterial = new SuppliesMaterial();
-
-    suppliesMaterial.id.kitWorkOrder = this.kitCreated;
-    suppliesMaterial.id.material = material;
-    suppliesMaterial.quantity = material.quantity;
-
-    if (action === 'select') {
-      this.selectedMaterials.push(suppliesMaterial);
-    } else if (action = 'removing') {
-      this.selectedMaterials.forEach((element, index) => {
-        if (element.id.material.id === suppliesMaterial.id.material.id) {
-          aux = this.arrayRemove(this.selectedMaterials, index);
-        }
-      });
-      this.selectedMaterials = aux;
-    }
-  }
-
-  selectDevice(value: any) {
-    let action = value.name;
-    let device = value.itemData as Device;
-    let aux;
-    let suppliesDevice: SuppliesDevice = new SuppliesDevice();
-
-    suppliesDevice.id.kitWorkOrder = this.kitCreated;
-    suppliesDevice.id.device = device;
-    suppliesDevice.quantity = device.quantity;
-
-    if (action === 'select') {
-      this.selectedDevices.push(suppliesDevice);
-    } else if (action = 'removing') {
-      this.selectedDevices.forEach((element, index) => {
-        if (element.id.device.id === suppliesDevice.id.device.id) {
-          aux = this.arrayRemove(this.selectedMaterials, index);
-        }
-      });
-      this.selectedMaterials = aux;
-    }
-  }
-
-  selectTool(value: any) {
-    let action = value.name;
-    let tool = value.itemData as Tool;
-    let aux;
-    let suppliesTool: SuppliesTool = new SuppliesTool();
-
-    suppliesTool.id.kitWorkOrder = this.kitCreated;
-    suppliesTool.id.tool = tool;
-    suppliesTool.quantity = tool.quantity;
-
-    if (action === 'select') {
-      this.selectedTools.push(suppliesTool);
-    } else if (action = 'removing') {
-      this.selectedTools.forEach((element, index) => {
-        if (element.id.tool.id === suppliesTool.id.tool.id) {
-          aux = this.arrayRemove(this.selectedTools, index);
-        }
-      });
-      this.selectedTools = aux;
-    }
-  }
-
-  arrayRemove(arr, value) {
-    return arr.filter(function (ele, index) {
-      return index != value;
-    });
-  }
 
   return() {
     this.kit.name = this.name.value;
-
-   /*/ this.kitService.insertKitWorkOrder(this.kit).subscribe(data => {
-      this.kitCreated = data;
-      
-    });/*/
+    this.implements = true;
+    /*/
+        this.kitService.insertKitWorkOrder(this.kit).subscribe(data => {
+          this.kitCreated = data;
+          
+        });/*/
   }
 
-  assignLists() {
+  addDevice() {
+    let suppliesdevice = new SuppliesDevice();
 
-    for (var element in this.selectedDevices) {
-      
-      this.selectedDevices[element].id.kitWorkOrder = this.kitCreated;
-    }
-    for (var element in this.selectedMaterials) {
-      this.selectedMaterials[element].id.kitWorkOrder = this.kitCreated;
-    }
-    for (var element in this.selectedTools) {
-      this.selectedTools[element].id.kitWorkOrder = this.kitCreated;
+    if (this.devicesMulti.value != undefined && this.deviceQuantity != undefined) {
+      suppliesdevice.id.kitWorkOrder = this.kitCreated;
+      suppliesdevice.id.device = this.devicesMulti.value;
+      suppliesdevice.quantity = this.deviceQuantity.value;
+
+      this.selectedSuppliesDevice.push(suppliesdevice);
+
+    } else {
+      this.bandera = true;
     }
 
   }
 
+  hidden() {
+    this.bandera = false;
+  }
+
+  addTool() {
+    let suppliestool = new SuppliesTool();
+
+    if (this.toolsMulti.value != undefined && this.toolQuantity != undefined) {
+      suppliestool.id.kitWorkOrder = this.kitCreated;
+      suppliestool.id.tool = this.toolsMulti.value;
+      suppliestool.quantity = this.toolQuantity.value;
+
+      this.selectedSuppliesTool.push(suppliestool);
+
+    } else {
+      this.bandera = true;
+    }
+
+  }
+
+  addMaterial() {
+    let suppliesMaterial = new SuppliesMaterial();
+
+    if (this.materialsMulti.value != undefined && this.materialQuantity != undefined) {
+      suppliesMaterial.id.kitWorkOrder = this.kitCreated;
+      suppliesMaterial.id.material = this.materialsMulti.value;
+      suppliesMaterial.quantity = this.materialQuantity.value;
+
+      this.selectedSuppliesMaterial.push(suppliesMaterial);
+
+    } else {
+      this.bandera = true;
+    }
+
+  }
 
 }
