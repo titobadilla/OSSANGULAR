@@ -1,0 +1,143 @@
+
+
+<div class="col-lg-1"></div>
+<div class="e-tab-section"> 
+  <div class="col-lg-10 content-wrapper control-section">
+    <div class="e-sample-resize-container">
+
+      <ejs-tab id="tab_adaptive" #adaptiveTab heightAdjustMode='None' height='900px'>
+        <e-tabitems>
+          <e-tabitem [header]='headerText[0]'>
+            <ng-template #content>
+
+              <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
+
+                <div class="formtitle">
+                  <span>Orden de Trabajo</span>                 
+                </div>
+                 
+                <div class="row">
+                  <div class="col-lg-6">
+
+                    <div class="form-group">
+                      <div class="e-float-input">
+                          <strong>Descripción</strong> 
+                        <input id="description" type="text" disabled="true" formControlName="description"
+                          [(ngModel)]="workOrder.description" >
+                        <span class="e-float-line"></span>
+                      </div>                       
+                    </div>
+
+                    <div class="form-group">
+                      <div class="e-float-input">
+                       <strong>Fecha Inicial</strong> 
+                        <input id="startDate" type="date" formControlName="startDate" [(ngModel)]="workOrder.startDate" disabled="true">
+                        <span class="e-float-line"></span>
+                      </div>                       
+                    </div>
+
+                    <div class="form-group">
+                      <div class="e-float-input">
+                          <strong>Fecha final</strong> 
+                        <input id="endDate" type="date" formControlName="endDate" [(ngModel)]="workOrder.endDate" disabled="true">
+                        <span class="e-float-line"></span>
+                      </div>                       
+                    </div>
+
+                    <div class="form-group">
+                      <div class="e-float-input">
+                          <strong>Hora inicial</strong> 
+                        <input id="startHour" type="time" formControlName="startHour" disabled="true">
+                        <span class="e-float-line"></span>
+                      </div>                      
+                    </div>
+
+                    <div class="form-group">
+                      <div class="e-float-input">
+                          <strong>Hora final</strong> 
+                        <input id="endHour" type="time" formControlName="endHour" disabled="true">
+                        <span class="e-float-line"></span>
+                      </div>                        
+                    </div>
+
+                  </div>
+
+                  <div class="col-lg-6">
+
+                    <div class="form-group">
+                        <div class="e-float-input" >
+                        <strong>Empleados</strong> 
+                      <ejs-multiselect #x formControlName="employeesMulti" style="margin-top:0px;" 
+                        id='multiselect-checkbox' [dataSource]='employees' disabled="true"
+                        [mode]='box' [fields]='employeeWorkOrder'
+                        [popupHeight]='popHeight' floatLabelType='Auto' [allowFiltering]='true'>
+                      </ejs-multiselect>
+                    </div>
+                    </div>
+
+                    <div class="form-group">    
+                        <div class="e-float-input">                   
+                        <strong>Cliente</strong> 
+                      <ejs-dropdownlist formControlName="client" name="client" [enabled]="false" [(ngModel)]="workOrder.client.id"
+                        #ejsclient [dataSource]='clients' [fields]='clientWorkOrder' 
+                        floatLabelType='Auto'>
+                      </ejs-dropdownlist></div>   
+                    </div>
+
+                    <div class="form-group">   
+                        <div class="e-float-input">                                     
+                        <strong>Tipo de orden de trabajo</strong> 
+                      <ejs-dropdownlist formControlName="type" name="type" [enabled]="false" [(ngModel)]="workOrder.workOrderType.id"
+                      #ejswotype [dataSource]='workOrdersType' [fields]='typeWorkOrder'
+                        floatLabelType='Auto'>
+                      </ejs-dropdownlist></div>   
+                    </div>
+
+                    <div class="form-group">   
+                        <div class="e-float-input">                                     
+                        <strong>Color</strong> 
+                      <ejs-dropdownlist formControlName="color" name="color" [enabled]="false" [(ngModel)]="workOrder.color.id"
+                        [dataSource]='colors' [fields]='colorWorkOrder'
+                        floatLabelType='Auto'>
+                        <ng-template #itemTemplate let-data>
+                          <img height="20" width="20" [style.background-color]="data.color" />
+                          <b> {{data.state}}</b>
+                        </ng-template>
+                      </ejs-dropdownlist></div>   
+                    </div>
+                  </div>
+                </div> 
+               
+              </form>
+            </ng-template>
+          </e-tabitem>
+
+          <e-tabitem [header]='headerText[1]'>
+            <ng-template #content>
+              <insert-inventory-work-order></insert-inventory-work-order>
+            </ng-template>
+          </e-tabitem>
+
+          <e-tabitem [header]='headerText[2]'>
+            <ng-template #content>
+              <insert-adicional-material-work-order></insert-adicional-material-work-order>
+            </ng-template>
+          </e-tabitem>
+
+          <e-tabitem [header]='headerText[3]'>
+            <ng-template #content>
+              <insert-adicional-tool-work-order></insert-adicional-tool-work-order>
+            </ng-template>
+          </e-tabitem>
+          <e-tabitem [header]='headerText[4]'>
+            <ng-template #content>
+              <insert-adicional-device-work-order></insert-adicional-device-work-order>
+            </ng-template>
+          </e-tabitem>
+
+        </e-tabitems>
+      </ejs-tab>
+
+    </div>
+  </div>
+</div>

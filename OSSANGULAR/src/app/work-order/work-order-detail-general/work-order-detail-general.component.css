@@ -1,0 +1,215 @@
+.formtitle {
+    font-family:'Questrial', Verdana, sans-serif;
+    text-align:center;
+    font-size:32px;
+    padding:0;
+    position:relative;
+    color:#555;
+   }
+   
+     .e-error,
+     .e-float-text {
+         font-weight: 500;
+         font-size:14px;
+     }
+   
+     form {
+         padding-top: 20px;
+         margin-bottom: 45px;
+         border: 1px solid #ccc;
+         box-shadow: 0 5px 4px 0 rgba(0, 0, 0, 0.36);
+         border-radius: 10px;
+         background:#fff;
+         }
+   
+     .form-horizontal .form-group {
+         margin-left: 20px;
+         margin-right: 20px;
+         margin-top: 5%;
+     }   
+   
+    
+     .e-bigger .e-tab .e-list-item {
+       height: 63px;
+       border-bottom: 1px solid gainsboro;
+   }
+   .template-container {
+       height: 63px;
+       padding: 7px 16px 0 16px;
+       border-bottom: 1px solid gainsboro;
+   }
+   .template-container:hover {
+       background: #eee;
+   }
+   .left {
+       display: inline-block;
+       vertical-align: top;
+   }
+   .empImg {
+       height: 48px;
+       width: 48px;
+   }
+   .name, .role {
+       font-size: 15px;
+       line-height: normal;
+   }
+   .name {
+       font-weight: 500;
+   }
+   .role {
+       color: grey;
+       font-weight: 100;
+   }
+   .info {
+       padding: 7px 0 0 15px;
+   }
+   .content-title {
+       height: 50px;
+       display: table;
+       margin: 0 auto;
+   }
+   .cnt-text {
+       vertical-align: middle;
+       display: table-cell;
+       font-size: 18px;
+       font-weight: 600;
+   
+    }
+    .e-float-input, .e-float-input.e-control-wrapper {
+        line-height: 1.4;
+        margin-bottom: 0;
+        margin-top: 0px;
+        padding-top: 0;
+        position: relative;
+        width: 100%;
+    }
+   #property td {
+       width: 50%;
+   }
+   .property-panel-content {
+       padding: 10px;
+   }
+   @media only screen and (min-width: 1824px) {
+       .e-tab-section .e-sample-resize-container {
+           width: 60%;
+       }
+   
+       .e-bigger .e-tab-section .e-sample-resize-container {
+           width: 70%;
+       }
+   }
+   #tab_orientation .e-listview:not(.e-list-template) .e-list-item {
+       height: 63px;
+   }
+   
+   #tab_orientation .e-tab-text {
+       display: inherit;
+   }
+   
+   .e-vertical-tab .e-content .e-item.e-active,
+   .e-vertical-tab .e-content .e-item.e-active ul.e-list-parent {
+       width: 100%;
+   }
+   
+   
+   @media screen and (min-width: 768px) {
+       .vertical-layout .e-sample-resize-container {
+           width: 75%;
+           margin: 0 auto;
+       }
+   }
+   
+   @media screen and (max-width: 481px) {
+       .control-section,
+       .container-fluid,
+       .e-tab-section .content-wrapper,
+       .sb-sample-content-area .e-active {
+           padding-left: 0;
+           padding-right: 0;
+       }
+   
+       #adaptiveTab .e-content {
+           height: inherit !important;
+       }
+   
+       #adaptiveTab .e-item.e-active {
+           overflow: scroll;
+       }
+   }
+   
+   @media screen and (max-width: 376px) {
+       #orientationTab .e-listview:not(.e-list-template) .e-list-item {
+           padding: 0;
+       }
+   
+       .e-sample-resize-container {
+           padding: 0;
+       }
+   
+       .container-fluid {
+           padding-left: 3px;
+           padding-right: 3px;
+       }
+   
+       .e-tab .e-content.sb-sample-content-area .e-item.e-active {
+           padding-left: 0;
+           padding-right: 0;
+           margin-left: 0;
+           margin-right: 0;
+       }
+   
+       .template-container {
+           padding: 7px 5px 0;
+       }
+   
+       #orientationTab .e-content .e-item.e-active {
+           padding: 10px 0;
+       }
+   
+       .info {
+           padding: 7px 0 0 8px;
+       }
+   }
+   
+   #tab_adaptive .e-tab-text {
+       display: inherit;
+   }
+   @media screen and (max-width: 481px) {
+       .control-section,
+       .container-fluid {
+           padding-left: 0;
+           padding-right: 0;
+       }
+   }
+   
+   @media screen and (max-width: 425px) {
+       #tab_adaptive {
+           overflow: hidden;
+       }
+   
+       #tab_adaptive .e-item.e-active {
+           overflow: scroll;
+       }
+   }
+   
+   .e-tab .e-content .e-item {
+       font-size: 12px;
+       padding: 10px;
+       text-align: justify;
+   }
+   
+   .but_insert {
+       margin-left: 80%;
+       background-color: rgb(110, 191, 211);
+       border: none;
+       border: 1px solid #000;
+       border-radius: 4px;
+       width: 200px;
+       padding: 16px 0;
+       font-size: 18px;
+       color: #424242;
+     }
+     .but_insert:hover {
+      box-shadow: 1px 1px 5px black;
+     }
+     

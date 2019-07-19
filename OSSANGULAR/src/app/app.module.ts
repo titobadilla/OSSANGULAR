@@ -130,6 +130,7 @@ import { ModalSesionRefreshComponent } from './@theme/components/header/modal-se
 import { InsertKitWorkOrderComponent } from './kit-work-order/insert-kit-work-order/insert-kit-work-order.component';
 import { UpdateKitWorkOrderComponent } from './kit-work-order/update-kit-work-order/update-kit-work-order.component';
 import { SuppliesService } from './kit-work-order/insert-kit-work-order/supplies.service';
+import { WorkOrderDetailGeneralComponent } from './work-order/work-order-detail-general/work-order-detail-general.component';
 
 
 declare var require: any;
@@ -209,7 +210,8 @@ loadCldr(
     ChangePasswordTechnicalComponent,
     NotificationComponent,
     InsertKitWorkOrderComponent,
-    UpdateKitWorkOrderComponent
+    UpdateKitWorkOrderComponent,
+    WorkOrderDetailGeneralComponent
   ],
   imports: [
 

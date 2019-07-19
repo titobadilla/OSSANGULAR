@@ -30,6 +30,7 @@ import { ChangePasswordTechnicalComponent } from './change-password-technical/ch
 import { UpdateWorkOrderComponent } from './work-order/update-work-order/update-work-order.component';
 import {KitWorkOrderComponent} from './kit-work-order/kit-work-order.component';
 import { InsertKitWorkOrderComponent } from './kit-work-order/insert-kit-work-order/insert-kit-work-order.component';
+import { WorkOrderDetailGeneralComponent } from './work-order/work-order-detail-general/work-order-detail-general.component';
 
 const routes: Routes = [
   {path:"address",component:AddressComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
@@ -48,6 +49,7 @@ const routes: Routes = [
   {path:"telephone-employee",component:TelephoneEmployeeComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path:"work-order",component:WorkOrderComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path:"update-work-order",component:UpdateWorkOrderComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:"work-order-detail-general",component:WorkOrderDetailGeneralComponent,canActivate: [AuthGuard,RoleGuard], data: {role:  ['ROLE_ADMIN','ROLE_TECNICO']}},
   {path:"work-order-detail",component:WorkOrderDetailComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN','ROLE_TECNICO']}},
   {path:"work-order-type",component:WorkOrderTypeComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path:"calendar",component:CalendarComponent, canActivate: [AuthGuard,RoleGuard],data: {role: ['ROLE_ADMIN','ROLE_TECNICO']}},

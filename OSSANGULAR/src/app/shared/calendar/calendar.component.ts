@@ -24,7 +24,7 @@ export class CalendarComponent  implements OnInit,AfterViewInit{
    
   public data:WorkOrder[];
   public val:Number;
-  public employeeDetail:Employee[];
+  public idDetail:number;
   public selectedDate: Date = new Date();
   public eventSettings: EventSettingsModel ;
   public isSelected: Boolean = true;
@@ -67,7 +67,8 @@ ngOnInit(){
 }
 
 detailEmployee(){
-    console.log(this.employeeDetail[0]);
+    this.router.navigate(['/work-order-detail-general'],{queryParams: {IdWO: this.idDetail}});
+    this.flagKeyDown=false;
 }
 
 
@@ -107,22 +108,22 @@ onCellClick(arg: EventRenderedArgs){
 
     onPopupOpen(arg: EventRenderedArgs){
 
-       /* if(arg.type==='QuickInfo'){
+        if(arg.type==='QuickInfo'){
             var dat=arg.data;     
            var button = document.createElement("input");
        
            button.type = "button";
-           button.value = "Detalles de empleados";
+           button.value = "Detalles";
            button.className="btn btn-info";   
            
            button.addEventListener('click', (e: any) => {
-            this.employeeDetail= <Employee[]>dat.employees;
+            this.idDetail= <number>dat.id;
             this.detailEmployee();
         });
            arg.element.firstChild.childNodes[2].appendChild(button);
 
-        }*/
-        if(arg.type==='QuickInfo'){
+        }
+      /*  if(arg.type==='QuickInfo'){
             var dat=arg.data;    
             this.employeeDetail= <Employee[]>dat.employees; 
             this.employeeDetail.forEach(element => {
@@ -136,7 +137,7 @@ onCellClick(arg: EventRenderedArgs){
            button.style.margin="1%";
            arg.element.firstChild.appendChild(button);            
             });
-        }
+        }*/
       else if((arg.type==='Editor' && !this.flagDoubleClick)){
           this.router.navigate(['/update-work-order'],{queryParams: {IdWO: arg.data.id}});
           this.flagKeyDown=false;
