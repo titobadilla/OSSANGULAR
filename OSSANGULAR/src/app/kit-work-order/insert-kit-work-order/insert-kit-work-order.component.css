@@ -1,0 +1,44 @@
+.formtitle {
+	font-family: 'Questrial', Verdana, sans-serif;
+	text-align: center;
+	font-size: 32px;
+	padding: 0;
+	position: relative;
+	color: #555;
+}
+
+.e-error,
+.e-float-text {
+	font-weight: 500;
+	font-size: 14px;
+}
+
+form {
+	background: #fff;
+}
+
+.form-horizontal .form-group {
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 5%;
+}
+
+.textarea {
+	resize: none;
+}
+
+.border-right {
+	border-right: 1px solid #ccc;
+	height: 100%;
+}
+
+.panel {
+	padding-top: 20px;
+	margin-bottom: 45px;
+	border: 1px solid #ccc;
+	box-shadow: 0 5px 4px 0 rgba(0, 0, 0, 0.36);
+	border-radius: 10px;
+	background: #fff;
+	margin-left: 3%;
+}
+
