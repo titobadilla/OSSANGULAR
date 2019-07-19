@@ -94,9 +94,7 @@ import { UpdateDeviceComponent } from './device/update-device/update-device.comp
 import { MenuPrincipalComponent } from './menu-principal/menu-principal.component';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { InventoryOutputComponent } from './inventory-output/inventory-output.component';
-import { InventoryOutputSpecificComponent } from './inventory-output/inventory-output-specific/inventory-output-specific.component';
-import { InventoryOutputGeneralComponent } from './inventory-output/inventory-output-general/inventory-output-general.component';
+import { InventoryOutputGeneralComponent } from './inventory-output-general/inventory-output-general.component';
 import { MaterialComponent } from './material/material.component';
 import { DeleteComponent } from './delete/delete.component';
 import { InsertDeviceStateComponent } from './device-state/insert-device-state/insert-device-state.component';
@@ -129,6 +127,9 @@ import { ChangePasswordTechnicalComponent } from './change-password-technical/ch
 import { NotificationComponent } from './notification/notification.component';
 import { LoginRefreshComponent } from './login/login-refresh/login-refresh.component';
 import { ModalSesionRefreshComponent } from './@theme/components/header/modal-sesion-refresh/modal-sesion-refresh.component';
+import { InsertKitWorkOrderComponent } from './kit-work-order/insert-kit-work-order/insert-kit-work-order.component';
+import { UpdateKitWorkOrderComponent } from './kit-work-order/update-kit-work-order/update-kit-work-order.component';
+import { SuppliesService } from './kit-work-order/insert-kit-work-order/supplies.service';
 
 
 declare var require: any;
@@ -185,8 +186,6 @@ loadCldr(
     InsertDeviceComponent,
     UpdateDeviceComponent,
     MenuPrincipalComponent,
-    InventoryOutputSpecificComponent,
-    InventoryOutputComponent,
     InventoryOutputGeneralComponent,
     MaterialComponent,
     DeleteComponent,
@@ -208,7 +207,9 @@ loadCldr(
     UpdateWorkOrderTypeComponent,
     ChangePasswordAdminComponent,
     ChangePasswordTechnicalComponent,
-    NotificationComponent
+    NotificationComponent,
+    InsertKitWorkOrderComponent,
+    UpdateKitWorkOrderComponent
   ],
   imports: [
 
@@ -265,11 +266,12 @@ loadCldr(
     WorkOrderService,
     WorkOrderDetailService,
     WorkOrderTypeService,
+    SuppliesService,
     AuthService, AuthGuard, RoleGuard,JwtHelper, TokenStorage, {
       provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
       multi: true
     }],
-  bootstrap: [AppComponent],entryComponents:[InventoryOutputSpecificComponent,DeleteComponent]
+  bootstrap: [AppComponent],entryComponents:[DeleteComponent]
 })
 export class AppModule { }

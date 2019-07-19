@@ -21,14 +21,15 @@ import { CalendarComponent } from './shared/calendar/calendar.component';
 import { AuthGuard } from './login/guards/auth.guard';
 import {HttpClientModule} from '@angular/common/http';
 import { ReactiveFormsModule} from '@angular/forms';
-import { InventoryOutputComponent } from './inventory-output/inventory-output.component';
-import { InventoryOutputGeneralComponent } from './inventory-output/inventory-output-general/inventory-output-general.component';
+import { InventoryOutputGeneralComponent } from './inventory-output-general/inventory-output-general.component';
 import { ToolComponent } from './tool/tool.component';
 import { MaterialComponent } from './material/material.component';
 import { RoleGuard } from './login/guards/role-guard.service';
 import { ChangePasswordAdminComponent } from './change-password-admin/change-password-admin.component';
 import { ChangePasswordTechnicalComponent } from './change-password-technical/change-password-technical.component';
 import { UpdateWorkOrderComponent } from './work-order/update-work-order/update-work-order.component';
+import {KitWorkOrderComponent} from './kit-work-order/kit-work-order.component';
+import { InsertKitWorkOrderComponent } from './kit-work-order/insert-kit-work-order/insert-kit-work-order.component';
 
 const routes: Routes = [
   {path:"address",component:AddressComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
@@ -51,13 +52,14 @@ const routes: Routes = [
   {path:"work-order-type",component:WorkOrderTypeComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path:"calendar",component:CalendarComponent, canActivate: [AuthGuard,RoleGuard],data: {role: ['ROLE_ADMIN','ROLE_TECNICO']}},
   {path:'work-order-type',component:WorkOrderTypeComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
-  {path:'inventory-output',component:InventoryOutputComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path:'inventory-output-general',component:InventoryOutputGeneralComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path:'tool',component:ToolComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path:'brand',component:BrandComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path:'device-state',component:DeviceStateComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path:'material',component:MaterialComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
-  {path:'change-password',component:ChangePasswordTechnicalComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_TECNICO','ROLE_ADMIN']}}
+  {path:'change-password',component:ChangePasswordTechnicalComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_TECNICO','ROLE_ADMIN']}},
+  {path:'kit',component:KitWorkOrderComponent, canActivate : [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:'insert-kit',component:InsertKitWorkOrderComponent, canActivate : [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
 ];
 
 @NgModule({

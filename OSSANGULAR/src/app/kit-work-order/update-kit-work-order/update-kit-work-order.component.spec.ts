@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InventoryOutputComponent } from './inventory-output.component';
+import { UpdateKitWorkOrderComponent } from './update-kit-work-order.component';
 
-describe('InventoryOutputComponent', () => {
-  let component: InventoryOutputComponent;
-  let fixture: ComponentFixture<InventoryOutputComponent>;
+describe('UpdateKitWorkOrderComponent', () => {
+  let component: UpdateKitWorkOrderComponent;
+  let fixture: ComponentFixture<UpdateKitWorkOrderComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InventoryOutputComponent ]
+      declarations: [ UpdateKitWorkOrderComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(InventoryOutputComponent);
+    fixture = TestBed.createComponent(UpdateKitWorkOrderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -31,4 +31,8 @@ export class ToolService {
   public deleteTool(tool:number):Observable<Tool>{
     return this.http.delete<Tool>(this.URLAPI+'tool/'+tool);
   }
+
+  public updateQuantityTool(tool:Tool): Observable<Tool>{
+    return this.http.put<Tool>(this.URLAPI+'tool/updateQuantity/',tool);
+  }
 }
