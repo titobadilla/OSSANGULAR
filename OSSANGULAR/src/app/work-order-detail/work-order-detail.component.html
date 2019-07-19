@@ -60,19 +60,22 @@
                         </e-column>
                         <e-column field='managerName' headerText="Persona que recibe" width='150' textAlign='center'>
                         </e-column>
-                        <e-column headerText="Editar" width='85' textAlign='center'>
-                            <ng-template #template let-data>
-                                <button mat-button class="btn btn-warning glyphicon glyphicon-pencil"
-                                    (click)='edit(data)'></button>
-                            </ng-template>
-                        </e-column>
-    
-                        <e-column headerText="Eliminar" width='115' textAlign='center'>
-                            <ng-template #template let-data>
-                                <button mat-button class="btn btn-danger glyphicon glyphicon-trash"
-                                    (click)='openModal(data)'></button>
-                            </ng-template>
-                        </e-column>
+                        <div *ngIf="permitEditDelete()">
+                            <e-column headerText="Editar" width='85' textAlign='center'>
+                                <ng-template #template let-data>
+                                    <button mat-button class="btn btn-warning glyphicon glyphicon-pencil"
+                                        (click)='edit(data)'></button>
+                                </ng-template>
+                            </e-column>
+        
+                            <e-column headerText="Eliminar" width='115' textAlign='center'>
+                                <ng-template #template let-data>
+                                    <button mat-button class="btn btn-danger glyphicon glyphicon-trash"
+                                        (click)='openModal(data)'></button>
+                                </ng-template>
+                            </e-column>
+                        </div>
+                        
                     </e-columns>
                 </ejs-grid>
             </div>

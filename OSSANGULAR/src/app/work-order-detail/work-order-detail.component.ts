@@ -6,6 +6,7 @@ import { DeleteComponent } from 'src/app/delete/delete.component';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { DeleteEmitterService } from 'src/app/delete/delete.emitter.service';
 import { WorkOrderDetailService } from './work-order-detail.service';
+import { AuthService } from '../login/auth.service';
 @Component({
   selector: 'work-order-detail',
   templateUrl: './work-order-detail.component.html',
@@ -43,13 +44,22 @@ export class WorkOrderDetailComponent implements OnInit {
 
   constructor(private detailService: WorkOrderDetailService,
     private modalService: BsModalService
-    , private deleteService: DeleteEmitterService) {
+    , private deleteService: DeleteEmitterService,private authService:AuthService) {
     this.data = new Array();
+  }
+
+  permitEditDelete():boolean{
+    if(this.authService.getTokenRole()=="ROLE_ADMIN"){
+      return true;
+    }
+    return false;
+    
   }
 
   ngOnInit() {
     this.pageSettings = { pageCount: 3 };
     setCulture('es-CR');
+    this.permitEditDelete();
 
     this.deleteService.deleteWorkOrderDetail$.subscribe(data => {
       this.acceptDelete(this.detailDelete.id);

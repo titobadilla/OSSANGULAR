@@ -47,6 +47,10 @@ export class AuthService {
     return this.jwtHelper.getUserToken().sub;
 }
 
+public getTokenRole(): any {
+  return this.jwtHelper.getUserToken().role;
+}
+
 public decode(){
   return this.token.decode();
 }
