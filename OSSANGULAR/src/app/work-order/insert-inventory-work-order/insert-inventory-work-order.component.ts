@@ -28,6 +28,7 @@ export class InsertInventoryWorkOrderComponent implements OnInit, AfterViewInit 
   public devices:SuppliesDevice[];
   public materials:SuppliesMaterial[];
   public pageSettings: Object;
+  
 
   kitSelected : KitWorkOrder = new KitWorkOrder();
   kitsWorkOrder: KitWorkOrder[];
@@ -39,12 +40,15 @@ export class InsertInventoryWorkOrderComponent implements OnInit, AfterViewInit 
   @ViewChild('gridTool') public gridTool: GridComponent;  
  @ViewChild('ejsKit') public ejsKit: DropDownListComponent; 
 
+ 
   public idUpdate:number=0;
+  flagRead:boolean=false;
 
   constructor(private kitService:KitWorkOrderService) {    
      this.createReactiveForm();
    // this.associateValues();
   }
+
 
   ngOnInit() {
     this.pageSettings = { pageCount: 3 };

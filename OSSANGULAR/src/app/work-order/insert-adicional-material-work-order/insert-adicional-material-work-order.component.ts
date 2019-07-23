@@ -23,6 +23,9 @@ export class InsertAdicionalMaterialWorkOrderComponent implements OnInit {
   flag: boolean = true;
   flag2: boolean = false;
 
+  
+  flagRead:boolean=false;
+
   //basic variables
   reactForm: FormGroup;
   modalRef: BsModalRef;

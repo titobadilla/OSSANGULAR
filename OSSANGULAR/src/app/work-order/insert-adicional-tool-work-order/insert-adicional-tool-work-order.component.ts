@@ -22,6 +22,9 @@ export class InsertAdicionalToolWorkOrderComponent implements OnInit, AfterViewI
     this.grid.pageSettings.pageSize = 5;
   }
 
+  
+  flagRead:boolean=false;
+
   //basic variables
   reactForm: FormGroup;
   modalRef: BsModalRef;

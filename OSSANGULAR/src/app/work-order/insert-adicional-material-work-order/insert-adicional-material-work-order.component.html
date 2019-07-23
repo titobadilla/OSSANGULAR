@@ -1,64 +1,100 @@
-<div class="content-wrapper" style="margin-bottom: 25px; ">
-  <div class="col-lg-2"></div>
-  <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
+<div *ngIf='flagRead'>
 
-    <div class="formtitle">
-      <span>Agregar Material Adicional</span>
-    </div>
-
-    <div class="form-group">
-      <div *ngIf="flag">
-      <ejs-dropdownlist #dropdown (change)='onChangeDdlMaterial($event)' formControlName="materialsMulti" [dataSource]='materials'
-        [fields]='materialWorkOrder' [placeholder]='materialWatermark' floatLabelType='Auto'>
-      </ejs-dropdownlist>
-    </div>
-    </div>
-    <div class="row" style="margin-top:5%; margin-left: 2%; margin-right: 2%; margin-bottom: 15%;">
-
-
-      <div class="col-lg-4">
-        <div *ngIf="addQuantityM">
-          <div class="form-group">
-            <label class="input-disabled" for="quantityMaterial" for="quantityMaterial" style="font-size:15px;">Cantidad
-              Disponible</label>
-            <br>
-            <input id="quantityMaterial" class="form-control" type="number" formControlName="quantityMaterial">
-          </div>
-
-          <div class="form-group">
-            <div class="e-float-input">
-              <input id="newQuantityMaterial" type="number" formControlName="newQuantityMaterial">
-              <span class="e-float-line"></span>
-              <label for="newQuantityMaterial" class="e-float-text" style="font-size:15px;">Cantidad:</label>
+    <div class="content-wrapper" style="margin-bottom: 25px; ">
+        <div class="col-lg-2"></div>
+        <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
+      
+          <div class="formtitle">
+            <span>Material Adicional</span>
+          </div>     
+         
+          <div class="row" style="margin-top:5%; margin-left: 2%; margin-right: 2%; margin-bottom: 15%;">
+                       
+            <div class="col-lg-8">
+      
+              <ejs-grid #grid [dataSource]='selectedMaterials' allowPaging='true' [allowSorting]='true' allowTextWrap='true'
+                [pageSettings]='pageSettings'>
+                <ng-template #toolbarTemplate>
+                  <ejs-toolbar>
+                    <div class="e-dlg-header">Materiales Agregados</div>
+                  </ejs-toolbar>
+                </ng-template>
+                <e-columns>
+                  <e-column field='id.material.name' headerText='Nombre' width='50' textAlign='center'></e-column>
+                  <e-column field='id.material.description' headerText='Descripción' width='60' textAlign='center'></e-column>
+                  <e-column field='quantity' headerText='Cantidad' width='50' textAlign='center'></e-column>                 
+                </e-columns>
+              </ejs-grid>
             </div>
           </div>
+        </form>
+      </div>
+</div>
 
-          <button id="validateSubmit" class="samplebtn e-control e-btn e-info" type="submit"
-            (click)='addSelectedInventory()' style="height:40px;width: 150px;" data-ripple="true">Agregar</button>
-          <hr>
+<div *ngIf='!flagRead'>
+  
+<div class="content-wrapper" style="margin-bottom: 25px; ">
+    <div class="col-lg-2"></div>
+    <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
+  
+      <div class="formtitle">
+        <span>Agregar Material Adicional</span>
+      </div>
+  
+      <div class="form-group">
+        <div *ngIf="flag">
+        <ejs-dropdownlist #dropdown (change)='onChangeDdlMaterial($event)' formControlName="materialsMulti" [dataSource]='materials'
+          [fields]='materialWorkOrder' [placeholder]='materialWatermark' floatLabelType='Auto'>
+        </ejs-dropdownlist>
+      </div>
+      </div>
+      <div class="row" style="margin-top:5%; margin-left: 2%; margin-right: 2%; margin-bottom: 15%;">
+  
+  
+        <div class="col-lg-4">
+          <div *ngIf="addQuantityM">
+            <div class="form-group">
+              <label class="input-disabled" for="quantityMaterial" for="quantityMaterial" style="font-size:15px;">Cantidad
+                Disponible</label>
+              <br>
+              <input id="quantityMaterial" class="form-control" type="number" formControlName="quantityMaterial">
+            </div>
+  
+            <div class="form-group">
+              <div class="e-float-input">
+                <input id="newQuantityMaterial" type="number" formControlName="newQuantityMaterial">
+                <span class="e-float-line"></span>
+                <label for="newQuantityMaterial" class="e-float-text" style="font-size:15px;">Cantidad:</label>
+              </div>
+            </div>
+  
+            <button id="validateSubmit" class="samplebtn e-control e-btn e-info" type="submit"
+              (click)='addSelectedInventory()' style="height:40px;width: 150px;" data-ripple="true">Agregar</button>
+            <hr>
+          </div>
+        </div>
+        <div class="col-lg-8">
+  
+          <ejs-grid #grid [dataSource]='selectedMaterials' allowPaging='true' [allowSorting]='true' allowTextWrap='true'
+            [pageSettings]='pageSettings'>
+            <ng-template #toolbarTemplate>
+              <ejs-toolbar>
+                <div class="e-dlg-header">Materiales Agregados</div>
+              </ejs-toolbar>
+            </ng-template>
+            <e-columns>
+              <e-column field='id.material.name' headerText='Nombre' width='50' textAlign='center'></e-column>
+              <e-column field='id.material.description' headerText='Descripción' width='60' textAlign='center'></e-column>
+              <e-column field='quantity' headerText='Cantidad' width='50' textAlign='center'></e-column>
+              <e-column field='id.material.delete' headerText="Eliminar" width='50' textAlign='center'>
+                <ng-template #template let-data>
+                  <button mat-button class="btn btn-danger glyphicon glyphicon-trash" (click)='openModal(data)'></button>
+                </ng-template>
+              </e-column>
+            </e-columns>
+          </ejs-grid>
         </div>
       </div>
-      <div class="col-lg-8">
-
-        <ejs-grid #grid [dataSource]='selectedMaterials' allowPaging='true' [allowSorting]='true' allowTextWrap='true'
-          [pageSettings]='pageSettings'>
-          <ng-template #toolbarTemplate>
-            <ejs-toolbar>
-              <div class="e-dlg-header">Materiales Agregados</div>
-            </ejs-toolbar>
-          </ng-template>
-          <e-columns>
-            <e-column field='id.material.name' headerText='Nombre' width='50' textAlign='center'></e-column>
-            <e-column field='id.material.description' headerText='Descripción' width='60' textAlign='center'></e-column>
-            <e-column field='quantity' headerText='Cantidad' width='50' textAlign='center'></e-column>
-            <e-column field='id.material.delete' headerText="Eliminar" width='50' textAlign='center'>
-              <ng-template #template let-data>
-                <button mat-button class="btn btn-danger glyphicon glyphicon-trash" (click)='openModal(data)'></button>
-              </ng-template>
-            </e-column>
-          </e-columns>
-        </ejs-grid>
-      </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>

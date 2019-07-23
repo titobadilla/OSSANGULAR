@@ -22,13 +22,12 @@ import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-update-work-order',
-  templateUrl: './update-work-order.component.html',
-  styleUrls: ['./update-work-order.component.css']
+  selector: 'app-work-order-detail-general',
+  templateUrl: './work-order-detail-general.component.html',
+  styleUrls: ['./work-order-detail-general.component.css']
 })
-export class UpdateWorkOrderComponent implements OnInit {
+export class WorkOrderDetailGeneralComponent implements OnInit {
 
-  
   startHourWo: String;
   stopCondition:boolean=false;
   endHourWo: String;
@@ -73,7 +72,6 @@ export class UpdateWorkOrderComponent implements OnInit {
  public colorWorkOrder: Object = { text: 'state', value: 'id' };
  public colorWatermark: string = 'Seleccione un color*';
  completeWorkOrder: boolean = false;
- val2:any;
 
   
   constructor(private workOrderService: WorkOrderService,
@@ -85,7 +83,6 @@ export class UpdateWorkOrderComponent implements OnInit {
     ) {
       this.createReactiveForm();
       this.associateValues();
-      this.initStart(); 
       this.initUpdateInsInvWorkOrder();  
       this.initUpdateInsInvMaterialWorkOrder();
       this.initUpdateInsInvDeviceWorkOrder();      
@@ -99,15 +96,6 @@ export class UpdateWorkOrderComponent implements OnInit {
     this.workOrder.endDate = end[0];
     this.reactForm.get('startHour').setValue(start[1]);
     this.reactForm.get('endHour').setValue(end[1]);
-  }
-
-  private onlyRead(){
-    this.headerText = [{ text: 'Orden de Trabajo' },
-    { text: 'Lista Predefinida' },
-    { text: 'Material Adicional' },
-    { text: 'Herramienta Adicional' },
-    { text: 'Dispositivo Adicional' }];
-    
   }
 
 
@@ -129,18 +117,10 @@ export class UpdateWorkOrderComponent implements OnInit {
     this.ddlWoType.value=this.workOrder.workOrderType.id.toString();
   }
 
-  booleanReadonly():boolean{
-    if(this.val2!=undefined){
-      this.onlyRead();
-      return true;
-    }
-    return false;
-  }
+
 
   ngOnInit() {
-   var val=this.route.snapshot.queryParams.IdWO;
-   this.val2=this.route.snapshot.queryParams.detail;
-   this.booleanReadonly();
+   var val=this.route.snapshot.queryParams.IdWO; 
 
     this.serviceWorkOrder.getByIdWorkOrder(val).subscribe(data => {
       this.workOrder = data;
@@ -168,58 +148,10 @@ export class UpdateWorkOrderComponent implements OnInit {
   }
 
   
-  initEventSubmit(formId:any) {
-   
-    formId.addEventListener(
-       'submit',
-       (e: Event) => {
-         e.preventDefault();
-         if (this.reactForm.valid) {
-       
-           //this.completeWorkOrder = true;
-           this.validateCompleteWorkOrder();
-         } else {
-           // validating whole form
-           Object.keys(this.reactForm.controls).forEach(field => {
-             const control = this.reactForm.get(field);
-             control.markAsTouched({ onlySelf: true });
-           });
-         }
-       });
-   }
 
-  
+ 
 
-   private validateCompleteWorkOrder(){
-   
-    if((this.insertAditionalDeviceWorkOrder!=undefined && this.insertAditionalDeviceWorkOrder.selectedDevices.length>0) ||
-      (this.insertAditionalMaterialWorkOrder!=undefined && this.insertAditionalMaterialWorkOrder.selectedMaterials.length>0) ||
-      (this.insertAditionalToolWorkOrder!=undefined && this.insertAditionalToolWorkOrder.selectedTools.length>0) || 
-      (this.insertInventoryWorkOrder!=undefined && this.insertInventoryWorkOrder.kitSelected.id>0)){
 
-        this.workOrder.kitWorkOrder=this.insertInventoryWorkOrder!=undefined?this.insertInventoryWorkOrder.kitSelected:null;
-        this.workOrder.listWorkOrderDevices=this.insertAditionalDeviceWorkOrder!=undefined?this.insertAditionalDeviceWorkOrder.selectedDevices:null;
-        this.workOrder.listWorkOrderMaterials=this.insertAditionalMaterialWorkOrder!=undefined?this.insertAditionalMaterialWorkOrder.selectedMaterials:null;
-        this.workOrder.listWorkOrderTools=this.insertAditionalToolWorkOrder!=undefined?this.insertAditionalToolWorkOrder.selectedTools:null;
-        this.updateWorkOrder();
-      }
-      else{
-        this.initTimeWarning();       
-      }
-
- }
-
- initTimeWarning(){
-   this.flagWarning=true;
-  Observable.interval(1000)
-    .takeWhile(() => this.flagWarning)
-    .subscribe(i => {
-      if(i==4){
-        this.flagWarning=false;
-      }       
-    })
-
-}
 
 
 initUpdateInsInvWorkOrder(){
@@ -227,8 +159,9 @@ initUpdateInsInvWorkOrder(){
     .takeWhile(() => !this.updateInsInvWorkOrder)
     .subscribe(i => {
       if(this.insertInventoryWorkOrder!=undefined){
-        this.updateInsInvWorkOrder=true;
         this.insertInventoryWorkOrder.idUpdate=this.workOrder.kitWorkOrder.id;
+        this.updateInsInvWorkOrder=true;
+        this.insertInventoryWorkOrder.flagRead=true;
       }       
     })
 
@@ -240,6 +173,7 @@ initUpdateInsInvMaterialWorkOrder(){
     .subscribe(i => {
       if(this.insertAditionalMaterialWorkOrder!=undefined){
         this.insertAditionalMaterialWorkOrder.dataMaterial=this.workOrder.listWorkOrderMaterials;
+        this.insertAditionalMaterialWorkOrder.flagRead=true;
         this.updateInsInvMaterialWorkOrder=true;        
       }       
     })
@@ -251,6 +185,7 @@ initUpdateInsInvToolWorkOrder(){
     .subscribe(i => {
       if(this.insertAditionalToolWorkOrder!=undefined){
         this.insertAditionalToolWorkOrder.dataTool=this.workOrder.listWorkOrderTools;
+        this.insertAditionalToolWorkOrder.flagRead=true;
         this.updateInsInvToolWorkOrder=true;       
       }       
     })
@@ -263,24 +198,12 @@ initUpdateInsInvDeviceWorkOrder(){
     .subscribe(i => {
       if(this.insertAditionalDeviceWorkOrder!=undefined){
         this.insertAditionalDeviceWorkOrder.dataDevice=this.workOrder.listWorkOrderDevices;
+        this.insertAditionalDeviceWorkOrder.flagRead=true;
         this.updateInsInvDeviceWorkOrder=true;       
       }       
     })
 }
 
-  initStart(){
-    Observable.interval(1000)
-      .takeWhile(() => !this.stopCondition)
-      .subscribe(i => {
-        let formId: HTMLElement = <HTMLElement>document.getElementById('formId'); 
-        if(formId!=undefined){
-          this.initEventSubmit(formId);
-          this.stopCondition=true;
-        }
-         
-      })
-  
-  }
 
   associateValues() {
     this.workOrder.description = this.description.value;
@@ -328,14 +251,7 @@ initUpdateInsInvDeviceWorkOrder(){
     }
     return null;
   }
-  public updateWorkOrder() {
-    console.log(this.workOrder);
-    this.serviceWorkOrder.updateWorkOrder(this.workOrder).subscribe(data=>{
-      this.router.navigate(['/calendar']);
-    }
-    );   
 
-  }
 
   selectEmployee(value: any) {  
     let action = value.name;
@@ -364,14 +280,13 @@ initUpdateInsInvDeviceWorkOrder(){
   // Mapping Tab items Header property   
   public headerText:
     Object = [{ text: 'Orden de Trabajo' },
-    { text: 'Agregar Lista Predefinida' },
-    { text: 'Agregar Material Adicional' },
-    { text: 'Agregar Herramienta Adicional' },
-    { text: 'Agregar Dispositivo Adicional' }];
+    { text: 'Lista Predefinida' },
+    { text: 'Material Adicional' },
+    { text: 'Herramienta Adicional' },
+    { text: 'Dispositivo Adicional' }];
 
   formatDates() {
     this.workOrder.startDate = this.workOrder.startDate + "T" + this.startHour.value + "-0600";
     this.workOrder.endDate = this.workOrder.endDate + "T" + this.endHour.value + "-0600";  
   }
 }
-

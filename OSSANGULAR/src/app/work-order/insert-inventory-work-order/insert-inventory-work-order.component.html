@@ -3,11 +3,11 @@
   <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
 
     <div class="formtitle">
-      <span>Asignar Lista Predefinida</span>
+      <span>Lista Predefinida</span>
     </div>
 
     <div class="form-group">
-      <ejs-dropdownlist #ejsKit (change)='onChangeDdl($event)' formControlName="kit" name="kit" [dataSource]='kitsWorkOrder'
+      <ejs-dropdownlist #ejsKit (change)='onChangeDdl($event)' [enabled]="false" formControlName="kit" name="kit" [dataSource]='kitsWorkOrder'
         [fields]='kitWorkOrder' [placeholder]='kitWatermark' floatLabelType='Auto'>
       </ejs-dropdownlist>
     </div>
