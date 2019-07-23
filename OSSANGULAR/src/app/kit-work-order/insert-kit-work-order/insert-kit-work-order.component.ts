@@ -28,21 +28,19 @@ export class InsertKitWorkOrderComponent implements OnInit {
   detail: boolean = false;
   implements: boolean = false;
   add: boolean = true;
-  selectedSuppliesDevice: SuppliesDevice[];
-  selectedSuppliesTool: SuppliesTool[];
-  selectedSuppliesMaterial: SuppliesMaterial[];
+  dev: boolean = false;
+  to: boolean = false;
+  mat: boolean = false;
+  save: boolean = false;
 
-  materials: Material[];
-  public material: Object = { text: 'name', value: 'id' };
-  public materialWatermark: string = 'Seleccione los materiales*';
+  kitList: KitWorkOrder[] = new Array();
+  selectedSuppliesDevice: SuppliesDevice[] = new Array();
+  selectedSuppliesTool: SuppliesTool[] = new Array();
+  selectedSuppliesMaterial: SuppliesMaterial[] = new Array();
 
-  devices: Device[];
-  public device: Object = { text: 'name', value: 'id' };
-  public deviceWatermark: string = 'Seleccione los dispositivos*';
-
-  tools: Tool[];
-  public tool: Object = { text: 'name', value: 'id' };
-  public toolWatermark: string = 'Seleccione las herramientas*';
+  inventories: any[];
+  public inventory: Object = { text: 'name', value: 'id' };
+  public watermark: string = 'Seleccione un artículo*';
 
   constructor(private kitWorkOrderService: KitWorkOrderService,
     private materialService: MaterialService, private toolService: ToolService, private deviceService: DeviceService,
@@ -53,19 +51,42 @@ export class InsertKitWorkOrderComponent implements OnInit {
 
 
   ngOnInit() {
-    this.materialService.getAllMaterial().subscribe(data => {
-      this.materials = data;
-    });
-
-    this.toolService.getAllTool().subscribe(data => {
-      this.tools = data;
-    });
-
-    this.deviceService.getAllDevice().subscribe(data => {
-      this.devices = data;
-    });
+    this.kitWorkOrderService.getAllKitWorkOrder().subscribe(data => {
+      this.kitList = data;
+    })
   }
 
+  fillDropdown(type: any) {
+
+    if (type.srcElement.id == 'material') {
+
+      this.materialService.getAllMaterial().subscribe(data => {
+        this.inventories = data;
+        this.to = false;
+        this.dev = false;
+        this.mat = true;
+      });
+    }
+
+    if (type.srcElement.id == 'tool') {
+      this.toolService.getAllTool().subscribe(data => {
+        this.inventories = data;
+        this.mat = false;
+        this.dev = false;
+        this.to = true;
+      });
+    }
+
+    if (type.srcElement.id == 'device') {
+      this.deviceService.getAllDevice().subscribe(data => {
+        this.inventories = data;
+        this.mat = false;
+        this.to = false;
+        this.dev = true;
+      });
+    }
+
+  }
 
   initEventSubmit(formId: any) {
 
@@ -91,44 +112,65 @@ export class InsertKitWorkOrderComponent implements OnInit {
   createReactiveForm() {
     this.reactForm = new FormGroup({
       'name': new FormControl('', [FormValidators.required]),
-      'devicesMulti': new FormControl('', []),
-      'materialsMulti': new FormControl('', []),
-      'toolsMulti': new FormControl('', []),
-      'deviceQuantity': new FormControl('', [FormValidators.required]),
-      'toolQuantity': new FormControl('', [FormValidators.required]),
-      'materialQuantity': new FormControl('', [FormValidators.required])
+      'multi': new FormControl('', []),
+      'newQuantity': new FormControl('', [FormValidators.required])
     });
   }
 
   get name() { return this.reactForm.get('name'); }
-  get devicesMulti() { return this.reactForm.get('devicesMulti'); }
-  get materialsMulti() { return this.reactForm.get('materialsMulti'); }
-  get toolsMulti() { return this.reactForm.get('toolsMulti'); }
-  get deviceQuantity() { return this.reactForm.get('deviceQuantity'); }
-  get materialQuantity() { return this.reactForm.get('materialQuantity'); }
-  get toolQuantity() { return this.reactForm.get('toolQuantity'); }
-
+  get multi() { return this.reactForm.get('multi'); }
+  get newQuantity() { return this.reactForm.get('newQuantity'); }
 
   return() {
-    this.kit.name = this.name.value;
-    this.implements = true;
-    /*/
-        this.kitService.insertKitWorkOrder(this.kit).subscribe(data => {
+    if (this.kit.name != undefined) {
+
+      this.kit.name = this.name.value;
+
+      this.kitService.insertKitWorkOrder(this.kit).subscribe(data => {
+        console.log(data.name)
+        if (data.name == 'exist') {
+          this.save = true;
+        } else {
           this.kitCreated = data;
-          
-        });/*/
+
+          this.implements = true;
+          this.add = false;
+        }
+      });
+    }
   }
+
+
+  addToList() {
+
+    if (this.to) {
+      this.addTool();
+      console.log(this.selectedSuppliesTool);
+    }
+
+    if (this.mat) {
+      this.addMaterial();
+      console.log(this.selectedSuppliesMaterial);
+    }
+
+    if (this.dev) {
+      this.addDevice();
+      console.log(this.selectedSuppliesDevice);
+    }
+
+  }
+
 
   addDevice() {
     let suppliesdevice = new SuppliesDevice();
 
-    if (this.devicesMulti.value != undefined && this.deviceQuantity != undefined) {
+    if (this.multi.value != undefined && this.newQuantity != undefined) {
       suppliesdevice.id.kitWorkOrder = this.kitCreated;
-      suppliesdevice.id.device = this.devicesMulti.value;
-      suppliesdevice.quantity = this.deviceQuantity.value;
+      suppliesdevice.id.device = this.multi.value;
+      suppliesdevice.quantity = this.newQuantity.value
 
       this.selectedSuppliesDevice.push(suppliesdevice);
-
+      setTimeout(function () { alert("El artículo fue añadido"); }, 2000);
     } else {
       this.bandera = true;
     }
@@ -137,18 +179,19 @@ export class InsertKitWorkOrderComponent implements OnInit {
 
   hidden() {
     this.bandera = false;
+    this.save = false;
   }
 
   addTool() {
     let suppliestool = new SuppliesTool();
 
-    if (this.toolsMulti.value != undefined && this.toolQuantity != undefined) {
+    if (this.multi.value != undefined && this.newQuantity != undefined) {
       suppliestool.id.kitWorkOrder = this.kitCreated;
-      suppliestool.id.tool = this.toolsMulti.value;
-      suppliestool.quantity = this.toolQuantity.value;
+      suppliestool.id.tool = this.multi.value;
+      suppliestool.quantity = this.newQuantity.value;
 
       this.selectedSuppliesTool.push(suppliestool);
-
+      setTimeout(function () { alert("El artículo fue añadido"); }, 2000);
     } else {
       this.bandera = true;
     }
@@ -158,15 +201,32 @@ export class InsertKitWorkOrderComponent implements OnInit {
   addMaterial() {
     let suppliesMaterial = new SuppliesMaterial();
 
-    if (this.materialsMulti.value != undefined && this.materialQuantity != undefined) {
+    if (this.multi.value != undefined && this.newQuantity != undefined) {
       suppliesMaterial.id.kitWorkOrder = this.kitCreated;
-      suppliesMaterial.id.material = this.materialsMulti.value;
-      suppliesMaterial.quantity = this.materialQuantity.value;
+      suppliesMaterial.id.material = this.multi.value;
+      suppliesMaterial.quantity = this.newQuantity.value;
 
       this.selectedSuppliesMaterial.push(suppliesMaterial);
 
+      setTimeout(function () { alert("El artículo fue añadido"); }, 2000);
     } else {
       this.bandera = true;
+    }
+
+  }
+
+  ready() {
+
+    for (var index in this.selectedSuppliesDevice) {
+      this.suppliesService.insertSuppliesDevice(this.selectedSuppliesDevice[index]).subscribe();
+    }
+
+    for (var index in this.selectedSuppliesTool) {
+      this.suppliesService.insertSuppliesTool(this.selectedSuppliesTool[index]).subscribe();
+    }
+
+    for (var index in this.selectedSuppliesMaterial) {
+      this.suppliesService.insertSuppliesMaterial(this.selectedSuppliesMaterial[index]).subscribe();
     }
 
   }

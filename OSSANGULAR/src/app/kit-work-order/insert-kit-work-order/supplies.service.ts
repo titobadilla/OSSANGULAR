@@ -16,15 +16,15 @@ export class SuppliesService{
   constructor(private http: HttpClient) { }
 
   public insertSuppliesDevice(suppliesDevice: SuppliesDevice): Observable<SuppliesDevice> {
-    return this.http.post<SuppliesDevice>(this.URLAPI + 'suppliesDevice/', suppliesDevice);
+    return this.http.post<SuppliesDevice>(this.URLAPI + 'suppliesdevice/', suppliesDevice);
   }
 
   public insertSuppliesTool(suppliesTool: SuppliesTool): Observable<SuppliesTool> {
-    return this.http.post<SuppliesTool>(this.URLAPI + 'suppliesTool/', suppliesTool);
+    return this.http.post<SuppliesTool>(this.URLAPI + 'suppliestool/', suppliesTool);
   }
 
   public insertSuppliesMaterial(suppliesMaterial: SuppliesMaterial): Observable<SuppliesMaterial> {
-    return this.http.post<SuppliesMaterial>(this.URLAPI + 'suppliesMaterial/', suppliesMaterial);
+    return this.http.post<SuppliesMaterial>(this.URLAPI + 'suppliesmaterial/', suppliesMaterial);
   }
   
 }

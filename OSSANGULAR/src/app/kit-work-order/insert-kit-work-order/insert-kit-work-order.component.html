@@ -9,13 +9,23 @@
         <h6>Debe llenar todos los campos</h6>
       </div>
     </div>
+
+    <div *ngIf="save">
+        <div class="alert alert-danger text-center alert-dismissible">
+          <h4 class="alert-heading"><i class="icon fa fa-check"></i> ¡Error!</h4>
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true" (click)="hidden()">x</button>
+          <h6>Ya existe una lista con ese nombre</h6>
+        </div>
+      </div>
     <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
 
+
+      <div class="formtitle">
+        <span>Listas predefinidas</span>
+      </div>
       <div *ngIf="add">
-        <div class="formtitle">
-          <span>Listas predefinidas</span>
-        </div>
         <div class="row">
+          <div class="col-sm-1"></div>
           <div class="col-sm-8">
             <div class="form-group">
               <div class="e-float-input">
@@ -36,102 +46,69 @@
             </button>
           </div>
         </div>
+      </div>
+
+      <div *ngIf="implements">
+        <div class="row" style="margin-left: 5px; margin-right: 5px; margin-top: 2%;">
+
+          <button class="samplebtn e-control e-btn" type="button"
+            style="height:40px;width: 146px; margin-left: 5px;" id="device" (click)="fillDropdown($event)">Dispositivos</button>
+
+          <button class="samplebtn e-control e-btn" type="button"
+            style="height:40px;width: 146px; margin-left: 5px;" id="material" (click)="fillDropdown($event)">Materiales</button>
+
+          <button class="samplebtn e-control e-btn" type="button"
+            style="height:40px;width: 146px; margin-left: 5px;" id="tool" (click)="fillDropdown($event)">Herramientas</button>
+
+        </div>
+
         <div *ngIf="implements">
           <div class="row">
-            <div class="col-sm-7">
+            <div class="col-sm-2"></div>
 
-              <div class="form-group">
-                <ejs-dropdownlist formControlName="devicesMulti" name="devicesMulti" [dataSource]='devices'
-                  [fields]='device' [placeholder]='deviceWatermark' floatLabelType='Auto'></ejs-dropdownlist>
-
-              </div>
-
-              <div class="form-group">
-                <ejs-dropdownlist formControlName="materialsMulti" name="materialsMulti" [dataSource]='materials'
-                  [fields]='material' [placeholder]='materialWatermark' floatLabelType='Auto'></ejs-dropdownlist>
-              </div>
-
-              <div class="form-group">
-                <ejs-dropdownlist formControlName="toolsMulti" name="toolsMulti" [dataSource]='tools' [fields]='tool'
-                  [placeholder]='toolWatermark' floatLabelType='Auto'></ejs-dropdownlist>
-              </div>
-            </div>
-
-
-
-            <div class="col-sm-3" style="margin-top:2%;">
-              <div class="form-group">
-                <div class="e-float-input">
-                  <input id="deviceQuantity" type="number" formControlName="deviceQuantity">
-                  <span class="e-float-line"></span>
-                  <label for="device" class="e-float-text" style="font-size:15px;">Cantidad dispositivo</label>
-                </div>
-                <div *ngIf="deviceQuantity.errors">
-                  <div *ngIf="deviceQuantity.errors.required && deviceQuantity.touched" class="e-error">
-                    Debe rellenar este campo.
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group" style="margin-top:10%;">
-                <div class="e-float-input">
-                  <input id="materialQuantity" type="number" formControlName="materialQuantity">
-                  <span class="e-float-line"></span>
-                  <label for="materialQuantity" class="e-float-text" style="font-size:15px;">Cantidad material</label>
-                </div>
-                <div *ngIf="materialQuantity.errors">
-                  <div *ngIf="materialQuantity.errors.required && materialQuantity.touched" class="e-error">
-                    Debe rellenar este campo.
-                  </div>
-                </div>
-              </div>
-
-
-              <div class="form-group" style="margin-top:15%;">
-                <div class="e-float-input">
-                  <input id="toolQuantity" type="number" formControlName="toolQuantity">
-                  <span class="e-float-line"></span>
-                  <label for="toolQuantity" class="e-float-text" style="font-size:15px;">Cantidad herramienta</label>
-                </div>
-                <div *ngIf="toolQuantity.errors">
-                  <div *ngIf="toolQuantity.errors.required && toolQuantity.touched" class="e-error">
-                    Debe rellenar este campo.
-                  </div>
-                </div>
-              </div>
+            <div class="form-group">
+              <ejs-dropdownlist formControlName="multi" name="multi" [dataSource]='inventories'
+                [fields]='inventory' [placeholder]='watermark' floatLabelType='Auto'></ejs-dropdownlist>
 
             </div>
 
-            <div class="col-sm-1">
-
-              <button type="button" class="btn btn-info" style="margin-top:90%;" (click)='addDevice()'>
-                Agregar
-              </button>
-
-              <button type="button" class="btn btn-info" style="margin-top:90%;" (click)='addMaterial()'>
-                Agregar
-              </button>
-
-              <button type="button" class="btn btn-info" style="margin-top:100%;" (click)='addTool()'>
-                Agregar
-              </button>
-
+            <div class="form-group">
+              <div class="e-float-input">
+                <input id="newQuantity" type="number" formControlName="newQuantity">
+                <span class="e-float-line"></span>
+                <label for="newQuantity" class="e-float-text" style="font-size:15px;">Cantidad material</label>
+              </div>
+              <div *ngIf="newQuantity.errors">
+                <div *ngIf="newQuantity.errors.required && newQuantity.touched" class="e-error">
+                  Debe rellenar este campo.
+                </div>
+              </div>
             </div>
+
+            <button class="samplebtn e-info e-control e-btn" type="button"
+              style="height:40px;width: 146px; margin-top: 7%;" (click)="addToList()">Agregar</button>
+
+
+
+
+
           </div>
 
-          <div class="row" style="margin-left: 5px; margin-right: 5px;">
-            <div style="width: 300px;margin:0px auto;height: 100px;padding-top: 25px;">
+        </div>
 
-              <button id="validateSubmit" class="samplebtn e-control e-btn e-info" type="submit" (click)='return()'
-                style="height:40px;width: 146px;" data-ripple="true">Listo</button>
+      </div>
+      <div class="row" style="margin-left: 5px; margin-right: 5px;">
+        <div style="width: 300px;margin:0px auto;height: 100px;padding-top: 25px;">
 
-              <button class="samplebtn e-control e-btn" type="button"
-                style="height:40px;width: 146px; margin-left: 5px;">Cancelar</button>
+          <button id="validateSubmit" class="samplebtn e-control e-btn e-info" type="submit" (click)='ready()'
+            style="height:40px;width: 146px;" data-ripple="true">Listo</button>
 
-            </div>
-          </div>
+          <button class="samplebtn e-control e-btn" type="button"
+            style="height:40px;width: 146px; margin-left: 5px;">Cancelar</button>
+
         </div>
       </div>
+
     </form>
 
     <div *ngIf="detail">
