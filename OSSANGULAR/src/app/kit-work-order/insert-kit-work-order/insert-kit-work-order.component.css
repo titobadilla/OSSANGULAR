@@ -1,12 +1,12 @@
 .formtitle {
-	font-family: 'Questrial', Verdana, sans-serif;
-	text-align: center;
-	font-size: 32px;
-	padding: 0;
-	position: relative;
-	color: #555;
-}
-
+	font-family:'Questrial', Verdana, sans-serif;
+	text-align:center;
+	font-size:32px;
+	padding:0;
+	position:relative;
+	color:#555;
+	margin-top: 1%;
+   }
 .e-error,
 .e-float-text {
 	font-weight: 500;
@@ -41,4 +41,12 @@ form {
 	background: #fff;
 	margin-left: 3%;
 }
+
+.e-dlg-header  {
+	font-family:'Questrial', Verdana, sans-serif;
+	display: block;
+	font-size: 18px;
+	margin-top: 2%;  
+	text-align: center;
+  }
 
