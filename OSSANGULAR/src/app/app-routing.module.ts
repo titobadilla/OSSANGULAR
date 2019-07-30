@@ -31,6 +31,8 @@ import { UpdateWorkOrderComponent } from './work-order/update-work-order/update-
 import {KitWorkOrderComponent} from './kit-work-order/kit-work-order.component';
 import { InsertKitWorkOrderComponent } from './kit-work-order/insert-kit-work-order/insert-kit-work-order.component';
 import { WorkOrderDetailGeneralComponent } from './work-order/work-order-detail-general/work-order-detail-general.component';
+import { ReportByTypeComponent } from './reports/report-by-type/report-by-type.component';
+import { ReportByClientComponent } from './reports/report-by-client/report-by-client.component';
 
 const routes: Routes = [
   {path:"address",component:AddressComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
@@ -62,6 +64,8 @@ const routes: Routes = [
   {path:'change-password',component:ChangePasswordTechnicalComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_TECNICO','ROLE_ADMIN']}},
   {path:'kit',component:KitWorkOrderComponent, canActivate : [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path:'insert-kit',component:InsertKitWorkOrderComponent, canActivate : [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:'report-work-order-by-type',component:ReportByTypeComponent, canActivate : [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:'report-work-order-by-client',component:ReportByClientComponent, canActivate : [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
 ];
 
 @NgModule({

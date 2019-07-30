@@ -1,0 +1,59 @@
+<div id="control_wrapper">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <ejs-daterangepicker [(ngModel)]="fecha"></ejs-daterangepicker>
+                </div>
+               <div class="col-sm-12">
+                  <div class="form-group" >
+                      <ejs-dropdownlist [(ngModel)]="typeId"
+                        [dataSource]='types' [fields]='typeWorkOrder' [placeholder]='typeWatermark'
+                        floatLabelType='Auto'>
+                      </ejs-dropdownlist>
+                    </div>
+               </div>
+                
+                <div class="col-sm-12">   
+                  <div class="col-sm-4">
+                                    
+                  </div>   
+                  <div class="col-sm-4"> <button id="validateSubmit" class="e-control e-btn e-info"
+                    type="submit" style="margin-top:2%;height:40px;width:200px;" data-ripple="true"
+                    (click)='list()'>Generar Reporte</button></div>   
+                  <div class="col-sm-4"></div>                         
+                      
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  
+  <div id="reporte" >
+      <div >  <div class="row" style="margin-left: 10px;">
+          <div class=""></div>
+          <div class="col-lg-12">        
+              <ejs-grid #grid [dataSource]='data' [allowSorting]='true'
+                  allowTextWrap='true' [allowPdfExport]='true' [toolbar]='toolbar' (toolbarClick)='toolbarClick($event)' 
+                  allowPaging='true' [pageSettings]='pageSettings'>
+                              
+      
+                  <e-columns>
+                      <e-column field='id' headerText='Id' width='100' textAlign='center'></e-column>
+                      <e-column field='description' headerText="Descripción" width='150' textAlign='center'></e-column>
+                      <e-column field='startDate' headerText="Fecha Inicio" width='150' textAlign='center'></e-column>
+                      <e-column field='endDate' headerText="Fecha Fin" width='150' textAlign='center'></e-column>
+                      <e-column field='state' headerText="Estado" width='150' textAlign='center'>
+                      </e-column>
+                      <e-column field='nameClient' headerText="Nombre Cliente" width='150' textAlign='center'>
+                      </e-column>  
+                      <e-column field='nameWorkOrderType' headerText="Tipo" width='150' textAlign='center'>
+                        </e-column>               
+                      
+                  </e-columns>
+              </ejs-grid>
+          </div>
+      </div>
+    </div>
+  </div>
+  

@@ -59,7 +59,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Lista predefinidas',
-        link: '/',
+        link: '/kit',
       },
       {
         title: 'Herramientas',
@@ -110,12 +110,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'nb-star',
     children: [
       {
-        title: 'Reporte 1',
-        link: '/',
+        title: 'Ordenes de Trabajo por tipo',
+        link: '/report-work-order-by-type',
       },
       {
-        title: 'Reporte 2',
-        link: '/',
+        title: 'Ordenes de Trabajo por cliente',
+        link: '/report-work-order-by-client',
       }    
     ],
   }/*

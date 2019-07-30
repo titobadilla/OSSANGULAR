@@ -131,6 +131,8 @@ import { InsertKitWorkOrderComponent } from './kit-work-order/insert-kit-work-or
 import { UpdateKitWorkOrderComponent } from './kit-work-order/update-kit-work-order/update-kit-work-order.component';
 import { SuppliesService } from './kit-work-order/insert-kit-work-order/supplies.service';
 import { WorkOrderDetailGeneralComponent } from './work-order/work-order-detail-general/work-order-detail-general.component';
+import { ReportByClientComponent } from './reports/report-by-client/report-by-client.component';
+import { ReportByTypeComponent } from './reports/report-by-type/report-by-type.component';
 
 
 declare var require: any;
@@ -211,7 +213,9 @@ loadCldr(
     NotificationComponent,
     InsertKitWorkOrderComponent,
     UpdateKitWorkOrderComponent,
-    WorkOrderDetailGeneralComponent
+    WorkOrderDetailGeneralComponent,
+    ReportByClientComponent,
+    ReportByTypeComponent
   ],
   imports: [
 

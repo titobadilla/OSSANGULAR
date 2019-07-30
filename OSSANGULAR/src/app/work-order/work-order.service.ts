@@ -43,4 +43,14 @@ public getWorkOrderByMonth(date: String):Observable<WorkOrder[]>{
     return this.http.put<WorkOrder>(this.URLAPI+'workorder/' + workOrder.id, workOrder);
   }
 
+  public getReportByTypeAndDate(id:number,startDate: String,endDate:String):Observable<any[]>{
+    return this.http.get<any[]>(this.URLAPI+'workorder/reportbytypedate/'+id+'/'+startDate+'/'+endDate);
+  }
+
+  public getReportByClientAndDate(id:number,startDate: String,endDate:String):Observable<any[]>{
+    return this.http.get<any[]>(this.URLAPI+'workorder/reportbyclientdate/'+id+'/'+startDate+'/'+endDate);
+  }
+
+  
+
 }
