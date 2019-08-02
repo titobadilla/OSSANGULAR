@@ -125,10 +125,7 @@ import { RoleGuard } from './login/guards/role-guard.service';
 import { ChangePasswordAdminComponent } from './change-password-admin/change-password-admin.component';
 import { ChangePasswordTechnicalComponent } from './change-password-technical/change-password-technical.component';
 import { NotificationComponent } from './notification/notification.component';
-import { LoginRefreshComponent } from './login/login-refresh/login-refresh.component';
-import { ModalSesionRefreshComponent } from './@theme/components/header/modal-sesion-refresh/modal-sesion-refresh.component';
 import { InsertKitWorkOrderComponent } from './kit-work-order/insert-kit-work-order/insert-kit-work-order.component';
-import { UpdateKitWorkOrderComponent } from './kit-work-order/update-kit-work-order/update-kit-work-order.component';
 import { SuppliesService } from './kit-work-order/insert-kit-work-order/supplies.service';
 import { WorkOrderDetailGeneralComponent } from './work-order/work-order-detail-general/work-order-detail-general.component';
 import { ReportByClientComponent } from './reports/report-by-client/report-by-client.component';
@@ -212,7 +209,6 @@ loadCldr(
     ChangePasswordTechnicalComponent,
     NotificationComponent,
     InsertKitWorkOrderComponent,
-    UpdateKitWorkOrderComponent,
     WorkOrderDetailGeneralComponent,
     ReportByClientComponent,
     ReportByTypeComponent

@@ -16,6 +16,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Device } from 'src/model/device.model';
 import { Material } from 'src/model/material.model';
 import { Tool } from 'src/model/tool.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-insert-kit-work-order',
@@ -24,6 +25,10 @@ import { Tool } from 'src/model/tool.model';
 })
 export class InsertKitWorkOrderComponent implements OnInit {
 
+  ngAfterViewInit(): void {
+    this.grid.pageSettings.pageSize = 3;
+  
+  }
 
   public data: any[];
   public pageSettings: Object;
@@ -34,9 +39,9 @@ export class InsertKitWorkOrderComponent implements OnInit {
   kit: KitWorkOrder = new KitWorkOrder();
   kitCreated: KitWorkOrder = new KitWorkOrder();
   bandera: boolean = false;
-  implements: boolean = false;
+ 
   add: boolean = true;
-  dev: boolean = false;
+  dev: boolean = true;
   to: boolean = false;
   mat: boolean = false;
   save: boolean = false;
@@ -60,7 +65,6 @@ export class InsertKitWorkOrderComponent implements OnInit {
     this.createReactiveForm();
     this.associateValues();
   }
-
 
   ngOnInit() {
     this.pageSettings = { pageCount: 3 };
@@ -157,9 +161,12 @@ export class InsertKitWorkOrderComponent implements OnInit {
           this.save = true;
         } else {
           this.kitCreated = data;
-
-          this.implements = true;
           this.add = false;
+        
+
+          var addButton = (<HTMLInputElement> document.getElementById("inventoryButton")).disabled = false;
+          var readyButton = (<HTMLInputElement> document.getElementById("validateSubmit")).disabled = false;
+
         }
       });
     }
@@ -194,26 +201,12 @@ export class InsertKitWorkOrderComponent implements OnInit {
       suppliesdevice.quantity = this.newQuantity.value
 
       this.selectedSuppliesDevice.push(suppliesdevice);
-      setTimeout(function () { alert("El artículo fue añadido"); }, 2000);
+      this.grid.refresh();
+     
     } else {
       this.bandera = true;
     }
 
-  }
-
-  findInventoryById(id: number, arr): any {
-    let elementReturn;
-    arr.forEach(element => {
-      if (element.id == id) {
-        elementReturn = element;
-      }
-    });
-    return elementReturn;
-  }
-
-  hidden() {
-    this.bandera = false;
-    this.save = false;
   }
 
   addTool() {
@@ -225,7 +218,8 @@ export class InsertKitWorkOrderComponent implements OnInit {
       suppliestool.quantity = this.newQuantity.value;
 
       this.selectedSuppliesTool.push(suppliestool);
-      setTimeout(function () { alert("El artículo fue añadido"); }, 2000);
+      this.grid.refresh();
+    
     } else {
       this.bandera = true;
     }
@@ -241,8 +235,8 @@ export class InsertKitWorkOrderComponent implements OnInit {
       suppliesMaterial.quantity = this.newQuantity.value;
 
       this.selectedSuppliesMaterial.push(suppliesMaterial);
-
-      setTimeout(function () { alert("El artículo fue añadido"); }, 2000);
+      this.grid.refresh();
+     
     } else {
       this.bandera = true;
     }
@@ -290,13 +284,31 @@ export class InsertKitWorkOrderComponent implements OnInit {
 
     if (this.dev == true) {
       this.selectedSuppliesDevice = this.removeElementAddedOfTable(this.selectedSuppliesDevice, data.id.device.id);
+      this.grid.refresh();
     } if (this.mat == true) {
       this.selectedSuppliesMaterial = this.removeElementAddedOfTable(this.selectedSuppliesMaterial, data.id.material.id);
+      this.grid.refresh();
     }
     if (this.to == true) {
       this.selectedSuppliesTool = this.removeElementAddedOfTable(this.selectedSuppliesTool, data.id.tool.id);
+      this.grid.refresh();
 
     }
 
+  }
+
+  findInventoryById(id: number, arr): any {
+    let elementReturn;
+    arr.forEach(element => {
+      if (element.id == id) {
+        elementReturn = element;
+      }
+    });
+    return elementReturn;
+  }
+
+  hidden() {
+    this.bandera = false;
+    this.save = false;
   }
 }
