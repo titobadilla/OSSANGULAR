@@ -17,9 +17,10 @@ import { Device } from 'src/model/device.model';
 import { Material } from 'src/model/material.model';
 import { Tool } from 'src/model/tool.model';
 import { Observable } from 'rxjs';
+import { KitWorkOrderComponent } from '../kit-work-order.component';
 
 @Component({
-  selector: 'app-insert-kit-work-order',
+  selector: 'insert-kit-work-order',
   templateUrl: './insert-kit-work-order.component.html',
   styleUrls: ['./insert-kit-work-order.component.css']
 })
@@ -61,7 +62,8 @@ export class InsertKitWorkOrderComponent implements OnInit {
 
   constructor(private modalService: BsModalService, private kitWorkOrderService: KitWorkOrderService,
     private materialService: MaterialService, private toolService: ToolService, private deviceService: DeviceService,
-    private kitService: KitWorkOrderService, private suppliesService: SuppliesService) {
+    private kitService: KitWorkOrderService, private suppliesService: SuppliesService,
+    private parent: KitWorkOrderComponent) {
     this.createReactiveForm();
     this.associateValues();
   }
@@ -162,10 +164,9 @@ export class InsertKitWorkOrderComponent implements OnInit {
         } else {
           this.kitCreated = data;
           this.add = false;
-        
-
-          var addButton = (<HTMLInputElement> document.getElementById("inventoryButton")).disabled = false;
-          var readyButton = (<HTMLInputElement> document.getElementById("validateSubmit")).disabled = false;
+      
+           (<HTMLInputElement> document.getElementById("inventoryButton")).disabled = false;
+           (<HTMLInputElement> document.getElementById("validateSubmit")).disabled = false;
 
         }
       });
@@ -258,6 +259,7 @@ export class InsertKitWorkOrderComponent implements OnInit {
         this.suppliesService.insertSuppliesMaterial(this.selectedSuppliesMaterial[index]).subscribe();
       }
 
+      this.returnView();
     } else {
       setTimeout(function () { alert("Debe ingresar almenos un artículo a la lista"); }, 1000);
     }
@@ -310,5 +312,11 @@ export class InsertKitWorkOrderComponent implements OnInit {
   hidden() {
     this.bandera = false;
     this.save = false;
+  }
+
+  returnView() {
+    this.parent.getAllKits();
+    this.parent.insertSection = false;
+    this.parent.principal = true;
   }
 }

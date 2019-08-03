@@ -63,9 +63,10 @@ const routes: Routes = [
   {path:'material',component:MaterialComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path:'change-password',component:ChangePasswordTechnicalComponent,canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_TECNICO','ROLE_ADMIN']}},
   {path:'kit',component:KitWorkOrderComponent, canActivate : [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
-  {path:'insert-kit',component:InsertKitWorkOrderComponent, canActivate : [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:'insert-kit-work-order',component:InsertKitWorkOrderComponent, canActivate : [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path:'report-work-order-by-type',component:ReportByTypeComponent, canActivate : [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path:'report-work-order-by-client',component:ReportByClientComponent, canActivate : [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
+  {path:'kit-work-order',component:KitWorkOrderComponent, canActivate : [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
 ];
 
 @NgModule({

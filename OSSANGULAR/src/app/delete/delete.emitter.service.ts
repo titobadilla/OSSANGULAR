@@ -56,6 +56,10 @@ export class DeleteEmitterService {
   private _messageWorkOrderTypeDelete= new Subject<boolean>();
   deleteWorkOrderType$ = this._messageWorkOrderTypeDelete.asObservable();
 
+  
+  private _messageKitWorkOrderDelete= new Subject<boolean>();
+  deleteKitWorkOrder$ = this._messageKitWorkOrderDelete.asObservable();
+
   constructor() { }
 
   public setDeleteEmployee(flat: boolean) {
@@ -121,5 +125,9 @@ export class DeleteEmitterService {
 
   public setWorkOrderType(flat:boolean){
     this._messageWorkOrderTypeDelete.next(flat);
+  }
+
+  public setKitWorkOrder(flat:boolean){
+    this._messageKitWorkOrderDelete.next(flat);
   }
 }
