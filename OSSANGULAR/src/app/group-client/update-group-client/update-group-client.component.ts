@@ -170,8 +170,10 @@ export class UpdateGroupClientComponent implements OnInit,AfterViewInit {
       (e: Event) => {
         e.preventDefault();
         if (this.reactForm.valid) {
+          console.log('valido');
           this.updateGroup();
         } else {
+          console.log('no valido');
           Object.keys(this.reactForm.controls).forEach(field => {
             const control = this.reactForm.get(field);
             control.markAsTouched({ onlySelf: true });
@@ -195,7 +197,7 @@ export class UpdateGroupClientComponent implements OnInit,AfterViewInit {
        this.reactForm.reset()
      }
      );/*/
-    console.log(this.group)
+    console.log(this.group.nameGroup)
   }
   returnView() {
     this.parent.getAllGroups();

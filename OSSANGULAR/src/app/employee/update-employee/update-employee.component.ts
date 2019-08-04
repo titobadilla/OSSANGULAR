@@ -174,14 +174,14 @@ export class UpdateEmployeeComponent implements OnInit {
 
 
   public editEmployee() {
-
-    if (this.employee.telephones[1] === undefined && this.home.value != "") {
+  
+    if (this.employee.telephones[0] === undefined && this.mobile.value != "") {
       var telephoneHome = new TelephoneEmployee();
-      telephoneHome.type = "Casa";
-      telephoneHome.number = this.home.value;
+      telephoneHome.type = "Celular";
+      telephoneHome.number = this.mobile.value;
       this.employee.telephones.push(telephoneHome);
-    } else if (this.home.value === "") {
-      this.employee.telephones[1].number = '';
+    } else if (this.mobile.value === "") {
+      this.employee.telephones[0].number = '';
     }
 
     if (this.employee.telephones[1] === undefined && this.home.value != "") {

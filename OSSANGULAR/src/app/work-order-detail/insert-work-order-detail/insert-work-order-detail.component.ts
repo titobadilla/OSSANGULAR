@@ -27,7 +27,7 @@ export class InsertWorkOrderDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.workOrderService.getByIdWorkOrder(3).subscribe(data => {
+    this.workOrderService.getByIdWorkOrder(2028).subscribe(data => {
       this.workOrder = data;
     });
 
@@ -76,7 +76,8 @@ export class InsertWorkOrderDetailComponent implements OnInit {
   get managerName() { return this.reactForm.get('managerName'); }
 
   private createWorkOrderDetail() {
-
+    this.detail.workOrder.id = this.workOrder.id;
+    
     this.workOrderDetailService.insertWorkOrderDetail(this.detail).subscribe(data => {
       this.returnView();
     });

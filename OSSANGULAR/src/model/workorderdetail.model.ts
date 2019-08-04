@@ -9,4 +9,5 @@ export class WorkOrderDetail{
     description:String;
     invoiceId:number;
     managerName:String;
+    workOrder:WorkOrder = new WorkOrder();
 }
