@@ -63,9 +63,10 @@ export class InsertGroupClientComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.initEventSubmit();
+    
     this.clientService.getClientsWithoutGroup().subscribe(data => {
       this.clients = data;
+      this.initEventSubmit();
     });
   }
 
@@ -119,10 +120,9 @@ export class InsertGroupClientComponent implements OnInit {
   }
 
   get nameGroup() { return this.reactForm.get('nameGroup'); }
-  get clientsSelected() { return this.reactForm.get('clientsMulti'); }
   get contactName() { return this.reactForm.get('contactName'); }
   get contactLastName() { return this.reactForm.get('contactLastName'); }
-  get clientsMulti() { return this.reactForm.get('clients'); }
+  get clientsMulti() { return this.reactForm.get('clientsMulti'); }
   get email() { return this.reactForm.get('email'); }
   get phone1() { return this.reactForm.get('phone1'); }
   get phone2() { return this.reactForm.get('phone2'); }

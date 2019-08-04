@@ -66,10 +66,10 @@ export class UpdateGroupClientComponent implements OnInit,AfterViewInit {
   }
 
   ngOnInit() {
-    this.initEventSubmit();
      this.clientService.getClientsWithoutGroup().subscribe(data => {
       this.clients = data;
-      this.loadGroup();
+      this.loadGroup();      
+      this.initEventSubmit();
      });
 
 
@@ -170,10 +170,8 @@ export class UpdateGroupClientComponent implements OnInit,AfterViewInit {
       (e: Event) => {
         e.preventDefault();
         if (this.reactForm.valid) {
-          console.log('valido');
           this.updateGroup();
         } else {
-          console.log('no valido');
           Object.keys(this.reactForm.controls).forEach(field => {
             const control = this.reactForm.get(field);
             control.markAsTouched({ onlySelf: true });
@@ -193,11 +191,10 @@ export class UpdateGroupClientComponent implements OnInit,AfterViewInit {
   get phone2() { return this.reactForm.get('phone2'); }
 
   public updateGroup() {
-    /*/ this.groupClientService.updateGroupClient(this.group).subscribe(data => {
+     this.groupClientService.updateGroupClient(this.group).subscribe(data => {
        this.reactForm.reset()
      }
-     );/*/
-    console.log(this.group.nameGroup)
+     );
   }
   returnView() {
     this.parent.getAllGroups();
