@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DeviceComponent } from './device/device.component';
-import { AddressComponent } from './address/address.component';
-import { AddressDescriptionComponent } from './address-description/address-description.component';
 import { BrandComponent } from './brand/brand.component';
 import { ClientComponent } from './client/client.component';
 import { DeviceStateComponent } from './device-state/device-state.component';
@@ -35,9 +33,7 @@ import { ReportByTypeComponent } from './reports/report-by-type/report-by-type.c
 import { ReportByClientComponent } from './reports/report-by-client/report-by-client.component';
 
 const routes: Routes = [
-  {path:"address",component:AddressComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path: "device",component:DeviceComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
-  {path:"address-description",component:AddressDescriptionComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path:"brand",component:BrandComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path:"client",component:ClientComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},
   {path:"device-state",component:DeviceStateComponent, canActivate: [AuthGuard,RoleGuard], data: {role: ['ROLE_ADMIN']}},

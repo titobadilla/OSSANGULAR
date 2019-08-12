@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddressDescriptionComponent } from './address-description.component';
+import { SeeMoreKitComponent } from './see-more-kit.component';
 
-describe('AddressDescriptionComponent', () => {
-  let component: AddressDescriptionComponent;
-  let fixture: ComponentFixture<AddressDescriptionComponent>;
+describe('SeeMoreKitComponent', () => {
+  let component: SeeMoreKitComponent;
+  let fixture: ComponentFixture<SeeMoreKitComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddressDescriptionComponent ]
+      declarations: [ SeeMoreKitComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddressDescriptionComponent);
+    fixture = TestBed.createComponent(SeeMoreKitComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

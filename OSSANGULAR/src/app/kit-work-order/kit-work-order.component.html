@@ -10,11 +10,16 @@
         [pageSettings]='pageSettings'>
         <ng-template #toolbarTemplate>
           <ejs-toolbar>
-            <div class="e-dlg-header">Lista de Categorías de Inventario</div>
+            <div class="e-dlg-header">Listas Predefinidas</div>
           </ejs-toolbar>
         </ng-template>
         <e-columns>
-          <e-column field='name' headerText='Nombre de categoría' width='50' textAlign='center'></e-column>
+          <e-column field='name' headerText='Nombre' width='50' textAlign='center'></e-column>
+          <e-column headerText="Ver Más" width='105' textAlign='center'>
+              <ng-template #template let-data>
+                <button mat-button class="btn btn-info glyphicon glyphicon-plus" (click)='seeMore(data)'></button>
+              </ng-template>
+            </e-column>
           <e-column field='delete' headerText="Eliminar" width='50' textAlign='center'>
             <ng-template #template let-data>
               <button mat-button class="btn btn-danger glyphicon glyphicon-trash" (click)='openModal(data)'></button>
@@ -28,3 +33,7 @@
 <div *ngIf="insertSection">
   <insert-kit-work-order></insert-kit-work-order>
 </div>
+
+<div *ngIf="seeMoreKit">
+    <see-more-kit  [kitId]="kitId"></see-more-kit>
+  </div>

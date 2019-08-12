@@ -20,8 +20,13 @@ export class InventoryOutputGeneralComponent implements OnInit, AfterViewInit {
   }
 
   material: Material = new Material();
+  materialList: Material[] = new Array();
+
   device: Device = new Device();
+  deviceList: Device[] = new Array();
+
   tool: Tool = new Tool();
+  toolList: Tool[] = new Array();
 
   //variables for control of dropdown
   elements: any;
@@ -60,6 +65,19 @@ export class InventoryOutputGeneralComponent implements OnInit, AfterViewInit {
       'description': new FormControl('', ),
       'quantity': new FormControl('',)
     });
+
+    this.materialService.getAllMaterial().subscribe(data => {
+      this.materialList = data;
+    })
+
+    this.deviceService.getAllDevice().subscribe(data => {
+      this.deviceList = data;
+    })
+
+    this.toolService.getAllTool().subscribe(data => {
+      this.toolList = data;
+    })
+
   }
 
   elementRequired(control: FormControl) {
@@ -109,11 +127,8 @@ export class InventoryOutputGeneralComponent implements OnInit, AfterViewInit {
 
   movebuttonsMaterial() {
     this.value = 'material';
-    this.quantitySection = false;
-    this.materialService.getAllMaterial().subscribe(data => {
-      this.elements = data;
-    })
-
+    this.quantitySection = false; 
+    this.elements = this.materialList;
     this.material.id = this.element.value; //associate values
     this.material.quantity = this.quantityNew.value;
   }
@@ -122,10 +137,7 @@ export class InventoryOutputGeneralComponent implements OnInit, AfterViewInit {
   movebuttonsDevice() {
     this.value = 'device';
     this.quantitySection = false;
-    this.deviceService.getAllDevice().subscribe(data => {
-      this.elements = data;
-    })
-
+    this.elements = this.deviceList;
     this.device.id = this.element.value
     this.device.quantity = this.quantityNew.value
   }
@@ -133,10 +145,7 @@ export class InventoryOutputGeneralComponent implements OnInit, AfterViewInit {
   movebuttonsTool() {
     this.value = 'tool';
     this.quantitySection = false;
-    this.toolService.getAllTool().subscribe(data => {
-      this.elements = data;
-    })
-
+    this.elements = this.toolList;
     this.tool.id = this.element.value
     this.tool.quantity = this.quantityNew.value
   }
@@ -187,6 +196,7 @@ export class InventoryOutputGeneralComponent implements OnInit, AfterViewInit {
 
 
   updateQuantity() {
+    this.quantitySection = false;
     if (this.toolSelected == true) {
       this.tool.quantity = this.quantityNew.value
       this.toolService.updateQuantityTool(this.tool).subscribe();

@@ -18,14 +18,10 @@ import { BrandComponent } from './brand/brand.component';
 import { WorkOrderComponent } from './work-order/work-order.component';
 import { WorkOrderTypeComponent } from './work-order-type/work-order-type.component';
 import { WorkOrderDetailComponent } from './work-order-detail/work-order-detail.component';
-import { AddressComponent } from './address/address.component';
-import { AddressDescriptionComponent } from './address-description/address-description.component';
 import { EmployeeRoleComponent } from "./employee-role/employee-role.component";
 import { GroupClientComponent } from './group-client/group-client.component';
 import { TelephoneClientComponent } from './telephone-client/telephone-client.component';
 import { TelephoneEmployeeComponent } from './telephone-employee/telephone-employee.component';
-import { AddressService } from './address/address.service';
-import { AddressDescriptionService } from './address-description/address-description.service';
 import { BrandService } from './brand/brand.service';
 import { ClientService } from './client/client.service';
 import { DeviceService } from './device/device.service';
@@ -130,6 +126,7 @@ import { SuppliesService } from './kit-work-order/insert-kit-work-order/supplies
 import { WorkOrderDetailGeneralComponent } from './work-order/work-order-detail-general/work-order-detail-general.component';
 import { ReportByClientComponent } from './reports/report-by-client/report-by-client.component';
 import { ReportByTypeComponent } from './reports/report-by-type/report-by-type.component';
+import { SeeMoreKitComponent } from './kit-work-order/see-more-kit/see-more-kit.component';
 
 
 declare var require: any;
@@ -155,8 +152,6 @@ loadCldr(
     WorkOrderComponent,
     WorkOrderTypeComponent,
     WorkOrderDetailComponent,
-    AddressComponent,
-    AddressDescriptionComponent,
     EmployeeRoleComponent,
     GroupClientComponent,
     TelephoneClientComponent,
@@ -211,7 +206,8 @@ loadCldr(
     InsertKitWorkOrderComponent,
     WorkOrderDetailGeneralComponent,
     ReportByClientComponent,
-    ReportByTypeComponent
+    ReportByTypeComponent,
+    SeeMoreKitComponent
   ],
   imports: [
 
@@ -251,8 +247,6 @@ loadCldr(
     
   ],
   providers: [
-    AddressService,
-    AddressDescriptionService,
     BrandService,
     ClientService,
     DeviceService,

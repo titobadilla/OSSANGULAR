@@ -1,0 +1,67 @@
+<div *ngIf="principal">
+  <div class="control-section">
+
+    <div class="row">
+      <div class="col-sm-4">
+
+        <ejs-grid #grid [dataSource]='materialList' allowPaging='true' [allowSorting]='true' allowTextWrap='true'
+          [pageSettings]='pageSettings'>
+          <ng-template #toolbarTemplate>
+            <ejs-toolbar>
+              <div class="e-dlg-header">Materiales</div>
+            </ejs-toolbar>
+          </ng-template>
+          <e-columns>
+            <e-column field='name' headerText='Nombre' width='50' textAlign='center'></e-column>
+            <e-column field='delete' headerText="Eliminar" width='50' textAlign='center'>
+              <ng-template #template let-data>
+                <button mat-button class="btn btn-danger glyphicon glyphicon-trash" (click)='openModal(data)'></button>
+              </ng-template>
+            </e-column>
+          </e-columns>
+        </ejs-grid>
+      </div>
+
+      <div class="col-sm-4">
+
+        <ejs-grid #grid [dataSource]='toolList' allowPaging='true' [allowSorting]='true' allowTextWrap='true'
+          [pageSettings]='pageSettings'>
+          <ng-template #toolbarTemplate>
+            <ejs-toolbar>
+              <div class="e-dlg-header">Herramientas</div>
+            </ejs-toolbar>
+          </ng-template>
+          <e-columns>
+            <e-column field='name' headerText='Nombre' width='50' textAlign='center'></e-column>
+            <e-column field='delete' headerText="Eliminar" width='50' textAlign='center'>
+              <ng-template #template let-data>
+                <button mat-button class="btn btn-danger glyphicon glyphicon-trash" (click)='openModal(data)'></button>
+              </ng-template>
+            </e-column>
+          </e-columns>
+        </ejs-grid>
+      </div>
+
+      <div class="col-sm-4">
+
+        <ejs-grid #grid [dataSource]='deviceList' allowPaging='true' [allowSorting]='true' allowTextWrap='true'
+          [pageSettings]='pageSettings'>
+          <ng-template #toolbarTemplate>
+            <ejs-toolbar>
+              <div class="e-dlg-header">Dispositivos</div>
+            </ejs-toolbar>
+          </ng-template>
+          <e-columns>
+            <e-column field='name' headerText='Nombre' width='50' textAlign='center'></e-column>
+            <e-column field='delete' headerText="Eliminar" width='50' textAlign='center'>
+              <ng-template #template let-data>
+                <button mat-button class="btn btn-danger glyphicon glyphicon-trash" (click)='openModal(data)'></button>
+              </ng-template>
+            </e-column>
+          </e-columns>
+        </ejs-grid>
+      </div>
+    </div>
+
+  </div>
+</div>

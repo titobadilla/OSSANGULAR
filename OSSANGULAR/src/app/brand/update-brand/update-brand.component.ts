@@ -66,8 +66,8 @@ export class UpdateBrandComponent implements OnInit {
   }
 
   returnView() {
-    this.parent.getAllBrands();
     this.parent.editSection = false;
+    this.parent.getAllBrands();
     this.parent.principal = true;
   }
 

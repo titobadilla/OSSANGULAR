@@ -25,6 +25,8 @@ export class KitWorkOrderComponent implements OnInit {
 
   principal: boolean = true;
   insertSection = false;
+  seeMoreKit: boolean =false;
+  kitId: number;
 
   @ViewChild('grid') public grid: GridComponent;
 
@@ -60,6 +62,12 @@ export class KitWorkOrderComponent implements OnInit {
   insert() {
     this.principal = false;
     this.insertSection = true;
+  }
+
+  seeMore(element: KitWorkOrder){
+    this.kitId = element.id;
+    this.principal = false;
+    this.seeMoreKit =true;
   }
 
   openModal(kitWorkOrder: KitWorkOrder) {
