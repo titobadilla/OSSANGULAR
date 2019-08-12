@@ -90,10 +90,10 @@ export class UpdateWorkOrderDetailComponent implements OnInit {
   }
 
   returnView() {
+    this.parent.editSection = false;
     if (this.parent.fecha != null) {
       this.parent.list();
     }
-    this.parent.editSection = false;
     this.parent.rangeSection = true;
   }
 }

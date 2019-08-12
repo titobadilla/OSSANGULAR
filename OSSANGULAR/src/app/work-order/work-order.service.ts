@@ -18,6 +18,10 @@ export class WorkOrderService {
       return this.http.get<WorkOrder[]>(this.URLAPI+'workorder/');
   }
 
+  public getAllWorkOrdersByFilter(): Observable<WorkOrder[]>{
+    return this.http.get<WorkOrder[]>(this.URLAPI+'workorder/filter');
+}
+
   public insertWorkOrder(workOrder: WorkOrder):Observable<WorkOrder>{
       return this.http.post<WorkOrder>(this.URLAPI+'workorder/', workOrder);
   }

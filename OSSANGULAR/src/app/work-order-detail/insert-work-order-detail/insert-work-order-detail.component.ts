@@ -14,21 +14,25 @@ import { WorkOrderDetailComponent } from '../work-order-detail.component';
 })
 export class InsertWorkOrderDetailComponent implements OnInit {
 
-  workOrder: WorkOrder = new WorkOrder();
+
   reactForm: FormGroup;
   detail: WorkOrderDetail;
+
+  workOrders: WorkOrder[] = new Array();
+  public workOrder: Object = { text: 'description', value: 'id' };
+  public workOrderWatermark: string = 'Seleccione una orden de trabajo*';
 
   constructor(private workOrderDetailService: WorkOrderDetailService,
     private workOrderService: WorkOrderService,
     private parent: WorkOrderDetailComponent) {
     this.detail = new WorkOrderDetail();
     this.createReactiveForm();
-    this.associateValues();
   }
 
   ngOnInit() {
-    this.workOrderService.getByIdWorkOrder(2028).subscribe(data => {
-      this.workOrder = data;
+    this.workOrderService.getAllWorkOrdersByFilter().subscribe(data => {
+      
+      this.workOrders = data;
     });
 
     let formId: HTMLElement = <HTMLElement>document.getElementById('formId');
@@ -48,15 +52,6 @@ export class InsertWorkOrderDetailComponent implements OnInit {
       });
   }
 
-  associateValues() {
-    this.detail.date = this.date.value;
-    this.detail.checkIn = this.checkIn.value;
-    this.detail.checkOut = this.checkOut.value;
-    this.detail.description = this.description.value;
-    this.detail.invoiceId = this.invoiceId.value;
-    this.detail.managerName = this.managerName.value;
-  }
-
   createReactiveForm() {
     this.reactForm = new FormGroup({
       'date': new FormControl('', [FormValidators.date]),
@@ -65,7 +60,18 @@ export class InsertWorkOrderDetailComponent implements OnInit {
       'description': new FormControl('', [FormValidators.required]),
       'invoiceId': new FormControl('', [FormValidators.required]),
       'managerName': new FormControl('', [FormValidators.required]),
+      'workOrderList': new FormControl('', [this.valueRequired])
     });
+  }
+
+  associateValues() {
+    this.detail.workOrder.id = this.workOrderList.value;
+    this.detail.date = this.date.value;
+    this.detail.checkIn = this.checkIn.value;
+    this.detail.checkOut = this.checkOut.value;
+    this.detail.description = this.description.value;
+    this.detail.invoiceId = this.invoiceId.value;
+    this.detail.managerName = this.managerName.value;
   }
 
   get date() { return this.reactForm.get('date'); }
@@ -74,10 +80,12 @@ export class InsertWorkOrderDetailComponent implements OnInit {
   get description() { return this.reactForm.get('description'); }
   get invoiceId() { return this.reactForm.get('invoiceId'); }
   get managerName() { return this.reactForm.get('managerName'); }
+  get workOrderList() { return this.reactForm.get('workOrderList') }
 
   private createWorkOrderDetail() {
-    this.detail.workOrder.id = this.workOrder.id;
-    
+
+    this.associateValues();
+
     this.workOrderDetailService.insertWorkOrderDetail(this.detail).subscribe(data => {
       this.returnView();
     });
@@ -89,5 +97,18 @@ export class InsertWorkOrderDetailComponent implements OnInit {
     }
     this.parent.insertSection = false;
     this.parent.rangeSection = true;
+  }
+
+  valueRequired(control: FormControl) {
+
+    let value = control.value;
+    if ((value === null || value === "" || value === undefined)) {
+      return {
+        errorD: {
+          parsed: value
+        }
+      }
+    }
+    return null;
   }
 }
