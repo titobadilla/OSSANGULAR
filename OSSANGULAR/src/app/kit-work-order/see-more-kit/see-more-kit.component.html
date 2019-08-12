@@ -12,7 +12,7 @@
             </ejs-toolbar>
           </ng-template>
           <e-columns>
-            <e-column field='name' headerText='Nombre' width='50' textAlign='center'></e-column>
+            <e-column field='id.material.name' headerText='Nombre' width='50' textAlign='center'></e-column>
             <e-column field='delete' headerText="Eliminar" width='50' textAlign='center'>
               <ng-template #template let-data>
                 <button mat-button class="btn btn-danger glyphicon glyphicon-trash" (click)='openModal(data)'></button>
@@ -32,7 +32,7 @@
             </ejs-toolbar>
           </ng-template>
           <e-columns>
-            <e-column field='name' headerText='Nombre' width='50' textAlign='center'></e-column>
+            <e-column field='id.tool.name' headerText='Nombre' width='50' textAlign='center'></e-column>
             <e-column field='delete' headerText="Eliminar" width='50' textAlign='center'>
               <ng-template #template let-data>
                 <button mat-button class="btn btn-danger glyphicon glyphicon-trash" (click)='openModal(data)'></button>
@@ -52,7 +52,7 @@
             </ejs-toolbar>
           </ng-template>
           <e-columns>
-            <e-column field='name' headerText='Nombre' width='50' textAlign='center'></e-column>
+            <e-column field='id.device.name' headerText='Nombre' width='50' textAlign='center'></e-column>
             <e-column field='delete' headerText="Eliminar" width='50' textAlign='center'>
               <ng-template #template let-data>
                 <button mat-button class="btn btn-danger glyphicon glyphicon-trash" (click)='openModal(data)'></button>
