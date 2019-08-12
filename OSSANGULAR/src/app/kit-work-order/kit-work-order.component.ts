@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { setCulture } from '@syncfusion/ej2-base';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
@@ -12,7 +12,7 @@ import { KitWorkOrderService } from './kit-work-order.service';
   templateUrl: './kit-work-order.component.html',
   styleUrls: ['./kit-work-order.component.css']
 })
-export class KitWorkOrderComponent implements OnInit {
+export class KitWorkOrderComponent implements OnInit,AfterViewInit {
 
   ngAfterViewInit(): void {
     this.grid.pageSettings.pageSize = 5;
