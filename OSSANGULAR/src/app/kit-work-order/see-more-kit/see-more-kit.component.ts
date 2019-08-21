@@ -20,7 +20,7 @@ export class SeeMoreKitComponent implements OnInit,AfterViewInit {
   @ViewChild('grid') public grid: GridComponent;
 
   ngAfterViewInit(): void {
-    this.grid.pageSettings.pageSize = 5;
+    this.grid.pageSettings.pageSize = 8;
 
     this.kitWorkOrderService.getByIdKitWorkOrder(this.kitId).subscribe(data => {
       this.materialList = data.listSuppliesMaterials;
@@ -37,14 +37,14 @@ export class SeeMoreKitComponent implements OnInit,AfterViewInit {
   }
 
   ngOnInit() {
-    this.pageSettings = { pageCount: 3 };
+    this.pageSettings = { pageCount: 8 };
     setCulture('es-CR');
 
   }
 
   returnView() {
     this.parent.getAllKits();
-    this.parent.insertSection = false;
+    this.parent.seeMoreKit = false;
     this.parent.principal = true;
   }
 
