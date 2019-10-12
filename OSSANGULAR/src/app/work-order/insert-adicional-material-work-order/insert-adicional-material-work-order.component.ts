@@ -154,7 +154,7 @@ export class InsertAdicionalMaterialWorkOrderComponent implements OnInit {
 
   addSelectedInventory() {
     if (this.quantityMaterialNew.value != 'null' && this.quantityMaterialNew.value > 0) {
-      this.materialSelected.quantity = this.newQuantityMaterial;
+      this.materialSelected.quantity = this.quantityMaterialNew.value;
       this.selectedMaterials.push(this.materialSelected);
       this.grid.refresh();
 

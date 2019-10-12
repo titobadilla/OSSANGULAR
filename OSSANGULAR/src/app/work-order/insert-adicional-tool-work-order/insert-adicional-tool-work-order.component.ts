@@ -148,7 +148,7 @@ export class InsertAdicionalToolWorkOrderComponent implements OnInit, AfterViewI
   addSelectedInventory() {
     if (this.quantityToolNew.value != 'null' && this.quantityToolNew.value > 0) {
 
-      this.workOrderToolSelected.quantity = this.newQuantityTool;
+      this.workOrderToolSelected.quantity = this.quantityToolNew.value;
       this.selectedTools.push(this.workOrderToolSelected);
       this.grid.refresh();
 

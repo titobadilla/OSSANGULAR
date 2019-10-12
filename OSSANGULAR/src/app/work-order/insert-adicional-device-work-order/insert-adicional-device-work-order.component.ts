@@ -139,7 +139,7 @@ export class InsertAdicionalDeviceWorkOrderComponent implements OnInit {
 
   addSelectedInventory() {
     if (this.quantityDeviceNew.value != 'null' && this.quantityDeviceNew.value > 0) {
-      this.deviceSelected.quantity = this.newQuantityDevice;
+      this.deviceSelected.quantity = this.quantityDeviceNew.value;
       this.selectedDevices.push(this.deviceSelected);
       this.grid.refresh();
 
