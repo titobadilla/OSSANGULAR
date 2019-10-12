@@ -67,11 +67,15 @@ export class UpdateToolComponent implements OnInit {
     this.measurementUnit.setValidators(this.valueRequired);
     this.unitMeasurement = this.tool.measurementUnit.id;
 
+    this.quantity.setValue(this.tool.quantity);
+    this.quantity.setValidators(FormValidators.required);
+    this.quantity.disable();
+
   }
 
   associateValues() {
     this.tool.name = this.name.value;
-    this.tool.quantity = 0;
+    this.tool.quantity = this.quantity.value;
     this.tool.description = this.description.value;
     this.tool.inventoryCategory.id = this.category.value;
     this.tool.measurementUnit.id = this.measurementUnit.value;
@@ -82,6 +86,7 @@ export class UpdateToolComponent implements OnInit {
       'name': new FormControl('', [FormValidators.required]),
       'description': new FormControl('', [FormValidators.required]),
       'category': new FormControl('', [this.valueRequired]),
+      'quantity': new FormControl('', []),
       'measurementUnit': new FormControl('', [this.valueRequired]),
     });
 
@@ -89,6 +94,7 @@ export class UpdateToolComponent implements OnInit {
   get name() { return this.reactForm.get('name'); }
   get description() { return this.reactForm.get('description'); }
   get category() { return this.reactForm.get('category'); }
+  get quantity() { return this.reactForm.get('quantity'); }
   get measurementUnit() { return this.reactForm.get('measurementUnit'); }
 
   valueRequired(control: FormControl) {

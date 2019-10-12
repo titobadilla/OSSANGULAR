@@ -8,20 +8,26 @@
         <div class="formtitle">
           <span>Actualizar Inventario</span>
         </div>
+        <div class="row" style="margin-top: 20px;">
+          <div class="col-lg-2"></div>
+
+          <button type="button" class="but_insert" (click)="movebuttonsMaterial()"
+            style="margin-top:10px;">Materiales</button>
+
+            <div class="col-lg-1"></div>
+
+          <button type="button" class="but_insert" (click)="movebuttonsTool()"
+            style="margin-top:10px;">Herramientas</button>
+            
+            <div class="col-lg-1"></div>
+            
+          <button type="button" class="but_insert" (click)="movebuttonsDevice()"
+            style="margin-top:10px;">Dispositivos</button>
+        </div>
         <div class="row">
-          <div class="col-lg-1"></div>
-          <div class="col-lg-5 border-right">
+            <div class="col-lg-3"></div>
 
-            <button type="button" class="but_insert" (click)="movebuttonsMaterial()"
-              style="margin-top:20px;">Materiales</button>
-            <button type="button" class="but_insert" (click)="movebuttonsTool()"
-              style="margin-top:10px;">Herramientas</button>
-            <button type="button" class="but_insert" (click)="movebuttonsDevice()"
-              style="margin-top:10px;">Dispositivos</button>
-          </div>
-
-
-          <div class="col-lg-6 ">
+          <div class="col-lg-6">
             <div class="form-group">
               <ejs-dropdownlist (change)='onChangeDdl($event)' formControlName="element" name="element"
                 [dataSource]='elements' [fields]='fields' [placeholder]='watermark' floatLabelType='Auto'>
